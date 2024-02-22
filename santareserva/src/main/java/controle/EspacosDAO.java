@@ -1,21 +1,40 @@
 package controle;
 
+import java.util.ArrayList;
+
 import modelo.Espacos;
 
-public class EspacosDAO {
+public class EspacosDAO implements IEspacosDAO {
 
-	public EspacosDAO() {
-		
+	@Override
+	public int InserirEspacos(Espacos end) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
+	@Override
+	public ArrayList<Espacos> listarEspacos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean atualizarEspacos(Espacos end) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removerEspacos(Espacos end) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Espacos buscarEspacos(Espacos end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
-	public Boolean Inserir(Espacos a) {
-		return true;
-	}
-	public Boolean Alterar(Espacos a) {
-		return true;
-	}
-	public Boolean Excluir(Espacos a) {
-		return true;
-	}
-
 }
