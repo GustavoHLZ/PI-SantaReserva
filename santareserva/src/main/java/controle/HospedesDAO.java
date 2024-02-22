@@ -1,20 +1,40 @@
 package controle;
 
+import java.util.ArrayList;
+
 import modelo.Hospedes;
 
-public class HospedesDAO {
+public class HospedesDAO implements IHospedesDAO {
 
-	public HospedesDAO() {
-		
+	@Override
+	public int InserirHospedes(Hospedes end) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
+	@Override
+	public ArrayList<Hospedes> listarEspacos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean atualizarHospedes(Hospedes end) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removerHospedes(Hospedes end) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Hospedes buscarHospedes(Hospedes end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
-	public Boolean Inserir(Hospedes a) {
-		return true;
-	}
-	public Boolean Alterar(Hospedes a) {
-		return true;
-	}
-	public Boolean Excluir(Hospedes a) {
-		return true;
-	}
 }
