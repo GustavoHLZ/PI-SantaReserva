@@ -1,19 +1,40 @@
 package controle;
 
+import java.util.ArrayList;
+
 import modelo.Computadores;
 
-public class ComputadoresDAO {
+public class ComputadoresDAO implements IComputadoresDAO {
 
-	public  ComputadoresDAO() {
-		
+	@Override
+	public int inserirComputadores(Computadores end) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	public Boolean Inserir(Computadores a) {
-		return true;
+
+	@Override
+	public ArrayList<Computadores> listarComputadores() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	public Boolean Alterar(Computadores a) {
-		return true;
+
+	@Override
+	public boolean atualizarComputadores(Computadores end) {
+		// TODO Auto-generated method stub
+		return false;
 	}
-	public Boolean Excluir(Computadores a) {
-		return true;
+
+	@Override
+	public boolean removerComputadores(Computadores end) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+	@Override
+	public Computadores buscarComputadores(Computadores end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
