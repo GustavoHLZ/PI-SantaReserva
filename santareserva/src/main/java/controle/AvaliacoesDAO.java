@@ -1,21 +1,29 @@
 package controle;
 
+import java.util.ArrayList;
+
 import modelo.Avaliacoes;
 
-public class AvaliacoesDAO {
+public class AvaliacoesDAO implements IAvaliacoesDAO{
 
-	public AvaliacoesDAO() {
-		
+	public int InserirAvaliacao(Avaliacoes end) {
+		return 0;
 	}
-	
-	public Boolean Inserir(Avaliacoes a) {
-		return true;
+
+	public ArrayList<Avaliacoes> listarAvaliacoes() {
+		return null;
 	}
-	public Boolean Alterar(Avaliacoes a) {
-		return true;
+
+	public boolean atualizarAvaliacoes(Avaliacoes end) {
+		return false;
 	}
-	public Boolean Excluir(Avaliacoes a) {
-		return true;
+
+	public boolean removerAvaliacoes(Avaliacoes end) {
+		return false;
+	}
+
+	public Avaliacoes buscarAvaliacoes(Avaliacoes end) {
+		return null;
 	}
 
 }
