@@ -8,7 +8,7 @@ public interface IHospedesDAO {
 
 	public int InserirHospedes(Hospedes end);
 	
-	public ArrayList<Hospedes> listarEspacos();
+	public ArrayList<Hospedes> listarHospedes();
 	
 	public boolean atualizarHospedes(Hospedes end);
 	

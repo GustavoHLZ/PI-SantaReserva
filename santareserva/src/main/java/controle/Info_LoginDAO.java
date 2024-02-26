@@ -1,20 +1,34 @@
 package controle;
 
+import java.util.ArrayList;
+
 import modelo.Info_Login;
 
-public class Info_LoginDAO {
+public class Info_LoginDAO implements IInfo_LoginDAO{
 
-	public Info_LoginDAO(){
+	public int InserirInfo_Login(Info_Login end) {
 		
+		return 0;
 	}
 	
-	public Boolean Inserir(Info_Login a) {
-		return true;
+	public ArrayList<Info_Login> listarInfo_Login() {
+		
+		return null;
 	}
-	public Boolean Alterar(Info_Login a) {
-		return true;
+	
+	public boolean atualizarInfo_Login(Info_Login end) {
+		
+		return false;
 	}
-	public Boolean Excluir(Info_Login a) {
-		return true;
+	
+	public boolean removerInfo_Login(Info_Login end) {
+		
+		return false;
 	}
+	
+	public Info_Login buscarInfo_Login(Info_Login end) {
+		
+		return null;
+	}
+
 }
