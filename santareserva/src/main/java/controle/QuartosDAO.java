@@ -1,22 +1,34 @@
 package controle;
 
+import java.util.ArrayList;
+
 import modelo.Quartos;
 
-public class QuartosDAO {
+public class QuartosDAO implements IQuartosDAO {
 
+	public int InserirQuartos(Quartos end) {
 	
-	public QuartosDAO() {
-		
+		return 0;
 	}
-		
-		public Boolean Inserir(Quartos a) {
-			return true;
-		}
-		public Boolean Alterar(Quartos a) {
-			return true;
-		}
-		public Boolean Excluir(Quartos a) {
-			return true;
-		}
 	
+	public ArrayList<Quartos> listarQuartos() {
+	
+		return null;
+	}
+	
+	public boolean atualizarQuartos(Quartos end) {
+	
+		return false;
+	}
+	
+	public boolean removerQuartos(Quartos end) {
+	
+		return false;
+	}
+	
+	public Quartos buscarQuartos(Quartos end) {
+	
+		return null;
+	}
+
 }
