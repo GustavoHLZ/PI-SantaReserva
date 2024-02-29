@@ -22,8 +22,29 @@ private static ComputadoresDAO instancia;
 		return instancia;
 	}
 
-	public int inserirComputadores(Computadores end) {
+	public int inserirComputadores(Computadores comp) {
 		String SQL = "INSERT INTO Computadores (ID_PC, Num_PC, Temp_alugado) VALUES (?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps= conBD.prepareStatement(SQL);
+			
+			
+			ps.setInt(1, comp.getID_PC());
+			ps.setInt(2, comp.getNum_PC());
+			ps.setInt(0, comp.getTemp_alugado());
+			
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
 		return 0;
 	}
 

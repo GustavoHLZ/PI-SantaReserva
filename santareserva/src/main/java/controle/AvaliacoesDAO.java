@@ -23,8 +23,29 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 		return instancia;
 	}
 	
-	public int InserirAvaliacao(Avaliacoes end) {
+	public int InserirAvaliacao(Avaliacoes ava) {
 		String SQL = "INSERT INTO Avaliacoes (ID_avaliacao, Avaliacao, Avaliador) VALUES (?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps= conBD.prepareStatement(SQL);
+			
+			
+			ps.setInt(1, ava.getID_avaliacao());
+			ps.setFloat(2, ava.getAvaliacao());
+			ps.setString(0, ava.getAvaliador());
+			
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
 		return 0;
 	}
 
