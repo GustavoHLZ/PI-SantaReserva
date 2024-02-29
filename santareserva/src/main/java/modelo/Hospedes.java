@@ -8,7 +8,7 @@ public class Hospedes {
 	private String Nome_Hospede;
 	private String sobrenome_hospede;
 	private Date nascimento_hospede;
-	private char telefone_hospede;
+	private int telefone_hospede;
 	private String email_hospede;
 	public int getID_Hospede() {
 		return ID_Hospede;
@@ -34,10 +34,10 @@ public class Hospedes {
 	public void setNascimento_hospede(Date nascimento_hospede) {
 		this.nascimento_hospede = nascimento_hospede;
 	}
-	public char getTelefone_hospede() {
+	public int getTelefone_hospede() {
 		return telefone_hospede;
 	}
-	public void setTelefone_hospede(char telefone_hospede) {
+	public void setTelefone_hospede(int telefone_hospede) {
 		this.telefone_hospede = telefone_hospede;
 	}
 	public String getEmail_hospede() {

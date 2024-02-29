@@ -1,5 +1,9 @@
 package controle;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelo.Avaliacoes;
@@ -20,13 +24,47 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	}
 	
 	public int InserirAvaliacao(Avaliacoes end) {
-		
+		String SQL = "INSERT INTO Avaliacoes (ID_avaliacao, Avaliacao, Avaliador) VALUES (?, ?, ?)";
 		return 0;
 	}
 
 	public ArrayList<Avaliacoes> listarAvaliacoes() {
+		ArrayList<Avaliacoes> avaliacoes = new ArrayList<Avaliacoes>();
 		
-		return null;
+		String SQL = "SELECT * FROM Avaliacoes";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps= conBD.prepareStatement(SQL);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Avaliacoes ava = new Avaliacoes();
+				
+				Integer ID_avaliacao = rs.getInt("ID_avaliacao");
+				Float Avaliacao = rs.getFloat("Avaliacao");
+				String Avaliador = rs.getString("Avaliador");
+				
+				ava.setID_avaliacao(ID_avaliacao);
+				ava.setAvaliacao(Avaliacao);
+				ava.setAvaliador(Avaliador);
+				
+				avaliacoes.add(ava);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally {
+			con.fecharConexao();
+		}
+	
+		return avaliacoes;
 	}
 
 	public boolean atualizarAvaliacoes(Avaliacoes end) {

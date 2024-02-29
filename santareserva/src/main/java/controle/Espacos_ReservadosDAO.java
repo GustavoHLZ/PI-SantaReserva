@@ -1,5 +1,9 @@
 package controle;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelo.Espacos_Reservados;
@@ -19,14 +23,44 @@ private static Espacos_ReservadosDAO instancia;
 	}
 
 	public int inserirEspacos_Reservados(Espacos_Reservados end) {
-		
+		String SQL = "INSERT INTO Espacos_Reservados (ID_Espacos_Reservados) VALUES (?)";
 		return 0;
 	}
 
 	
 	public ArrayList<Espacos_Reservados> listarEspacos_Reservados() {
+		ArrayList<Espacos_Reservados> espaR = new ArrayList<Espacos_Reservados>();
 		
-		return null;
+		String SQL = "SELECT * FROM Espacos_Reservados";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps= conBD.prepareStatement(SQL);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Espacos_Reservados esr = new Espacos_Reservados();
+				
+				Integer ID_Espacos_Reservados = rs.getInt("ID_Espacos_Reservados");
+				
+				esr.setID_Espacos_Reservados(ID_Espacos_Reservados);
+				
+				espaR.add(esr);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally {
+			con.fecharConexao();
+		}
+	
+		return espaR;
 	}
 
 	public boolean atualizarEspacos_Reservados(Espacos_Reservados end) {
