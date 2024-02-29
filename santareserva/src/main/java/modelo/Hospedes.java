@@ -10,6 +10,13 @@ public class Hospedes {
 	private Date nascimento_hospede;
 	private int telefone_hospede;
 	private String email_hospede;
+	private int FK_ID_usuario;
+	public int getFK_ID_usuario() {
+		return FK_ID_usuario;
+	}
+	public void setFK_ID_usuario(int fK_ID_usuario) {
+		FK_ID_usuario = fK_ID_usuario;
+	}
 	public int getID_Hospede() {
 		return ID_Hospede;
 	}

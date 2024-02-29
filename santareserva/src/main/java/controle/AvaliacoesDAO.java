@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Avaliacoes;
@@ -24,32 +25,39 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	}
 	
 	public int InserirAvaliacao(Avaliacoes ava) {
-		String SQL = "INSERT INTO Avaliacoes (ID_avaliacao, Avaliacao, Avaliador) VALUES (?, ?, ?)";
+		
+		String SQL = "INSERT INTO Avaliacoes (Avaliacao, FK_ID_Hospede) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
+		int chavePrimariaGerada = Integer.MIN_VALUE;
+		
 		try {
-			PreparedStatement ps= conBD.prepareStatement(SQL);
+			PreparedStatement ps= conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			
-			ps.setInt(1, ava.getID_avaliacao());
-			ps.setFloat(2, ava.getAvaliacao());
-			ps.setString(0, ava.getAvaliador());
+			ps.setFloat(1, ava.getAvaliacao());
+			ps.setInt(2, ava.getFK_ID_Hospede());
 			
 			ps.executeUpdate();
 			
-			
+			ResultSet rs = ps.executeQuery();
+			if(rs!=null) {
+				chavePrimariaGerada = rs.getInt(1);
+			}
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();
 		}
 		
-		return 0;
+		return chavePrimariaGerada;
 	}
 
 	public ArrayList<Avaliacoes> listarAvaliacoes() {
+		
 		ArrayList<Avaliacoes> avaliacoes = new ArrayList<Avaliacoes>();
 		
 		String SQL = "SELECT * FROM Avaliacoes";
@@ -59,7 +67,6 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 		
 		try {
 			PreparedStatement ps= conBD.prepareStatement(SQL);
-			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -79,7 +86,6 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  finally {
 			con.fecharConexao();

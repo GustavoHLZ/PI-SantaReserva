@@ -24,19 +24,26 @@ private static Espacos_ReservadosDAO instancia;
 	}
 
 	public int inserirEspacos_Reservados(Espacos_Reservados esr) {
-		String SQL = "INSERT INTO Espacos_Reservados () VALUES (?)";
+		
+		String SQL = "INSERT INTO Espacos_Reservados (FK_ID_Hospede, FK_ID_Espaco) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
 		int chavePrimariaGerada = Integer.MIN_VALUE;
+		
 		try {
 			PreparedStatement ps= conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
-			
-			ps.setInt(1, esr.getID_Espacos_Reservados());
-			
+			ps.setInt(1, esr.getFK_ID_Hospede());
+			ps.setInt(1, esr.getFK_ID_Espaco());
+		
 			ps.executeUpdate();
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs!=null) {
+				chavePrimariaGerada = rs.getInt(1);
+			}
 			
 			
 		} catch (SQLException e) {
@@ -50,6 +57,7 @@ private static Espacos_ReservadosDAO instancia;
 
 	
 	public ArrayList<Espacos_Reservados> listarEspacos_Reservados() {
+		
 		ArrayList<Espacos_Reservados> espaR = new ArrayList<Espacos_Reservados>();
 		
 		String SQL = "SELECT * FROM Espacos_Reservados";

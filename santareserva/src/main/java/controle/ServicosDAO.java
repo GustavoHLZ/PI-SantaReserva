@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelo.Servicos;
-import modelo.Servicos_Consumidos;
 
 public class ServicosDAO implements IServicosDAO {
 	
@@ -82,7 +81,6 @@ public class ServicosDAO implements IServicosDAO {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();
