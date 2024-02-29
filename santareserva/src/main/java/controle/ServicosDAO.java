@@ -6,6 +6,18 @@ import modelo.Servicos;
 
 public class ServicosDAO implements IServicosDAO {
 	
+	private static ServicosDAO instancia;
+	
+	private ServicosDAO() {}
+	
+	public static ServicosDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new ServicosDAO();
+		}
+		return instancia;
+	}
+	
 	public int InserirServicos(Servicos end) {
 			
 		return 0;

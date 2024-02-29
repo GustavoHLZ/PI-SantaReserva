@@ -5,6 +5,18 @@ import java.util.ArrayList;
 import modelo.Quartos;
 
 public class QuartosDAO implements IQuartosDAO {
+	
+	private static QuartosDAO instancia;
+	
+	private QuartosDAO() {}
+	
+	public static QuartosDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new QuartosDAO();
+		}
+		return instancia;
+	}
 
 	public int InserirQuartos(Quartos end) {
 	

@@ -5,6 +5,18 @@ import java.util.ArrayList;
 import modelo.Sala_Reunioes;
 
 public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
+	
+	private static Sala_ReunioesDAO instancia;
+	
+	private Sala_ReunioesDAO() {}
+	
+	public static Sala_ReunioesDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new Sala_ReunioesDAO();
+		}
+		return instancia;
+	}
 
 	public int InserirSala_Reunioes(Sala_Reunioes end) {
 	

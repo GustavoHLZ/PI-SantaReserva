@@ -6,6 +6,7 @@ import modelo.Hospedes;
 
 public class HospedesDAO implements IHospedesDAO {
 	
+	
 	public int InserirHospedes(Hospedes end) {
 		
 		return 0;
