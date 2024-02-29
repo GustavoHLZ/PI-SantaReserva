@@ -6,6 +6,19 @@ import modelo.Avaliacoes;
 
 public class AvaliacoesDAO implements IAvaliacoesDAO{
 
+	
+	private static AvaliacoesDAO instancia;
+	
+	private AvaliacoesDAO() {}
+	
+	public static AvaliacoesDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new AvaliacoesDAO();
+		}
+		return instancia;
+	}
+	
 	public int InserirAvaliacao(Avaliacoes end) {
 		
 		return 0;

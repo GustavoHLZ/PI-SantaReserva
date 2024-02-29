@@ -6,6 +6,18 @@ import modelo.Hospedes;
 
 public class HospedesDAO implements IHospedesDAO {
 	
+private static HospedesDAO instancia;
+	
+	private HospedesDAO() {}
+	
+	public static HospedesDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new HospedesDAO();
+		}
+		return instancia;
+	}
+	
 	public int InserirHospedes(Hospedes end) {
 		
 		return 0;
