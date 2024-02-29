@@ -62,6 +62,8 @@ private static Info_LoginDAO instancia;
 			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
 		}
 		
 		return info_login;
