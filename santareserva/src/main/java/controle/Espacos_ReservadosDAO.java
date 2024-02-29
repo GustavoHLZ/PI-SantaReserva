@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Espacos_Reservados;
@@ -23,13 +24,14 @@ private static Espacos_ReservadosDAO instancia;
 	}
 
 	public int inserirEspacos_Reservados(Espacos_Reservados esr) {
-		String SQL = "INSERT INTO Espacos_Reservados (ID_Espacos_Reservados) VALUES (?)";
+		String SQL = "INSERT INTO Espacos_Reservados () VALUES (?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
+		int chavePrimariaGerada = Integer.MIN_VALUE;
 		try {
-			PreparedStatement ps= conBD.prepareStatement(SQL);
+			PreparedStatement ps= conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			
 			ps.setInt(1, esr.getID_Espacos_Reservados());
@@ -43,7 +45,7 @@ private static Espacos_ReservadosDAO instancia;
 			con.fecharConexao();
 		}
 		
-		return 0;
+		return chavePrimariaGerada;
 	}
 
 	

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Espacos;
@@ -26,19 +27,18 @@ public class EspacosDAO implements IEspacosDAO {
 	}
 
 	public int InserirEspacos(Espacos esp) {
-		String SQL = "INSERT INTO Espacos (ID_Espaco, Ocupante_Espaco, Check_In, Check_Out) VALUES (?,?,?,?)";
+		String SQL = "INSERT INTO Espacos (Ocupante_Espaco, Check_In, Check_Out) VALUES (?,?,?)";
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-
-			ps.setInt(1, esp.getID_Espaco());
 			ps.setInt(2, esp.getOcupante_Espaco());
 			ps.setDate(0, esp.getCheck_In());
 			ps.setDate(4, esp.getCheck_Out());
 
 			ps.executeUpdate();
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
