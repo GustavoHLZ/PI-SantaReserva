@@ -1,5 +1,9 @@
 package controle;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelo.Computadores;
@@ -19,13 +23,47 @@ private static ComputadoresDAO instancia;
 	}
 
 	public int inserirComputadores(Computadores end) {
-
+		String SQL = "INSERT INTO Computadores (ID_PC, Num_PC, Temp_alugado) VALUES (?, ?, ?)";
 		return 0;
 	}
 
 	public ArrayList<Computadores> listarComputadores() {
-
-		return null;
+		ArrayList<Computadores> computadores = new ArrayList<Computadores>();
+		
+		String SQL = "SELECT * FROM Computadores";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps= conBD.prepareStatement(SQL);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Computadores comp = new Computadores();
+				
+				Integer ID_PC = rs.getInt("ID_PC");
+				Integer Temp_alugado = rs.getInt("Temp_alugado");
+				Integer Num_PC = rs.getInt("Num_PC");
+				
+				comp.setID_PC(ID_PC);
+				comp.setTemp_alugado(Temp_alugado);
+				comp.setNum_PC(Num_PC);
+				
+				computadores.add(comp);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally {
+			con.fecharConexao();
+		}
+	
+		return computadores;
 	}
 
 
