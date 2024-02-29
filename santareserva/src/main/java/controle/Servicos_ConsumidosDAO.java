@@ -81,7 +81,6 @@ public class Servicos_ConsumidosDAO implements IServicos_ConsumidosDAO {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();

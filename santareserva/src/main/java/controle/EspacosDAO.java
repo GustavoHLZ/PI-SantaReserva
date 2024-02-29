@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Espacos;
-import modelo.Espacos_Reservados;
 
 public class EspacosDAO implements IEspacosDAO {
 
@@ -28,7 +27,7 @@ public class EspacosDAO implements IEspacosDAO {
 
 	public int InserirEspacos(Espacos esp) {
 		
-		String SQL = "INSERT INTO Espacos (Ocupante_Espaco, Check_In, Check_Out) VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO Espacos (Ocupante_Espaco, Check_In, Check_Out, FK_ID_Quarto, FK_ID_Computador, FK_ID_Sala_Reuniao) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -41,7 +40,10 @@ public class EspacosDAO implements IEspacosDAO {
 			ps.setInt(1, esp.getOcupante_Espaco());
 			ps.setDate(2, esp.getCheck_In());
 			ps.setDate(3, esp.getCheck_Out());
-
+			ps.setInt(4, esp.getFK_ID_Quarto());
+			ps.setInt(5, esp.getFK_ID_Computador());
+			ps.setInt(6, esp.getFK_ID_Sala_Reuniao());
+			
 			ps.executeUpdate();
 			
 			ResultSet rs = ps.executeQuery();
