@@ -7,6 +7,27 @@ public class Espacos {
 	private int Ocupante_Espaco;
 	private Date Check_In;
 	private Date Check_Out;
+	private int FK_ID_Quarto;
+	private int FK_ID_Computador;
+	private int FK_ID_Sala_Reuniao;
+	public int getFK_ID_Quarto() {
+		return FK_ID_Quarto;
+	}
+	public void setFK_ID_Quarto(int fK_ID_Quarto) {
+		FK_ID_Quarto = fK_ID_Quarto;
+	}
+	public int getFK_ID_Computador() {
+		return FK_ID_Computador;
+	}
+	public void setFK_ID_Computador(int fK_ID_Computador) {
+		FK_ID_Computador = fK_ID_Computador;
+	}
+	public int getFK_ID_Sala_Reuniao() {
+		return FK_ID_Sala_Reuniao;
+	}
+	public void setFK_ID_Sala_Reuniao(int fK_ID_Sala_Reuniao) {
+		FK_ID_Sala_Reuniao = fK_ID_Sala_Reuniao;
+	}
 	public int getID_Espaco() {
 		return ID_Espaco;
 	}

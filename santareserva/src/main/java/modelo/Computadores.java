@@ -5,6 +5,7 @@ public class Computadores {
 	private int ID_PC;
 	private int Num_PC;
 	private int Temp_alugado;
+	
 	public int getID_PC() {
 		return ID_PC;
 	}

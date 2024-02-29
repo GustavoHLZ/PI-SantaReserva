@@ -2,7 +2,14 @@ package modelo;
 
 public class Avaliacoes {
 	private int ID_avaliacao;
+	public int getFK_ID_Hospede() {
+		return FK_ID_Hospede;
+	}
+	public void setFK_ID_Hospede(int fK_ID_Hospede) {
+		FK_ID_Hospede = fK_ID_Hospede;
+	}
 	private float Avaliacao;
+	private int FK_ID_Hospede;
 	public int getID_avaliacao() {
 		return ID_avaliacao;
 	}

@@ -62,7 +62,6 @@ public class QuartosDAO implements IQuartosDAO {
 		
 		try {
 			PreparedStatement ps= conBD.prepareStatement(SQL);
-			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -72,21 +71,20 @@ public class QuartosDAO implements IQuartosDAO {
 				Integer ID_quarto = rs.getInt("ID_Quarto");
 				String tipo_quarto = rs.getString("Tipo_Quarto");
 				Float preco_diaria = rs.getFloat("Preco_Diaria");
-				Boolean dispo_quarto = rs.getBoolean("Dispo_Quarto");
-				Integer cap_max = rs.getInt("Cap_max");
+				Boolean Dispo_Quarto = rs.getBoolean("Dispo_Quarto");
+				Integer Cap_max = rs.getInt("Cap_max");
 				
 				qua.setID_Quarto(ID_quarto);
 				qua.setTipo_Quarto(tipo_quarto);
 				qua.setPreco_Diaria(preco_diaria);
-				qua.setID_Quarto(ID_quarto);
-				qua.setID_Quarto(ID_quarto);
+				qua.setDispo_Quarto(Dispo_Quarto);
+				qua.setCap_max(Cap_max);
 				
 				quartos.add(qua);
 				
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();

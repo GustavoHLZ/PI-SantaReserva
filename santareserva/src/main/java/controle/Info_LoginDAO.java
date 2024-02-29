@@ -32,7 +32,6 @@ private static Info_LoginDAO instancia;
 		
 		int ChavePrimariaGerada = Integer.MIN_VALUE;
 				
-		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
@@ -64,8 +63,7 @@ private static Info_LoginDAO instancia;
 		Connection conBD = con.conectar();
 		
 		try {
-			PreparedStatement ps= conBD.prepareStatement(SQL);
-			
+			PreparedStatement ps= conBD.prepareStatement(SQL);	
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -85,7 +83,6 @@ private static Info_LoginDAO instancia;
 			}
 				
 			} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();

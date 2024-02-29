@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import modelo.Sala_Reunioes;
 import modelo.Servicos_Consumidos;
 
 public class Servicos_ConsumidosDAO implements IServicos_ConsumidosDAO {
@@ -25,17 +25,25 @@ public class Servicos_ConsumidosDAO implements IServicos_ConsumidosDAO {
 
 	public int InserirServicos_Consumidos(Servicos_Consumidos consumido) {
 		
-		String SQL = "INSERT INTO Servicos_Consumidos (ID_Servico_Consumido) VALUES (?)";
+		String SQL = "INSERT INTO Servicos_Consumidos (FK,ID_Hospede, FK_ID_Servico) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
+		int chavePrimariaGerada = Integer.MIN_VALUE;
+		
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
+			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setInt(1, consumido.getID_Servico_Consumido());
+			ps.setInt(1, consumido.getFK_ID_Hospede());
+			ps.setInt(2, consumido.getFK_Servico());
 			
-			return ps.executeUpdate();
+			ps.executeUpdate();
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs!=null) {
+				chavePrimariaGerada = rs.getInt(1);
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,7 +51,7 @@ public class Servicos_ConsumidosDAO implements IServicos_ConsumidosDAO {
 			con.fecharConexao();
 		}
 	
-		return 0;
+		return chavePrimariaGerada;
 	}
 	
 	public ArrayList<Servicos_Consumidos> listarServicos_Consumidos() {

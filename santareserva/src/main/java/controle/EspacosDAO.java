@@ -27,18 +27,27 @@ public class EspacosDAO implements IEspacosDAO {
 	}
 
 	public int InserirEspacos(Espacos esp) {
-		String SQL = "INSERT INTO Espacos (Ocupante_Espaco, Check_In, Check_Out) VALUES (?,?,?)";
+		
+		String SQL = "INSERT INTO Espacos (Ocupante_Espaco, Check_In, Check_Out) VALUES (?, ?, ?)";
+		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 
+		int chavePrimariaGerada = Integer.MIN_VALUE;
+		
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(2, esp.getOcupante_Espaco());
-			ps.setDate(0, esp.getCheck_In());
-			ps.setDate(4, esp.getCheck_Out());
+			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setInt(1, esp.getOcupante_Espaco());
+			ps.setDate(2, esp.getCheck_In());
+			ps.setDate(3, esp.getCheck_Out());
 
 			ps.executeUpdate();
 			
+			ResultSet rs = ps.executeQuery();
+			if(rs!=null) {
+				chavePrimariaGerada = rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,10 +55,11 @@ public class EspacosDAO implements IEspacosDAO {
 			con.fecharConexao();
 		}
 
-		return 0;
+		return chavePrimariaGerada;
 	}
 
 	public ArrayList<Espacos> listarEspacos() {
+		
 		ArrayList<Espacos> espacos = new ArrayList<Espacos>();
 
 		String SQL = "SELECT * FROM Espacos";
@@ -59,7 +69,6 @@ public class EspacosDAO implements IEspacosDAO {
 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -81,7 +90,6 @@ public class EspacosDAO implements IEspacosDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			con.fecharConexao();

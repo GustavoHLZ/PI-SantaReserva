@@ -23,6 +23,7 @@ private static ComputadoresDAO instancia;
 	}
 
 	public int inserirComputadores(Computadores comp) {
+		
 		String SQL = "INSERT INTO Computadores (ID_PC, Num_PC, Temp_alugado) VALUES (?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
@@ -34,10 +35,9 @@ private static ComputadoresDAO instancia;
 			
 			ps.setInt(1, comp.getID_PC());
 			ps.setInt(2, comp.getNum_PC());
-			ps.setInt(0, comp.getTemp_alugado());
+			ps.setInt(3, comp.getTemp_alugado());
 			
 			ps.executeUpdate();
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -49,6 +49,7 @@ private static ComputadoresDAO instancia;
 	}
 
 	public ArrayList<Computadores> listarComputadores() {
+		
 		ArrayList<Computadores> computadores = new ArrayList<Computadores>();
 		
 		String SQL = "SELECT * FROM Computadores";
@@ -58,7 +59,6 @@ private static ComputadoresDAO instancia;
 		
 		try {
 			PreparedStatement ps= conBD.prepareStatement(SQL);
-			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -78,7 +78,6 @@ private static ComputadoresDAO instancia;
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  finally {
 			con.fecharConexao();
