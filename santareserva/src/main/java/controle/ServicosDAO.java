@@ -23,9 +23,28 @@ public class ServicosDAO implements IServicosDAO {
 		return instancia;
 	}
 	
-	public int InserirServicos(Servicos end) {
+	public int InserirServicos(Servicos servico) {
 		
 		String SQL = "INSERT INTO Servicos (ID_servico, Nome_servico, Preco_servico, Pag_Efetuado) VALUES (?, ?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, servico.getID_servico());
+			ps.setString(2, servico.getNome_servico());
+			ps.setFloat(3, servico.getPreco_servico());
+			ps.setBoolean(4, servico.getPag_Efetuado());
+			
+			return ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
 			
 		return 0;
 	}

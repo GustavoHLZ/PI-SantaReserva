@@ -22,9 +22,27 @@ private static Info_LoginDAO instancia;
 		return instancia;
 	}
 
-	public int InserirInfo_Login(Info_Login end) {
+	public int InserirInfo_Login(Info_Login info) {
 		
 		String SQL = "INSERT INTO Info_Login (ID_usuario, Login, Senha) VALUES (?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, info.getID_usuario());
+			ps.setString(2, info.getLogin());
+			ps.setString(3, info.getSenha());
+			
+			return ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
 		
 		return 0;
 	}

@@ -24,9 +24,28 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 		return instancia;
 	}
 
-	public int InserirSala_Reunioes(Sala_Reunioes end) {
+	public int InserirSala_Reunioes(Sala_Reunioes sala) {
 		
 		String SQL = "INSERT INTO Sala_Reunioes (ID_Sala, Disp_Sala, Temp_Alugado, Cap_Max) VALUES (?, ?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, sala.getID_Sala());
+			ps.setBoolean(2, sala.getDisp_Sala());
+			ps.setInt(3, sala.getTemp_Alugado());
+			ps.setInt(4, sala.getCap_Max());
+			
+			return ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
 	
 		return 0;
 	}

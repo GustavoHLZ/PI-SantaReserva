@@ -24,9 +24,29 @@ public class QuartosDAO implements IQuartosDAO {
 		return instancia;
 	}
 
-	public int InserirQuartos(Quartos end) {
+	public int InserirQuartos(Quartos qua) {
 		
 		String SQL = "INSERT INTO Quartos (ID_Quarto, Tipo_Quarto, Preco_Diaria, Dispo_Quarto, Cap_max) VALUES (?, ?, ?, ?, ?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, qua.getID_Quarto());
+			ps.setString(2, qua.getTipo_Quarto());
+			ps.setFloat(3, qua.getPreco_Diaria());
+			ps.setBoolean(4, qua.getDispo_Quarto());
+			ps.setInt(5, qua.getCap_max());
+			
+			return ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
 	
 		return 0;
 	}
