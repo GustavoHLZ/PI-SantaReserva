@@ -6,7 +6,7 @@ import modelo.Hospedes;
 
 public class HospedesDAO implements IHospedesDAO {
 	
-<<<<<<< HEAD
+
 private static HospedesDAO instancia;
 	
 	private HospedesDAO() {}
@@ -18,8 +18,6 @@ private static HospedesDAO instancia;
 		}
 		return instancia;
 	}
-=======
->>>>>>> ConexaoBDD2
 	
 	public int InserirHospedes(Hospedes end) {
 		

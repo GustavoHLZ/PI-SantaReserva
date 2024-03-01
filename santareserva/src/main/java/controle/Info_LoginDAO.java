@@ -10,11 +10,7 @@ import modelo.Info_Login;
 
 public class Info_LoginDAO implements IInfo_LoginDAO{
 	
-<<<<<<< HEAD
 private static Info_LoginDAO instancia;
-=======
-	private static Info_LoginDAO instancia;
->>>>>>> ConexaoBDD2
 	
 	private Info_LoginDAO() {}
 	
