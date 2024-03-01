@@ -21,7 +21,7 @@ public class Conexao { //Connection
 	 * @return
 	 */
 	
-	public static Conexao getConexao() {
+	public static Conexao getInstancia() {
 		if(instancia == null) {
 			instancia = new Conexao();
 		}

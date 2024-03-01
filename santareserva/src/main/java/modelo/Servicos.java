@@ -3,6 +3,9 @@ package modelo;
 public class Servicos {
 	private int ID_servico;
 	private String Nome_servico;
+	private float Preco_servico;
+	private Boolean Pag_Efetuado;
+	
 	public int getID_servico() {
 		return ID_servico;
 	}
@@ -27,7 +30,5 @@ public class Servicos {
 	public void setPag_Efetuado(Boolean pag_Efetuado) {
 		Pag_Efetuado = pag_Efetuado;
 	}
-	private float Preco_servico;
-	private Boolean Pag_Efetuado;
 
 }
