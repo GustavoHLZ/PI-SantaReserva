@@ -66,6 +66,8 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
 		}
 	
 		return sala_reunioes;

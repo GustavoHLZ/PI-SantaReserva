@@ -65,6 +65,8 @@ public class ServicosDAO implements IServicosDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
 		}
 			
 		return servicos;
