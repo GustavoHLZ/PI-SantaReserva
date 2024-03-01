@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
@@ -25,21 +26,25 @@ private static HospedesDAO instancia;
 	}
 	
 	public int InserirHospedes(Hospedes hosp) {
-		String SQL = "INSERT INTO Hospedes (ID_Hospede, Nome_Hospede, sobrenome_hospede, nascimento_hospede, telefone_hospede, email_hospede) VALUES (?,?,?,?,?,?)";
+		String SQL = "INSERT INTO Hospedes (Nome_Hospede, sobrenome_hospede, nascimento_hospede, telefone_hospede, email_hospede) VALUES (?,?,?,?,?)";
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
-
+		int chavePrimariaGerada = Integer.MIN_VALUE;
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
+			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 
-			ps.setInt(1, hosp.getID_Hospede());
-			ps.setString(2, hosp.getNome_Hospede());
-			ps.setString(0, hosp.getSobrenome_hospede());
-			ps.setDate(4, hosp.getNascimento_hospede());
-			ps.setInt(5, hosp.getTelefone_hospede());
-			ps.setString(6, hosp.getEmail_hospede());
+			ps.setString(1, hosp.getNome_Hospede());
+			ps.setString(2, hosp.getSobrenome_hospede());
+			ps.setDate(3, hosp.getNascimento_hospede());
+			ps.setInt(4, hosp.getTelefone_hospede());
+			ps.setString(5, hosp.getEmail_hospede());
 			
 			ps.executeUpdate();
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs!=null) {
+				chavePrimariaGerada = rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,7 +52,7 @@ private static HospedesDAO instancia;
 			con.fecharConexao();
 		}
 
-		return 0;
+		return chavePrimariaGerada;
 	}
 	
 	public ArrayList<Hospedes> listarHospedes() {
