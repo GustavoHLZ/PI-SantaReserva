@@ -22,8 +22,27 @@ private static Espacos_ReservadosDAO instancia;
 		return instancia;
 	}
 
-	public int inserirEspacos_Reservados(Espacos_Reservados end) {
+	public int inserirEspacos_Reservados(Espacos_Reservados esr) {
 		String SQL = "INSERT INTO Espacos_Reservados (ID_Espacos_Reservados) VALUES (?)";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		try {
+			PreparedStatement ps= conBD.prepareStatement(SQL);
+			
+			
+			ps.setInt(1, esr.getID_Espacos_Reservados());
+			
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
 		return 0;
 	}
 
