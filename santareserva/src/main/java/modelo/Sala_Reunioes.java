@@ -4,6 +4,9 @@ public class Sala_Reunioes {
 
 	private int ID_Sala;
 	private Boolean Disp_Sala;
+	private int Temp_Alugado;
+	private int Cap_Max;
+	
 	public int getID_Sala() {
 		return ID_Sala;
 	}
@@ -28,7 +31,5 @@ public class Sala_Reunioes {
 	public void setCap_Max(int cap_Max) {
 		Cap_Max = cap_Max;
 	}
-	private int Temp_Alugado;
-	private int Cap_Max;
 
 }
