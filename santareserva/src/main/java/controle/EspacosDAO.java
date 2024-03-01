@@ -5,6 +5,18 @@ import java.util.ArrayList;
 import modelo.Espacos;
 
 public class EspacosDAO implements IEspacosDAO {
+	
+private static EspacosDAO instancia;
+	
+	private EspacosDAO() {}
+	
+	public static EspacosDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new EspacosDAO();
+		}
+		return instancia;
+	}
 
 	public int InserirEspacos(Espacos end) {
 		

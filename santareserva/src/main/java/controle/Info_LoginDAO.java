@@ -5,6 +5,18 @@ import java.util.ArrayList;
 import modelo.Info_Login;
 
 public class Info_LoginDAO implements IInfo_LoginDAO{
+	
+private static Info_LoginDAO instancia;
+	
+	private Info_LoginDAO() {}
+	
+	public static Info_LoginDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new Info_LoginDAO();
+		}
+		return instancia;
+	}
 
 	public int InserirInfo_Login(Info_Login end) {
 		

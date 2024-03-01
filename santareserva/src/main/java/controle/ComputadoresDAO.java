@@ -5,6 +5,18 @@ import java.util.ArrayList;
 import modelo.Computadores;
 
 public class ComputadoresDAO implements IComputadoresDAO {
+	
+private static ComputadoresDAO instancia;
+	
+	private ComputadoresDAO() {}
+	
+	public static ComputadoresDAO getInstancia() {
+		
+		if(instancia == null) {
+			instancia = new ComputadoresDAO();
+		}
+		return instancia;
+	}
 
 	public int inserirComputadores(Computadores end) {
 
