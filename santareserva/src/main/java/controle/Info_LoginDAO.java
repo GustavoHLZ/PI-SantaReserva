@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Info_Login;
@@ -24,19 +25,25 @@ private static Info_LoginDAO instancia;
 
 	public int InserirInfo_Login(Info_Login info) {
 		
-		String SQL = "INSERT INTO Info_Login (ID_usuario, Login, Senha) VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO Info_Login (Login, Senha) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
+		int ChavePrimariaGerada = Integer.MIN_VALUE;
+				
+		
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
+			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setInt(1, info.getID_usuario());
-			ps.setString(2, info.getLogin());
-			ps.setString(3, info.getSenha());
+			ps.setString(1, info.getLogin());
+			ps.setString(2, info.getSenha());
 			
-			return ps.executeUpdate();
+			ResultSet rs = ps.executeQuery();
+			if(rs!=null) {
+				ChavePrimariaGerada = rs.getInt(1);
+			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -44,7 +51,7 @@ private static Info_LoginDAO instancia;
 			con.fecharConexao();
 		}
 		
-		return 0;
+		return ChavePrimariaGerada;
 	}
 	
 	public ArrayList<Info_Login> listarInfo_Login() {
