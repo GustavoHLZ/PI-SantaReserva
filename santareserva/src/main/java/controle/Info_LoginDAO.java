@@ -95,7 +95,7 @@ private static Info_LoginDAO instancia;
 	
 	
 	public boolean atualizarInfo_Login(Info_Login info) {
-		String SQL = "UPDATE Info_Login SET Login = ? WHERE Senha = ?";
+		String SQL = "UPDATE Info_Login SET Login = ?, Senha = ?, WHERE ID_usuario = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();

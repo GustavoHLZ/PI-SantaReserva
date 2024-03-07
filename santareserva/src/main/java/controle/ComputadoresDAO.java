@@ -88,7 +88,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 		
 	public boolean atualizarComputadores(Computadores end) {
 		
-		String SQL = "UPDATE Computadores SET Temp_alugado = ? Where Num_PC = ?";
+		String SQL = "UPDATE Computadores SET Temp_alugado = ? Where ID_PC = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -101,7 +101,6 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			
 			
 			ps.setInt(1, end.getTemp_alugado());
-			ps.setInt(2, end.getNum_PC());
 			
 			retorno = ps.executeUpdate();
 			

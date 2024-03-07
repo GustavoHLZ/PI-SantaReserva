@@ -100,9 +100,36 @@ public class EspacosDAO implements IEspacosDAO {
 		return espacos;
 	}
 
-	public boolean atualizarEspacos(Espacos end) {
+	public boolean atualizarEspacos(Espacos espc) {
 
-		return false;
+String SQL = "UPDATE Espacos SET Ocupante_Espaco = ?, Check_In = ?, Check_Out = ? WHERE ID_Espaco = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setInt(1, espc.getOcupante_Espaco());
+			ps.setDate(2, espc.getCheck_In());
+			ps.setDate(3, espc.getCheck_Out());
+			
+			
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
+		return (retorno == 0 ? false : true);
+		
 	}
 
 	public boolean removerEspacos(Espacos end) {
