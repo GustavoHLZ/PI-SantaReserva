@@ -105,9 +105,39 @@ private static HospedesDAO instancia;
 		return hospedes;
 	}
 	
-	public boolean atualizarHospedes(Hospedes end) {
+	public boolean atualizarHospedes(Hospedes hosp) {
 		
-		return false;
+String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nascimento_hospede = ?, telefone_hospede = ?, email_hospede = ? WHERE ID_Hospede = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setString(1, hosp.getNome_Hospede());
+			ps.setString(2, hosp.getSobrenome_hospede());
+			ps.setDate(3, hosp.getNascimento_hospede());
+			ps.setInt(4, hosp.getTelefone_hospede());
+			ps.setString(5, hosp.getEmail_hospede());
+			
+			
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
+		return (retorno == 0 ? false : true);
+		
+
 	}
 	
 	public boolean removerHospedes(Hospedes end) {
