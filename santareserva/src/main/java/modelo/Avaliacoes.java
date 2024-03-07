@@ -13,7 +13,7 @@ public class Avaliacoes {
 		FK_ID_Hospede = fK_ID_Hospede;
 	}
 	
-	public int getID_avaliacao() {
+	public int getIdAvaliacao() {
 		return ID_avaliacao;
 	}
 	public void setID_avaliacao(int iD_avaliacao) {
