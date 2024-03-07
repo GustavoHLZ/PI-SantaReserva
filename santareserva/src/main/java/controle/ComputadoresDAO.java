@@ -88,7 +88,33 @@ public class ComputadoresDAO implements IComputadoresDAO {
 		
 	public boolean atualizarComputadores(Computadores end) {
 		
-		return false;
+		String SQL = "UPDATE Computadores SET Temp_alugado = ? Where Num_PC = ?";
+		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			
+			ps.setInt(1, end.getTemp_alugado());
+			ps.setInt(2, end.getNum_PC());
+			
+			retorno = ps.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+		
+			return (retorno == 0 ? false : true);
 	}
 		
 		
