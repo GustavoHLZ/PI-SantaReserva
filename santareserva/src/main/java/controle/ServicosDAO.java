@@ -90,8 +90,31 @@ public class ServicosDAO implements IServicosDAO {
 	}
 		
 	public boolean atualizarServicos(Servicos end) {
-			
-		return false;
+
+				//Comando SQL a ser executado
+				String SQL = "UPDATE Servicos Set Pag_Efetuado = ? WHERE ID_servico = ?";
+				
+				// Abre a conexao e cria a "ponte de conexao" com MYSQL
+				Conexao con = Conexao.getInstancia();
+				Connection conBD = con.conectar();
+				
+				int retorno = 0;
+				
+				try {
+					PreparedStatement ps = conBD.prepareStatement(SQL);
+					
+					ps.setBoolean(1, end.getPag_Efetuado());
+					ps.setInt(2, end.getID_servico());
+					
+					retorno = ps.executeUpdate();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					con.fecharConexao();
+				}
+				
+				return (retorno == 0 ? false : true);
 	}
 		
 	public boolean removerServicos(Servicos end) {
