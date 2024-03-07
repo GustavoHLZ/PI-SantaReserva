@@ -94,12 +94,47 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 		return avaliacoes;
 	}
 	
-	public boolean atualizarAvaliacoes(Avaliacoes end) {
+	/*
+	 * Tem que possuir a chave primeira (ID, etc.)
+	 */
 	
-	return false;
+	public boolean atualizarAvaliacoes(Avaliacoes end) {
+		
+		// Comando SQL a se executado
+		String SQL = "UPDATE Avaliacoes SET avaliacao = ? Where avaliador = ?";
+		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			
+			ps.setFloat(1, end.getAvaliacao());
+			ps.setString(2, end.getAvaliador());
+			
+			retorno = ps.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+		
+		
+	// Usando IF ternário // isso é if ternário (operador condicional ternário)
+	return (retorno == 0 ? false : true);
 	}
 	
 	public boolean removerAvaliacoes(Avaliacoes end) {
+		
+		
 	
 	return false;
 	}
