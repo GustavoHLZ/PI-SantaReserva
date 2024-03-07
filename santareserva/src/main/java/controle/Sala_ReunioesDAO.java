@@ -91,9 +91,33 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 		return sala_reunioes;
 	}
 	
-	public boolean atualizarSala_Reunioes(Sala_Reunioes end) {
-	
-		return false;
+	public boolean atualizarSala_Reunioes(Sala_Reunioes sala) {
+		
+		String SQL = "UPDATE Sala_Reunioes SET Disp_Sala, Temp_Alugado = ? WHERE ID_Sala = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setBoolean(1, sala.getDisp_Sala());
+			ps.setInt(2, sala.getTemp_Alugado());
+			
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
+		return (retorno == 0 ? false : true);
 	}
 	
 	public boolean removerSala_Reunioes(Sala_Reunioes end) {
