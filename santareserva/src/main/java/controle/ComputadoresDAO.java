@@ -86,7 +86,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	}
 		
 		
-	public boolean atualizarComputadores(Computadores end) {
+	public boolean atualizarComputadores(Computadores comp) {
 		
 		String SQL = "UPDATE Computadores SET Temp_alugado = ? Where ID_PC = ?";
 		
@@ -100,7 +100,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			
-			ps.setInt(1, end.getTemp_alugado());
+			ps.setInt(1, comp.getTemp_alugado());
 			
 			retorno = ps.executeUpdate();
 			
@@ -117,9 +117,33 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	}
 		
 		
-	public boolean removerComputadores(Computadores end) {
+	public boolean removerComputadores(Computadores comp) {
 		
-		return false;
+		
+		String SQL = "DELETE FROM Computadores WHERE ID_PC = ?";
+
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			ps.setInt(1, comp.getID_PC());
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+	
+		return (retorno == 0 ? false : true);
+		
+	
 	}
 		
 		
