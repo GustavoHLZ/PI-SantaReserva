@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.mysql.cj.jdbc.PreparedStatementWrapper;
+
 import modelo.Info_Login;
 
 public class Info_LoginDAO implements IInfo_LoginDAO{
@@ -91,17 +93,41 @@ private static Info_LoginDAO instancia;
 		return info_login;
 	}
 	
-	public boolean atualizarInfo_Login(Info_Login end) {
+	
+	public boolean atualizarInfo_Login(Info_Login info) {
+		String SQL = "UPDATE Info_Login SET Login = ? WHERE Senha = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setString(1, info.getLogin());
+			ps.setString(2, info.getSenha());
+			
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
+		return (retorno == 0 ? false : true);
+	}
+	
+	public boolean removerInfo_Login(Info_Login info) {
 		
 		return false;
 	}
 	
-	public boolean removerInfo_Login(Info_Login end) {
-		
-		return false;
-	}
-	
-	public Info_Login buscarInfo_Login(Info_Login end) {
+	public Info_Login buscarInfo_Login(Info_Login info) {
 		
 		return null;
 	}
