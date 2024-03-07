@@ -134,9 +134,27 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	
 	public boolean removerAvaliacoes(Avaliacoes end) {
 		
+		String SQL = "DELETE FROM Avaliacoes WHERE ID_Avaliacao = ?";
 		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
 	
-	return false;
+		return (retorno == 0 ? false : true);
 	}
 	
 	public Avaliacoes buscarAvaliacoes(Avaliacoes end) {
