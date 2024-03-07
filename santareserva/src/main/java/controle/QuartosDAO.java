@@ -94,8 +94,32 @@ public class QuartosDAO implements IQuartosDAO {
 	}
 	
 	public boolean atualizarQuartos(Quartos end) {
-	
-		return false;
+		
+		//Comando SQL a ser executado
+		String SQL = "UPDATE Quartos Set Dispo_Quarto = ? WHERE ID_Quarto = ?";
+		
+		// Abre a conexao e cria a "ponte de conexao" com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			
+			ps.setBoolean(1, end.getDispo_Quarto());
+			ps.setInt(2, end.getID_Quarto());
+			
+			retorno = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		return (retorno == 0 ? false : true);
+		
 	}
 	
 	public boolean removerQuartos(Quartos end) {
