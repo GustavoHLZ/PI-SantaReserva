@@ -4,6 +4,7 @@ public class Info_Login {
 	private int ID_usuario;
 	private String Login;
 	private String Senha;
+	
 	public int getID_usuario() {
 		return ID_usuario;
 	}
