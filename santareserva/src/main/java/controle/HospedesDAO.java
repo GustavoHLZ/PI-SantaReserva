@@ -27,7 +27,7 @@ private static HospedesDAO instancia;
 	
 	public int InserirHospedes(Hospedes hosp) {
 		
-		String SQL = "INSERT INTO Hospedes (Nome_Hospede, sobrenome_hospede, nascimento_hospede, telefone_hospede, email_hospede, FK_ID_usuario) VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Hospedes (Nome_Hospede, sobrenome_hospede, nascimento_hospede, telefone_hospede, email_hospede, senha_hospede, FK_ID_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -42,8 +42,9 @@ private static HospedesDAO instancia;
 			ps.setDate(3, hosp.getNascimento_hospede());
 			ps.setInt(4, hosp.getTelefone_hospede());
 			ps.setString(5, hosp.getEmail_hospede());
-			ps.setInt(6, hosp.getFK_ID_usuario());
-			
+			ps.setString(6, hosp.getSenha_hospede());
+			ps.setInt(7, hosp.getFK_ID_usuario());
+			 
 			ps.executeUpdate();
 			
 			ResultSet rs = ps.executeQuery();
@@ -84,6 +85,7 @@ private static HospedesDAO instancia;
 				Date nascimento_hospede = rs.getDate("nascimento_hospede");
 				Integer telefone_hospede = rs.getInt("telefone_hospede");
 				String email_hospede = rs.getString("email_hospede");
+				String senha_hospede = rs.getString("senha_hospede");
 				
 				hosp.setID_Hospede(ID_Hospede);
 				hosp.setNome_Hospede(Nome_Hospede);
@@ -91,6 +93,7 @@ private static HospedesDAO instancia;
 				hosp.setNascimento_hospede(nascimento_hospede);
 				hosp.setTelefone_hospede(telefone_hospede);
 				hosp.setEmail_hospede(email_hospede);
+				hosp.setSenha_hospede(senha_hospede);
 				
 				hospedes.add(hosp);
 				
@@ -107,7 +110,7 @@ private static HospedesDAO instancia;
 	
 	public boolean atualizarHospedes(Hospedes hosp) {
 		
-String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nascimento_hospede = ?, telefone_hospede = ?, email_hospede = ? WHERE ID_Hospede = ?";
+String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nascimento_hospede = ?, telefone_hospede = ?, email_hospede = ?, senha_hospede = ? WHERE ID_Hospede = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -122,6 +125,7 @@ String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nasc
 			ps.setDate(3, hosp.getNascimento_hospede());
 			ps.setInt(4, hosp.getTelefone_hospede());
 			ps.setString(5, hosp.getEmail_hospede());
+			ps.setString(6, hosp.getSenha_hospede());
 			
 			
 			retorno = ps.executeUpdate();

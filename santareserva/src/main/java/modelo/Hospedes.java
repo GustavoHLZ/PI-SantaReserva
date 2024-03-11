@@ -10,6 +10,7 @@ public class Hospedes {
 	private Date nascimento_hospede;
 	private int telefone_hospede;
 	private String email_hospede;
+	private String senha_hospede;
 	private int FK_ID_usuario;
 	public int getFK_ID_usuario() {
 		return FK_ID_usuario;
@@ -53,6 +54,11 @@ public class Hospedes {
 	public void setEmail_hospede(String email_hospede) {
 		this.email_hospede = email_hospede;
 	}
-	
+	public String getSenha_hospede() {
+		return senha_hospede;
+	}
+	public void setSenha_hospede(String senha_hospede) {
+		this.senha_hospede = senha_hospede;
+	}
 
 }
