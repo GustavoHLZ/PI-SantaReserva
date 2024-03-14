@@ -11,12 +11,12 @@ public class Hospedes {
 	private int telefone_hospede;
 	private String email_hospede;
 	private String senha_hospede;
-	private int FK_ID_usuario;
-	public int getFK_ID_usuario() {
-		return FK_ID_usuario;
+	private int FK_ID_Hospede;
+	public int getFK_ID_Hospede() {
+		return FK_ID_Hospede;
 	}
-	public void setFK_ID_usuario(int fK_ID_usuario) {
-		FK_ID_usuario = fK_ID_usuario;
+	public void setFK_ID_Hospede(int fK_ID_Hospede) {
+		FK_ID_Hospede = fK_ID_Hospede;
 	}
 	public int getID_Hospede() {
 		return ID_Hospede;
