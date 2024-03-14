@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class Conexao { //Connection
 	
 	private static final String USERNAME = "root";
-	private static final String SENHA = "aluno";
-	private static final String BD = "nome_banco";
+	private static final String SENHA = "gusta2023157c.c";
+	private static final String BD = "mydb";
 	private Connection con; // jdbc
 	private static  Conexao instancia; // singleton
 	
