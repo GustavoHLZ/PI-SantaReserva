@@ -163,6 +163,10 @@ public class TelaCadastro extends JFrame {
 				
 				JOptionPane.showMessageDialog(null, "inserido");
 				
+				TelaLogin c = new TelaLogin();
+				c.setVisible(true);
+				dispose();
+				
 			}
 		});
 		BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
