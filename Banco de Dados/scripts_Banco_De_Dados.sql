@@ -127,7 +127,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Servicos_Consumidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Servicos_Consumidos` (
-  `ID_Servico_Consumido` INT GENERATED ALWAYS AS (),
+  `ID_Servico_Consumido` INT NOT NULL AUTO_INCREMENT,
   `FK_ID_Hospede` INT NOT NULL,
   `FK_Servico` INT NOT NULL,
   PRIMARY KEY (`ID_Servico_Consumido`, `FK_ID_Hospede`, `FK_Servico`),

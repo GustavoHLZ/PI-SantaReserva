@@ -4,7 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import controle.Info_LoginDAO;
+import modelo.Info_Login;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
@@ -18,6 +25,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 public class TelaLogin extends JFrame {
@@ -26,7 +35,10 @@ public class TelaLogin extends JFrame {
 	private JTextField txtLogin;
 	private JTextField txtSenha;
 	private JLabel lblNewLabel_1;
+	private JTable table;
 	private JLabel lblNewLabel_2;
+	private Info_Login endSelecionado;
+	ArrayList<Info_Login> listarInfo_Login;
 
 	/**
 	 * Launch the application.
@@ -50,6 +62,9 @@ public class TelaLogin extends JFrame {
 	
 	
 	public TelaLogin() {
+		
+		listarInfo_Login = new ArrayList<Info_Login>();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
 		contentPane = new JPanel();
@@ -60,7 +75,7 @@ public class TelaLogin extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(229, 236, 238));
-		panel.setBounds(960, 11, 934, 1019);
+		panel.setBounds(951, 10, 934, 1019);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -69,6 +84,12 @@ public class TelaLogin extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 64));
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 217, 207);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		
 		txtLogin = new JTextField();
 		txtLogin.setFont(new Font("Arial", Font.PLAIN, 32));
 		txtLogin.addFocusListener(new FocusAdapter() {
@@ -76,9 +97,22 @@ public class TelaLogin extends JFrame {
 			public void focusGained(FocusEvent e) {
 				
 				
+				//int linhaSelecionada = table.getSelectedRow();
+
+				//endSelecionado = listarInfo_Login.get(linhaSelecionada);
+
+
+				//txtLogin.setText(endSelecionado.getLogin());
+				//txtSenha.setText(endSelecionado.getSenha());
 				
 			}
 		});
+		
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Login", "Senha" }));
+		// atualiza JTable
+		atualizarJTable();
+		
 		txtLogin.setBounds(309, 339, 335, 30);
 		panel.add(txtLogin);
 		txtLogin.setColumns(10);
@@ -105,6 +139,19 @@ public class TelaLogin extends JFrame {
 		JButton.setFont(new Font("Arial", Font.PLAIN, 16));
 		JButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String Login = txtLogin.getText();
+				String Senha = txtSenha.getText();
+				
+				Info_Login chama = new Info_Login();
+				
+				chama.setLogin(Login);
+				chama.setSenha(Senha);
+					
+				Info_LoginDAO dao = Info_LoginDAO.getInstancia();
+				
+				dao.listarInfo_Login();	
+				
 			}
 		});
 		JButton.setBackground(new Color(119, 165, 175));
@@ -132,4 +179,19 @@ public class TelaLogin extends JFrame {
 		lblNewLabel_5.setBounds(0, 0, 960, 1080);
 		contentPane.add(lblNewLabel_5);
 	}
+	
+	protected void atualizarJTable() {
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Login", "Senha" });
+
+		Info_LoginDAO endDAO = Info_LoginDAO.getInstancia();
+		listarInfo_Login = endDAO.listarInfo_Login();
+		
+		for (int i = 0; i < listarInfo_Login.size(); i++) {
+			Info_Login p = listarInfo_Login.get(i);
+			modelo.addRow(new Object[] { p.getLogin(), p.getSenha() });
+		}
+
+		table.setModel(modelo);
+	}
+
 }
