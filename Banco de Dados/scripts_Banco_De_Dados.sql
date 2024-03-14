@@ -16,9 +16,9 @@ CREATE DATABASE IF NOT EXISTS `mydb`;
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Hospedes`
+-- Table `Hospedes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Hospedes` (
+CREATE TABLE IF NOT EXISTS `Hospedes` (
   `ID_Hospede` INT NOT NULL AUTO_INCREMENT,
   `Nome_Hospede` VARCHAR(45) NOT NULL,
   `sobrenome_hospede` VARCHAR(45) NOT NULL,
@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Hospedes` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Avaliacoes`
+-- Table `Avaliacoes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Avaliacoes` (
+CREATE TABLE IF NOT EXISTS `Avaliacoes` (
   `ID_Avaliacao` INT NOT NULL AUTO_INCREMENT,
   `Avaliacao` FLOAT NOT NULL,
   `Avaliador` VARCHAR(45) NOT NULL,
@@ -41,25 +41,23 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Avaliacoes` (
   INDEX `fk_Avaliacoes_Hospedes1_idx` (`FK_ID_Hospede` ASC) VISIBLE,
   CONSTRAINT `fk_Avaliacoes_Hospedes1`
     FOREIGN KEY (`FK_ID_Hospede`)
-    REFERENCES `mydb`.`Hospedes` (`ID_Hospede`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `Hospedes` (`ID_Hospede`));
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Computadores`
+-- Table `Computadores`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Computadores` (
+CREATE TABLE IF NOT EXISTS `Computadores` (
   `ID_PC` INT NOT NULL,
   `Num_PC` INT NOT NULL,
-  `Temp_Alugado` INT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Temp_Alugado` INT NOT NULL,
   PRIMARY KEY (`ID_PC`));
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Sala_Reunioes`
+-- Table `Sala_Reunioes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Sala_Reunioes` (
+CREATE TABLE IF NOT EXISTS `Sala_Reunioes` (
   `ID_Sala` INT NOT NULL,
   `Disp_Sala` TINYINT NOT NULL,
   `Temp_Alugado` INT NOT NULL,
@@ -68,21 +66,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Sala_Reunioes` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Quartos`
+-- Table `Quartos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Quartos` (
+CREATE TABLE IF NOT EXISTS `Quartos` (
   `ID_Quarto` INT NOT NULL AUTO_INCREMENT,
   `Tipo_Quarto` VARCHAR(45) NOT NULL,
   `Preco_Diaria` FLOAT NOT NULL,
-  `Dispo_Quarto` TINYINT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Dispo_Quarto` TINYINT NOT NULL,
   `Cap_max` INT NOT NULL,
   PRIMARY KEY (`ID_Quarto`));
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Espacos`
+-- Table `Espacos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Espacos` (
+CREATE TABLE IF NOT EXISTS `Espacos` (
   `ID_Espaco` INT NOT NULL AUTO_INCREMENT,
   `Ocupante_Espaco` INT NOT NULL,
   `Check_In` DATE NOT NULL,
@@ -91,30 +89,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Espacos` (
   `FK_ID_Sala_Reuniao` INT NOT NULL,
   `Quartos_ID_Quarto` INT NOT NULL,
   PRIMARY KEY (`ID_Espaco`, `FK_ID_Computador`, `FK_ID_Sala_Reuniao`, `Quartos_ID_Quarto`),
-  INDEX `fk_Espacos_Computadores1_idx` (`FK_ID_Computador` ASC) VISIBLE,
-  INDEX `fk_Espacos_Sala_Reunioes1_idx` (`FK_ID_Sala_Reuniao` ASC) VISIBLE,
-  INDEX `fk_Espacos_Quartos1_idx` (`Quartos_ID_Quarto` ASC) VISIBLE,
   CONSTRAINT `fk_Espacos_Computadores1`
     FOREIGN KEY (`FK_ID_Computador`)
-    REFERENCES `mydb`.`Computadores` (`ID_PC`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `Computadores` (`ID_PC`),
   CONSTRAINT `fk_Espacos_Sala_Reunioes1`
     FOREIGN KEY (`FK_ID_Sala_Reuniao`)
-    REFERENCES `mydb`.`Sala_Reunioes` (`ID_Sala`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `Sala_Reunioes` (`ID_Sala`),
   CONSTRAINT `fk_Espacos_Quartos1`
     FOREIGN KEY (`Quartos_ID_Quarto`)
-    REFERENCES `mydb`.`Quartos` (`ID_Quarto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `Quartos` (`ID_Quarto`));
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Servicos`
+-- Table `Servicos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Servicos` (
+CREATE TABLE IF NOT EXISTS `Servicos` (
   `ID_Servico` INT NOT NULL,
   `Nome_Servico` VARCHAR(45) NOT NULL,
   `Preco_Servico` FLOAT NOT NULL,
@@ -124,64 +113,54 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Servicos_Consumidos`
+-- Table `Servicos_Consumidos`
 -- -----------------------------------------------------
+<<<<<<< Updated upstream
 CREATE TABLE IF NOT EXISTS `mydb`.`Servicos_Consumidos` (
+=======
+CREATE TABLE IF NOT EXISTS `Servicos_Consumidos` (
+>>>>>>> Stashed changes
   `ID_Servico_Consumido` INT NOT NULL AUTO_INCREMENT,
   `FK_ID_Hospede` INT NOT NULL,
   `FK_Servico` INT NOT NULL,
   PRIMARY KEY (`ID_Servico_Consumido`, `FK_ID_Hospede`, `FK_Servico`),
-  INDEX `fk_Servicos_Consumidos_Hospedes1_idx` (`FK_ID_Hospede` ASC) VISIBLE,
-  INDEX `fk_Servicos_Consumidos_Servicos1_idx` (`FK_Servico` ASC) VISIBLE,
   CONSTRAINT `fk_Servicos_Consumidos_Hospedes1`
     FOREIGN KEY (`FK_ID_Hospede`)
-    REFERENCES `mydb`.`Hospedes` (`ID_Hospede`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `Hospedes` (`ID_Hospede`),
   CONSTRAINT `fk_Servicos_Consumidos_Servicos1`
     FOREIGN KEY (`FK_Servico`)
-    REFERENCES `mydb`.`Servicos` (`ID_Servico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `Servicos` (`ID_Servico`));
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Info_Login`
+-- Table `Info_Login`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Info_Login` (
+CREATE TABLE IF NOT EXISTS `Info_Login` (
   `ID_usuario` INT NOT NULL,
   `Login` VARCHAR(50) NOT NULL,
   `Senha` VARCHAR(50) NOT NULL,
   `FK_ID_Hospede` INT NOT NULL,
   PRIMARY KEY (`ID_usuario`, `FK_ID_Hospede`),
-  INDEX `fk_Info_Login_Hospedes1_idx` (`FK_ID_Hospede` ASC) VISIBLE,
   CONSTRAINT `fk_Info_Login_Hospedes1`
     FOREIGN KEY (`FK_ID_Hospede`)
-    REFERENCES `mydb`.`Hospedes` (`ID_Hospede`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `Hospedes` (`ID_Hospede`));
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Espacos_Reservados`
+-- Table `Espacos_Reservados`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Espacos_Reservados` (
+CREATE TABLE IF NOT EXISTS `Espacos_Reservados` (
   `FK_ID_Espaco` INT NOT NULL,
   `FK_ID_Hospede` INT NOT NULL,
   `ID_Espacos_Reservados` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`FK_ID_Espaco`, `FK_ID_Hospede`, `ID_Espacos_Reservados`),
-  INDEX `fk_Espacos_has_Hospedes_Hospedes1_idx` (`FK_ID_Hospede` ASC) VISIBLE,
-  INDEX `fk_Espacos_has_Hospedes_Espacos1_idx` (`FK_ID_Espaco` ASC) VISIBLE,
   CONSTRAINT `fk_Espacos_has_Hospedes_Espacos1`
     FOREIGN KEY (`FK_ID_Espaco`)
-    REFERENCES `mydb`.`Espacos` (`ID_Espaco`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `Espacos` (`ID_Espaco`),
   CONSTRAINT `fk_Espacos_has_Hospedes_Hospedes1`
     FOREIGN KEY (`FK_ID_Hospede`)
-    REFERENCES `mydb`.`Hospedes` (`ID_Hospede`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    REFERENCES `Hospedes` (`ID_Hospede`)
+);
 
 insert into Servicos (ID_Servico, Pag_Efetuado, Preco_Servico, Nome_Servico) values (101, true, 149.99, 'Frigobar1');
 insert into Servicos (ID_Servico, Pag_Efetuado, Preco_Servico, Nome_Servico) values (102, true, 249.99, 'Frigobar2');

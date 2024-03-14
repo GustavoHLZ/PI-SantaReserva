@@ -27,7 +27,7 @@ private static HospedesDAO instancia;
 	
 	public int InserirHospedes(Hospedes hosp) {
 		
-		String SQL = "INSERT INTO Hospedes (Nome_Hospede, sobrenome_hospede, nascimento_hospede, telefone_hospede, email_hospede, senha_hospede, FK_ID_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Hospedes (Nome_Hospede, sobrenome_hospede, nascimento_hospede, telefone_hospede, email_hospede, senha_hospede) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -43,14 +43,14 @@ private static HospedesDAO instancia;
 			ps.setInt(4, hosp.getTelefone_hospede());
 			ps.setString(5, hosp.getEmail_hospede());
 			ps.setString(6, hosp.getSenha_hospede());
-			ps.setInt(7, hosp.getFK_ID_usuario());
+		
 			 
 			ps.executeUpdate();
 			
-			ResultSet rs = ps.executeQuery();
-			if(rs!=null) {
-				chavePrimariaGerada = rs.getInt(1);
-			}
+			//ResultSet rs = ps.executeQuery();
+			//if(rs!=null) {
+			//	chavePrimariaGerada = rs.getInt(1);
+			//}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,7 +58,8 @@ private static HospedesDAO instancia;
 			con.fecharConexao();
 		}
 
-		return chavePrimariaGerada;
+		//return chavePrimariaGerada;
+		return 0;
 	}
 	
 	public ArrayList<Hospedes> listarHospedes() {

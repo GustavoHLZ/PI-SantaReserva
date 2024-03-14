@@ -1,17 +1,24 @@
 package visao;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import controle.HospedesDAO;
+import modelo.Hospedes;
+import net.miginfocom.swing.MigLayout;
 
 public class TelaCadastro extends JFrame {
 
@@ -22,6 +29,8 @@ public class TelaCadastro extends JFrame {
 	private JTextField txtTelefone;
 	private JTextField txtSenha;
 	private JTextField txtNome;
+	private Hospedes hospSelecionado;
+	private ArrayList<Hospedes> listaHospedes;
 
 	/**
 	 * Launch the application.
@@ -43,6 +52,9 @@ public class TelaCadastro extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastro() {
+		ArrayList<Hospedes> listaHospedes = new ArrayList<Hospedes>();
+		
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Icones\\LogoAPP.png"));
 		setTitle("Bem-vindo à Santa Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +75,7 @@ public class TelaCadastro extends JFrame {
 		PainelHotel.add(ImgHotel, "cell 0 0,alignx left,aligny top");
 		
 		JPanel PainelCadastro = new JPanel();
-		Tela.add(PainelCadastro, "cell 15 0 1 6,alignx center,growy");
+		Tela.add(PainelCadastro, "flowx,cell 15 0 1 6,alignx center,growy");
 		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]", "[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][]"));
 		
 		JLabel lblRegistro = new JLabel("Registrar-se");
@@ -125,6 +137,34 @@ public class TelaCadastro extends JFrame {
 		txtSenha.setColumns(10);
 		
 		JLabel BTNRegistrar = new JLabel("");
+		BTNRegistrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String Email = txtEmail.getText();
+				String Nome = txtNome.getText();
+				String Sobrenome = txtSobrenome.getText();
+				Date Nascimento = Date.valueOf(txtNascimento.getText());
+				Integer Telefone = Integer.valueOf(txtTelefone.getText());
+				String Senha = txtSenha.getText();
+				
+				Hospedes hospede = new Hospedes();
+				
+				hospede.setEmail_hospede(Email);
+				hospede.setNome_Hospede(Nome);
+				hospede.setSobrenome_hospede(Sobrenome);
+				hospede.setNascimento_hospede(Nascimento);
+				hospede.setTelefone_hospede(Telefone);
+				hospede.setSenha_hospede(Senha);
+				
+				HospedesDAO dao = HospedesDAO.getInstancia();
+				
+				int retorno = dao.InserirHospedes(hospede);
+				
+				JOptionPane.showMessageDialog(null, "inserido");
+				
+			}
+		});
 		BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
 		PainelCadastro.add(BTNRegistrar, "cell 0 21");
 		
@@ -132,5 +172,6 @@ public class TelaCadastro extends JFrame {
 		lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelCadastro.add(lblJapossui, "cell 0 22,alignx center,aligny bottom");
 	}
+	
 
 }
