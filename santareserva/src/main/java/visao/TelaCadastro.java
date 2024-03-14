@@ -59,7 +59,7 @@ public class TelaCadastro extends JFrame {
 		PainelHotel.setLayout(new MigLayout("", "[]", "[]"));
 		
 		JLabel ImgHotel = new JLabel("");
-		ImgHotel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Fotos\\Hotel.png"));
+		ImgHotel.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Fotos/Hotel.png")));
 		PainelHotel.add(ImgHotel, "cell 0 0,alignx left,aligny top");
 		
 		JPanel PainelCadastro = new JPanel();
@@ -84,6 +84,7 @@ public class TelaCadastro extends JFrame {
 		PainelCadastro.add(lblNome, "cell 0 6");
 		
 		txtNome = new JTextField();
+		txtNome.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtNome, "cell 0 7,grow");
 		txtNome.setColumns(10);
 		
@@ -101,6 +102,7 @@ public class TelaCadastro extends JFrame {
 		PainelCadastro.add(lblNascimento, "cell 0 10");
 		
 		txtNascimento = new JTextField();
+		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtNascimento, "cell 0 11,grow");
 		txtNascimento.setColumns(10);
 		
@@ -109,6 +111,7 @@ public class TelaCadastro extends JFrame {
 		PainelCadastro.add(lblTelefone, "cell 0 12");
 		
 		txtTelefone = new JTextField();
+		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtTelefone, "cell 0 13,grow");
 		txtTelefone.setColumns(10);
 		
@@ -117,11 +120,12 @@ public class TelaCadastro extends JFrame {
 		PainelCadastro.add(lblSenha, "cell 0 14");
 		
 		txtSenha = new JTextField();
+		txtSenha.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtSenha, "cell 0 15,grow");
 		txtSenha.setColumns(10);
 		
 		JLabel BTNRegistrar = new JLabel("");
-		BTNRegistrar.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Botões\\BTN Registrar.png"));
+		BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
 		PainelCadastro.add(BTNRegistrar, "cell 0 21");
 		
 		JLabel lblJapossui = new JLabel("Já possui registro? Faça o Login");

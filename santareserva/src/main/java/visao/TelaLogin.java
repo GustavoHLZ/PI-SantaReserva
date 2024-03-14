@@ -60,16 +60,17 @@ public class TelaLogin extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(229, 236, 238));
-		panel.setBounds(634, 0, 736, 749);
+		panel.setBounds(960, 11, 934, 1019);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Login");
-		lblNewLabel.setBounds(299, 64, 158, 74);
+		lblNewLabel.setBounds(397, 61, 158, 74);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 64));
 		
 		txtLogin = new JTextField();
+		txtLogin.setFont(new Font("Arial", Font.PLAIN, 32));
 		txtLogin.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -78,22 +79,23 @@ public class TelaLogin extends JFrame {
 				
 			}
 		});
-		txtLogin.setBounds(220, 339, 335, 30);
+		txtLogin.setBounds(309, 339, 335, 30);
 		panel.add(txtLogin);
 		txtLogin.setColumns(10);
 		
-		lblNewLabel_1 = new JLabel("Login");
-		lblNewLabel_1.setBounds(220, 286, 123, 47);
+		lblNewLabel_1 = new JLabel("Email");
+		lblNewLabel_1.setBounds(309, 281, 123, 47);
 		panel.add(lblNewLabel_1);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 40));
 		
 		txtSenha = new JTextField();
-		txtSenha.setBounds(220, 453, 335, 30);
+		txtSenha.setFont(new Font("Arial", Font.PLAIN, 32));
+		txtSenha.setBounds(309, 453, 335, 30);
 		panel.add(txtSenha);
 		txtSenha.setColumns(10);
 		
 		lblNewLabel_2 = new JLabel("Senha");
-		lblNewLabel_2.setBounds(220, 402, 123, 40);
+		lblNewLabel_2.setBounds(309, 402, 123, 40);
 		panel.add(lblNewLabel_2);
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 40));
 		
@@ -106,28 +108,28 @@ public class TelaLogin extends JFrame {
 			}
 		});
 		JButton.setBackground(new Color(119, 165, 175));
-		JButton.setBounds(272, 537, 243, 40);
+		JButton.setBounds(359, 546, 243, 40);
 		panel.add(JButton);
 		
 		JLabel lblNewLabel_3 = new JLabel("Esqueceu a senha?");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(426, 494, 129, 14);
+		lblNewLabel_3.setBounds(515, 494, 129, 14);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Não possui conta? Registre-se");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel_4.setBounds(299, 588, 210, 14);
+		lblNewLabel_4.setBounds(372, 631, 210, 14);
 		panel.add(lblNewLabel_4);
 		
 		JLabel lblFotoHotel = new JLabel("");
-		lblFotoHotel.setBounds(214, 31, 256, 256);
-		contentPane.add(lblFotoHotel);
+		lblFotoHotel.setBounds(-23, 50, 256, 256);
+		panel.add(lblFotoHotel);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Fotos/Hotel.png")));
-		lblNewLabel_5.setBounds(0, 0, 634, 749);
+		lblNewLabel_5.setBounds(0, 0, 960, 1080);
 		contentPane.add(lblNewLabel_5);
 	}
 }
