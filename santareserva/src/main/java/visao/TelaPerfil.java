@@ -55,7 +55,7 @@ public class TelaPerfil extends JFrame {
 		PainelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(PainelGeral);
-		PainelGeral.setLayout(new MigLayout("", "[][][210.00,grow 25][][39.00][21.00][1487.00,grow 25][grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", "[][][40.00][grow][][][][][][][][][][][][][][][][][][]"));
+		PainelGeral.setLayout(new MigLayout("", "[][][210.00,grow 25][][39.00][21.00][1487.00,grow 25][grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", "[][][40.00][grow][][][][][grow][][][][][][][][][][][][][]"));
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\BackgroundsPI\\Rectangle 3 barra s home.png"));
@@ -73,12 +73,12 @@ public class TelaPerfil extends JFrame {
 		
 		JPanel PainelAlteracao = new JPanel();
 		PainelAlteracao.setBackground(new Color(238, 238, 238));
-		PainelGeral.add(PainelAlteracao, "cell 6 3 1 6,grow");
+		PainelGeral.add(PainelAlteracao, "cell 6 3 41 19,grow");
 		PainelAlteracao.setLayout(new MigLayout("", "[grow][178.00][142.00][::200.00px][69.00][173.00][46px,grow]", "[66px][][][][40][][40][][40][46.00][][40][][40][169.00][20][5px:n][40][15][][5px:n][40][131.00][28.00]"));
 		
 		JLabel lblPerfil = new JLabel("");
 		PainelAlteracao.add(lblPerfil, "cell 3 0,alignx center,aligny center");
-		lblPerfil.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Icones\\IconeUser.png"));
+		lblPerfil.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/IconeUser.png")));
 		
 		JLabel lblUser = new JLabel("User");
 		lblUser.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -93,10 +93,12 @@ public class TelaPerfil extends JFrame {
 		PainelAlteracao.add(lblAltusuario, "cell 4 3 2 1");
 		
 		txtRua = new JTextField();
+		txtRua.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtRua, "cell 1 4 2 1,grow");
 		txtRua.setColumns(10);
 		
 		txtUsuario = new JTextField();
+		txtUsuario.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtUsuario, "cell 4 4 2 1,grow");
 		txtUsuario.setColumns(10);
 		
@@ -109,10 +111,12 @@ public class TelaPerfil extends JFrame {
 		PainelAlteracao.add(lblAltSenha, "cell 4 5 2 1");
 		
 		txtBairro = new JTextField();
+		txtBairro.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtBairro, "cell 1 6 2 1,grow");
 		txtBairro.setColumns(10);
 		
 		txtSenha = new JTextField();
+		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtSenha, "cell 4 6 2 1,grow");
 		txtSenha.setColumns(10);
 		
@@ -125,10 +129,12 @@ public class TelaPerfil extends JFrame {
 		PainelAlteracao.add(lblAltEmail, "cell 4 7 2 1");
 		
 		txtCidade = new JTextField();
+		txtCidade.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtCidade, "cell 1 8 2 1,grow");
 		txtCidade.setColumns(10);
 		
 		txtEmail = new JTextField();
+		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtEmail, "cell 4 8 2 1,grow");
 		txtEmail.setColumns(10);
 		
@@ -137,6 +143,7 @@ public class TelaPerfil extends JFrame {
 		PainelAlteracao.add(lblNewLabel_6, "cell 2 12 3 1,growy");
 		
 		txtCep = new JTextField();
+		txtCep.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtCep, "cell 2 13 3 1,grow");
 		txtCep.setColumns(10);
 		
@@ -145,6 +152,7 @@ public class TelaPerfil extends JFrame {
 		PainelAlteracao.add(lblNewLabel_7, "cell 2 15 3 1,alignx left");
 		
 		txtVerSenha = new JTextField();
+		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtVerSenha, "cell 2 17 3 1,grow");
 		txtVerSenha.setColumns(10);
 		
@@ -153,11 +161,12 @@ public class TelaPerfil extends JFrame {
 		PainelAlteracao.add(lblNewLabel_8, "cell 2 19 3 1,alignx left");
 		
 		txtConfSenha = new JTextField();
+		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtConfSenha, "cell 2 21 3 1,grow");
 		txtConfSenha.setColumns(10);
 		
 		JLabel BtnAtualizarInfo = new JLabel("");
-		BtnAtualizarInfo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Botões\\BTN Aplicar Atualizações.png"));
+		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
 		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 22 3 1,alignx center,aligny bottom");
 		
 		JPanel ColunaIcones = new JPanel();
