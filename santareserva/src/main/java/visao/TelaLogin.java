@@ -43,19 +43,6 @@ public class TelaLogin extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaLogin frame = new TelaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -84,9 +71,7 @@ public class TelaLogin extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 64));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 217, 207);
-		contentPane.add(scrollPane);
+		
 		
 		table = new JTable();
 		
@@ -108,10 +93,7 @@ public class TelaLogin extends JFrame {
 			}
 		});
 		
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Login", "Senha" }));
-		// atualiza JTable
-		atualizarJTable();
+
 		
 		txtLogin.setBounds(309, 339, 335, 30);
 		panel.add(txtLogin);
@@ -152,6 +134,9 @@ public class TelaLogin extends JFrame {
 				
 				dao.listarInfo_Login();	
 				
+				TelaHome c = new TelaHome();
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		JButton.setBackground(new Color(119, 165, 175));
