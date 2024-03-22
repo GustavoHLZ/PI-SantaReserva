@@ -14,6 +14,6 @@ public interface IHospedesDAO {
 	
 	public boolean removerHospedes(Hospedes end);
 	
-    public Hospedes buscarHospedes(Hospedes end);
+    public Hospedes buscarHospedes(String email_hospede,String senha_hospede);
 	
 }

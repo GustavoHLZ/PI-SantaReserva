@@ -9,11 +9,15 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controle.HospedesDAO;
 import controle.Info_LoginDAO;
+import modelo.Hospedes;
 import modelo.Info_Login;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import net.miginfocom.swing.MigLayout;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -125,18 +129,20 @@ public class TelaLogin extends JFrame {
 				String Login = txtLogin.getText();
 				String Senha = txtSenha.getText();
 				
-				Info_Login chama = new Info_Login();
-				
-				chama.setLogin(Login);
-				chama.setSenha(Senha);
 					
-				Info_LoginDAO dao = Info_LoginDAO.getInstancia();
+				HospedesDAO dao = HospedesDAO.getInstancia();
 				
-				dao.listarInfo_Login();	
+				Hospedes logins = dao.buscarHospedes(Login, Senha);
 				
-				TelaHome c = new TelaHome();
-				c.setVisible(true);
-				dispose();
+				if(logins != null) {
+					JOptionPane.showMessageDialog(null,"Usuário Cadastro");
+					TelaHome c = new TelaHome();
+					c.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null,"Usuário não cadastrado");
+				}
+				
 			}
 		});
 		JButton.setBackground(new Color(119, 165, 175));
