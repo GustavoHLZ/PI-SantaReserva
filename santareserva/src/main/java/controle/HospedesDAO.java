@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
+import modelo.Info_Login;
 
 public class HospedesDAO implements IHospedesDAO {
 	
@@ -150,9 +151,40 @@ String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nasc
 		return false;
 	}
 	
-	public Hospedes buscarHospedes(Hospedes end) {
+	public Hospedes buscarHospedes(String email_hospede,String senha_hospede) {
 		
-		return null;
+		
+		Hospedes login = null;
+		String SQL = "SELECT * FROM Hospedes WHERE email_hospede = ? AND senha_hospede = ?";
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+	try {
+		PreparedStatement ps = conBD.prepareStatement(SQL);
+		ps.setString(1,email_hospede);
+		ps.setString(2, senha_hospede);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if (rs.next()) {
+			login = new Hospedes();
+			int ID = rs.getInt("ID_Hospede");
+			String email = rs.getString("email_hospede");
+			String senha = rs.getString("senha_hospede");
+			login.setEmail_hospede(email);
+			login.setSenha_hospede(senha);
+			login.setID_Hospede(ID);
+		}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
+		
+		return login;
 	}
-
+	
 }
+
