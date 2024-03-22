@@ -128,8 +128,10 @@ private static Info_LoginDAO instancia;
 	}
 	
 	public Info_Login buscarInfo_Login(Info_Login info) {
+		return info;
+	
 		
-		return null;
+	
 	}
 
 }
