@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -141,28 +143,36 @@ public class TelaCadastro extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				String Email = txtEmail.getText();
-				String Nome = txtNome.getText();
-				String Sobrenome = txtSobrenome.getText();
-				Date Nascimento = Date.valueOf(txtNascimento.getText());
-				Integer Telefone = Integer.valueOf(txtTelefone.getText());
-				String Senha = txtSenha.getText();
-				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+				String email = txtEmail.getText();
+				String nome = txtNome.getText();
+				String sobrenome = txtSobrenome.getText();
+				Date nascimento = null;
+				try {
+				nascimento = new Date(dateFormat.parse(txtNascimento.getText()).getTime());
+				} catch (ParseException e1) {
+
+				e1.printStackTrace();
+				}
+				Integer telefone = Integer.valueOf(txtTelefone.getText());
+				String senha = txtSenha.getText();
+
 				Hospedes hospede = new Hospedes();
-				
-				hospede.setEmail_hospede(Email);
-				hospede.setNome_Hospede(Nome);
-				hospede.setSobrenome_hospede(Sobrenome);
-				hospede.setNascimento_hospede(Nascimento);
-				hospede.setTelefone_hospede(Telefone);
-				hospede.setSenha_hospede(Senha);
-				
+
+				hospede.setEmail_hospede(email);
+				hospede.setNome_Hospede(nome);
+				hospede.setSobrenome_hospede(sobrenome);
+				hospede.setNascimento_hospede(nascimento);
+				hospede.setTelefone_hospede(telefone);
+				hospede.setSenha_hospede(senha);
+
 				HospedesDAO dao = HospedesDAO.getInstancia();
-				
+
 				int retorno = dao.InserirHospedes(hospede);
-				
+
 				JOptionPane.showMessageDialog(null, "inserido");
-				
+
 				TelaLogin c = new TelaLogin();
 				c.setVisible(true);
 				dispose();
