@@ -133,8 +133,29 @@ String SQL = "UPDATE Espacos SET Ocupante_Espaco = ?, Check_In = ?, Check_Out = 
 	}
 
 	public boolean removerEspacos(Espacos end) {
-
-		return false;
+		
+String SQL = "DELETE FROM Espacos WHERE ID_Espaco = ?";
+		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			ps.setInt(1, end.getID_Espaco());
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+	
+		return (retorno == 0 ? false : true);
 	}
 
 	public Espacos buscarEspacos(Espacos end) {
