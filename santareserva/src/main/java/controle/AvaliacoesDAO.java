@@ -144,7 +144,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getIdAvaliacao());
+			ps.setInt(1, end.geIDAvaliacao());
 			retorno = ps.executeUpdate();
 			
 			
