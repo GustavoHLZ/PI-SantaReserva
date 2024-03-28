@@ -143,6 +143,78 @@ public class TelaCadastro extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				if (txtEmail.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
+
+					return;
+
+					}
+
+					if (txtNome.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
+
+					return;
+
+					}
+
+					if (txtSobrenome.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo Sobrenome.");
+
+					return;
+
+					}
+
+					if (txtNascimento.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
+
+					return;
+
+					}
+
+					if (txtTelefone.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
+
+					return;
+
+					}
+
+					if (txtSenha.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
+
+					return;
+
+					}
+					
+					if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
+						
+	                    JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+	                    
+	                return;
+	                
+	                }
+
+	                if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
+	                	
+	                    JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
+	                    
+	                return;
+	                
+	                }
+
+	                if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+	                	
+	                    JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
+	                    
+	                return;
+	                
+	                }
+				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 				String email = txtEmail.getText();
