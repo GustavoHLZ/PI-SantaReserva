@@ -99,7 +99,29 @@ private static Espacos_ReservadosDAO instancia;
 
 	public boolean removerEspacos_Reservados(Espacos_Reservados end) {
 		
-		return false;
+String SQL = "DELETE FROM Espacos_Reservados WHERE ID_Espacos_Reservados = ?";
+		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			ps.setInt(1, end.getID_Espacos_Reservados());
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+	
+		return (retorno == 0 ? false : true);
+		
 	}
 
 	public Espacos_Reservados buscarEspacos_Reservados(Espacos_Reservados end) {
