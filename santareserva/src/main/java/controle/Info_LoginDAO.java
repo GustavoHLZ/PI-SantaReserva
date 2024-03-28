@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
 
-import modelo.Info_Login;
+import modelo.InfoLogin;
 
 public class Info_LoginDAO implements IInfo_LoginDAO{
 	
@@ -25,14 +25,14 @@ private static Info_LoginDAO instancia;
 		return instancia;
 	}
 
-	public int InserirInfo_Login(Info_Login info) {
+	public int inserir(InfoLogin info) {
 		
 		String SQL = "INSERT INTO Info_Login (Login, Senha) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
-		int ChavePrimariaGerada = Integer.MIN_VALUE;
+		int chavePrimariaGerada = Integer.MIN_VALUE;
 				
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
@@ -40,9 +40,14 @@ private static Info_LoginDAO instancia;
 			ps.setString(1, info.getLogin());
 			ps.setString(2, info.getSenha());
 			
-			ResultSet rs = ps.executeQuery();
-			if(rs!=null) {
-				ChavePrimariaGerada = rs.getInt(1);
+			int result = ps.executeUpdate();
+			if(result == 0) {
+				throw new SQLException("Não foi possível executar o INSERT");
+			} else {
+				ResultSet rs = ps.getGeneratedKeys();
+				if(rs.next()) {
+					chavePrimariaGerada = rs.getInt(1);
+				}
 			}
 			
 			
@@ -52,12 +57,12 @@ private static Info_LoginDAO instancia;
 			con.fecharConexao();
 		}
 		
-		return ChavePrimariaGerada;
+		return chavePrimariaGerada;
 	}
 	
-	public ArrayList<Info_Login> listarInfo_Login() {
+	public ArrayList<InfoLogin> listarInfo_Login() {
 		
-		ArrayList<Info_Login> info_login = new ArrayList<Info_Login>();
+		ArrayList<InfoLogin> info_login = new ArrayList<InfoLogin>();
 		
 		String SQL = "SELECT * FROM Info_Login";
 		
@@ -70,7 +75,7 @@ private static Info_LoginDAO instancia;
 			
 			while(rs.next()) {
 				
-				Info_Login info = new Info_Login();
+				InfoLogin info = new InfoLogin();
 				
 				Integer ID_usuario = rs.getInt("ID_usuario");
 				String login = rs.getString("Login");
@@ -94,7 +99,7 @@ private static Info_LoginDAO instancia;
 	}
 	
 	
-	public boolean atualizarInfo_Login(Info_Login info) {
+	public boolean atualizarInfo_Login(InfoLogin info) {
 		String SQL = "UPDATE Info_Login SET Login = ?, Senha = ?, WHERE ID_usuario = ?";
 		
 		Conexao con = Conexao.getInstancia();
@@ -122,33 +127,12 @@ private static Info_LoginDAO instancia;
 		return (retorno == 0 ? false : true);
 	}
 	
-	public boolean removerInfo_Login(Info_Login end) {
+	public boolean removerInfo_Login(InfoLogin info) {
 		
-		String SQL = "DELETE FROM Info_Login WHERE ID_usuario = ?";
-		
-		// Abre a conexão e cria a "ponte de conexao " com MYSQL
-		Conexao con = Conexao.getInstancia();
-		Connection conBD = con.conectar();
-		
-		int retorno = 0;
-		
-		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getID_usuario());
-			retorno = ps.executeUpdate();
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-			}
-	
-		return (retorno == 0 ? false : true);
+		return false;
 	}
 	
-	public Info_Login buscarInfo_Login(Info_Login info) {
+	public InfoLogin buscarInfo_Login(InfoLogin info) {
 		return info;
 	
 		

@@ -1,11 +1,11 @@
 package modelo;
 
-public class Info_Login {
+public class InfoLogin {
 	private int ID_usuario;
 	private String Login;
 	private String Senha;
 	
-	public int getID_usuario() {
+	public int getIdUsuario() {
 		return ID_usuario;
 	}
 	public void setID_usuario(int iD_usuario) {

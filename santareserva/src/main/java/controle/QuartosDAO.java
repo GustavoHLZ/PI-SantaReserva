@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import modelo.Info_Login;
+import modelo.InfoLogin;
 import modelo.Quartos;
 import modelo.Quartos;
 

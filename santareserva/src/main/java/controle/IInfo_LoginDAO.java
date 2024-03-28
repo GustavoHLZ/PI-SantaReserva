@@ -2,18 +2,18 @@ package controle;
 
 import java.util.ArrayList;
 
-import modelo.Info_Login;
+import modelo.InfoLogin;
 
 public interface IInfo_LoginDAO {
 	
-public int InserirInfo_Login(Info_Login end);
+public int inserir(InfoLogin end);
 	
-	public ArrayList<Info_Login> listarInfo_Login();
+	public ArrayList<InfoLogin> listarInfo_Login();
 	
-	public boolean atualizarInfo_Login(Info_Login end);
+	public boolean atualizarInfo_Login(InfoLogin end);
 	
-	public boolean removerInfo_Login(Info_Login end);
+	public boolean removerInfo_Login(InfoLogin end);
 	
-    public Info_Login buscarInfo_Login(Info_Login end);
+    public InfoLogin buscarInfo_Login(InfoLogin end);
 
 }

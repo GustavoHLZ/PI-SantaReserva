@@ -26,7 +26,11 @@ CREATE TABLE IF NOT EXISTS `Hospedes` (
   `telefone_hospede` CHAR(14) NOT NULL,
   `email_hospede` VARCHAR(255) NOT NULL,
   `senha_hospede` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`ID_Hospede`));
+  `FK_ID_usuario` INT NOT NULL,
+  PRIMARY KEY (`ID_Hospede`),
+  CONSTRAINT `fk_Hospedes_Info_Login1`
+    FOREIGN KEY (`FK_ID_Usuario`)
+    REFERENCES `Info_Login` (`ID_usuario`));
 
 
 -- -----------------------------------------------------
@@ -38,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `Avaliacoes` (
   `Avaliador` VARCHAR(45) NOT NULL,
   `FK_ID_Hospede` INT NOT NULL,
   PRIMARY KEY (`ID_Avaliacao`, `FK_ID_Hospede`),
-  INDEX `fk_Avaliacoes_Hospedes1_idx` (`FK_ID_Hospede` ASC) VISIBLE,
   CONSTRAINT `fk_Avaliacoes_Hospedes1`
     FOREIGN KEY (`FK_ID_Hospede`)
     REFERENCES `Hospedes` (`ID_Hospede`));
@@ -115,11 +118,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Servicos_Consumidos`
 -- -----------------------------------------------------
-<<<<<<< Updated upstream
-CREATE TABLE IF NOT EXISTS `mydb`.`Servicos_Consumidos` (
-=======
 CREATE TABLE IF NOT EXISTS `Servicos_Consumidos` (
->>>>>>> Stashed changes
   `ID_Servico_Consumido` INT NOT NULL AUTO_INCREMENT,
   `FK_ID_Hospede` INT NOT NULL,
   `FK_Servico` INT NOT NULL,
@@ -136,14 +135,13 @@ CREATE TABLE IF NOT EXISTS `Servicos_Consumidos` (
 -- Table `Info_Login`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Info_Login` (
-  `ID_usuario` INT NOT NULL,
+  `ID_usuario` INT NOT NULL AUTO_INCREMENT,
   `Login` VARCHAR(50) NOT NULL,
   `Senha` VARCHAR(50) NOT NULL,
   `FK_ID_Hospede` INT NOT NULL,
-  PRIMARY KEY (`ID_usuario`, `FK_ID_Hospede`),
-  CONSTRAINT `fk_Info_Login_Hospedes1`
-    FOREIGN KEY (`FK_ID_Hospede`)
-    REFERENCES `Hospedes` (`ID_Hospede`));
+  PRIMARY KEY (`ID_usuario`));
+
+
 
 
 -- -----------------------------------------------------
@@ -153,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `Espacos_Reservados` (
   `FK_ID_Espaco` INT NOT NULL,
   `FK_ID_Hospede` INT NOT NULL,
   `ID_Espacos_Reservados` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`FK_ID_Espaco`, `FK_ID_Hospede`, `ID_Espacos_Reservados`),
+  PRIMARY KEY (`ID_Espacos_Reservados`),
   CONSTRAINT `fk_Espacos_has_Hospedes_Espacos1`
     FOREIGN KEY (`FK_ID_Espaco`)
     REFERENCES `Espacos` (`ID_Espaco`),

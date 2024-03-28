@@ -19,7 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controle.HospedesDAO;
+import controle.Info_LoginDAO;
 import modelo.Hospedes;
+import modelo.InfoLogin;
 import net.miginfocom.swing.MigLayout;
 
 public class TelaCadastro extends JFrame {
@@ -33,6 +35,7 @@ public class TelaCadastro extends JFrame {
 	private JTextField txtNome;
 	private Hospedes hospSelecionado;
 	private ArrayList<Hospedes> listaHospedes;
+	private ArrayList<InfoLogin> listalogin;
 
 	/**
 	 * Launch the application.
@@ -55,9 +58,9 @@ public class TelaCadastro extends JFrame {
 	 */
 	public TelaCadastro() {
 		ArrayList<Hospedes> listaHospedes = new ArrayList<Hospedes>();
-		
-		
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Icones\\LogoAPP.png"));
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				"C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Icones\\LogoAPP.png"));
 		setTitle("Bem-vindo à Santa Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
@@ -67,154 +70,155 @@ public class TelaCadastro extends JFrame {
 
 		setContentPane(Tela);
 		Tela.setLayout(new MigLayout("", "[960][][][][][][][][][][][][][][][1000px]", "[800px,grow][][][][][60px]"));
-		
+
 		JPanel PainelHotel = new JPanel();
 		Tela.add(PainelHotel, "cell 0 0,grow");
 		PainelHotel.setLayout(new MigLayout("", "[]", "[]"));
-		
+
 		JLabel ImgHotel = new JLabel("");
 		ImgHotel.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Fotos/Hotel.png")));
 		PainelHotel.add(ImgHotel, "cell 0 0,alignx left,aligny top");
-		
+
 		JPanel PainelCadastro = new JPanel();
 		Tela.add(PainelCadastro, "flowx,cell 15 0 1 6,alignx center,growy");
-		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]", "[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][]"));
-		
+		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]",
+				"[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][]"));
+
 		JLabel lblRegistro = new JLabel("Registrar-se");
 		lblRegistro.setFont(new Font("Arial", Font.PLAIN, 36));
 		PainelCadastro.add(lblRegistro, "cell 0 0,alignx center,aligny top");
-		
+
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblEmail, "cell 0 4");
-		
+
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtEmail, "cell 0 5,grow");
 		txtEmail.setColumns(10);
-		
+
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblNome, "cell 0 6");
-		
+
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtNome, "cell 0 7,grow");
 		txtNome.setColumns(10);
-		
+
 		JLabel lblSobrenome = new JLabel("Sobrenome");
 		lblSobrenome.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblSobrenome, "cell 0 8");
-		
+
 		txtSobrenome = new JTextField();
 		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtSobrenome, "cell 0 9,grow");
 		txtSobrenome.setColumns(10);
-		
+
 		JLabel lblNascimento = new JLabel("Data de nascimento");
 		lblNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblNascimento, "cell 0 10");
-		
+
 		txtNascimento = new JTextField();
 		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtNascimento, "cell 0 11,grow");
 		txtNascimento.setColumns(10);
-		
+
 		JLabel lblTelefone = new JLabel("Telefone");
 		lblTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblTelefone, "cell 0 12");
-		
+
 		txtTelefone = new JTextField();
 		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtTelefone, "cell 0 13,grow");
 		txtTelefone.setColumns(10);
-		
+
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblSenha, "cell 0 14");
-		
+
 		txtSenha = new JTextField();
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtSenha, "cell 0 15,grow");
 		txtSenha.setColumns(10);
-		
+
 		JLabel BTNRegistrar = new JLabel("");
 		BTNRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				if (txtEmail.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
 
 					return;
 
-					}
+				}
 
-					if (txtNome.getText().equals("")) {
+				if (txtNome.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
 
 					return;
 
-					}
+				}
 
-					if (txtSobrenome.getText().equals("")) {
+				if (txtSobrenome.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo Sobrenome.");
 
 					return;
 
-					}
+				}
 
-					if (txtNascimento.getText().equals("")) {
+				if (txtNascimento.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
 
 					return;
 
-					}
+				}
 
-					if (txtTelefone.getText().equals("")) {
+				if (txtTelefone.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
 
 					return;
 
-					}
+				}
 
-					if (txtSenha.getText().equals("")) {
+				if (txtSenha.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
 
 					return;
 
-					}
-					
-					if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
-						
-	                    JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
-	                    
-	                return;
-	                
-	                }
+				}
 
-	                if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
-	                	
-	                    JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
-	                    
-	                return;
-	                
-	                }
+				if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
 
-	                if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
-	                	
-	                    JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
-	                    
-	                return;
-	                
-	                }
-				
+					JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+
+					return;
+
+				}
+
+				if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
+
+					JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
+
+					return;
+
+				}
+
+				if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+
+					JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
+
+					return;
+
+				}
+
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 				String email = txtEmail.getText();
@@ -222,15 +226,19 @@ public class TelaCadastro extends JFrame {
 				String sobrenome = txtSobrenome.getText();
 				Date nascimento = null;
 				try {
-				nascimento = new Date(dateFormat.parse(txtNascimento.getText()).getTime());
+					nascimento = new Date(dateFormat.parse(txtNascimento.getText()).getTime());
 				} catch (ParseException e1) {
 
-				e1.printStackTrace();
+					e1.printStackTrace();
 				}
 				Integer telefone = Integer.valueOf(txtTelefone.getText());
 				String senha = txtSenha.getText();
 
 				Hospedes hospede = new Hospedes();
+				InfoLogin login = new InfoLogin();
+
+				login.setLogin(email);
+				login.setSenha(senha);
 
 				hospede.setEmail_hospede(email);
 				hospede.setNome_Hospede(nome);
@@ -240,24 +248,28 @@ public class TelaCadastro extends JFrame {
 				hospede.setSenha_hospede(senha);
 
 				HospedesDAO dao = HospedesDAO.getInstancia();
+				Info_LoginDAO daologin = Info_LoginDAO.getInstancia();
 
-				int retorno = dao.InserirHospedes(hospede);
+				int retorno = daologin.inserir(login);
+				login.setID_usuario(retorno);
+				hospede.setUsuario(login);
+
+				retorno = dao.InserirHospedes(hospede);
 
 				JOptionPane.showMessageDialog(null, "inserido");
 
 				TelaLogin c = new TelaLogin();
 				c.setVisible(true);
 				dispose();
-				
+
 			}
 		});
 		BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
 		PainelCadastro.add(BTNRegistrar, "cell 0 21");
-		
+
 		JLabel lblJapossui = new JLabel("Já possui registro? Faça o Login");
 		lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelCadastro.add(lblJapossui, "cell 0 22,alignx center,aligny bottom");
 	}
-	
 
 }
