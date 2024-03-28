@@ -121,9 +121,29 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 	}
 	
 	public boolean removerSala_Reunioes(Sala_Reunioes end) {
-	
-		return false;
-	}
+		// Provalmente não vai ser usado este metodo pois não irá ser removido uma sala de reuniões do hotel
+				String SQL = "DELETE FROM Quartos WHERE ID_Quartos = ?";
+				
+				Conexao con = Conexao.getInstancia();
+				Connection conBD = con.conectar();
+				
+				int retorno = 0;
+				
+				try {
+					PreparedStatement ps = conBD.prepareStatement(SQL);
+					ps.setInt(1, end.getID_Sala());
+					retorno = ps.executeUpdate();
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					con.fecharConexao();
+					}
+			
+				return (retorno == 0 ? false : true);
+					}
 	
 	public Sala_Reunioes buscarSala_Reunioes(Sala_Reunioes end) {
 	

@@ -123,8 +123,29 @@ public class QuartosDAO implements IQuartosDAO {
 	}
 	
 	public boolean removerQuartos(Quartos end) {
+		// Provalmente não vai ser usado este metodo pois não irá ser removido um quarto do hotel
+		String SQL = "DELETE FROM Quartos WHERE ID_Quartos = ?";
+		
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			ps.setInt(1, end.getID_Quarto());
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
 	
-		return false;
+		return (retorno == 0 ? false : true);
+		
 	}
 	
 	public Quartos buscarQuartos(Quartos end) {
