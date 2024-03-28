@@ -148,7 +148,29 @@ String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nasc
 	
 	public boolean removerHospedes(Hospedes end) {
 		
-		return false;
+		String SQL = "DELETE FROM Hospedes WHERE ID_Hospede = ?";
+		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			ps.setInt(1, end.getID_Hospede());
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+	
+		return (retorno == 0 ? false : true);
+		
 	}
 	
 	public Hospedes buscarHospedes(String email_hospede,String senha_hospede) {
