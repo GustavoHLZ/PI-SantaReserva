@@ -122,9 +122,30 @@ private static Info_LoginDAO instancia;
 		return (retorno == 0 ? false : true);
 	}
 	
-	public boolean removerInfo_Login(Info_Login info) {
+	public boolean removerInfo_Login(Info_Login end) {
 		
-		return false;
+		String SQL = "DELETE FROM Info_Login WHERE ID_usuario = ?";
+		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			ps.setInt(1, end.getID_usuario());
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+	
+		return (retorno == 0 ? false : true);
 	}
 	
 	public Info_Login buscarInfo_Login(Info_Login info) {

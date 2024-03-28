@@ -90,15 +90,37 @@ public class Servicos_ConsumidosDAO implements IServicos_ConsumidosDAO {
 	}
 	
 	public boolean atualizarServicos_Consumidos(Servicos_Consumidos end) {
-	
+		
+		//Aqui não há como fazer um update em razao do Servicos_Consumidos ser constituido apenas de variaveis estrangeiras
+		
 		return false;
-	}
+			}
 	
 	public boolean removerServicos_Consumidos(Servicos_Consumidos end) {
 	
-		return false;
+String SQL = "DELETE FROM Servicos_Consumidos WHERE ID_Servicos_Consumidos = ?";
+		
+		// Abre a conexão e cria a "ponte de conexao " com MYSQL
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+		int retorno = 0;
+		
+		try {
+			PreparedStatement ps = conBD.prepareStatement(SQL);
+			ps.setInt(1, end.getID_Servico_Consumido());
+			retorno = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+			}
+	
+		return (retorno == 0 ? false : true);
 	}
-
 	public Servicos_Consumidos buscarServicos_Consumidos(Servicos_Consumidos end) {
 	
 		return null;
