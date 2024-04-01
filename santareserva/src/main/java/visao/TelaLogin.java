@@ -85,7 +85,6 @@ public class TelaLogin extends JFrame {
 			@Override
 			public void focusGained(FocusEvent e) {
 				
-				
 				//int linhaSelecionada = table.getSelectedRow();
 
 				//endSelecionado = listarInfo_Login.get(linhaSelecionada);
@@ -124,7 +123,24 @@ public class TelaLogin extends JFrame {
 		
 		JButton.setFont(new Font("Arial", Font.PLAIN, 16));
 		JButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
+				
+				if (txtLogin.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo Login.");
+
+					return;
+
+					}
+				
+				if (txtSenha.getText().equals("")) {
+
+					JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
+
+					return;
+
+					}
 				
 				String Login = txtLogin.getText();
 				String Senha = txtSenha.getText();
