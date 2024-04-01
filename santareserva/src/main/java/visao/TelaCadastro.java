@@ -12,11 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controle.HospedesDAO;
 import modelo.Hospedes;
@@ -27,12 +29,11 @@ public class TelaCadastro extends JFrame {
 	private JPanel Tela;
 	private JTextField txtEmail;
 	private JTextField txtSobrenome;
-	private JTextField txtNascimento;
-	private JTextField txtTelefone;
 	private JTextField txtSenha;
 	private JTextField txtNome;
 	private Hospedes hospSelecionado;
 	private ArrayList<Hospedes> listaHospedes;
+
 
 	/**
 	 * Launch the application.
@@ -78,7 +79,7 @@ public class TelaCadastro extends JFrame {
 		
 		JPanel PainelCadastro = new JPanel();
 		Tela.add(PainelCadastro, "flowx,cell 15 0 1 6,alignx center,growy");
-		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]", "[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][]"));
+		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]", "[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][][][][][]"));
 		
 		JLabel lblRegistro = new JLabel("Registrar-se");
 		lblRegistro.setFont(new Font("Arial", Font.PLAIN, 36));
@@ -115,19 +116,15 @@ public class TelaCadastro extends JFrame {
 		lblNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblNascimento, "cell 0 10");
 		
-		txtNascimento = new JTextField();
-		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtNascimento, "cell 0 11,grow");
-		txtNascimento.setColumns(10);
+		JFormattedTextField ftNascimento = new JFormattedTextField();
+		PainelCadastro.add(ftNascimento, "cell 0 11,grow");
 		
 		JLabel lblTelefone = new JLabel("Telefone");
 		lblTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblTelefone, "cell 0 12");
 		
-		txtTelefone = new JTextField();
-		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
+		JFormattedTextField txtTelefone = new JFormattedTextField();
 		PainelCadastro.add(txtTelefone, "cell 0 13,grow");
-		txtTelefone.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setFont(new Font("Arial", Font.PLAIN, 32));
@@ -143,6 +140,18 @@ public class TelaCadastro extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				JFormattedTextField ftNascimento = null;
+				
+				MaskFormatter mask;
+				
+				try {
+					mask = new MaskFormatter("(##) #####-####");
+					ftNascimento = new JFormattedTextField(mask);
+				} catch (ParseException e1)
+				{
+					e1.printStackTrace();
+				}
+				 
 				if (txtEmail.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
@@ -167,7 +176,7 @@ public class TelaCadastro extends JFrame {
 
 					}
 
-					if (txtNascimento.getText().equals("")) {
+					if (ftNascimento.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
 
@@ -207,7 +216,7 @@ public class TelaCadastro extends JFrame {
 	                
 	                }
 
-	                if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+	                if (!ftNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
 	                	
 	                    JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
 	                    
@@ -222,7 +231,7 @@ public class TelaCadastro extends JFrame {
 				String sobrenome = txtSobrenome.getText();
 				Date nascimento = null;
 				try {
-				nascimento = new Date(dateFormat.parse(txtNascimento.getText()).getTime());
+				nascimento = new Date(dateFormat.parse(ftNascimento.getText()).getTime());
 				} catch (ParseException e1) {
 
 				e1.printStackTrace();
@@ -258,6 +267,8 @@ public class TelaCadastro extends JFrame {
 		lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelCadastro.add(lblJapossui, "cell 0 22,alignx center,aligny bottom");
 	}
+	
+	
 	
 
 }
