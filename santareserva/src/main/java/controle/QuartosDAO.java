@@ -34,11 +34,11 @@ public class QuartosDAO implements IQuartosDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, qua.getID_Quarto());
-			ps.setString(2, qua.getTipo_Quarto());
-			ps.setFloat(3, qua.getPreco_Diaria());
-			ps.setBoolean(4, qua.getDispo_Quarto());
-			ps.setInt(5, qua.getCap_max());
+			ps.setInt(1, qua.getidQuarto());
+			ps.setString(2, qua.gettipo());
+			ps.setFloat(3, qua.getpreco());
+			ps.setBoolean(4, qua.getdispo());
+			ps.setInt(5, qua.getcap());
 			
 			return ps.executeUpdate();
 			
@@ -68,17 +68,17 @@ public class QuartosDAO implements IQuartosDAO {
 				
 				Quartos qua = new Quartos();
 				
-				Integer ID_quarto = rs.getInt("ID_Quarto");
-				String tipo_quarto = rs.getString("Tipo_Quarto");
-				Float preco_diaria = rs.getFloat("Preco_Diaria");
-				Boolean Dispo_Quarto = rs.getBoolean("Dispo_Quarto");
-				Integer Cap_max = rs.getInt("Cap_max");
+				Integer idQuarto = rs.getInt("idQuarto");
+				String tipo = rs.getString("tipo");
+				Float preco = rs.getFloat("preco");
+				Boolean dispo = rs.getBoolean("dispo");
+				Integer cap = rs.getInt("cap");
 				
-				qua.setID_Quarto(ID_quarto);
-				qua.setTipo_Quarto(tipo_quarto);
-				qua.setPreco_Diaria(preco_diaria);
-				qua.setDispo_Quarto(Dispo_Quarto);
-				qua.setCap_max(Cap_max);
+				qua.setidQuarto(idQuarto);
+				qua.settipo(tipo);
+				qua.setpreco(preco);
+				qua.setdispo(dispo);
+				qua.setcap(cap);
 				
 				quartos.add(qua);
 				
@@ -107,8 +107,8 @@ public class QuartosDAO implements IQuartosDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setBoolean(1, end.getDispo_Quarto());
-			ps.setInt(2, end.getID_Quarto());
+			ps.setBoolean(1, end.getdispo());
+			ps.setInt(2, end.getidQuarto());
 			
 			retorno = ps.executeUpdate();
 			
@@ -133,7 +133,7 @@ public class QuartosDAO implements IQuartosDAO {
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getID_Quarto());
+			ps.setInt(1, end.getidQuarto());
 			retorno = ps.executeUpdate();
 			
 			

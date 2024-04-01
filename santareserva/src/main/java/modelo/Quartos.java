@@ -2,40 +2,40 @@ package modelo;
 
 public class Quartos {
 
-	private int ID_Quarto;
-	private String Tipo_Quarto;
-	private Float Preco_Diaria;
-	private Boolean Dispo_Quarto;
-	private int Cap_max;
-	public int getID_Quarto() {
-		return ID_Quarto;
+	private int idQuarto;
+	private String tipo;
+	private Float preco;
+	private Boolean dispo;
+	private int cap;
+	public int getidQuarto() {
+		return idQuarto;
 	}
-	public void setID_Quarto(int iD_Quarto) {
-		ID_Quarto = iD_Quarto;
+	public void setidQuarto (int idQuarto) {
+		idQuarto = idQuarto;
 	}
-	public String getTipo_Quarto() {
-		return Tipo_Quarto;
+	public String gettipo() {
+		return tipo;
 	}
-	public void setTipo_Quarto(String tipo_Quarto) {
-		Tipo_Quarto = tipo_Quarto;
+	public void settipo(String tipo) {
+		tipo = tipo;
 	}
-	public Float getPreco_Diaria() {
-		return Preco_Diaria;
+	public Float getpreco() {
+		return preco;
 	}
-	public void setPreco_Diaria(Float preco_Diaria) {
-		Preco_Diaria = preco_Diaria;
+	public void setpreco(Float preco) {
+		preco = preco;
 	}
-	public Boolean getDispo_Quarto() {
-		return Dispo_Quarto;
+	public Boolean getdispo() {
+		return dispo;
 	}
-	public void setDispo_Quarto(Boolean dispo_Quarto) {
-		Dispo_Quarto = dispo_Quarto;
+	public void setdispo(Boolean dispo) {
+		dispo = dispo;
 	}
-	public int getCap_max() {
-		return Cap_max;
+	public int getcap() {
+		return cap;
 	}
-	public void setCap_max(int cap_max) {
-		Cap_max = cap_max;
+	public void setcap(int cap) {
+		cap = cap;
 	}
 
 }

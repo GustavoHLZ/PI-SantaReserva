@@ -34,10 +34,10 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, sala.getID_Sala());
-			ps.setBoolean(2, sala.getDisp_Sala());
-			ps.setInt(3, sala.getTemp_Alugado());
-			ps.setInt(4, sala.getCap_Max());
+			ps.setInt(1, sala.getidSala());
+			ps.setBoolean(2, sala.getdisp());
+			ps.setInt(3, sala.gettemp());
+			ps.setInt(4, sala.getcap());
 			
 			return ps.executeUpdate();
 			
@@ -68,15 +68,15 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 				
 				Sala_Reunioes sala = new Sala_Reunioes();
 				
-				Integer ID_sala = rs.getInt("ID_Sala");
-				Boolean disp_sala = rs.getBoolean("Disp_Sala");
-				Integer temp_alugado = rs.getInt("Temp_Alugado");
-				Integer cap_max = rs.getInt("Cap_Max");
+				Integer idSala = rs.getInt("idSala");
+				Boolean disp = rs.getBoolean("disp");
+				Integer temp = rs.getInt("temp");
+				Integer cap = rs.getInt("Cap_Max");
 				
-				sala.setID_Sala(ID_sala);
-				sala.setDisp_Sala(disp_sala);
-				sala.setTemp_Alugado(temp_alugado);
-				sala.setCap_Max(cap_max);
+				sala.setidSala(idSala);
+				sala.setdisp(disp);
+				sala.settemp(temp);
+				sala.setcap(cap);
 				
 				sala_reunioes.add(sala);
 				
@@ -103,8 +103,8 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setBoolean(1, sala.getDisp_Sala());
-			ps.setInt(2, sala.getTemp_Alugado());
+			ps.setBoolean(1, sala.getdisp());
+			ps.setInt(2, sala.gettemp());
 			
 			retorno = ps.executeUpdate();
 			
@@ -131,7 +131,7 @@ public class Sala_ReunioesDAO implements ISala_ReunioesDAO{
 				
 				try {
 					PreparedStatement ps = conBD.prepareStatement(SQL);
-					ps.setInt(1, end.getID_Sala());
+					ps.setInt(1, end.getidSala());
 					retorno = ps.executeUpdate();
 					
 					
