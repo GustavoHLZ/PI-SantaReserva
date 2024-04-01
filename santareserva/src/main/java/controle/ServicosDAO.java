@@ -30,10 +30,10 @@ public class ServicosDAO implements IServicosDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, servico.getID_servico());
-			ps.setString(2,servico.getNome_servico());
-			ps.setFloat(3,servico.getPreco_servico());
-			ps.setBoolean(4, servico.getPag_Efetuado());
+			ps.setInt(1, servico.getidServico());
+			ps.setString(2,servico.getnomeServico());
+			ps.setFloat(3,servico.getprecoServico());
+			ps.setBoolean(4, servico.getpagEfetuado());
 			
 			return ps.executeUpdate();
 		} catch (SQLException e) {
@@ -63,15 +63,15 @@ public class ServicosDAO implements IServicosDAO{
 				
 				Servicos servico = new Servicos();
 				
-				Integer ID_servico = rs.getInt("ID_servico");
-				String nome_servico = rs.getString("Nome_servico");
-				Float preco_servico	= rs.getFloat("Preco_servico");
-				Boolean pag_efetuado = rs.getBoolean("Pag_Efetuado");
+				Integer idServico = rs.getInt("idServico");
+				String nomeServico = rs.getString("nomeServico");
+				Float precoServico	= rs.getFloat("precoServico");
+				Boolean pagEfetuado = rs.getBoolean("pagEfetuado");
 				
-				servico.setID_servico(ID_servico);
-				servico.setNome_servico(nome_servico);
-				servico.setPreco_servico(preco_servico);
-				servico.setPag_Efetuado(pag_efetuado);
+				servico.setidServico(idServico);
+				servico.setnomeServico(nomeServico);
+				servico.setPreco_servico(precoServico);
+				servico.setpagEfetuado(pagEfetuado);
 				
 				servicos.add(servico);
 				}
@@ -97,8 +97,8 @@ public class ServicosDAO implements IServicosDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setBoolean(1,end.getPag_Efetuado());
-			ps.setInt(2, end.getID_servico());
+			ps.setBoolean(1,end.getpagEfetuado());
+			ps.setInt(2, end.getidServico());
 			
 			retorno = ps.executeUpdate();
 			
@@ -126,7 +126,7 @@ String SQL = "DELETE FROM Servicos WHERE ID_servico = ?";
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getID_servico());
+			ps.setInt(1, end.getidServico());
 			retorno = ps.executeUpdate();
 			
 			

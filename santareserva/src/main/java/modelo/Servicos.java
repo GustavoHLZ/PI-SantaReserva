@@ -1,34 +1,34 @@
 package modelo;
 
 public class Servicos {
-	private int ID_servico;
-	private String Nome_servico;
-	private float Preco_servico;
-	private Boolean Pag_Efetuado;
+	private int idservico;
+	private String nomeServico;
+	private float precoServico;
+	private Boolean pagEfetuado;
 	
-	public int getID_servico() {
-		return ID_servico;
+	public int getidServico() {
+		return idservico;
 	}
-	public void setID_servico(int iD_servico) {
-		ID_servico = iD_servico;
+	public void setidServico(int idServico) {
+		idservico = idServico;
 	}
-	public String getNome_servico() {
-		return Nome_servico;
+	public String getnomeServico() {
+		return nomeServico;
 	}
-	public void setNome_servico(String nome_servico) {
-		Nome_servico = nome_servico;
+	public void setnomeServico(String nomeServico) {
+		nomeServico = nomeServico;
 	}
-	public float getPreco_servico() {
-		return Preco_servico;
+	public float getprecoServico() {
+		return precoServico;
 	}
-	public void setPreco_servico(float preco_servico) {
-		Preco_servico = preco_servico;
+	public void setPreco_servico(float precoServico) {
+		precoServico = precoServico;
 	}
-	public Boolean getPag_Efetuado() {
-		return Pag_Efetuado;
+	public Boolean getpagEfetuado() {
+		return pagEfetuado;
 	}
-	public void setPag_Efetuado(Boolean pag_Efetuado) {
-		Pag_Efetuado = pag_Efetuado;
+	public void setpagEfetuado(Boolean pagEfetuado) {
+		pagEfetuado = pagEfetuado;
 	}
 
 }
