@@ -27,7 +27,7 @@ public class EspacosDAO implements IEspacosDAO {
 
 	public int InserirEspacos(Espacos esp) {
 		
-		String SQL = "INSERT INTO Espacos (Ocupante_Espaco, Check_In, Check_Out, FK_ID_Quarto, FK_ID_Computador, FK_ID_Sala_Reuniao) VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Espacos (ocupante, checkIn, checkOut, fkidComputador, fkidSalaReuniao, fkidQuartos) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -37,12 +37,12 @@ public class EspacosDAO implements IEspacosDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setInt(1, esp.getOcupante_Espaco());
-			ps.setDate(2, esp.getCheck_In());
-			ps.setDate(3, esp.getCheck_Out());
-			ps.setInt(4, esp.getFK_ID_Quarto());
-			ps.setInt(5, esp.getFK_ID_Computador());
-			ps.setInt(6, esp.getFK_ID_Sala_Reuniao());
+			ps.setInt(1, esp.getOcupante());
+			ps.setDate(2, esp.getCheckIn());
+			ps.setDate(3, esp.getCheckOut());
+			ps.setInt(4, esp.getFkidComputador());
+			ps.setInt(5, esp.getFkidSalaReuniao());
+			ps.setInt(6, esp.getFkidQuartos());
 			
 			ps.executeUpdate();
 			
@@ -77,15 +77,15 @@ public class EspacosDAO implements IEspacosDAO {
 
 				Espacos esp = new Espacos();
 
-				Integer ID_Espaco = rs.getInt("ID_Espaco");
-				Integer Ocupante_Espaco = rs.getInt("Ocupante_Espaco");
-				Date Check_In = rs.getDate("Check_In");
-				Date Check_Out = rs.getDate("Check_Out");
+				Integer IDEspaco = rs.getInt("idEspaco");
+				Integer OcupanteEspaco = rs.getInt("ocupante");
+				Date CheckIn = rs.getDate("checkIn");
+				Date CheckOut = rs.getDate("checkOut");
 
-				esp.setID_Espaco(ID_Espaco);
-				esp.setOcupante_Espaco(Ocupante_Espaco);
-				esp.setCheck_In(Check_In);
-				esp.setCheck_Out(Check_Out);
+				esp.setIdEspaco(IDEspaco);
+				esp.setOcupante(OcupanteEspaco);
+				esp.setCheckIn(CheckIn);
+				esp.setCheckOut(CheckOut);
 
 				espacos.add(esp);
 
@@ -102,7 +102,7 @@ public class EspacosDAO implements IEspacosDAO {
 
 	public boolean atualizarEspacos(Espacos espc) {
 
-String SQL = "UPDATE Espacos SET Ocupante_Espaco = ?, Check_In = ?, Check_Out = ? WHERE ID_Espaco = ?";
+		String SQL = "UPDATE Espacos SET ocupante = ?, checkIn = ?, checkOut = ? WHERE idEspaco = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -112,9 +112,9 @@ String SQL = "UPDATE Espacos SET Ocupante_Espaco = ?, Check_In = ?, Check_Out = 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, espc.getOcupante_Espaco());
-			ps.setDate(2, espc.getCheck_In());
-			ps.setDate(3, espc.getCheck_Out());
+			ps.setInt(1, espc.getOcupante());
+			ps.setDate(2, espc.getCheckIn());
+			ps.setDate(3, espc.getCheckOut());
 			
 			
 			retorno = ps.executeUpdate();
@@ -134,7 +134,7 @@ String SQL = "UPDATE Espacos SET Ocupante_Espaco = ?, Check_In = ?, Check_Out = 
 
 	public boolean removerEspacos(Espacos end) {
 		
-String SQL = "DELETE FROM Espacos WHERE ID_Espaco = ?";
+String SQL = "DELETE FROM Espacos WHERE idEspaco = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -144,7 +144,7 @@ String SQL = "DELETE FROM Espacos WHERE ID_Espaco = ?";
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getID_Espaco());
+			ps.setInt(1, end.getIdEspaco());
 			retorno = ps.executeUpdate();
 			
 			

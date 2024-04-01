@@ -25,7 +25,7 @@ private static Espacos_ReservadosDAO instancia;
 
 	public int inserirEspacos_Reservados(Espacos_Reservados esr) {
 		
-		String SQL = "INSERT INTO Espacos_Reservados (FK_ID_Hospede, FK_ID_Espaco) VALUES (?, ?)";
+		String SQL = "INSERT INTO EspacosReservados (fkIDHospede, fkidEspaco) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -35,8 +35,8 @@ private static Espacos_ReservadosDAO instancia;
 		try {
 			PreparedStatement ps= conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setInt(1, esr.getFK_ID_Hospede());
-			ps.setInt(1, esr.getFK_ID_Espaco());
+			ps.setInt(1, esr.getFkIDHospede());
+			ps.setInt(1, esr.getFkidEspaco());
 		
 			ps.executeUpdate();
 			
@@ -60,7 +60,7 @@ private static Espacos_ReservadosDAO instancia;
 		
 		ArrayList<Espacos_Reservados> espaR = new ArrayList<Espacos_Reservados>();
 		
-		String SQL = "SELECT * FROM Espacos_Reservados";
+		String SQL = "SELECT * FROM EspacosReservados";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -74,9 +74,9 @@ private static Espacos_ReservadosDAO instancia;
 				
 				Espacos_Reservados esr = new Espacos_Reservados();
 				
-				Integer ID_Espacos_Reservados = rs.getInt("ID_Espacos_Reservados");
+				Integer IDER = rs.getInt("idEspacosReservados");
 				
-				esr.setID_Espacos_Reservados(ID_Espacos_Reservados);
+				esr.setIdEspacosReservados(IDER);
 				
 				espaR.add(esr);
 				
@@ -99,7 +99,7 @@ private static Espacos_ReservadosDAO instancia;
 
 	public boolean removerEspacos_Reservados(Espacos_Reservados end) {
 		
-String SQL = "DELETE FROM Espacos_Reservados WHERE ID_Espacos_Reservados = ?";
+String SQL = "DELETE FROM EspacosReservados WHERE idEspacosReservados = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -109,7 +109,7 @@ String SQL = "DELETE FROM Espacos_Reservados WHERE ID_Espacos_Reservados = ?";
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getID_Espacos_Reservados());
+			ps.setInt(1, end.getIdEspacosReservados());
 			retorno = ps.executeUpdate();
 			
 			

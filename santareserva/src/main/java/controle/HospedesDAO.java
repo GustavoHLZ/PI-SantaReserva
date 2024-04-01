@@ -28,7 +28,7 @@ private static HospedesDAO instancia;
 	
 	public int InserirHospedes(Hospedes hosp) {
 		
-		String SQL = "INSERT INTO Hospedes (Nome_Hospede, sobrenome_hospede, nascimento_hospede, telefone_hospede, email_hospede, senha_hospede) VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Hospedes (nome, sobrenome, nascimento, telefone, email, senha) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -38,12 +38,12 @@ private static HospedesDAO instancia;
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 
-			ps.setString(1, hosp.getNome_Hospede());
-			ps.setString(2, hosp.getSobrenome_hospede());
-			ps.setDate(3, hosp.getNascimento_hospede());
-			ps.setInt(4, hosp.getTelefone_hospede());
-			ps.setString(5, hosp.getEmail_hospede());
-			ps.setString(6, hosp.getSenha_hospede());
+			ps.setString(1, hosp.getNome());
+			ps.setString(2, hosp.getSobrenome());
+			ps.setDate(3, hosp.getNascimento());
+			ps.setInt(4, hosp.getTelefone());
+			ps.setString(5, hosp.getEmail());
+			ps.setString(6, hosp.getSenha());
 		
 			 
 			ps.executeUpdate();
@@ -81,21 +81,21 @@ private static HospedesDAO instancia;
 				
 				Hospedes hosp = new Hospedes();
 				
-				Integer ID_Hospede = rs.getInt("ID_Hospede");
-				String Nome_Hospede = rs.getString("Nome_Hospede");
-				String sobrenome_hospede = rs.getString("sobrenome_hospede");
-				Date nascimento_hospede = rs.getDate("nascimento_hospede");
-				Integer telefone_hospede = rs.getInt("telefone_hospede");
-				String email_hospede = rs.getString("email_hospede");
-				String senha_hospede = rs.getString("senha_hospede");
+				Integer IDHospede = rs.getInt("idHospede");
+				String NomeHospede = rs.getString("nome");
+				String sobrenomehospede = rs.getString("sobrenome");
+				Date nascimentohospede = rs.getDate("nascimento");
+				Integer telefonehospede = rs.getInt("telefone");
+				String emailhospede = rs.getString("email");
+				String senhahospede = rs.getString("senha");
 				
-				hosp.setID_Hospede(ID_Hospede);
-				hosp.setNome_Hospede(Nome_Hospede);
-				hosp.setSobrenome_hospede(sobrenome_hospede);
-				hosp.setNascimento_hospede(nascimento_hospede);
-				hosp.setTelefone_hospede(telefone_hospede);
-				hosp.setEmail_hospede(email_hospede);
-				hosp.setSenha_hospede(senha_hospede);
+				hosp.setIdHospede(0);
+				hosp.setNome(NomeHospede);
+				hosp.setSobrenome(sobrenomehospede);
+				hosp.setNascimento(nascimentohospede);
+				hosp.setTelefone(telefonehospede);
+				hosp.setEmail(emailhospede);
+				hosp.setSenha(senhahospede);
 				
 				hospedes.add(hosp);
 				
@@ -112,7 +112,7 @@ private static HospedesDAO instancia;
 	
 	public boolean atualizarHospedes(Hospedes hosp) {
 		
-String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nascimento_hospede = ?, telefone_hospede = ?, email_hospede = ?, senha_hospede = ? WHERE ID_Hospede = ?";
+String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, telefone = ?, email = ?, senha = ? WHERE idHospede = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -122,12 +122,12 @@ String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nasc
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setString(1, hosp.getNome_Hospede());
-			ps.setString(2, hosp.getSobrenome_hospede());
-			ps.setDate(3, hosp.getNascimento_hospede());
-			ps.setInt(4, hosp.getTelefone_hospede());
-			ps.setString(5, hosp.getEmail_hospede());
-			ps.setString(6, hosp.getSenha_hospede());
+			ps.setString(1, hosp.getNome());
+			ps.setString(2, hosp.getSobrenome());
+			ps.setDate(3, hosp.getNascimento());
+			ps.setInt(4, hosp.getTelefone());
+			ps.setString(5, hosp.getEmail());
+			ps.setString(6, hosp.getSenha());
 			
 			
 			retorno = ps.executeUpdate();
@@ -148,7 +148,7 @@ String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nasc
 	
 	public boolean removerHospedes(Hospedes end) {
 		
-		String SQL = "DELETE FROM Hospedes WHERE ID_Hospede = ?";
+		String SQL = "DELETE FROM Hospedes WHERE idHospede = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -158,7 +158,7 @@ String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nasc
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getID_Hospede());
+			ps.setInt(1, end.getIdHospede());
 			retorno = ps.executeUpdate();
 			
 			
@@ -173,29 +173,29 @@ String SQL = "UPDATE Hospedes SET Nome_Hospede = ? , sobrenome_hospede = ?, nasc
 		
 	}
 	
-	public Hospedes buscarHospedes(String email_hospede,String senha_hospede) {
+	public Hospedes buscarHospedes(String email,String senha) {
 		
 		
 		Hospedes login = null;
-		String SQL = "SELECT * FROM Hospedes WHERE email_hospede = ? AND senha_hospede = ?";
+		String SQL = "SELECT * FROM Hospedes WHERE email = ? AND senha = ?";
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
 	try {
 		PreparedStatement ps = conBD.prepareStatement(SQL);
-		ps.setString(1,email_hospede);
-		ps.setString(2, senha_hospede);
+		ps.setString(1,email);
+		ps.setString(2, senha);
 		
 		ResultSet rs = ps.executeQuery();
 		
 		if (rs.next()) {
 			login = new Hospedes();
-			int ID = rs.getInt("ID_Hospede");
-			String email = rs.getString("email_hospede");
-			String senha = rs.getString("senha_hospede");
-			login.setEmail_hospede(email);
-			login.setSenha_hospede(senha);
-			login.setID_Hospede(ID);
+			int ID = rs.getInt("idHospede");
+			String Email = rs.getString("email");
+			String Senha = rs.getString("senha");
+			login.setEmail(Email);
+			login.setSenha(Senha);
+			login.setIdHospede(ID);
 		}
 		} catch(SQLException e) {
 			e.printStackTrace();
