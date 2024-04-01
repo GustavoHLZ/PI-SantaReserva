@@ -26,7 +26,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	
 	public int InserirAvaliacao(Avaliacoes ava) {
 	
-		String SQL = "INSERT INTO Avaliacoes (Avaliacao, FK_ID_Hospede) VALUES (?, ?)";
+		String SQL = "INSERT INTO Avaliacoes (avaliacao, avaliador) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -38,7 +38,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 			
 			
 			ps.setFloat(1, ava.getAvaliacao());
-			ps.setInt(2, ava.getFK_ID_Hospede());
+			ps.setString(2, ava.getAvaliador());
 			
 			ps.executeUpdate();
 			
@@ -73,11 +73,11 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 			
 				Avaliacoes ava = new Avaliacoes();
 				
-				Integer ID_avaliacao = rs.getInt("ID_avaliacao");
-				Float Avaliacao = rs.getFloat("Avaliacao");
-				String Avaliador = rs.getString("Avaliador");
+				Integer ID_avaliacao = rs.getInt("idAvaliacao");
+				Float Avaliacao = rs.getFloat("avaliacao");
+				String Avaliador = rs.getString("avaliador");
 				
-				ava.setID_avaliacao(ID_avaliacao);
+				ava.setIdAvaliacao(ID_avaliacao);
 				ava.setAvaliacao(Avaliacao);
 				ava.setAvaliador(Avaliador);
 				
@@ -134,7 +134,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	
 	public boolean removerAvaliacoes(Avaliacoes end) {
 		
-		String SQL = "DELETE FROM Avaliacoes WHERE ID_Avaliacao = ?";
+		String SQL = "DELETE FROM Avaliacoes WHERE idAvaliacao = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -144,7 +144,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.geIDAvaliacao());
+			ps.setInt(1, end.getIdAvaliacao());
 			retorno = ps.executeUpdate();
 			
 			

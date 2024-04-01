@@ -27,7 +27,7 @@ private static Info_LoginDAO instancia;
 
 	public int InserirInfo_Login(Info_Login info) {
 		
-		String SQL = "INSERT INTO Info_Login (Login, Senha) VALUES (?, ?)";
+		String SQL = "INSERT INTO Infologin (login, senha) VALUES (?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -59,7 +59,7 @@ private static Info_LoginDAO instancia;
 		
 		ArrayList<Info_Login> info_login = new ArrayList<Info_Login>();
 		
-		String SQL = "SELECT * FROM Info_Login";
+		String SQL = "SELECT * FROM Infologin";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -72,11 +72,11 @@ private static Info_LoginDAO instancia;
 				
 				Info_Login info = new Info_Login();
 				
-				Integer ID_usuario = rs.getInt("ID_usuario");
-				String login = rs.getString("Login");
-				String senha = rs.getString("Senha");
+				Integer ID_usuario = rs.getInt("idUsuario");
+				String login = rs.getString("login");
+				String senha = rs.getString("senha");
 				
-				info.setID_usuario(ID_usuario);
+				info.setIdUsuario(ID_usuario);
 				info.setLogin(login);
 				info.setSenha(senha);
 				
@@ -95,7 +95,7 @@ private static Info_LoginDAO instancia;
 	
 	
 	public boolean atualizarInfo_Login(Info_Login info) {
-		String SQL = "UPDATE Info_Login SET Login = ?, Senha = ?, WHERE ID_usuario = ?";
+		String SQL = "UPDATE Infologin SET login = ?, senha = ?, WHERE idUsuario = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -124,7 +124,7 @@ private static Info_LoginDAO instancia;
 	
 	public boolean removerInfo_Login(Info_Login end) {
 		
-		String SQL = "DELETE FROM Info_Login WHERE ID_usuario = ?";
+		String SQL = "DELETE FROM Infologin WHERE idUsuario = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -134,7 +134,7 @@ private static Info_LoginDAO instancia;
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getID_usuario());
+			ps.setInt(1, end.getIdUsuario());
 			retorno = ps.executeUpdate();
 			
 			

@@ -24,7 +24,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	
 	public int inserirComputadores(Computadores comp) {
 	
-		String SQL = "INSERT INTO Computadores (ID_PC, Num_PC, Temp_alugado) VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO Computadores (idPC, num, temp) VALUES (?, ?, ?)";
 	
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -33,9 +33,9 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			PreparedStatement ps= conBD.prepareStatement(SQL);
 	
 	
-			ps.setInt(1, comp.getID_PC());
-			ps.setInt(2, comp.getNum_PC());
-			ps.setInt(3, comp.getTemp_alugado());
+			ps.setInt(1, comp.getIdPC());
+			ps.setInt(2, comp.getNum());
+			ps.setInt(3, comp.getTemp());
 		
 			ps.executeUpdate();
 		
@@ -64,13 +64,13 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			
 				Computadores comp = new Computadores();
 				
-				Integer ID_PC = rs.getInt("ID_PC");
-				Integer Temp_alugado = rs.getInt("Temp_alugado");
-				Integer Num_PC = rs.getInt("Num_PC");
+				Integer idPC = rs.getInt("idPC");
+				Integer Temp_alugado = rs.getInt("temp");
+				Integer Num_PC = rs.getInt("num");
 				
-				comp.setID_PC(ID_PC);
-				comp.setTemp_alugado(Temp_alugado);
-				comp.setNum_PC(Num_PC);
+				comp.setIdPC(idPC);
+				comp.setTemp(Temp_alugado);
+				comp.setNum(Num_PC);
 				
 				computadores.add(comp);
 		
@@ -88,7 +88,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 		
 	public boolean atualizarComputadores(Computadores comp) {
 		
-		String SQL = "UPDATE Computadores SET Temp_alugado = ? Where ID_PC = ?";
+		String SQL = "UPDATE Computadores SET temp = ? Where idPC = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -100,7 +100,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			
-			ps.setInt(1, comp.getTemp_alugado());
+			ps.setInt(1, comp.getTemp());
 			
 			retorno = ps.executeUpdate();
 			
@@ -120,7 +120,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	public boolean removerComputadores(Computadores comp) {
 		
 		
-		String SQL = "DELETE FROM Computadores WHERE ID_PC = ?";
+		String SQL = "DELETE FROM Computadores WHERE idPC = ?";
 
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -130,7 +130,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, comp.getID_PC());
+			ps.setInt(1, comp.getIdPC());
 			retorno = ps.executeUpdate();
 			
 			
