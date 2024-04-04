@@ -3,54 +3,58 @@ package modelo;
 import java.sql.Date;
 
 public class Espacos {
-	private int ID_Espaco;
-	private int Ocupante_Espaco;
-	private Date Check_In;
-	private Date Check_Out;
-	private int FK_ID_Quarto;
-	private int FK_ID_Computador;
-	private int FK_ID_Sala_Reuniao;
-	public int getFK_ID_Quarto() {
-		return FK_ID_Quarto;
+	private int idEspaco;
+	private int ocupante;
+	private Date checkIn;
+	private Date checkOut;
+	private int fkidComputador;
+	private int fkidSalaReuniao;
+	private int fkidQuartos;
+	
+	public int getIdEspaco() {
+		return idEspaco;
 	}
-	public void setFK_ID_Quarto(int fK_ID_Quarto) {
-		FK_ID_Quarto = fK_ID_Quarto;
+	public void setIdEspaco(int idEspaco) {
+		this.idEspaco = idEspaco;
 	}
-	public int getFK_ID_Computador() {
-		return FK_ID_Computador;
+	public int getOcupante() {
+		return ocupante;
 	}
-	public void setFK_ID_Computador(int fK_ID_Computador) {
-		FK_ID_Computador = fK_ID_Computador;
+	public void setOcupante(int ocupante) {
+		this.ocupante = ocupante;
 	}
-	public int getFK_ID_Sala_Reuniao() {
-		return FK_ID_Sala_Reuniao;
+	public Date getCheckIn() {
+		return checkIn;
 	}
-	public void setFK_ID_Sala_Reuniao(int fK_ID_Sala_Reuniao) {
-		FK_ID_Sala_Reuniao = fK_ID_Sala_Reuniao;
+	public void setCheckIn(Date checkIn) {
+		this.checkIn = checkIn;
 	}
-	public int getID_Espaco() {
-		return ID_Espaco;
+	public Date getCheckOut() {
+		return checkOut;
 	}
-	public void setID_Espaco(int iD_Espaco) {
-		ID_Espaco = iD_Espaco;
+	public void setCheckOut(Date checkOut) {
+		this.checkOut = checkOut;
 	}
-	public int getOcupante_Espaco() {
-		return Ocupante_Espaco;
+	public int getFkidComputador() {
+		return fkidComputador;
 	}
-	public void setOcupante_Espaco(int ocupante_Espaco) {
-		Ocupante_Espaco = ocupante_Espaco;
+	public void setFkidComputador(int fkidComputador) {
+		this.fkidComputador = fkidComputador;
 	}
-	public Date getCheck_In() {
-		return Check_In;
+	public int getFkidSalaReuniao() {
+		return fkidSalaReuniao;
 	}
-	public void setCheck_In(Date check_In) {
-		Check_In = check_In;
+	public void setFkidSalaReuniao(int fkidSalaReuniao) {
+		this.fkidSalaReuniao = fkidSalaReuniao;
 	}
-	public Date getCheck_Out() {
-		return Check_Out;
+	public int getFkidQuartos() {
+		return fkidQuartos;
 	}
-	public void setCheck_Out(Date check_Out) {
-		Check_Out = check_Out;
+	public void setFkidQuartos(int fkidQuartos) {
+		this.fkidQuartos = fkidQuartos;
 	}
+	
+	
+	
 	
 }

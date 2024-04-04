@@ -104,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `Espacos` (
   `checkOut` DATE NOT NULL,
   `fkidComputador` INT NOT NULL,
   `fkidSalaReuniao` INT NOT NULL,
-  `quartosID` INT NOT NULL,
-  PRIMARY KEY (`idEspaco`, `fkidComputador`, `fkidSalaReuniao`, `quartosID`),
+  `fkidQuartos` INT NOT NULL,
+  PRIMARY KEY (`idEspaco`, `fkidComputador`, `fkidSalaReuniao`, `fkidQuartos`),
   CONSTRAINT `fkEspacosComputadores1`
     FOREIGN KEY (`fkidComputador`)
     REFERENCES `Computadores` (`idPC`),
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `Espacos` (
     FOREIGN KEY (`fkidSalaReuniao`)
     REFERENCES `SalaReunioes` (`idSala`),
   CONSTRAINT `fkEspacosQuartos1`
-    FOREIGN KEY (`quartosID`)
+    FOREIGN KEY (`fkidQuartos`)
     REFERENCES `Quartos` (`idQuarto`));
 
 

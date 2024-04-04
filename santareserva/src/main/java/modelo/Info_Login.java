@@ -1,27 +1,36 @@
 package modelo;
 
 public class Info_Login {
-	private int ID_usuario;
-	private String Login;
-	private String Senha;
+	private int idUsuario;
+	private String login;
+	private String senha;
+	private int fkIDHospede;
 	
-	public int getID_usuario() {
-		return ID_usuario;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
-	public void setID_usuario(int iD_usuario) {
-		ID_usuario = iD_usuario;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	public String getLogin() {
-		return Login;
+		return login;
 	}
 	public void setLogin(String login) {
-		Login = login;
+		this.login = login;
 	}
 	public String getSenha() {
-		return Senha;
+		return senha;
 	}
 	public void setSenha(String senha) {
-		Senha = senha;
+		this.senha = senha;
 	}
+	public int getFkIDHospede() {
+		return fkIDHospede;
+	}
+	public void setFkIDHospede(int fkIDHospede) {
+		this.fkIDHospede = fkIDHospede;
+	}
+	
+	
 
 }

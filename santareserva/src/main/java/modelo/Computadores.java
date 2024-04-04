@@ -2,27 +2,29 @@ package modelo;
 
 public class Computadores {
 
-	private int ID_PC;
-	private int Num_PC;
-	private int Temp_alugado;
+	private int idPC;
+	private int num;
+	private int temp;
 	
-	public int getID_PC() {
-		return ID_PC;
+	public int getIdPC() {
+		return idPC;
 	}
-	public void setID_PC(int iD_PC) {
-		ID_PC = iD_PC;
+	public void setIdPC(int idPC) {
+		this.idPC = idPC;
 	}
-	public int getNum_PC() {
-		return Num_PC;
+	public int getNum() {
+		return num;
 	}
-	public void setNum_PC(int num_PC) {
-		Num_PC = num_PC;
+	public void setNum(int num) {
+		this.num = num;
 	}
-	public int getTemp_alugado() {
-		return Temp_alugado;
+	public int getTemp() {
+		return temp;
 	}
-	public void setTemp_alugado(int temp_alugado) {
-		Temp_alugado = temp_alugado;
+	public void setTemp(int temp) {
+		this.temp = temp;
 	}
+	
+	
 
 }
