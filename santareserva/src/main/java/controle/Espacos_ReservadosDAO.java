@@ -36,7 +36,7 @@ private static Espacos_ReservadosDAO instancia;
 			PreparedStatement ps= conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setInt(1, esr.getFkIDHospede());
-			ps.setInt(1, esr.getFkidEspaco());
+			ps.setInt(2, esr.getFkidEspaco());
 		
 			ps.executeUpdate();
 			

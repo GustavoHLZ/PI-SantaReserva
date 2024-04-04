@@ -1,35 +1,38 @@
 package modelo;
 
 public class Avaliacoes {
-	private int ID_avaliacao;
-	private String Avaliador;
-	private float Avaliacao;
-	private int FK_ID_Hospede;
+	private int idAvaliacao;
+	private float avaliacao;
+	private String avaliador;
+	private int fkIDHospede;
 	
-	public int getFK_ID_Hospede() {
-		return FK_ID_Hospede;
+	public int getIdAvaliacao() {
+		return idAvaliacao;
 	}
-	public void setFK_ID_Hospede(int fK_ID_Hospede) {
-		FK_ID_Hospede = fK_ID_Hospede;
-	}
-	
-	public int geIDAvaliacao() {
-		return ID_avaliacao;
-	}
-	public void setID_avaliacao(int iD_avaliacao) {
-		ID_avaliacao = iD_avaliacao;
+	public void setIdAvaliacao(int idAvaliacao) {
+		this.idAvaliacao = idAvaliacao;
 	}
 	public float getAvaliacao() {
-		return Avaliacao;
+		return avaliacao;
 	}
 	public void setAvaliacao(float avaliacao) {
-		Avaliacao = avaliacao;
+		this.avaliacao = avaliacao;
 	}
 	public String getAvaliador() {
-		return Avaliador;
+		return avaliador;
 	}
 	public void setAvaliador(String avaliador) {
-		Avaliador = avaliador;
+		this.avaliador = avaliador;
 	}
+	public int getFkIDHospede() {
+		return fkIDHospede;
+	}
+	public void setFkIDHospede(int fkIDHospede) {
+		this.fkIDHospede = fkIDHospede;
+	}
+	
+	
+	
+	
 		
 }

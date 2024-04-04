@@ -27,7 +27,7 @@ private static Info_LoginDAO instancia;
 
 	public int InserirInfo_Login(Info_Login info) {
 		
-		String SQL = "INSERT INTO Infologin (login, senha) VALUES (?, ?)";
+		String SQL = "INSERT INTO Infologin (login, senha, fkIDHospede) VALUES (?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -39,6 +39,8 @@ private static Info_LoginDAO instancia;
 			
 			ps.setString(1, info.getLogin());
 			ps.setString(2, info.getSenha());
+			ps.setInt(3,  info.getFkIDHospede());
+			
 			
 			ResultSet rs = ps.executeQuery();
 			if(rs!=null) {
