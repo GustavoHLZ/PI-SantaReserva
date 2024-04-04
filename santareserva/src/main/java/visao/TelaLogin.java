@@ -10,9 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controle.HospedesDAO;
-import controle.Info_LoginDAO;
+import controle.InfologinDAO;
 import modelo.Hospedes;
-import modelo.Info_Login;
+import modelo.Infologin;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -41,8 +41,8 @@ public class TelaLogin extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JTable table;
 	private JLabel lblNewLabel_2;
-	private Info_Login endSelecionado;
-	ArrayList<Info_Login> listarInfo_Login;
+	private Infologin endSelecionado;
+	ArrayList<Infologin> listarInfo_Login;
 
 	/**
 	 * Launch the application.
@@ -54,7 +54,7 @@ public class TelaLogin extends JFrame {
 	
 	public TelaLogin() {
 		
-		listarInfo_Login = new ArrayList<Info_Login>();
+		listarInfo_Login = new ArrayList<Infologin>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
@@ -190,11 +190,11 @@ public class TelaLogin extends JFrame {
 	protected void atualizarJTable() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Login", "Senha" });
 
-		Info_LoginDAO endDAO = Info_LoginDAO.getInstancia();
-		listarInfo_Login = endDAO.listarInfo_Login();
+		InfologinDAO endDAO = InfologinDAO.getInstancia();
+		listarInfo_Login = endDAO.listarInfologin();
 		
 		for (int i = 0; i < listarInfo_Login.size(); i++) {
-			Info_Login p = listarInfo_Login.get(i);
+			Infologin p = listarInfo_Login.get(i);
 			modelo.addRow(new Object[] { p.getLogin(), p.getSenha() });
 		}
 

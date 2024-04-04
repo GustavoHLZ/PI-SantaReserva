@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
-import modelo.Info_Login;
+import modelo.Infologin;
 
 public class HospedesDAO implements IHospedesDAO {
 	
