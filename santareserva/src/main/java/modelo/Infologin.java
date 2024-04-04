@@ -1,6 +1,6 @@
 package modelo;
 
-public class Info_Login {
+public class Infologin {
 	private int idUsuario;
 	private String login;
 	private String senha;

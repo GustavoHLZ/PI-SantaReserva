@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import modelo.Info_Login;
+import modelo.Infologin;
 import modelo.Quartos;
 import modelo.Quartos;
 
@@ -26,7 +26,7 @@ public class QuartosDAO implements IQuartosDAO {
 
 	public int InserirQuartos(Quartos qua) {
 		
-		String SQL = "INSERT INTO Quartos (ID_Quarto, Tipo_Quarto, Preco_Diaria, Dispo_Quarto, Cap_max) VALUES (?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Quartos (idQuarto, tipo, preco, dispo, cap) VALUES (?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();

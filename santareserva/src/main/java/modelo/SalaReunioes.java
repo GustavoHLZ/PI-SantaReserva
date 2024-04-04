@@ -1,6 +1,6 @@
 package modelo;
 
-public class Sala_Reunioes {
+public class SalaReunioes {
 
 	private int idSala;
 	private Boolean disp;

@@ -22,7 +22,7 @@ public class ServicosDAO implements IServicosDAO{
 	}
 	
 	public int InserirServicos(Servicos servico) {
-		String SQL = "INSERT INTO Servicos (ID_servico, Nome_servico, Preco_servico, PAG_Efetuado) VALUES (?,?,?,?)";
+		String SQL = "INSERT INTO Servicos (idServico, nomeServico, precoServico, pagEfetuado) VALUES (?,?,?,?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -87,7 +87,7 @@ public class ServicosDAO implements IServicosDAO{
 	
 	public boolean atualizarServicos(Servicos end) {
 			
-		String SQL = "UPDATE Servicos SET Pag_efetuado = ? WHERE ID_Servico = ?";
+		String SQL = "UPDATE Servicos SET pagEfetuado = ? WHERE idServico = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -116,7 +116,7 @@ public class ServicosDAO implements IServicosDAO{
 	
 	public boolean removerServicos(Servicos end ) {
 		
-String SQL = "DELETE FROM Servicos WHERE ID_servico = ?";
+String SQL = "DELETE FROM Servicos WHERE idServico = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
