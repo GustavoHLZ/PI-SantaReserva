@@ -14,6 +14,6 @@ public int InserirInfologin(Infologin end);
 	
 	public boolean removerInfologin(Infologin end);
 	
-    public Infologin buscarInfologin(Infologin end);
+    public Infologin buscarInfologin(String email, String senha);
 
 }

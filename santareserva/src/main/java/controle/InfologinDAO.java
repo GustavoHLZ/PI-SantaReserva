@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
 
+import modelo.Hospedes;
 import modelo.Infologin;
 
 public class InfologinDAO implements IInfologinDAO{
@@ -152,8 +153,41 @@ private static InfologinDAO instancia;
 		return (retorno == 0 ? false : true);
 	}
 	
-	public Infologin buscarInfologin(Infologin info) {
-		return info;
+	public Infologin buscarInfologin(String email, String senha) {
+		
+		Infologin login = null;
+		String SQL = "SELECT * FROM Infologin WHERE email = ? and senha = ?";
+		Conexao con = Conexao.getInstancia();
+		Connection conBD = con.conectar();
+		
+	try {
+		PreparedStatement ps = conBD.prepareStatement(SQL);
+		ps.setString(1, email);
+		ps.setString(2, senha);
+
+		ResultSet rs = ps.executeQuery();
+		
+		if (rs.next()) {
+			login = new Infologin();
+			int id = rs.getInt("idUsuario");
+			String Email = rs.getString("email");
+			String Senha = rs.getString("senha");
+			login.setIdUsuario(id);
+			login.setLogin(Email);
+			login.setSenha(Senha);
+			
+		}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			con.fecharConexao();
+		}
+		
+		
+		
+		
+		
+		return login;
 	
 		
 	

@@ -146,9 +146,9 @@ public class TelaLogin extends JFrame {
 				String Senha = txtSenha.getText();
 				
 					
-				HospedesDAO dao = HospedesDAO.getInstancia();
+				InfologinDAO dao = InfologinDAO.getInstancia();
 				
-				Hospedes logins = dao.buscarHospedes(Login, Senha);
+				Infologin logins = dao.buscarInfologin(Login, Senha);
 				
 				if(logins != null) {
 					JOptionPane.showMessageDialog(null,"Usuário Cadastro");
