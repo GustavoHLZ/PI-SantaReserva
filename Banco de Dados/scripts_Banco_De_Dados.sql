@@ -21,9 +21,9 @@ USE `mydb` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Infologin` (
   `idUsuario` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(50) NOT NULL,
+  `admin` INT  default 0,
+  `email` VARCHAR(255) NOT NULL,
   `senha` VARCHAR(50) NOT NULL,
-  `fkIDHospede` INT NOT NULL,
   PRIMARY KEY (`idUsuario`));
   
   
@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS `Hospedes` (
   `sobrenome` VARCHAR(45) NOT NULL,
   `nascimento` DATE NOT NULL,
   `telefone` CHAR(14) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `senha` VARCHAR(50) NOT NULL,
   `fkidUsuario` INT NOT NULL,
   PRIMARY KEY (`idHospede`),
   CONSTRAINT `fkHospedesInfologin1`

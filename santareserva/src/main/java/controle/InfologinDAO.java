@@ -27,7 +27,7 @@ private static InfologinDAO instancia;
 
 	public int InserirInfologin(Infologin info) {
 		
-		String SQL = "INSERT INTO Infologin (login, senha, fkIDHospede) VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO Infologin (admin, email, senha) VALUES (?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -37,13 +37,15 @@ private static InfologinDAO instancia;
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setString(1, info.getLogin());
-			ps.setString(2, info.getSenha());
-			ps.setInt(3,  info.getFkIDHospede());
+			ps.setInt(1, info.getAdmin());
+			ps.setString(2, info.getLogin());
+			ps.setString(3, info.getSenha());
 			
+			ps.executeUpdate();
 			
-			ResultSet rs = ps.executeQuery();
-			if(rs!=null) {
+			// Pega as chaves criadas e coloca no id do usuario
+			ResultSet rs = ps.getGeneratedKeys();
+			if(rs.next()) {
 				ChavePrimariaGerada = rs.getInt(1);
 			}
 			
