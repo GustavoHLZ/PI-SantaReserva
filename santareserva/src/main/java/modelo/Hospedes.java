@@ -11,7 +11,8 @@ public class Hospedes {
 	private int telefone;
 	private String email;
 	private String senha;
-	private int fkidUsuario;
+	private Infologin login;
+	// cria um objeto do tipo Infologin 
 	
 	public int getIdHospede() {
 		return idHospede;
@@ -55,12 +56,13 @@ public class Hospedes {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public int getFkidUsuario() {
-		return fkidUsuario;
+	public Infologin getLogin() {
+		return login;
 	}
-	public void setFkidUsuario(int fkidUsuario) {
-		this.fkidUsuario = fkidUsuario;
+	public void setLogin(Infologin login) {
+		this.login = login;
 	}
+	
 	
 
 }

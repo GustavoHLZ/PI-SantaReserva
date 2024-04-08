@@ -28,7 +28,7 @@ private static HospedesDAO instancia;
 	
 	public int InserirHospedes(Hospedes hosp) {
 		
-		String SQL = "INSERT INTO Hospedes (nome, sobrenome, nascimento, telefone, email, senha) VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Hospedes (nome, sobrenome, nascimento, telefone, fkidUsuario) VALUES (?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -42,16 +42,11 @@ private static HospedesDAO instancia;
 			ps.setString(2, hosp.getSobrenome());
 			ps.setDate(3, hosp.getNascimento());
 			ps.setInt(4, hosp.getTelefone());
-			ps.setString(5, hosp.getEmail());
-			ps.setString(6, hosp.getSenha());
+			// puxa o objeto de Infologin em hospede e coloca seu id na chave estrangeira
+			ps.setInt(5, hosp.getLogin().getIdUsuario());
 		
 			 
 			ps.executeUpdate();
-			
-			//ResultSet rs = ps.executeQuery();
-			//if(rs!=null) {
-			//	chavePrimariaGerada = rs.getInt(1);
-			//}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

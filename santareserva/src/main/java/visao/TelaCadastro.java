@@ -19,7 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controle.HospedesDAO;
+import controle.InfologinDAO;
 import modelo.Hospedes;
+import modelo.Infologin;
 import net.miginfocom.swing.MigLayout;
 
 public class TelaCadastro extends JFrame {
@@ -33,6 +35,7 @@ public class TelaCadastro extends JFrame {
 	private JTextField txtNome;
 	private Hospedes hospSelecionado;
 	private ArrayList<Hospedes> listaHospedes;
+	private ArrayList<Infologin> listaLogin;
 
 	/**
 	 * Launch the application.
@@ -55,6 +58,7 @@ public class TelaCadastro extends JFrame {
 	 */
 	public TelaCadastro() {
 		ArrayList<Hospedes> listaHospedes = new ArrayList<Hospedes>();
+		ArrayList<Infologin> listaLogin = new ArrayList<Infologin>();
 		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Icones\\LogoAPP.png"));
@@ -231,23 +235,42 @@ public class TelaCadastro extends JFrame {
 				String senha = txtSenha.getText();
 
 				Hospedes hospede = new Hospedes();
+				Infologin login = new Infologin();
+				
+				
+				login .setLogin(email);
+				login.setSenha(senha);
 
-				hospede.setEmail(email);
 				hospede.setNome(nome);
 				hospede.setSobrenome(sobrenome);
 				hospede.setNascimento(nascimento);
 				hospede.setTelefone(telefone);
-				hospede.setSenha(senha);
 
 				HospedesDAO dao = HospedesDAO.getInstancia();
+				InfologinDAO idao = InfologinDAO.getInstancia();
 
-				int retorno = dao.InserirHospedes(hospede);
-
-				JOptionPane.showMessageDialog(null, "inserido");
-
-				TelaLogin c = new TelaLogin();
-				c.setVisible(true);
-				dispose();
+				
+				try {
+					// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
+					// mações no Login do usuário
+					int retorno = idao.InserirInfologin(login);
+					// insere o retorno como o id do Infologin
+					login.setIdUsuario(retorno);
+					// insere as informações de login a partir da chave estrangeira em Hospedes
+					hospede.setLogin(login);
+					// insere as informações em hospede
+					dao.InserirHospedes(hospede);
+					
+					JOptionPane.showMessageDialog(null, "inserido");
+					
+					TelaLogin c = new TelaLogin();
+					c.setVisible(true);
+					dispose();
+					
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "Erro ao inserir informações");
+				}
+				
 				
 			}
 		});

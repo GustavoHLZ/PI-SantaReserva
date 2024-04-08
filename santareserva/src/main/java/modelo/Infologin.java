@@ -2,9 +2,9 @@ package modelo;
 
 public class Infologin {
 	private int idUsuario;
+	private boolean admin;
 	private String login;
 	private String senha;
-	private int fkIDHospede;
 	
 	public int getIdUsuario() {
 		return idUsuario;
@@ -24,11 +24,17 @@ public class Infologin {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public int getFkIDHospede() {
-		return fkIDHospede;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
-	public void setFkIDHospede(int fkIDHospede) {
-		this.fkIDHospede = fkIDHospede;
+	// verifica se o usuario é um admnistrador ou hospede
+	public int getAdmin() {
+		// TODO Auto-generated method stub
+		if( admin == true) {
+			return 0;
+		}else {
+			return 1;
+		}
 	}
 	
 	
