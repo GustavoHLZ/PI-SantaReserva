@@ -12,11 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controle.HospedesDAO;
 import controle.InfologinDAO;
@@ -119,16 +121,40 @@ public class TelaCadastro extends JFrame {
 		lblNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblNascimento, "cell 0 10");
 		
-		txtNascimento = new JTextField();
-		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtNascimento, "cell 0 11,grow");
-		txtNascimento.setColumns(10);
-		
+		MaskFormatter mascaraDat = null;
+
+		 try {
+
+		      mascaraDat = new MaskFormatter("##/##/####");
+
+		 } catch (ParseException e) {
+
+		      e.printStackTrace();
+
+		 }
+
+		 txtNascimento = new JFormattedTextField(mascaraDat);
+		 txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
+		 PainelCadastro.add(txtNascimento, "cell 0 11,grow");
+		 txtNascimento.setColumns(10);
+	
 		JLabel lblTelefone = new JLabel("Telefone");
 		lblTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(lblTelefone, "cell 0 12");
 		
-		txtTelefone = new JTextField();
+		MaskFormatter mascaraTel = null;
+
+		 try {
+
+		      mascaraTel = new MaskFormatter("(##) #####-####");
+
+		 } catch (ParseException e) {
+
+		      e.printStackTrace();
+
+		 }
+
+		txtTelefone = new JFormattedTextField(mascaraTel);
 		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
 		PainelCadastro.add(txtTelefone, "cell 0 13,grow");
 		txtTelefone.setColumns(10);
