@@ -7,9 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 public class TelaQuartos extends JFrame {
 
@@ -44,19 +49,43 @@ public class TelaQuartos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[350px][grow]", "[200px][grow]"));
+		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][grow][grow]"));
 		
 		JPanel PainelTopo = new JPanel();
 		PainelTopo.setBackground(new Color(119, 165, 175));
 		contentPane.add(PainelTopo, "cell 0 0 2 1,grow");
-		PainelTopo.setLayout(new MigLayout("", "[]", "[]"));
+		PainelTopo.setLayout(new MigLayout("", "[1800px][]", "[]"));
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/LogoAPP.png")));
 		PainelTopo.add(lblNewLabel, "cell 0 0");
 		
+		JLabel lblNewLabel_19 = new JLabel("");
+		lblNewLabel_19.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeUser.png")));
+		PainelTopo.add(lblNewLabel_19, "cell 1 0");
+		
+		JPanel panel_4 = new JPanel();
+		contentPane.add(panel_4, "cell 0 1,grow");
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, "cell 1 1,grow");
+		panel.setLayout(new MigLayout("", "[290px][1070px][144px]", "[58px]"));
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/BackgroundsPI/Group 26 quantidade.png")));
+		panel.add(lblNewLabel_20, "cell 0 0,alignx left,aligny top");
+		
+		JLabel lblNewLabel_22 = new JLabel("");
+		lblNewLabel_22.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/BackgroundsPI/Group 26 quantidade.png")));
+		panel.add(lblNewLabel_22, "cell 1 0,alignx left,aligny top");
+		
+		JLabel lblNewLabel_23 = new JLabel("");
+		lblNewLabel_23.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_23.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Busca.png")));
+		panel.add(lblNewLabel_23, "cell 2 0,alignx left,aligny center");
+		
 		JPanel PainelIcones = new JPanel();
-		contentPane.add(PainelIcones, "cell 0 1,grow");
+		contentPane.add(PainelIcones, "cell 0 2,grow");
 		PainelIcones.setLayout(new MigLayout("", "[][]", "[][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][][300px][][][][][][][][][]"));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -132,7 +161,117 @@ public class TelaQuartos extends JFrame {
 		PainelIcones.add(lblNewLabel_17, "cell 1 25");
 		
 		JPanel PainelPrincipal = new JPanel();
-		contentPane.add(PainelPrincipal, "cell 1 1,grow");
+		contentPane.add(PainelPrincipal, "cell 1 2,grow");
+		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setPreferredSize(new Dimension(100, 50));
+		PainelPrincipal.add(panel_1, "cell 0 0,grow");
+		panel_1.setLayout(new MigLayout("", "[][750px][200px][200px][][100px]", "[][][][]"));
+		
+		JLabel lblNewLabel_21 = new JLabel("");
+		lblNewLabel_21.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Fotos/Solteiro.png")));
+		panel_1.add(lblNewLabel_21, "cell 0 0");
+		
+		JLabel lblNewLabel_26 = new JLabel("Quarto Solteiro");
+		lblNewLabel_26.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_26, "cell 1 0,aligny top");
+		
+		JLabel lblNewLabel_28 = new JLabel("Preço Diária");
+		lblNewLabel_28.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblNewLabel_28, "cell 2 0,alignx center");
+		
+		JLabel lblNewLabel_30 = new JLabel("Quantidade");
+		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblNewLabel_30, "cell 3 0,alignx center");
+		
+		JLabel lblNewLabel_29 = new JLabel("");
+		panel_1.add(lblNewLabel_29, "cell 1 1");
+		
+		JLabel lblNewLabel_27 = new JLabel("Detalhes: 1 cama de solteiro, wifi disponpível, ar condicionado, banheira e televisão.");
+		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_1.add(lblNewLabel_27, "cell 1 2");
+		
+		JLabel lblNewLabel_31 = new JLabel("R$ 250,00");
+		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblNewLabel_31, "cell 2 2,alignx center");
+		
+		JComboBox comboBox = new JComboBox();
+		panel_1.add(comboBox, "cell 3 2,growx");
+		
+		JLabel lblNewLabel_32 = new JLabel("");
+		lblNewLabel_32.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
+		panel_1.add(lblNewLabel_32, "cell 5 2,alignx center");
+		
+		JPanel panel_2 = new JPanel();
+		PainelPrincipal.add(panel_2, "cell 0 1,grow");
+		panel_2.setLayout(new MigLayout("", "[][750px][200px][200px][][]", "[][][]"));
+		
+		JLabel lblNewLabel_24 = new JLabel("");
+		lblNewLabel_24.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Fotos/Suite.png")));
+		panel_2.add(lblNewLabel_24, "cell 0 0");
+		
+		JLabel lblNewLabel_26_1 = new JLabel("Quarto Casal");
+		lblNewLabel_26_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_2.add(lblNewLabel_26_1, "cell 1 0,aligny top");
+		
+		JLabel lblNewLabel_28_1 = new JLabel("Preço Diária");
+		lblNewLabel_28_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_2.add(lblNewLabel_28_1, "cell 2 0,alignx center");
+		
+		JLabel lblNewLabel_30_1 = new JLabel("Quantidade");
+		lblNewLabel_30_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_2.add(lblNewLabel_30_1, "cell 3 0,alignx center");
+		
+		JLabel lblNewLabel_27_1 = new JLabel("Detalhes: 1 cama de solteiro, wifi disponpível, ar condicionado, banheira e televisão.");
+		lblNewLabel_27_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblNewLabel_27_1, "cell 1 2");
+		
+		JLabel lblNewLabel_31_1 = new JLabel("R$ 350,00");
+		lblNewLabel_31_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_2.add(lblNewLabel_31_1, "cell 2 2,alignx center");
+		
+		JComboBox comboBox_1 = new JComboBox();
+		panel_2.add(comboBox_1, "cell 3 2,growx");
+		
+		JLabel lblNewLabel_32_1 = new JLabel("");
+		lblNewLabel_32_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
+		panel_2.add(lblNewLabel_32_1, "cell 5 2,alignx center");
+		
+		JPanel panel_3 = new JPanel();
+		PainelPrincipal.add(panel_3, "cell 0 2,grow");
+		panel_3.setLayout(new MigLayout("", "[][750px][200px][200px][][]", "[][][]"));
+		
+		JLabel lblNewLabel_25 = new JLabel("");
+		lblNewLabel_25.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Fotos/CamaDupla.png")));
+		panel_3.add(lblNewLabel_25, "cell 0 0");
+		
+		JLabel lblNewLabel_26_1_1 = new JLabel("Quarto Casal");
+		lblNewLabel_26_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_3.add(lblNewLabel_26_1_1, "cell 1 0,aligny top");
+		
+		JLabel lblNewLabel_28_1_1 = new JLabel("Preço Diária");
+		lblNewLabel_28_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_3.add(lblNewLabel_28_1_1, "cell 2 0,alignx center");
+		
+		JLabel lblNewLabel_30_1_1 = new JLabel("Quantidade");
+		lblNewLabel_30_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_3.add(lblNewLabel_30_1_1, "cell 3 0,alignx center");
+		
+		JLabel lblNewLabel_27_1_1 = new JLabel("Detalhes: 1 cama de solteiro, wifi disponpível, ar condicionado, banheira e televisão.");
+		lblNewLabel_27_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_3.add(lblNewLabel_27_1_1, "cell 1 2");
+		
+		JLabel lblNewLabel_31_1_1 = new JLabel("R$ 450,00");
+		lblNewLabel_31_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_3.add(lblNewLabel_31_1_1, "cell 2 2,alignx center");
+		
+		JComboBox comboBox_1_1 = new JComboBox();
+		panel_3.add(comboBox_1_1, "cell 3 2,growx");
+		
+		JLabel lblNewLabel_32_1_1 = new JLabel("");
+		lblNewLabel_32_1_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
+		panel_3.add(lblNewLabel_32_1_1, "cell 5 2");
 	}
 
 }
