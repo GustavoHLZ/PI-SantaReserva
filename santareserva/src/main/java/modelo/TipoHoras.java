@@ -2,7 +2,7 @@ package modelo;
 
 public enum TipoHoras {
 
-	uma_hora(1, "1 hora"), duas_horas(2, "2 horas"), tres_horas(3, "3 horas");
+	uma_hora(1, "1"), duas_horas(2, "2"), tres_horas(3, "3");
 
 	private int num;
 	private String desc;
