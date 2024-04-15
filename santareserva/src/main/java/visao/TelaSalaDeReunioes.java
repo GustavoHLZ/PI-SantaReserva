@@ -1,25 +1,27 @@
 package visao;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
-import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
+import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class TelaSalaDeReunioes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel PainelGeral;
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -41,188 +43,321 @@ public class TelaSalaDeReunioes extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaSalaDeReunioes() {
-		setTitle("Sala de Reuniões");
+		setTitle("Sala De Reunioes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
-		PainelGeral = new JPanel();
-		PainelGeral.setBackground(new Color(255, 255, 255));
-		PainelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(228, 228, 228));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(PainelGeral);
-		PainelGeral.setLayout(new MigLayout("", "[][grow][][][][][][][][][][grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", "[][][][][][grow][grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]"));
+		setContentPane(contentPane);
+		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][grow][grow]"));
 		
 		JPanel PainelTopo = new JPanel();
 		PainelTopo.setBackground(new Color(119, 165, 175));
-		PainelGeral.add(PainelTopo, "cell 0 0 66 5,grow");
-		PainelTopo.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][grow][grow][][]", "[grow]"));
-		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/LogoAPP.png")));
-		PainelTopo.add(lblNewLabel_2, "cell 0 0");
+		contentPane.add(PainelTopo, "cell 0 0 2 1,grow");
+		PainelTopo.setLayout(new MigLayout("", "[1800px][]", "[]"));
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeUser.png")));
-		PainelTopo.add(lblNewLabel, "cell 56 0");
+		lblNewLabel.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/LogoAPP.png")));
+		PainelTopo.add(lblNewLabel, "cell 0 0");
 		
-		JPanel PainelIcones = new JPanel();
-		PainelIcones.setBackground(new Color(239, 239, 239));
-		PainelGeral.add(PainelIcones, "cell 1 5 9 31,grow");
-		PainelIcones.setLayout(new MigLayout("", "[][grow]", "[grow][][grow][][grow][][grow][][grow][][grow][][grow][][grow][][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][]"));
-		
-		JPanel panel_9 = new JPanel();
-		PainelIcones.add(panel_9, "cell 1 0,grow");
-		
-		JLabel lblImagemHome = new JLabel("");
-		lblImagemHome.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeHome.png")));
-		PainelIcones.add(lblImagemHome, "cell 0 1");
-		
-		JLabel lblHome = new JLabel("Home");
-		lblHome.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblHome, "cell 1 1");
-		
-		JPanel panel_8 = new JPanel();
-		PainelIcones.add(panel_8, "cell 1 2,grow");
-		
-		JLabel lblImagemPerfil = new JLabel("");
-		lblImagemPerfil.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblImagemPerfil.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblImagemPerfil.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconePerfil.png")));
-		PainelIcones.add(lblImagemPerfil, "cell 0 3");
-		
-		JLabel lblNewLabel_1 = new JLabel("Perfil");
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil();
-				c.setVisible(true);
-				dispose();
-			}
-		});
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_1, "cell 1 3");
-		
-		JPanel panel_10 = new JPanel();
-		PainelIcones.add(panel_10, "cell 1 4,grow");
-		
-		JLabel lblImagemReserva = new JLabel("");
-		lblImagemReserva.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeReserva.png")));
-		PainelIcones.add(lblImagemReserva, "cell 0 5");
-		
-		JLabel lblReserva = new JLabel("Reserva");
-		lblReserva.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblReserva, "cell 1 5");
-		
-		JPanel panel_7 = new JPanel();
-		PainelIcones.add(panel_7, "cell 1 6,grow");
-		
-		JLabel lblImagemSalaReunioes = new JLabel("");
-		lblImagemSalaReunioes.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeSalaReunioes.png")));
-		PainelIcones.add(lblImagemSalaReunioes, "cell 0 7");
-		
-		JLabel lblSalaReunioes = new JLabel("Sala de Reuniões");
-		lblSalaReunioes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblSalaReunioes, "cell 1 7");
-		
-		JPanel panel_6 = new JPanel();
-		PainelIcones.add(panel_6, "cell 1 8,grow");
-		
-		JLabel lblImagemComputador = new JLabel("");
-		lblImagemComputador.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeComputadores.png")));
-		PainelIcones.add(lblImagemComputador, "cell 0 9");
-		
-		JLabel lblComputadores = new JLabel("Computadores");
-		lblComputadores.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblComputadores, "cell 1 9");
-		
-		JPanel panel_5 = new JPanel();
-		PainelIcones.add(panel_5, "cell 1 10,grow");
-		
-		JLabel lblImagemQuarto = new JLabel("");
-		lblImagemQuarto.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeQuartos.png")));
-		PainelIcones.add(lblImagemQuarto, "cell 0 11");
-		
-		JLabel lblQuartos = new JLabel("Quartos");
-		lblQuartos.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblQuartos, "cell 1 11");
+		JLabel lblNewLabel_19 = new JLabel("");
+		lblNewLabel_19.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeUser.png")));
+		PainelTopo.add(lblNewLabel_19, "cell 1 0");
 		
 		JPanel panel_4 = new JPanel();
-		PainelIcones.add(panel_4, "cell 1 12,grow");
-		
-		JLabel lblImagemAvalie = new JLabel("");
-		lblImagemAvalie.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeAvalie.png")));
-		PainelIcones.add(lblImagemAvalie, "cell 0 13");
-		
-		JLabel lblAvalie = new JLabel("Avalie-nos");
-		lblAvalie.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblAvalie, "cell 1 13");
-		
-		JPanel panel_3 = new JPanel();
-		PainelIcones.add(panel_3, "cell 1 14,grow");
-		
-		JLabel lblImagemNossasInfo = new JLabel("");
-		lblImagemNossasInfo.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeInformacoes.png")));
-		PainelIcones.add(lblImagemNossasInfo, "cell 0 15");
-		
-		JLabel lblNossasInfo = new JLabel("Nossas Informações");
-		lblNossasInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNossasInfo, "cell 1 15");
-		
-		JPanel panel_2 = new JPanel();
-		PainelIcones.add(panel_2, "cell 1 16,grow");
-		
-		JPanel panel_11 = new JPanel();
-		PainelIcones.add(panel_11, "cell 1 17,grow");
-		
-		JPanel panel_12 = new JPanel();
-		PainelIcones.add(panel_12, "cell 1 18,grow");
-		
-		JPanel panel_13 = new JPanel();
-		PainelIcones.add(panel_13, "cell 1 19,grow");
+		contentPane.add(panel_4, "cell 0 1,grow");
 		
 		JPanel panel = new JPanel();
-		PainelIcones.add(panel, "cell 1 20,grow");
+		contentPane.add(panel, "cell 1 1,grow");
+		panel.setLayout(new MigLayout("", "[290px][1070px][144px]", "[58px]"));
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/BackgroundsPI/Group 26 quantidade.png")));
+		panel.add(lblNewLabel_20, "cell 0 0,alignx left,aligny top");
+		
+		JLabel lblNewLabel_22 = new JLabel("");
+		lblNewLabel_22.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/BackgroundsPI/Group 26 quantidade.png")));
+		panel.add(lblNewLabel_22, "flowx,cell 1 0,alignx left,aligny top");
+		
+		JLabel lblNewLabel_23 = new JLabel("");
+		lblNewLabel_23.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_23.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Busca.png")));
+		panel.add(lblNewLabel_23, "cell 2 0,alignx left,aligny center");
+		
+		JPanel PainelIcones = new JPanel();
+		contentPane.add(PainelIcones, "cell 0 2,grow");
+		PainelIcones.setLayout(new MigLayout("", "[][]", "[][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][][300px][][][][][][][][][]"));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeHome.png")));
+		PainelIcones.add(lblNewLabel_1, "cell 0 1");
+		
+		JLabel lblNewLabel_2 = new JLabel("Home");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaHome c = new TelaHome();
+				c.setVisible(true);
+				dispose();
+		
+			}
+		});
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_2, "cell 1 1");
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconePerfil.png")));
+		PainelIcones.add(lblNewLabel_3, "cell 0 3");
+		
+		JLabel lblNewLabel_4 = new JLabel("Perfil");
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_4, "cell 1 3");
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeReserva.png")));
+		PainelIcones.add(lblNewLabel_11, "cell 0 5");
+		
+		JLabel lblNewLabel_5 = new JLabel("Reserva");
+		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_5, "cell 1 5");
+		
+		JLabel lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeSalaReunioes.png")));
+		PainelIcones.add(lblNewLabel_12, "cell 0 7");
+		
+		JLabel lblNewLabel_6 = new JLabel("Sala de Reuniões");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_6, "cell 1 7");
+		
+		JLabel lblNewLabel_13 = new JLabel("");
+		lblNewLabel_13.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeComputadores.png")));
+		PainelIcones.add(lblNewLabel_13, "cell 0 9");
+		
+		JLabel lblNewLabel_7 = new JLabel("Computadores");
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_7, "cell 1 9");
+		
+		JLabel lblNewLabel_14 = new JLabel("");
+		lblNewLabel_14.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeQuartos.png")));
+		PainelIcones.add(lblNewLabel_14, "cell 0 11");
+		
+		JLabel lblNewLabel_8 = new JLabel("Quartos");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaQuartos c = new TelaQuartos();
+				c.setVisible(true);
+				dispose();
+				
+			}
+		});
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_8, "cell 1 11");
+		
+		JLabel lblNewLabel_15 = new JLabel("");
+		lblNewLabel_15.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeAvalie.png")));
+		PainelIcones.add(lblNewLabel_15, "cell 0 13");
+		
+		JLabel lblNewLabel_9 = new JLabel("Avalie-nos");
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_9, "cell 1 13");
+		
+		JLabel lblNewLabel_16 = new JLabel("");
+		lblNewLabel_16.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeInformacoes.png")));
+		PainelIcones.add(lblNewLabel_16, "cell 0 15");
+		
+		JLabel lblNewLabel_10 = new JLabel("Nossas Informações");
+		lblNewLabel_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_10, "cell 1 15");
+		
+		JLabel lblNewLabel_18 = new JLabel("");
+		lblNewLabel_18.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeConfiguracoes.png")));
+		PainelIcones.add(lblNewLabel_18, "cell 0 25");
+		
+		JLabel lblNewLabel_17 = new JLabel("Configurações");
+		lblNewLabel_17.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+			}
+		});
+		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_17, "cell 1 25");
+		
+		JPanel PainelPrincipal = new JPanel();
+		contentPane.add(PainelPrincipal, "cell 1 2,grow");
+		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
 		
 		JPanel panel_1 = new JPanel();
-		PainelIcones.add(panel_1, "cell 1 21,grow");
+		panel_1.setPreferredSize(new Dimension(100, 50));
+		PainelPrincipal.add(panel_1, "cell 0 0,grow");
+		panel_1.setLayout(new MigLayout("", "[][750px][200px][200px][][100px]", "[][][][]"));
 		
-		JPanel panel_14 = new JPanel();
-		PainelIcones.add(panel_14, "cell 1 22,grow");
+		JLabel lblNewLabel_21 = new JLabel("");
+		lblNewLabel_21.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
+		panel_1.add(lblNewLabel_21, "cell 0 0");
 		
-		JPanel panel_15 = new JPanel();
-		PainelIcones.add(panel_15, "cell 1 23,grow");
+		JLabel lblNewLabel_26 = new JLabel("Sala de Reunião");
+		lblNewLabel_26.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_26, "cell 1 0,aligny top");
 		
-		JPanel panel_16 = new JPanel();
-		PainelIcones.add(panel_16, "cell 1 24,grow");
+		JLabel lblNewLabel_28 = new JLabel("Preço Hora");
+		lblNewLabel_28.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblNewLabel_28, "cell 2 0,alignx center");
 		
-		JPanel panel_17 = new JPanel();
-		PainelIcones.add(panel_17, "cell 1 25,grow");
+		JLabel lblNewLabel_30 = new JLabel("Quantidade");
+		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblNewLabel_30, "cell 3 0,alignx center");
 		
-		JPanel panel_18 = new JPanel();
-		PainelIcones.add(panel_18, "cell 1 26,grow");
+		JLabel lblNewLabel_29 = new JLabel("");
+		panel_1.add(lblNewLabel_29, "cell 1 1");
 		
-		JPanel panel_19 = new JPanel();
-		PainelIcones.add(panel_19, "cell 1 27,grow");
+		JLabel lblNewLabel_27 = new JLabel("Detalhes: 4 Cadeira, Mesa e Televisão.");
+		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_1.add(lblNewLabel_27, "cell 1 2");
 		
-		JPanel panel_20 = new JPanel();
-		PainelIcones.add(panel_20, "cell 1 28,grow");
+		JLabel lblNewLabel_31 = new JLabel("R$ 35,00");
+		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblNewLabel_31, "cell 2 2,alignx center");
 		
-		JLabel lblImagemConfig = new JLabel("");
-		lblImagemConfig.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Icones/IconeConfiguracoes.png")));
-		PainelIcones.add(lblImagemConfig, "cell 0 29");
+		JComboBox comboBox = new JComboBox();
+		panel_1.add(comboBox, "cell 3 2,growx");
 		
-		JLabel lblConfiguracoes = new JLabel("Configurações");
-		lblConfiguracoes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblConfiguracoes, "cell 1 29");
+		JLabel lblNewLabel_32 = new JLabel("");
+		lblNewLabel_32.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//Reservar1//
+			}
+			
+		});
+		lblNewLabel_32.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
+		panel_1.add(lblNewLabel_32, "cell 5 2,alignx center");
 		
-		JPanel PainelSalaDeReunioes = new JPanel();
-		PainelSalaDeReunioes.setBackground(new Color(239, 239, 239));
-		PainelGeral.add(PainelSalaDeReunioes, "cell 11 6 55 30,grow");
-		PainelSalaDeReunioes.setLayout(new MigLayout("", "[grow]", "[grow]"));
+		JPanel panel_2 = new JPanel();
+		PainelPrincipal.add(panel_2, "cell 0 1,grow");
+		panel_2.setLayout(new MigLayout("", "[][750px][200px][200px][][]", "[][][]"));
 		
-		JPanel panel_21 = new JPanel();
-		PainelSalaDeReunioes.add(panel_21, "cell 0 0");
+		JLabel lblNewLabel_24 = new JLabel("");
+		lblNewLabel_24.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
+		panel_2.add(lblNewLabel_24, "cell 0 0");
 		
+		JLabel lblNewLabel_26_1 = new JLabel("Sala de Reunião");
+		lblNewLabel_26_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_2.add(lblNewLabel_26_1, "cell 1 0,aligny top");
 		
+		JLabel lblNewLabel_28_1 = new JLabel("Preço Hora");
+		lblNewLabel_28_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_2.add(lblNewLabel_28_1, "cell 2 0,alignx center");
+		
+		JLabel lblNewLabel_30_1 = new JLabel("Quantidade");
+		lblNewLabel_30_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_2.add(lblNewLabel_30_1, "cell 3 0,alignx center");
+		
+		JLabel lblNewLabel_27_1 = new JLabel("Detalhes: 4 Cadeira, Mesa e Televisão.");
+		lblNewLabel_27_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lblNewLabel_27_1, "cell 1 2");
+		
+		JLabel lblNewLabel_31_1 = new JLabel("R$ 35,00");
+		lblNewLabel_31_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_2.add(lblNewLabel_31_1, "cell 2 2,alignx center");
+		
+		JComboBox comboBox_1 = new JComboBox();
+		panel_2.add(comboBox_1, "cell 3 2,growx");
+		
+		JLabel lblNewLabel_32_1 = new JLabel("");
+		lblNewLabel_32_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//Reservar//
+			}
+		});
+		lblNewLabel_32_1.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
+		panel_2.add(lblNewLabel_32_1, "cell 5 2,alignx center");
+		
+		JPanel panel_3 = new JPanel();
+		PainelPrincipal.add(panel_3, "cell 0 2,grow");
+		panel_3.setLayout(new MigLayout("", "[][750px][200px][200px][][]", "[][][]"));
+		
+		JLabel lblNewLabel_25 = new JLabel("");
+		lblNewLabel_25.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
+		panel_3.add(lblNewLabel_25, "cell 0 0");
+		
+		JLabel lblNewLabel_26_1_1 = new JLabel("Sala de Reunião");
+		lblNewLabel_26_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_3.add(lblNewLabel_26_1_1, "cell 1 0,aligny top");
+		
+		JLabel lblNewLabel_28_1_1 = new JLabel("Preço Hora");
+		lblNewLabel_28_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_3.add(lblNewLabel_28_1_1, "cell 2 0,alignx center");
+		
+		JLabel lblNewLabel_30_1_1 = new JLabel("Quantidade");
+		lblNewLabel_30_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_3.add(lblNewLabel_30_1_1, "cell 3 0,alignx center");
+		
+		JLabel lblNewLabel_27_1_1 = new JLabel("Detalhes: 4 Cadeira, Mesa e Televisão.");
+		lblNewLabel_27_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_3.add(lblNewLabel_27_1_1, "cell 1 2");
+		
+		JLabel lblNewLabel_31_1_1 = new JLabel("R$ 35,00");
+		lblNewLabel_31_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_3.add(lblNewLabel_31_1_1, "cell 2 2,alignx center");
+		
+		JComboBox comboBox_1_1 = new JComboBox();
+		panel_3.add(comboBox_1_1, "cell 3 2,growx");
+		
+		JLabel lblNewLabel_32_1_1 = new JLabel("");
+		lblNewLabel_32_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//Reservar//
+			}
+		});
+		lblNewLabel_32_1_1.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
+		panel_3.add(lblNewLabel_32_1_1, "cell 5 2");
 	}
 
 }
