@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
-import modelo.Infologin;
 
 public class HospedesDAO implements IHospedesDAO {
 	
@@ -40,8 +39,8 @@ private static HospedesDAO instancia;
 
 			ps.setString(1, hosp.getNome());
 			ps.setString(2, hosp.getSobrenome());
-			ps.setDate(3, hosp.getNascimento());
-			ps.setInt(4, hosp.getTelefone());
+			ps.setDate(3, java.sql.Date.valueOf(hosp.getNascimento()));
+			ps.setString(4, hosp.getTelefone());
 			// puxa o objeto de Infologin em hospede e coloca seu id na chave estrangeira
 			ps.setInt(5, hosp.getLogin().getIdUsuario());
 		
@@ -80,17 +79,17 @@ private static HospedesDAO instancia;
 				String NomeHospede = rs.getString("nome");
 				String sobrenomehospede = rs.getString("sobrenome");
 				Date nascimentohospede = rs.getDate("nascimento");
-				Integer telefonehospede = rs.getInt("telefone");
+				String telefonehospede = rs.getString("telefone");
 				String emailhospede = rs.getString("email");
 				String senhahospede = rs.getString("senha");
 				
 				hosp.setIdHospede(0);
 				hosp.setNome(NomeHospede);
 				hosp.setSobrenome(sobrenomehospede);
-				hosp.setNascimento(nascimentohospede);
+//				hosp.setNascimento(nascimentohospede);
 				hosp.setTelefone(telefonehospede);
-				hosp.setEmail(emailhospede);
-				hosp.setSenha(senhahospede);
+//				hosp.setEmail(emailhospede);
+//				hosp.setSenha(senhahospede);
 				
 				hospedes.add(hosp);
 				
@@ -119,10 +118,10 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 			
 			ps.setString(1, hosp.getNome());
 			ps.setString(2, hosp.getSobrenome());
-			ps.setDate(3, hosp.getNascimento());
-			ps.setInt(4, hosp.getTelefone());
-			ps.setString(5, hosp.getEmail());
-			ps.setString(6, hosp.getSenha());
+//			ps.setDate(3, hosp.getNascimento());
+			ps.setString(4, hosp.getTelefone());
+//			ps.setString(5, hosp.getEmail());
+//			ps.setString(6, hosp.getSenha());
 			
 			
 			retorno = ps.executeUpdate();
@@ -188,8 +187,8 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 			int ID = rs.getInt("idHospede");
 			String Email = rs.getString("email");
 			String Senha = rs.getString("senha");
-			login.setEmail(Email);
-			login.setSenha(Senha);
+//			login.setEmail(Email);
+//			login.setSenha(Senha);
 			login.setIdHospede(ID);
 		}
 		} catch(SQLException e) {
