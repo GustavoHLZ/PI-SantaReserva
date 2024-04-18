@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `Hospedes` (
   `nome` VARCHAR(45) NOT NULL,
   `sobrenome` VARCHAR(45) NOT NULL,
   `nascimento` DATE NOT NULL,
-  `telefone` CHAR(14) NOT NULL,
+  `telefone` CHAR(15) NOT NULL,
   `fkidUsuario` INT NOT NULL,
   PRIMARY KEY (`idHospede`),
   CONSTRAINT `fkHospedesInfologin1`
