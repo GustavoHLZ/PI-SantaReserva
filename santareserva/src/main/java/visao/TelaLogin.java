@@ -43,6 +43,9 @@ public class TelaLogin extends JFrame {
 	private JLabel lblNewLabel_2;
 	private Infologin endSelecionado;
 	ArrayList<Infologin> listarInfo_Login;
+	private JTextField testelogin;
+	private JTextField testesenha;
+	private JTextField testeid;
 
 	/**
 	 * Launch the application.
@@ -66,7 +69,7 @@ public class TelaLogin extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(229, 236, 238));
-		panel.setBounds(951, 10, 934, 1019);
+		panel.setBounds(960, 0, 944, 1041);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -177,9 +180,49 @@ public class TelaLogin extends JFrame {
 		lblNewLabel_4.setBounds(372, 631, 210, 14);
 		panel.add(lblNewLabel_4);
 		
-		JLabel lblFotoHotel = new JLabel("");
-		lblFotoHotel.setBounds(-23, 50, 256, 256);
-		panel.add(lblFotoHotel);
+		testeid = new JTextField();
+		testeid.setFont(new Font("Arial", Font.PLAIN, 32));
+		testeid.setColumns(10);
+		testeid.setBounds(319, 687, 335, 30);
+		panel.add(testeid);
+		
+		
+		testelogin = new JTextField();
+		testelogin.setFont(new Font("Arial", Font.PLAIN, 32));
+		testelogin.setColumns(10);
+		testelogin.setBounds(319, 728, 335, 30);
+		panel.add(testelogin);
+		
+		testesenha = new JTextField();
+		testesenha.setFont(new Font("Arial", Font.PLAIN, 32));
+		testesenha.setColumns(10);
+		testesenha.setBounds(319, 769, 335, 30);
+		panel.add(testesenha);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Infologin logNovo = new Infologin();
+				
+				Integer id = Integer.valueOf(testeid.getText());
+				String email = testelogin.getText();
+				String senha = testesenha.getText();
+				
+				
+				InfologinDAO dao = InfologinDAO.getInstancia();
+				
+				Infologin update = dao.atualizarInfologin(email, senha, id);
+				
+
+				
+			}
+		});
+		btnAlterar.setForeground(Color.WHITE);
+		btnAlterar.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnAlterar.setBackground(new Color(119, 165, 175));
+		btnAlterar.setBounds(359, 810, 243, 40);
+		panel.add(btnAlterar);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Fotos/Hotel.png")));
@@ -200,5 +243,4 @@ public class TelaLogin extends JFrame {
 
 		table.setModel(modelo);
 	}
-
 }

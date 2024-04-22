@@ -53,8 +53,8 @@ private static HospedesDAO instancia;
 			con.fecharConexao();
 		}
 
-		//return chavePrimariaGerada;
-		return 0;
+		return chavePrimariaGerada;
+		
 	}
 	
 	public ArrayList<Hospedes> listarHospedes() {

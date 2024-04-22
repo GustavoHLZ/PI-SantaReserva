@@ -6,11 +6,11 @@ import modelo.Infologin;
 
 public interface IInfologinDAO {
 	
-public int InserirInfologin(Infologin end);
+	public int InserirInfologin(Infologin end);
 	
 	public ArrayList<Infologin> listarInfologin();
 	
-	public boolean atualizarInfologin(Infologin end);
+	public Infologin atualizarInfologin(String email, String senha, Integer id);
 	
 	public boolean removerInfologin(Infologin end);
 	
