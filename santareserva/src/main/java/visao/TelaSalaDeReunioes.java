@@ -5,11 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.comboBoxPreco;
+import modelo.TipoHoras;
+import modelo.comboBoxDisponivel;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -69,22 +74,19 @@ public class TelaSalaDeReunioes extends JFrame {
 		JPanel panel_4 = new JPanel();
 		contentPane.add(panel_4, "cell 0 1,grow");
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, "cell 1 1,grow");
-		panel.setLayout(new MigLayout("", "[290px][1070px][144px]", "[58px]"));
+		JPanel PainelFiltro = new JPanel();
+		contentPane.add(PainelFiltro, "cell 1 1,grow");
+		PainelFiltro.setLayout(new MigLayout("", "[250px][250px][144px]", "[][58px]"));
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/BackgroundsPI/Group 26 quantidade.png")));
-		panel.add(lblNewLabel_20, "cell 0 0,alignx left,aligny top");
+		JComboBox comboBoxDisp = new JComboBox();
+		comboBoxDisp.setFont(new Font("Noto Sans", Font.PLAIN, 11));
+		comboBoxDisp.setModel(new DefaultComboBoxModel(comboBoxDisponivel.values()));
+		PainelFiltro.add(comboBoxDisp, "cell 0 0,growx");
 		
-		JLabel lblNewLabel_22 = new JLabel("");
-		lblNewLabel_22.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/BackgroundsPI/Group 26 quantidade.png")));
-		panel.add(lblNewLabel_22, "flowx,cell 1 0,alignx left,aligny top");
-		
-		JLabel lblNewLabel_23 = new JLabel("");
-		lblNewLabel_23.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_23.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Busca.png")));
-		panel.add(lblNewLabel_23, "cell 2 0,alignx left,aligny center");
+		JComboBox comboFiltroPreco = new JComboBox();
+		comboFiltroPreco.setFont(new Font("Noto Sans", Font.PLAIN, 11));
+		comboFiltroPreco.setModel(new DefaultComboBoxModel(comboBoxPreco.values()));
+		PainelFiltro.add(comboFiltroPreco, "cell 1 0,growx");
 		
 		JPanel PainelIcones = new JPanel();
 		contentPane.add(PainelIcones, "cell 0 2,grow");
@@ -237,7 +239,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_21.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
 		panel_1.add(lblNewLabel_21, "cell 0 0");
 		
-		JLabel lblNewLabel_26 = new JLabel("Sala de Reunião");
+		JLabel lblNewLabel_26 = new JLabel("Sala de Reunião 1");
 		lblNewLabel_26.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_26, "cell 1 0,aligny top");
 		
@@ -252,7 +254,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		JLabel lblNewLabel_29 = new JLabel("");
 		panel_1.add(lblNewLabel_29, "cell 1 1");
 		
-		JLabel lblNewLabel_27 = new JLabel("Detalhes: 4 Cadeira, Mesa e Televisão.");
+		JLabel lblNewLabel_27 = new JLabel("Detalhes: 4 Cadeiras, Mesa e Televisão.");
 		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_27, "cell 1 2");
 		
@@ -260,8 +262,12 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_1.add(lblNewLabel_31, "cell 2 2,alignx center");
 		
-		JComboBox comboBox = new JComboBox();
-		panel_1.add(comboBox, "cell 3 2,growx");
+		JComboBox<String> cbHora = new JComboBox<>();
+		for (TipoHoras tipo : TipoHoras.values()) {
+			cbHora.addItem(tipo.getDesc());
+		
+		panel_1.add(cbHora, "cell 3 2,growx");
+		}
 		
 		JLabel lblNewLabel_32 = new JLabel("");
 		lblNewLabel_32.addMouseListener(new MouseAdapter() {
@@ -283,7 +289,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_24.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
 		panel_2.add(lblNewLabel_24, "cell 0 0");
 		
-		JLabel lblNewLabel_26_1 = new JLabel("Sala de Reunião");
+		JLabel lblNewLabel_26_1 = new JLabel("Sala de Reunião 2");
 		lblNewLabel_26_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_2.add(lblNewLabel_26_1, "cell 1 0,aligny top");
 		
@@ -295,7 +301,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_30_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_2.add(lblNewLabel_30_1, "cell 3 0,alignx center");
 		
-		JLabel lblNewLabel_27_1 = new JLabel("Detalhes: 4 Cadeira, Mesa e Televisão.");
+		JLabel lblNewLabel_27_1 = new JLabel("Detalhes: 4 Cadeiras, Mesa e Televisão.");
 		lblNewLabel_27_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_2.add(lblNewLabel_27_1, "cell 1 2");
 		
@@ -303,8 +309,12 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_31_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_2.add(lblNewLabel_31_1, "cell 2 2,alignx center");
 		
-		JComboBox comboBox_1 = new JComboBox();
-		panel_2.add(comboBox_1, "cell 3 2,growx");
+		JComboBox<String> cbHora1 = new JComboBox<>();
+		for (TipoHoras tipo : TipoHoras.values()) {
+			cbHora1.addItem(tipo.getDesc());
+		
+		panel_2.add(cbHora1, "cell 3 2,growx");
+		}
 		
 		JLabel lblNewLabel_32_1 = new JLabel("");
 		lblNewLabel_32_1.addMouseListener(new MouseAdapter() {
@@ -325,7 +335,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_25.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
 		panel_3.add(lblNewLabel_25, "cell 0 0");
 		
-		JLabel lblNewLabel_26_1_1 = new JLabel("Sala de Reunião");
+		JLabel lblNewLabel_26_1_1 = new JLabel("Sala de Reunião 3");
 		lblNewLabel_26_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_3.add(lblNewLabel_26_1_1, "cell 1 0,aligny top");
 		
@@ -337,7 +347,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_30_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_3.add(lblNewLabel_30_1_1, "cell 3 0,alignx center");
 		
-		JLabel lblNewLabel_27_1_1 = new JLabel("Detalhes: 4 Cadeira, Mesa e Televisão.");
+		JLabel lblNewLabel_27_1_1 = new JLabel("Detalhes: 4 Cadeiras, Mesa e Televisão.");
 		lblNewLabel_27_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_3.add(lblNewLabel_27_1_1, "cell 1 2");
 		
@@ -345,8 +355,12 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_31_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_3.add(lblNewLabel_31_1_1, "cell 2 2,alignx center");
 		
-		JComboBox comboBox_1_1 = new JComboBox();
-		panel_3.add(comboBox_1_1, "cell 3 2,growx");
+		JComboBox<String> cbHora2 = new JComboBox<>();
+		for (TipoHoras tipo : TipoHoras.values()) {
+			cbHora2.addItem(tipo.getDesc());
+		
+		panel_3.add(cbHora2, "cell 3 2,growx");
+		}
 		
 		JLabel lblNewLabel_32_1_1 = new JLabel("");
 		lblNewLabel_32_1_1.addMouseListener(new MouseAdapter() {
