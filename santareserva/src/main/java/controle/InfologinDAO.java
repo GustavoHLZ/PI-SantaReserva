@@ -99,21 +99,36 @@ private static InfologinDAO instancia;
 	}
 	
 	
-	public boolean atualizarInfologin(Infologin info) {
-		String SQL = "UPDATE Infologin SET login = ?, senha = ?, WHERE idUsuario = ?";
+	public Infologin atualizarInfologin(String email, String senha, Integer id) {
+		String SQL = "UPDATE Infologin SET email = ?, senha = ? WHERE idUsuario = ?";
+		
+		Infologin login = null;
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
-		int retorno = 0;
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setString(1, info.getLogin());
-			ps.setString(2, info.getSenha());
 			
-			retorno = ps.executeUpdate();
+			ps.setString(1, email);
+			ps.setString(2, senha);
+			ps.setInt(3, id);
+			
+			ps.executeUpdate();
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				login = new Infologin();
+				int idUser = rs.getInt("idUsuario");
+				String Email = rs.getString("email");
+				String Senha = rs.getString("senha");
+				login.setIdUsuario(idUser);
+				login.setLogin(Email);
+				login.setSenha(Senha);
+			}
 			
 			
 		} catch (SQLException e) {
@@ -124,7 +139,7 @@ private static InfologinDAO instancia;
 		}
 		
 		
-		return (retorno == 0 ? false : true);
+		return login;
 	}
 	
 	public boolean removerInfologin(Infologin end) {
