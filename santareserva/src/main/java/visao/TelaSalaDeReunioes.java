@@ -27,6 +27,7 @@ public class TelaSalaDeReunioes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private String valor;
 
 	/**
 	 * Launch the application.
@@ -258,9 +259,9 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(lblNewLabel_27, "cell 1 2");
 		
-		JLabel lblNewLabel_31 = new JLabel("R$ 35,00");
-		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblNewLabel_31, "cell 2 2,alignx center");
+		JLabel lblPrecoHora1 = new JLabel("R$ 35,00");
+		lblPrecoHora1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblPrecoHora1, "cell 2 2,alignx center");
 		
 		JComboBox<String> cbHora = new JComboBox<>();
 		for (TipoHoras tipo : TipoHoras.values()) {
