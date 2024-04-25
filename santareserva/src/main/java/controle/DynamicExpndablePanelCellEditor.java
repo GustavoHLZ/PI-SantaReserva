@@ -1,4 +1,4 @@
-package test;
+package controle;
 
 import java.awt.Component;
 import java.util.ArrayList;
@@ -7,8 +7,14 @@ import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
+import visao.MeuPainel2;
+
 public class DynamicExpndablePanelCellEditor extends AbstractCellEditor implements TableCellEditor {
-    Object value;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	Object value;
     ArrayList<Quarto> dados;
     public DynamicExpndablePanelCellEditor(ArrayList<Quarto> dados) {
 		// TODO Auto-generated constructor stub

@@ -1,4 +1,4 @@
-package test;
+package visao;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
@@ -26,7 +26,7 @@ public class MeuPainel extends JPanel {
 		setBounds(0, 0, 1500, 200);
 		
 		JLabel lblImagemSolteiro = new JLabel("");
-		lblImagemSolteiro.setIcon(new ImageIcon(MeuPainel.class.getResource("/img/Solteiro.png")));
+		lblImagemSolteiro.setIcon(new ImageIcon(MeuPainel.class.getResource("/visao/Fotos/Solteiro.png")));
 		add(lblImagemSolteiro, "cell 0 0");
 		
 		JLabel lblQuartoSolteiro = new JLabel("Quarto Solteiro");
@@ -50,7 +50,7 @@ public class MeuPainel extends JPanel {
 		add(lblPreco, "cell 2 2,alignx center");
 		
 		JLabel lblReservarSolteiro = new JLabel("");
-		lblReservarSolteiro.setIcon(new ImageIcon(MeuPainel.class.getResource("/img/BTN Reserva.png")));
+		lblReservarSolteiro.setIcon(new ImageIcon(MeuPainel.class.getResource("/visao/Botões/BTN Reserva.png")));
 		add(lblReservarSolteiro, "cell 5 2");
 
 	}

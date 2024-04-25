@@ -1,4 +1,4 @@
-package test;
+package controle;
 
 
 import java.awt.BorderLayout;
@@ -16,8 +16,9 @@ public class SistemaTeste {
         var contentPane = new JPanel(new BorderLayout());
         ArrayList<Quarto> dados = new ArrayList<Quarto>();
 
+		
         Quarto q1 = new Quarto();
-        q1.preco = "1111";
+        q1.preco = "112831283182318312";
         q1.quantidade="222";
         q1.tipo = "Solteiro";
         dados.add(q1);
@@ -27,6 +28,12 @@ public class SistemaTeste {
         q2.quantidade="quantidade 5555";
         q2.tipo = "Casal";
         dados.add(q2);
+        
+        Quarto q3 = new Quarto();
+        q3.preco = "34232382323";
+        q3.quantidade="quantidade 55558347834";
+        q3.tipo = "Casal";
+        dados.add(q3);
         
         
         JTable tabela =  new MeuJTable(new MeuTableModel(dados) );

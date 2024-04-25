@@ -1,4 +1,4 @@
-package test;
+package visao;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
+import controle.Quarto;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -28,10 +30,10 @@ public class MeuPainel2 extends JPanel {
 		setBounds(0, 0, 1500, 200);
 		
 		JLabel lblImagemCasal = new JLabel("");
-		lblImagemCasal.setIcon(new ImageIcon(MeuPainel2.class.getResource("/img/Suite.png")));
+		lblImagemCasal.setIcon(new ImageIcon(visao.MeuPainel2.class.getResource("/visao/Fotos/Suite.png")));
 		add(lblImagemCasal, "cell 0 0");
 		
-		lblTipoQuarto = new JLabel(quarto.tipo);
+		lblTipoQuarto = new JLabel(quarto.getTipo());
 		lblTipoQuarto.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblTipoQuarto, "cell 1 0");
 		
@@ -39,7 +41,7 @@ public class MeuPainel2 extends JPanel {
 		lblTextPrecoCasal.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		add(lblTextPrecoCasal, "cell 2 0,alignx center");
 		
-		JLabel lblTextQuantidadeCasal = new JLabel(quarto.quantidade);
+		JLabel lblTextQuantidadeCasal = new JLabel(quarto.getQuantidade());
 		lblTextQuantidadeCasal.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		add(lblTextQuantidadeCasal, "cell 3 0,alignx center");
 		
@@ -47,7 +49,7 @@ public class MeuPainel2 extends JPanel {
 		lblDescCasal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblDescCasal, "cell 1 2");
 		
-		JLabel lblPrecoCasal = new JLabel(quarto.preco);
+		JLabel lblPrecoCasal = new JLabel(quarto.getPreco());
 		lblPrecoCasal.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		add(lblPrecoCasal, "cell 2 2,alignx center");
 		
@@ -55,10 +57,10 @@ public class MeuPainel2 extends JPanel {
 		lblReservarCasal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("clicou no quarto tipo "+quarto.tipo);
+				System.out.println("clicou no quarto tipo "+quarto.getTipo());
 			}
 		});
-		lblReservarCasal.setIcon(new ImageIcon(MeuPainel.class.getResource("/img/BTN Reserva.png")));
+		lblReservarCasal.setIcon(new ImageIcon(MeuPainel2.class.getResource("/visao/Botões/BTN Reserva.png")));
 		add(lblReservarCasal, "cell 5 2");
 	}
 	

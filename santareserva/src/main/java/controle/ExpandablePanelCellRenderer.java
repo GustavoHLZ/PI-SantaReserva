@@ -1,10 +1,12 @@
-package test;
+package controle;
 
 import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
+
+import visao.MeuPainel2;
 
 public class ExpandablePanelCellRenderer implements TableCellRenderer {
    // private final MeuPainel2 expandablePanelRenderComponent = new MeuPainel2("1");

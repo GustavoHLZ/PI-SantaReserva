@@ -1,8 +1,13 @@
-package test;
+package controle;
 
 import javax.swing.JTable;
 public class MeuJTable extends JTable {
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public MeuJTable(MeuTableModel meuTableModel) {
 		super(meuTableModel);
