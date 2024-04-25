@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
+import modelo.Infologin;
 
 public class HospedesDAO implements IHospedesDAO {
 	
@@ -173,7 +174,7 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 		
 		
 		Hospedes login = null;
-		String SQL = "SELECT * FROM Hospedes WHERE email = ? AND senha = ?";
+		String SQL = "SELECT * FROM Hospedes Inner Join Infologin ON Hospedes.fkidUsuario = infologin.idUsuario WHERE infologin.email = ? AND infologin.senha = ?";
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
@@ -181,7 +182,7 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 		PreparedStatement ps = conBD.prepareStatement(SQL);
 		ps.setString(1,email);
 		ps.setString(2, senha);
-		
+		System.out.println(ps);
 		ResultSet rs = ps.executeQuery();
 		
 		if (rs.next()) {
@@ -199,7 +200,11 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 			con.fecharConexao();
 		}
 		
+		InfologinDAO loginDAO = InfologinDAO.getInstancia();
 		
+		Infologin info = loginDAO.buscarInfologin(email, senha);
+		
+		login.setLogin(info);
 		
 		return login;
 	}

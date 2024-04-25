@@ -43,19 +43,6 @@ public class TelaCadastro extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastro frame = new TelaCadastro();
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -86,8 +73,7 @@ public class TelaCadastro extends JFrame {
 
 		JPanel PainelCadastro = new JPanel();
 		Tela.add(PainelCadastro, "flowx,cell 15 0 1 6,alignx center,growy");
-		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]",
-				"[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][]"));
+		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]", "[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][][][][][][]"));
 
 		JLabel lblRegistro = new JLabel("Registrar-se");
 		lblRegistro.setFont(new Font("Arial", Font.PLAIN, 36));
@@ -288,7 +274,7 @@ public class TelaCadastro extends JFrame {
 				hospede.setNome(nome);
 				hospede.setSobrenome(sobrenome);
 				hospede.setNascimento(nascimento);
-				
+
 				telefone = telefone.replace("(", "");
 				telefone = telefone.replace(")", "");
 				telefone = telefone.replace("-", "");
@@ -329,8 +315,21 @@ public class TelaCadastro extends JFrame {
 		PainelCadastro.add(BTNRegistrar, "cell 0 21");
 
 		JLabel lblJapossui = new JLabel("Já possui registro? Faça o Login");
+		lblJapossui.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				TelaLogin frame = new TelaLogin();
+				frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // maximizado
+				frame.setVisible(true);
+			}
+		});
 		lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelCadastro.add(lblJapossui, "cell 0 22,alignx center,aligny bottom");
+		
+		JLabel lblJapossui_1 = new JLabel("Já possui registro? Faça o Login");
+		lblJapossui_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelCadastro.add(lblJapossui_1, "cell 0 23");
 	}
 
 }

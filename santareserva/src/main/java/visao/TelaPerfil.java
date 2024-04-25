@@ -35,28 +35,14 @@ public class TelaPerfil extends JFrame {
 	private JTextField txtEmail;
 	private JTextField txtVerSenha;
 	private JTextField txtConfSenha;
-	private JTextField txtConfirmDelete;
+	private Hospedes hospedeLogado;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaPerfil frame = new TelaPerfil();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaPerfil() {
+	public TelaPerfil(Hospedes hospede) {
+		hospedeLogado = hospede;
 		setFont(new Font("Arial", Font.PLAIN, 18));
 		setTitle("Perfil");
 		setResizable(false);
@@ -119,6 +105,7 @@ public class TelaPerfil extends JFrame {
 		txtUsuario.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtUsuario, "cell 4 4 3 1,grow");
 		txtUsuario.setColumns(10);
+		txtUsuario.setText(hospedeLogado.getNome() + " " + hospedeLogado.getSobrenome());
 		
 		JLabel lblAltBairro = new JLabel("Alterar Bairro");
 		lblAltBairro.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -137,6 +124,7 @@ public class TelaPerfil extends JFrame {
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtSenha, "cell 4 6 3 1,grow");
 		txtSenha.setColumns(10);
+		txtSenha.setText(hospedeLogado.getLogin().getSenha());
 		
 		JLabel lblAltCidade = new JLabel("Alterar Cidade");
 		lblAltCidade.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -155,29 +143,22 @@ public class TelaPerfil extends JFrame {
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtEmail, "cell 4 8 3 1,grow");
 		txtEmail.setColumns(10);
+		txtEmail.setText(hospedeLogado.getLogin().getSenha());
 		
 		JLabel lblNewLabel_6 = new JLabel("Alterar CEP");
 		lblNewLabel_6.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblNewLabel_6, "cell 2 12 3 1,growy");
-		
-		JLabel lblExcluir = new JLabel("Exclusão de Perfil");
-		lblExcluir.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblExcluir, "cell 6 12,alignx center");
 		
 		txtCep = new JTextField();
 		txtCep.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtCep, "cell 2 13 3 1,grow");
 		txtCep.setColumns(10);
 		
-		txtConfirmDelete = new JTextField();
-		PainelAlteracao.add(txtConfirmDelete, "cell 6 13,grow");
-		txtConfirmDelete.setColumns(10);
-		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String email = txtConfirmDelete.getText();
+				String email = hospedeLogado.getLogin().getLogin();
 				
 				InfologinDAO dao = InfologinDAO.getInstancia();
 				
@@ -185,7 +166,7 @@ public class TelaPerfil extends JFrame {
 				
 			}
 		});
-		PainelAlteracao.add(btnExcluir, "cell 6 14,alignx center");
+		PainelAlteracao.add(btnExcluir, "cell 6 13,grow");
 		
 		JLabel lblNewLabel_7 = new JLabel("Senha");
 		lblNewLabel_7.setFont(new Font("Arial", Font.PLAIN, 18));

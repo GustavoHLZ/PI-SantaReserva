@@ -2,6 +2,8 @@ package modelo;
 
 import java.time.LocalDate;
 
+import controle.InfologinDAO;
+
 public class Hospedes {
 
 	private int idHospede;
