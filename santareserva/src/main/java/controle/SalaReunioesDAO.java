@@ -149,10 +149,5 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 		return null;
 	}
 
-	@Override
-	public int InserirSala_Reunioes(SalaReunioes end) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }
