@@ -156,7 +156,7 @@ public class TelaLogin extends JFrame {
 				
 				if(logins != null) {
 					JOptionPane.showMessageDialog(null,"Usuário Cadastro");
-					TelaHome c = new TelaHome();
+					TelaPerfil c = new TelaPerfil();
 					c.setVisible(true);
 					dispose();
 				} else {
@@ -234,11 +234,11 @@ public class TelaLogin extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Integer id = Integer.valueOf(txtdelete.getText());
+				String email = txtdelete.getText();
 				
 				InfologinDAO dao = InfologinDAO.getInstancia();
 				
-				Infologin deletelog = dao.removerInfologin(id);
+				Infologin deletelog = dao.removerInfologin(email);
 				
 			}
 		});

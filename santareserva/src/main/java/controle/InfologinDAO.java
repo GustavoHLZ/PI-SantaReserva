@@ -142,9 +142,9 @@ private static InfologinDAO instancia;
 		return login;
 	}
 	
-	public Infologin removerInfologin(Integer id) {
+	public Infologin removerInfologin(String email) {
 		
-		String SQL = "DELETE FROM Infologin WHERE idUsuario = ?";
+		String SQL = "DELETE FROM Infologin WHERE email = ?";
 		
 		Infologin login = null;
 		
@@ -155,7 +155,7 @@ private static InfologinDAO instancia;
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, id);
+			ps.setString(1, email);
 			ps.executeUpdate();
 			
 			

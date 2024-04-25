@@ -140,9 +140,11 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 
 	}
 	
-	public boolean removerHospedes(Hospedes end) {
+	public Hospedes removerHospedes(String email) {
 		
-		String SQL = "DELETE FROM Hospedes WHERE idHospede = ?";
+		String SQL = "DELETE FROM Hospedes WHERE nome = ?";
+		
+		Hospedes hospede = null;
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -152,7 +154,7 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getIdHospede());
+			ps.setString(1, email);
 			retorno = ps.executeUpdate();
 			
 			
@@ -163,7 +165,7 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 			con.fecharConexao();
 			}
 	
-		return (retorno == 0 ? false : true);
+		return hospede;
 		
 	}
 	

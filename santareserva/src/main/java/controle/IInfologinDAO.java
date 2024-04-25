@@ -12,7 +12,7 @@ public interface IInfologinDAO {
 	
 	public Infologin atualizarInfologin(String email, String senha, Integer id);
 	
-	public Infologin removerInfologin(Integer id);
+	public Infologin removerInfologin(String email);
 	
     public Infologin buscarInfologin(String email, String senha);
 
