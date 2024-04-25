@@ -14,9 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import modelo.comboBoxDisponivel;
+import modelo.comboBoxOpcaoPagamento;
 import modelo.comboBoxPreco;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 
 public class TelaReservas extends JFrame {
 
@@ -192,7 +195,35 @@ public class TelaReservas extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");
-		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
+		PainelPrincipal.setLayout(new MigLayout("", "[][][][200px:n:200px,grow][][][][][][][][][][100px:n][]", "[][][][100px:n][][][][][][][][100px:n][][][][grow][][][]"));
+		
+		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
+		PainelPrincipal.add(lblReservasRealizadas, "cell 2 4,alignx center,growy");
+		
+		JPanel panel = new JPanel();
+		PainelPrincipal.add(panel, "cell 3 5 1 5,grow");
+		
+		JLabel lblOpcaoPagamento = new JLabel("Escolha outra forma de pagamento");
+		lblOpcaoPagamento.addMouseListener(new MouseAdapter() {
+			@Override
+		
+			public void mousePressed(MouseEvent e) {
+				JComboBox comboBoxOpcaoPagmento = new JComboBox(comboBoxOpcaoPagamento.values());
+				PainelPrincipal.add(comboBoxOpcaoPagmento, "cell 3 11,growx");
+			}
+		});
+		lblOpcaoPagamento.setHorizontalAlignment(SwingConstants.CENTER);
+		PainelPrincipal.add(lblOpcaoPagamento, "cell 3 12");
+		
+		
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Cancelar Reserva.png")));
+		PainelPrincipal.add(lblNewLabel_20, "cell 3 15,grow");
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(84, 113, 119));
+		panel_1.setForeground(new Color(84, 113, 119));
+		PainelPrincipal.add(panel_1, "cell 12 0 1 15,grow");
 	}
-
 }
