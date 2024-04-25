@@ -142,20 +142,21 @@ private static InfologinDAO instancia;
 		return login;
 	}
 	
-	public boolean removerInfologin(Infologin end) {
+	public Infologin removerInfologin(Integer id) {
 		
 		String SQL = "DELETE FROM Infologin WHERE idUsuario = ?";
+		
+		Infologin login = null;
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
-		int retorno = 0;
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getIdUsuario());
-			retorno = ps.executeUpdate();
+			ps.setInt(1, id);
+			ps.executeUpdate();
 			
 			
 		} catch (SQLException e) {
@@ -165,7 +166,7 @@ private static InfologinDAO instancia;
 			con.fecharConexao();
 			}
 	
-		return (retorno == 0 ? false : true);
+		return login;
 	}
 	
 	public Infologin buscarInfologin(String email, String senha) {

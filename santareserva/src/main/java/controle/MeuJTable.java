@@ -1,4 +1,4 @@
-package test;
+package controle;
 
 import javax.swing.JTable;
 public class MeuJTable extends JTable {

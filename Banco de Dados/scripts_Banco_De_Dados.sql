@@ -41,7 +41,10 @@ CREATE TABLE IF NOT EXISTS `hospedes` (
   INDEX `fkHospedesInfologin1` (`fkidUsuario`),
   CONSTRAINT `fkHospedesInfologin1`
     FOREIGN KEY (`fkidUsuario`)
-    REFERENCES `mydb`.`infologin` (`idUsuario`));
+    REFERENCES `infologin` (`idUsuario`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+    );
 
 
 -- -----------------------------------------------------
@@ -56,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `avaliacoes` (
   INDEX `fkAvaliacoesHospedes1` (`fkIDHospede` ASC),
   CONSTRAINT `fkAvaliacoesHospedes1`
     FOREIGN KEY (`fkIDHospede`)
-    REFERENCES `mydb`.`hospedes` (`idHospede`));
+    REFERENCES `hospedes` (`idHospede`));
 
 -- -----------------------------------------------------
 -- Table `computadores`
@@ -114,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `espacos` (
     REFERENCES `mydb`.`quartos` (`idQuarto`),
   CONSTRAINT `fkEspacosSalaReunioes1`
     FOREIGN KEY (`fkidSalaReuniao`)
-    REFERENCES `mydb`.`salareunioes` (`idSala`));
+    REFERENCES `salareunioes` (`idSala`));
 
 
 
@@ -133,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `espacosreservados` (
     REFERENCES `mydb`.`espacos` (`idEspaco`),
   CONSTRAINT `fkEspacoshasHospedesHospedes1`
     FOREIGN KEY (`fkIDHospede`)
-    REFERENCES `mydb`.`hospedes` (`idHospede`));
+    REFERENCES `hospedes` (`idHospede`));
 
 
 
@@ -164,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `servicosconsumidos` (
     REFERENCES `mydb`.`hospedes` (`idHospede`),
   CONSTRAINT `fkServicosConsumidosServicos1`
     FOREIGN KEY (`fkServico`)
-    REFERENCES `mydb`.`servicos` (`idServico`));
+    REFERENCES `servicos` (`idServico`));
 
 insert into Servicos (idServico, pagEfetuado, precoServico, nomeServico) values (101, true, 149.99, 'Frigobar1');
 insert into Servicos (idServico, pagEfetuado, precoServico, nomeServico) values (102, true, 249.99, 'Frigobar2');

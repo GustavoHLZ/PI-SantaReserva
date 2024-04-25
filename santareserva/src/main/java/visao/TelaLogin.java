@@ -46,6 +46,7 @@ public class TelaLogin extends JFrame {
 	private JTextField testelogin;
 	private JTextField testesenha;
 	private JTextField testeid;
+	private JTextField txtdelete;
 
 	/**
 	 * Launch the application.
@@ -203,7 +204,6 @@ public class TelaLogin extends JFrame {
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Infologin logNovo = new Infologin();
 				
 				Integer id = Integer.valueOf(testeid.getText());
 				String email = testelogin.getText();
@@ -223,6 +223,30 @@ public class TelaLogin extends JFrame {
 		btnAlterar.setBackground(new Color(119, 165, 175));
 		btnAlterar.setBounds(359, 810, 243, 40);
 		panel.add(btnAlterar);
+		
+		txtdelete = new JTextField();
+		txtdelete.setFont(new Font("Arial", Font.PLAIN, 32));
+		txtdelete.setColumns(10);
+		txtdelete.setBounds(319, 925, 335, 30);
+		panel.add(txtdelete);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Integer id = Integer.valueOf(txtdelete.getText());
+				
+				InfologinDAO dao = InfologinDAO.getInstancia();
+				
+				Infologin deletelog = dao.removerInfologin(id);
+				
+			}
+		});
+		btnExcluir.setForeground(Color.WHITE);
+		btnExcluir.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnExcluir.setBackground(new Color(119, 165, 175));
+		btnExcluir.setBounds(359, 875, 243, 40);
+		panel.add(btnExcluir);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Fotos/Hotel.png")));

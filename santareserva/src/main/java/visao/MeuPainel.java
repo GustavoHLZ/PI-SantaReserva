@@ -1,4 +1,4 @@
-package test;
+package visao;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;

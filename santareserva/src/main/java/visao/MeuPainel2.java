@@ -1,4 +1,4 @@
-package test;
+package visao;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.Quarto;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
