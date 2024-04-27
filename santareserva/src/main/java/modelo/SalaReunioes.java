@@ -6,7 +6,14 @@ public class SalaReunioes {
 	private Boolean disp;
 	private int temp;
 	private int cap;
+	private float preco;
 	
+	public float getPreco() {
+		return preco;
+	}
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
 	public int getidSala() {
 		return idSala;
 	}

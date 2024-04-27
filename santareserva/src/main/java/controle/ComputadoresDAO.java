@@ -24,7 +24,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	
 	public int inserirComputadores(Computadores comp) {
 	
-		String SQL = "INSERT INTO Computadores (idPC, num, temp) VALUES (?, ?, ?)";
+		String SQL = "INSERT INTO Computadores (idPC, num, temp, preco, disp) VALUES (?, ?, ?, ?, ?)";
 	
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -36,6 +36,8 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			ps.setInt(1, comp.getIdPC());
 			ps.setInt(2, comp.getNum());
 			ps.setInt(3, comp.getTemp());
+			ps.setFloat(4, comp.getPreco());
+			ps.setBoolean(5, comp.getDisp());
 		
 			ps.executeUpdate();
 		
@@ -67,10 +69,14 @@ public class ComputadoresDAO implements IComputadoresDAO {
 				Integer idPC = rs.getInt("idPC");
 				Integer Temp_alugado = rs.getInt("temp");
 				Integer Num_PC = rs.getInt("num");
+				Float Preco = rs.getFloat("preco");
+				Boolean Disp = rs.getBoolean("disp");
 				
 				comp.setIdPC(idPC);
 				comp.setTemp(Temp_alugado);
 				comp.setNum(Num_PC);
+				comp.setPreco(Preco);
+				comp.setDisp(Disp);
 				
 				computadores.add(comp);
 		

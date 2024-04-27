@@ -5,7 +5,21 @@ public class Computadores {
 	private int idPC;
 	private int num;
 	private int temp;
+	private float preco;
+	private Boolean disp;
 	
+	public float getPreco() {
+		return preco;
+	}
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
+	public Boolean getDisp() {
+		return disp;
+	}
+	public void setDisp(Boolean disp) {
+		this.disp = disp;
+	}
 	public int getIdPC() {
 		return idPC;
 	}

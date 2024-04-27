@@ -5,8 +5,18 @@ public class Quartos {
 	private int idQuarto;
 	private String tipo;
 	private Float preco;
-	private Boolean dispo;
+	private Boolean disp;
 	private int cap;
+	private int temp;
+	
+	
+	
+	public int getTemp() {
+		return temp;
+	}
+	public void setTemp(int temp) {
+		this.temp = temp;
+	}
 	public int getidQuarto() {
 		return idQuarto;
 	}
@@ -25,11 +35,11 @@ public class Quartos {
 	public void setpreco(Float preco) {
 		preco = preco;
 	}
-	public Boolean getdispo() {
-		return dispo;
+	public Boolean getdisp() {
+		return disp;
 	}
-	public void setdispo(Boolean dispo) {
-		dispo = dispo;
+	public void setdispo(Boolean disp) {
+		disp = disp;
 	}
 	public int getcap() {
 		return cap;
