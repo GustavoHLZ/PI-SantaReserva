@@ -60,7 +60,7 @@ public class TelaQuartos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaQuartos(TelaQuartos quarto) {
+	public TelaQuartos() {
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
