@@ -7,13 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-<<<<<<< HEAD
-import modelo.Hospedes;
-=======
 import controle.Quarto;
 import controle.QuartosDAO;
 import modelo.Quartos;
->>>>>>> JtableQuarto
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
 import modelo.comboBoxPreco;
@@ -34,16 +30,11 @@ import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JScrollPane;
-<<<<<<< HEAD
-
-=======
 import javax.swing.JTable;
 import javax.swing.JButton;
->>>>>>> JtableQuarto
 
 public class TelaQuartos extends JFrame {
 
-	private ArrayList<Quartos> listaQuarto;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
@@ -70,9 +61,6 @@ public class TelaQuartos extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaQuartos() {
-		
-		ArrayList<Quartos> listaQuarto = new ArrayList<Quartos>();
-		
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
@@ -213,17 +201,11 @@ public class TelaQuartos extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");
-<<<<<<< HEAD
-		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow]"));
-=======
 		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][]"));
->>>>>>> JtableQuarto
 		
 		JScrollPane scrollPane = new JScrollPane();
 		PainelPrincipal.add(scrollPane, "cell 0 0,grow");
 		
-<<<<<<< HEAD
-=======
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -241,7 +223,6 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
 		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
 		
->>>>>>> JtableQuarto
 	}
 		protected void atualizarJTable() {
 		    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Preço", "Tipo", "Quantidade"});
