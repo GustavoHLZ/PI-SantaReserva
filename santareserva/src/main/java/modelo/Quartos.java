@@ -8,44 +8,46 @@ public class Quartos {
 	private Boolean disp;
 	private int cap;
 	private int temp;
-	
-	
-	
+	public int getIdQuarto() {
+		return idQuarto;
+	}
+	public void setIdQuarto(int idQuarto) {
+		this.idQuarto = idQuarto;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public Float getPreco() {
+		return preco;
+	}
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
+	public Boolean getDisp() {
+		return disp;
+	}
+	public void setDisp(Boolean disp) {
+		this.disp = disp;
+	}
+	public int getCap() {
+		return cap;
+	}
+	public void setCap(int cap) {
+		this.cap = cap;
+	}
 	public int getTemp() {
 		return temp;
 	}
 	public void setTemp(int temp) {
 		this.temp = temp;
 	}
-	public int getidQuarto() {
-		return idQuarto;
-	}
-	public void setidQuarto (int idQuarto) {
-		idQuarto = idQuarto;
-	}
-	public String gettipo() {
-		return tipo;
-	}
-	public void settipo(String tipo) {
-		tipo = tipo;
-	}
-	public Float getpreco() {
-		return preco;
-	}
-	public void setpreco(Float preco) {
-		preco = preco;
-	}
-	public Boolean getdisp() {
-		return disp;
-	}
-	public void setdispo(Boolean disp) {
-		disp = disp;
-	}
-	public int getcap() {
-		return cap;
-	}
-	public void setcap(int cap) {
-		cap = cap;
-	}
+	
+	
+	
+	
+	
 
 }

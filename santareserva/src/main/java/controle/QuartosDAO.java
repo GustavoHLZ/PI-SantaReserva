@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import modelo.Infologin;
+
 import modelo.Quartos;
-import modelo.Quartos;
+
 
 public class QuartosDAO implements IQuartosDAO {
 	
@@ -34,11 +34,11 @@ public class QuartosDAO implements IQuartosDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, qua.getidQuarto());
-			ps.setString(2, qua.gettipo());
-			ps.setFloat(3, qua.getpreco());
-			ps.setBoolean(4, qua.getdisp());
-			ps.setInt(5, qua.getcap());
+			ps.setInt(1, qua.getIdQuarto());
+			ps.setString(2, qua.getTipo());
+			ps.setFloat(3, qua.getPreco());
+			ps.setBoolean(4, qua.getDisp());
+			ps.setInt(5, qua.getCap());
 			ps.setInt(6, qua.getTemp());
 			
 			return ps.executeUpdate();
@@ -72,15 +72,15 @@ public class QuartosDAO implements IQuartosDAO {
 				Integer idQuarto = rs.getInt("idQuarto");
 				String tipo = rs.getString("tipo");
 				Float preco = rs.getFloat("preco");
-				Boolean dispo = rs.getBoolean("dispo");
+				Boolean disp = rs.getBoolean("disp");
 				Integer cap = rs.getInt("cap");
 				Integer temp = rs.getInt("temp");
 				
-				qua.setidQuarto(idQuarto);
-				qua.settipo(tipo);
-				qua.setpreco(preco);
-				qua.setdispo(dispo);
-				qua.setcap(cap);
+				qua.setIdQuarto(idQuarto);
+				qua.setTipo(tipo);
+				qua.setPreco(preco);
+				qua.setDisp(disp);
+				qua.setCap(cap);
 				qua.setTemp(temp);
 				
 				quartos.add(qua);
@@ -97,32 +97,30 @@ public class QuartosDAO implements IQuartosDAO {
 	}
 	
 	public boolean atualizarQuartos(Quartos end) {
-		
-		//Comando SQL a ser executado
-		String SQL = "UPDATE Quartos Set Dispo_Quarto = ? WHERE ID_Quarto = ?";
-		
-		// Abre a conexao e cria a "ponte de conexao" com MYSQL
-		Conexao con = Conexao.getInstancia();
-		Connection conBD = con.conectar();
-		
-		int retorno = 0;
-		
-		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
-			
-			ps.setBoolean(1, end.getdisp());
-			ps.setInt(2, end.getidQuarto());
-			
-			retorno = ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-		}
-		
-		return (retorno == 0 ? false : true);
-		
+	    // Comando SQL a ser executado
+	    String SQL = "UPDATE Quartos SET disp = ? WHERE idQuarto = ?";
+
+	    // Abre a conexão e cria a "ponte de conexão" com o MySQL
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+
+	    int retorno = 0;
+
+	    try {
+	        PreparedStatement ps = conBD.prepareStatement(SQL);
+
+	        ps.setBoolean(1, end.getDisp());
+	        ps.setInt(2, end.getIdQuarto());
+
+	        retorno = ps.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+
+	    return (retorno != 0);
 	}
 	
 	public boolean removerQuartos(Quartos end) {
@@ -136,7 +134,7 @@ public class QuartosDAO implements IQuartosDAO {
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getidQuarto());
+			ps.setInt(1, end.getIdQuarto());
 			retorno = ps.executeUpdate();
 			
 			
