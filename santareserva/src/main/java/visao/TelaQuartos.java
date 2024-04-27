@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Hospedes;
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
 import modelo.comboBoxPreco;
@@ -22,11 +23,15 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JScrollPane;
+
 
 public class TelaQuartos extends JFrame {
 
+	private ArrayList<Quartos> listaQuarto;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
@@ -50,6 +55,9 @@ public class TelaQuartos extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaQuartos() {
+		
+		ArrayList<Quartos> listaQuarto = new ArrayList<Quartos>();
+		
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
@@ -200,157 +208,11 @@ public class TelaQuartos extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");
-		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
+		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow]"));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setPreferredSize(new Dimension(100, 50));
-		PainelPrincipal.add(panel_1, "cell 0 0,grow");
-		panel_1.setLayout(new MigLayout("", "[][750px][200px][200px][200px][][100px]", "[][][][]"));
+		JScrollPane scrollPane = new JScrollPane();
+		PainelPrincipal.add(scrollPane, "cell 0 0,grow");
 		
-		JLabel lblNewLabel_21 = new JLabel("");
-		lblNewLabel_21.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Fotos/Solteiro.png")));
-		panel_1.add(lblNewLabel_21, "cell 0 0");
-		
-		JLabel lblNewLabel_26 = new JLabel("Quarto Solteiro");
-		lblNewLabel_26.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_26, "cell 1 0,aligny top");
-		
-		JLabel lblNewLabel_28 = new JLabel("Preço Diária");
-		lblNewLabel_28.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblNewLabel_28, "cell 2 0,alignx center");
-		
-		JLabel lblNewLabel_30 = new JLabel("Quantidade");
-		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblNewLabel_30, "cell 3 0,alignx center");
-		
-		JLabel lblNewLabel_20 = new JLabel("Disponíveis");
-		lblNewLabel_20.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblNewLabel_20, "cell 4 0,alignx center");
-		
-		JLabel lblNewLabel_29 = new JLabel("");
-		panel_1.add(lblNewLabel_29, "cell 1 1");
-		
-		JLabel lblNewLabel_27 = new JLabel("Detalhes: 1 cama de solteiro, wifi disponpível, ar condicionado, banheira e televisão.");
-		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(lblNewLabel_27, "cell 1 2");
-		
-		JComboBox<String> cbHora = new JComboBox<>();
-		for (TipoHoras tipo : TipoHoras.values()) {
-			cbHora.addItem(tipo.getDesc());
-		
-		panel_1.add(cbHora, "cell 3 2,growx");
-		}
-		
-		JLabel lblNewLabel_31 = new JLabel("R$ 250,00");
-		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblNewLabel_31, "cell 2 2,alignx center");
-		
-		JLabel lblQuantidadeQuartoSolteiro = new JLabel("-");
-		lblQuantidadeQuartoSolteiro.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-			}
-		});
-		panel_1.add(lblQuantidadeQuartoSolteiro, "cell 4 2,alignx center");
-		
-		JLabel lblNewLabel_32 = new JLabel("");
-		lblNewLabel_32.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
-		panel_1.add(lblNewLabel_32, "cell 6 2,alignx center");
-		
-		JPanel panel_2 = new JPanel();
-		PainelPrincipal.add(panel_2, "cell 0 1,grow");
-		panel_2.setLayout(new MigLayout("", "[][750px][200px][200px][200px][][]", "[][][]"));
-		
-		JLabel lblNewLabel_24 = new JLabel("");
-		lblNewLabel_24.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Fotos/Suite.png")));
-		panel_2.add(lblNewLabel_24, "cell 0 0");
-		
-		JLabel lblNewLabel_26_1 = new JLabel("Quarto Casal");
-		lblNewLabel_26_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_2.add(lblNewLabel_26_1, "cell 1 0,aligny top");
-		
-		JLabel lblNewLabel_28_1 = new JLabel("Preço Diária");
-		lblNewLabel_28_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_2.add(lblNewLabel_28_1, "cell 2 0,alignx center");
-		
-		JLabel lblNewLabel_30_1 = new JLabel("Quantidade");
-		lblNewLabel_30_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_2.add(lblNewLabel_30_1, "cell 3 0,alignx center");
-		
-		JLabel lblNewLabel_22 = new JLabel("Dosponíveis");
-		lblNewLabel_22.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_2.add(lblNewLabel_22, "cell 4 0,alignx center");
-		
-		JLabel lblNewLabel_27_1 = new JLabel("Detalhes: 1 cama de casal, wifi disponpível, ar condicionado, banheira e televisão.");
-		lblNewLabel_27_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_27_1, "cell 1 2");
-		
-		JComboBox<String> cbHora2 = new JComboBox<>();
-		for (TipoHoras tipo : TipoHoras.values()) {
-			cbHora2.addItem(tipo.getDesc());
-		panel_2.add(cbHora2, "cell 3 2,growx");
-		}
-		
-		JLabel lblNewLabel_31_1 = new JLabel("R$ 350,00");
-		lblNewLabel_31_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_2.add(lblNewLabel_31_1, "cell 2 2,alignx center");
-		
-		JLabel lblQuantidadeQuartoCasal = new JLabel("-");
-		lblQuantidadeQuartoCasal.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-			}
-		});
-		panel_2.add(lblQuantidadeQuartoCasal, "cell 4 2,alignx center");
-		
-		JLabel lblNewLabel_32_1 = new JLabel("");
-		lblNewLabel_32_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
-		panel_2.add(lblNewLabel_32_1, "cell 6 2,alignx center");
-		
-		JPanel panel_3 = new JPanel();
-		PainelPrincipal.add(panel_3, "cell 0 2,grow");
-		panel_3.setLayout(new MigLayout("", "[][750px][200px][200px][200px][][]", "[][][]"));
-		
-		JLabel lblNewLabel_25 = new JLabel("");
-		lblNewLabel_25.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Fotos/CamaDupla.png")));
-		panel_3.add(lblNewLabel_25, "cell 0 0");
-		
-		JLabel lblNewLabel_26_1_1 = new JLabel("Quarto Casal");
-		lblNewLabel_26_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_3.add(lblNewLabel_26_1_1, "cell 1 0,aligny top");
-		
-		JLabel lblNewLabel_28_1_1 = new JLabel("Preço Diária");
-		lblNewLabel_28_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_3.add(lblNewLabel_28_1_1, "cell 2 0,alignx center");
-		
-		JLabel lblNewLabel_30_1_1 = new JLabel("Quantidade");
-		lblNewLabel_30_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_3.add(lblNewLabel_30_1_1, "cell 3 0,alignx center");
-		
-		JLabel lblNewLabel_23 = new JLabel("Disponíveis");
-		lblNewLabel_23.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_3.add(lblNewLabel_23, "cell 4 0,alignx center");
-		
-		JLabel lblNewLabel_27_1_1 = new JLabel("Detalhes: 2 camas de casal, wifi disponpível, ar condicionado, banheira e televisão.");
-		lblNewLabel_27_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_3.add(lblNewLabel_27_1_1, "cell 1 2");
-		
-		JComboBox<String> cbHora3 = new JComboBox<>();
-		for (TipoHoras tipo : TipoHoras.values()) {
-			cbHora3.addItem(tipo.getDesc());
-		panel_3.add(cbHora3, "cell 3 2,growx");
-		}
-		
-		JLabel lblNewLabel_31_1_1 = new JLabel("R$ 450,00");
-		lblNewLabel_31_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_3.add(lblNewLabel_31_1_1, "cell 2 2,alignx center");
-		
-		JLabel lblQuantidadeQuartoCasalDuplo = new JLabel("-");
-		panel_3.add(lblQuantidadeQuartoCasalDuplo, "cell 4 2,alignx center");
-		
-		JLabel lblNewLabel_32_1_1 = new JLabel("");
-		lblNewLabel_32_1_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
-		panel_3.add(lblNewLabel_32_1_1, "cell 6 2");
 	}
 
 }
