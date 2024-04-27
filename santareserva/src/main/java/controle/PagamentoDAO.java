@@ -8,26 +8,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import modelo.Espacos;
+import modelo.Pagamento;
 
-public class EspacosDAO implements IEspacosDAO {
+public class PagamentoDAO implements IPagamentoDAO{
+	
+	
+	private static PagamentoDAO instancia;
 
-	private static EspacosDAO instancia;
-
-	private EspacosDAO() {
+	private PagamentoDAO() {
 	}
 
-	public static EspacosDAO getInstancia() {
+	public static PagamentoDAO getInstancia() {
 
 		if (instancia == null) {
-			instancia = new EspacosDAO();
+			instancia = new PagamentoDAO();
 		}
 		return instancia;
 	}
+	
 
-	public int InserirEspacos(Espacos esp) {
-		
-		String SQL = "INSERT INTO Espacos (ocupante, checkIn, checkOut, fkidComputador, fkidSalaReuniao, fkidQuartos, fkidHospede, fkidPagamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	@Override
+	public int InserirPagamento(Pagamento pag) {
+
+		String SQL = "INSERT INTO Pagamento (nometitular, numeroCartao, dataValidade, codigoSeguranca, numeroBoleto, numeroPix) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -37,14 +40,13 @@ public class EspacosDAO implements IEspacosDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setInt(1, esp.getOcupante());
-			ps.setDate(2, esp.getCheckIn());
-			ps.setDate(3, esp.getCheckOut());
-			ps.setInt(4, esp.getFkidComputador());
-			ps.setInt(5, esp.getFkidSalaReuniao());
-			ps.setInt(6, esp.getFkidQuartos());
-			ps.setInt(7, esp.getFkidHospede());
-			ps.setInt(8, esp.getFkidPagamento());
+			ps.setString(1, pag.getNometitular());
+			ps.setString(2, pag.getNumeroCartao());
+			ps.setString(3, pag.getDataValidade());
+			ps.setString(4, pag.getCodigoSeguranca());
+			ps.setString(5, pag.getNumeroBoleto());
+			ps.setString(6, pag.getNumeroPix());
+			
 			
 			ps.executeUpdate();
 			
@@ -62,11 +64,12 @@ public class EspacosDAO implements IEspacosDAO {
 		return chavePrimariaGerada;
 	}
 
-	public ArrayList<Espacos> listarEspacos() {
+	@Override
+	public ArrayList<Pagamento> listarPagamento() {
 		
-		ArrayList<Espacos> espacos = new ArrayList<Espacos>();
+		ArrayList<Pagamento> pagamentos = new ArrayList<Pagamento>();
 
-		String SQL = "SELECT * FROM Espacos";
+		String SQL = "SELECT * FROM Pagamento";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -77,19 +80,23 @@ public class EspacosDAO implements IEspacosDAO {
 
 			while (rs.next()) {
 
-				Espacos esp = new Espacos();
+				Pagamento pags = new Pagamento();
 
-				Integer IDEspaco = rs.getInt("idEspaco");
-				Integer OcupanteEspaco = rs.getInt("ocupante");
-				Date CheckIn = rs.getDate("checkIn");
-				Date CheckOut = rs.getDate("checkOut");
+				String nometitular = rs.getString("nometitular");
+				String numeroCartao = rs.getString("numeroCartao");
+				String dataValidade = rs.getString("dataValidade");
+				String codigoSeguranca = rs.getString("codigoSeguranca");
+				String numeroBoleto = rs.getString("numeroBoleto");
+				String numeroPix = rs.getString("numeroPix");
 
-				esp.setIdEspaco(IDEspaco);
-				esp.setOcupante(OcupanteEspaco);
-				esp.setCheckIn(CheckIn);
-				esp.setCheckOut(CheckOut);
+				pags.setNometitular(nometitular);
+				pags.setNumeroCartao(numeroCartao);
+				pags.setDataValidade(dataValidade);
+				pags.setCodigoSeguranca(codigoSeguranca);
+				pags.setNumeroBoleto(numeroBoleto);
+				pags.setNumeroPix(numeroPix);
 
-				espacos.add(esp);
+				pagamentos.add(pags);
 
 			}
 
@@ -99,12 +106,13 @@ public class EspacosDAO implements IEspacosDAO {
 			con.fecharConexao();
 		}
 
-		return espacos;
+		return pagamentos;
 	}
 
-	public boolean atualizarEspacos(Espacos espc) {
-
-		String SQL = "UPDATE Espacos SET ocupante = ?, checkIn = ?, checkOut = ? WHERE idEspaco = ?";
+	@Override
+	public boolean atualizarPagamento(Pagamento end) {
+		
+		String SQL = "UPDATE Pagamento SET nometitular = ? WHERE idPagamento = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -114,9 +122,7 @@ public class EspacosDAO implements IEspacosDAO {
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, espc.getOcupante());
-			ps.setDate(2, espc.getCheckIn());
-			ps.setDate(3, espc.getCheckOut());
+			ps.setInt(1, end.getIdPagamento());
 			
 			
 			retorno = ps.executeUpdate();
@@ -131,12 +137,12 @@ public class EspacosDAO implements IEspacosDAO {
 		
 		
 		return (retorno == 0 ? false : true);
-		
 	}
 
-	public boolean removerEspacos(Espacos end) {
+	@Override
+	public boolean removerPagamento(Pagamento end) {
 		
-		String SQL = "DELETE FROM Espacos WHERE idEspaco = ?";
+		String SQL = "DELETE FROM Pagamento WHERE idPagamento = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -146,7 +152,7 @@ public class EspacosDAO implements IEspacosDAO {
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getIdEspaco());
+			ps.setInt(1, end.getIdPagamento());
 			retorno = ps.executeUpdate();
 			
 			
@@ -160,9 +166,13 @@ public class EspacosDAO implements IEspacosDAO {
 		return (retorno == 0 ? false : true);
 	}
 
-	public Espacos buscarEspacos(Espacos end) {
-
+	@Override
+	public Pagamento buscarPagamento(Pagamento end) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
+	
+	
 }

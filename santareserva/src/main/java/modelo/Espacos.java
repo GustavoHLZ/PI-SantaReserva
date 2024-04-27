@@ -10,7 +10,21 @@ public class Espacos {
 	private int fkidComputador;
 	private int fkidSalaReuniao;
 	private int fkidQuartos;
+	private int fkidHospede;
+	private int fkidPagamento;
 	
+	public int getFkidHospede() {
+		return fkidHospede;
+	}
+	public void setFkidHospede(int fkidHospede) {
+		this.fkidHospede = fkidHospede;
+	}
+	public int getFkidPagamento() {
+		return fkidPagamento;
+	}
+	public void setFkidPagamento(int fkidPagamento) {
+		this.fkidPagamento = fkidPagamento;
+	}
 	public int getIdEspaco() {
 		return idEspaco;
 	}
