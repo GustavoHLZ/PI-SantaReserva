@@ -12,7 +12,7 @@ public interface IHospedesDAO {
 	
 	public boolean atualizarHospedes(Hospedes end);
 	
-	public boolean removerHospedes(Hospedes end);
+	public Hospedes removerHospedes(String email);
 	
     public Hospedes buscarHospedes(String email_hospede,String senha_hospede);
 	

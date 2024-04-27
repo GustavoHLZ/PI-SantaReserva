@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controle.Quarto;
 import net.miginfocom.swing.MigLayout;
 import controle.Quarto;
 
