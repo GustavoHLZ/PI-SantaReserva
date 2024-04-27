@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -31,10 +32,10 @@ public class TelaReservas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtNometitular;
+	private JTextField txtNumeroCartao;
+	private JTextField txtDataValidade;
+	private JTextField txtCodigoSeguranca;
 	private static TelaQuartos quartoalugado;
 	private static TelaSalaDeReunioes salaalugada;
 	private static Computadores computadoralugado;
@@ -200,76 +201,70 @@ public class TelaReservas extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		PainelPrincipal.add(panel_2, "cell 13 0 13 4,grow");
-		panel_2.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][][][][][][][][][][][][][]"));
+		panel_2.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][][][][][][][][][][][][][][][]"));
 		
-		JLabel lblNewLabel_21 = new JLabel("Nome Completo");
+		JLabel lblNewLabel_21 = new JLabel("Nome Titular");
 		lblNewLabel_21.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_21, "cell 0 0");
 		
-		textField = new JTextField();
-		panel_2.add(textField, "cell 0 1,grow");
-		textField.setColumns(10);
+		txtNometitular = new JTextField();
+		panel_2.add(txtNometitular, "cell 0 1,grow");
+		txtNometitular.setColumns(10);
 		
 		JLabel lblNewLabel_22 = new JLabel("Número do Cartão");
 		lblNewLabel_22.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_22, "cell 0 3");
 		
-		textField_1 = new JTextField();
-		panel_2.add(textField_1, "cell 0 4,growx");
-		textField_1.setColumns(10);
+		txtNumeroCartao = new JTextField();
+		panel_2.add(txtNumeroCartao, "cell 0 4,growx");
+		txtNumeroCartao.setColumns(10);
 		
 		JLabel lblNewLabel_23 = new JLabel("Data de Validade");
 		lblNewLabel_23.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_23, "cell 0 6");
 		
-		textField_2 = new JTextField();
-		panel_2.add(textField_2, "cell 0 7,growx");
-		textField_2.setColumns(10);
+		txtDataValidade = new JTextField();
+		panel_2.add(txtDataValidade, "cell 0 7,growx");
+		txtDataValidade.setColumns(10);
 		
-		JLabel lblNewLabel_24 = new JLabel("Códico de Segurança");
+		JLabel lblNewLabel_24 = new JLabel("Código de Segurança");
 		lblNewLabel_24.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_24, "cell 0 9");
 		
-		textField_3 = new JTextField();
-		panel_2.add(textField_3, "cell 0 10,growx");
-		textField_3.setColumns(10);
+		txtCodigoSeguranca = new JTextField();
+		panel_2.add(txtCodigoSeguranca, "cell 0 10,growx");
+		txtCodigoSeguranca.setColumns(10);
 		
 		JLabel lblNewLabel_25 = new JLabel("Total Sala de Reuniões");
 		lblNewLabel_25.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_25, "cell 0 12");
 		
-		//JLabel lblNewLabel_26 = new JLabel("-");
-		//lblNewLabel_26.setText(getName())
-		//lblNewLabel_26.addFocusListener(new FocusAdapter() {
-		//	@Override
-		//	public void focusLost(FocusEvent e) {
-				
-		//		String valor = salaalugada.get
-			
-		//	}
-		//});
-		panel_2.add(lblNewLabel_26, "cell 0 13,alignx center");
+		JLabel lbltotalsalareunioes = new JLabel("-");
+		lbltotalsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lbltotalsalareunioes, "cell 0 13,grow");
+		
+		
 		
 		JLabel lblNewLabel_27 = new JLabel("Total Computadores");
 		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_2.add(lblNewLabel_27, "cell 0 15");
+		panel_2.add(lblNewLabel_27, "cell 0 17");
 		
-		JLabel lblNewLabel_28 = new JLabel("-");
-		panel_2.add(lblNewLabel_28, "cell 0 16,alignx center");
+		JLabel lblcomputadores = new JLabel("-");
+		panel_2.add(lblcomputadores, "cell 0 18,alignx center");
 		
 		JLabel lblNewLabel_29 = new JLabel("Total Quartos");
 		lblNewLabel_29.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_2.add(lblNewLabel_29, "cell 0 18");
+		panel_2.add(lblNewLabel_29, "cell 0 20");
 		
-		JLabel lblNewLabel_30 = new JLabel("-");
-		panel_2.add(lblNewLabel_30, "cell 0 19,alignx center");
+		JLabel lblquartos = new JLabel("-");
+		panel_2.add(lblquartos, "cell 0 21,alignx center");
 		
 		JLabel lblNewLabel_31 = new JLabel("Total à pagar:");
 		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_2.add(lblNewLabel_31, "cell 0 20");
+		panel_2.add(lblNewLabel_31, "cell 0 22");
 		
-		JLabel lblNewLabel_32 = new JLabel("-");
-		panel_2.add(lblNewLabel_32, "cell 0 21,alignx center");
+		JLabel lbltotalpagar = new JLabel("-");
+		panel_2.add(lbltotalpagar, "cell 0 23,alignx center");
 		
 		JLabel lblOpcaoPagamento = new JLabel("Escolha outra forma de pagamento");
 		lblOpcaoPagamento.addMouseListener(new MouseAdapter() {
@@ -293,9 +288,35 @@ public class TelaReservas extends JFrame {
 		JPanel panel_3 = new JPanel();
 		PainelPrincipal.add(panel_3, "cell 14 4 11 1,grow");
 		
-		JLabel lblNewLabel_33 = new JLabel("");
-		lblNewLabel_33.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Efetuar Pagamento.png")));
-		panel_3.add(lblNewLabel_33);
+		JLabel lblEfetuarPagamento = new JLabel("");
+		lblEfetuarPagamento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+				 String nomeTitular = txtNometitular.getText();
+			        String numeroCartao = txtNumeroCartao.getText();
+			        String dataValidade = txtDataValidade.getText();
+			        String codigoSeguranca = txtCodigoSeguranca.getText();
+			        
+			       
+			        if (nomeTitular.isEmpty() || numeroCartao.isEmpty() || dataValidade.isEmpty() || codigoSeguranca.isEmpty()) {
+			            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+			            return; 
+			        }
+			        
+			      
+			        int quantidadeQuartos = Integer.parseInt(comboBoxFiltroPreco.getSelectedItem().toString());
+			        double precoQuarto = 250; 
+			        double totalPagar = quantidadeQuartos * precoQuarto;
+			        
+			
+			        JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso!\nTotal a pagar: R$ " + totalPagar, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			    }				
+			
+		});
+		lblEfetuarPagamento.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Efetuar Pagamento.png")));
+		panel_3.add(lblEfetuarPagamento);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(84, 113, 119));
