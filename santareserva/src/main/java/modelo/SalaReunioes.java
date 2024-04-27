@@ -8,35 +8,37 @@ public class SalaReunioes {
 	private int cap;
 	private float preco;
 	
+	public int getIdSala() {
+		return idSala;
+	}
+	public void setIdSala(int idSala) {
+		this.idSala = idSala;
+	}
+	public Boolean getDisp() {
+		return disp;
+	}
+	public void setDisp(Boolean disp) {
+		this.disp = disp;
+	}
+	public int getTemp() {
+		return temp;
+	}
+	public void setTemp(int temp) {
+		this.temp = temp;
+	}
+	public int getCap() {
+		return cap;
+	}
+	public void setCap(int cap) {
+		this.cap = cap;
+	}
 	public float getPreco() {
 		return preco;
 	}
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
-	public int getidSala() {
-		return idSala;
-	}
-	public void setidSala (int idSala) {
-		idSala = idSala;
-	}
-	public Boolean getdisp() {
-		return disp;
-	}
-	public void setdisp(Boolean disp) {
-		disp = disp;
-	}
-	public int gettemp() {
-		return temp;
-	}
-	public void settemp(int temp) {
-		temp = temp;
-	}
-	public int getcap() {
-		return cap;
-	}
-	public void setcap (int cap) {
-		cap = cap;
-	}
+	
+
 
 }

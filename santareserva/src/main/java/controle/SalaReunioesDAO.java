@@ -33,10 +33,10 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, sala.getidSala());
-			ps.setBoolean(2, sala.getdisp());
-			ps.setInt(3, sala.gettemp());
-			ps.setInt(4, sala.getcap());
+			ps.setInt(1, sala.getIdSala());
+			ps.setBoolean(2, sala.getDisp());
+			ps.setInt(3, sala.getTemp());
+			ps.setInt(4, sala.getCap());
 			ps.setFloat(5, sala.getPreco());
 			
 			return ps.executeUpdate();
@@ -74,10 +74,10 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 				Integer cap = rs.getInt("cap");
 				Float preco = rs.getFloat("preco");
 				
-				sala.setidSala(idSala);
-				sala.setdisp(disp);
-				sala.settemp(temp);
-				sala.setcap(cap);
+				sala.setIdSala(idSala);
+				sala.setDisp(disp);
+				sala.setTemp(temp);
+				sala.setCap(cap);
 				sala.setPreco(preco);
 				
 				sala_reunioes.add(sala);
@@ -105,8 +105,8 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setBoolean(1, sala.getdisp());
-			ps.setInt(2, sala.gettemp());
+			ps.setBoolean(1, sala.getDisp());
+			ps.setInt(2, sala.getTemp());
 			
 			retorno = ps.executeUpdate();
 			
@@ -133,7 +133,7 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 				
 				try {
 					PreparedStatement ps = conBD.prepareStatement(SQL);
-					ps.setInt(1, end.getidSala());
+					ps.setInt(1, end.getIdSala());
 					retorno = ps.executeUpdate();
 					
 					
