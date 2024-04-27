@@ -10,9 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Computadores;
+import modelo.Quartos;
+import modelo.SalaReunioes;
 import modelo.comboBoxDisponivel;
 import modelo.comboBoxOpcaoPagamento;
 import modelo.comboBoxPreco;
@@ -20,33 +24,35 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class TelaReservas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private JTextField txtNometitular;
+	private JTextField txtNumeroCartao;
+	private JTextField txtDataValidade;
+	private JTextField txtCodigoSeguranca;
+	private static TelaQuartos quartoalugado;
+	private static TelaSalaDeReunioes salaalugada;
+	private static Computadores computadoralugado;
+	private static TelaLogin usuariologado;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaReservas frame = new TelaReservas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
-	public TelaReservas() {
+	public TelaReservas(TelaLogin login ,TelaQuartos quarto, TelaSalaDeReunioes salareunioes) {
+		usuariologado = login;
+		quartoalugado = quarto;
+		salaalugada = salareunioes;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
 		setBounds(0, 0, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(228, 228, 228));
@@ -129,9 +135,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas();
-				c.setVisible(true);
-				dispose();
+			
 			}
 		});
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -145,9 +149,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes();
-				c.setVisible(true);
-				dispose();
+			
 			}
 		});
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -195,13 +197,74 @@ public class TelaReservas extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");
-		PainelPrincipal.setLayout(new MigLayout("", "[][][][200px:n:200px,grow][][][][][][][][][][100px:n][]", "[][][][100px:n][][][][][][][][100px:n][][][][grow][][][]"));
+		PainelPrincipal.setLayout(new MigLayout("", "[][][][200px:n:200px,grow][][][][][][][][650px][][][grow][][][][][][][][][][][]", "[][][grow][100px:n][][]"));
 		
-		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
-		PainelPrincipal.add(lblReservasRealizadas, "cell 2 4,alignx center,growy");
+		JPanel panel_2 = new JPanel();
+		PainelPrincipal.add(panel_2, "cell 13 0 13 4,grow");
+		panel_2.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][][][][][][][][][][][][][][][]"));
 		
-		JPanel panel = new JPanel();
-		PainelPrincipal.add(panel, "cell 3 5 1 5,grow");
+		JLabel lblNewLabel_21 = new JLabel("Nome Titular");
+		lblNewLabel_21.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_21, "cell 0 0");
+		
+		txtNometitular = new JTextField();
+		panel_2.add(txtNometitular, "cell 0 1,grow");
+		txtNometitular.setColumns(10);
+		
+		JLabel lblNewLabel_22 = new JLabel("Número do Cartão");
+		lblNewLabel_22.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_22, "cell 0 3");
+		
+		txtNumeroCartao = new JTextField();
+		panel_2.add(txtNumeroCartao, "cell 0 4,growx");
+		txtNumeroCartao.setColumns(10);
+		
+		JLabel lblNewLabel_23 = new JLabel("Data de Validade");
+		lblNewLabel_23.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_23, "cell 0 6");
+		
+		txtDataValidade = new JTextField();
+		panel_2.add(txtDataValidade, "cell 0 7,growx");
+		txtDataValidade.setColumns(10);
+		
+		JLabel lblNewLabel_24 = new JLabel("Código de Segurança");
+		lblNewLabel_24.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_24, "cell 0 9");
+		
+		txtCodigoSeguranca = new JTextField();
+		panel_2.add(txtCodigoSeguranca, "cell 0 10,growx");
+		txtCodigoSeguranca.setColumns(10);
+		
+		JLabel lblNewLabel_25 = new JLabel("Total Sala de Reuniões");
+		lblNewLabel_25.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_25, "cell 0 12");
+		
+		JLabel lbltotalsalareunioes = new JLabel("-");
+		lbltotalsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lbltotalsalareunioes, "cell 0 13,grow");
+		
+		
+		
+		JLabel lblNewLabel_27 = new JLabel("Total Computadores");
+		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_27, "cell 0 17");
+		
+		JLabel lblcomputadores = new JLabel("-");
+		panel_2.add(lblcomputadores, "cell 0 18,alignx center");
+		
+		JLabel lblNewLabel_29 = new JLabel("Total Quartos");
+		lblNewLabel_29.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_29, "cell 0 20");
+		
+		JLabel lblquartos = new JLabel("-");
+		panel_2.add(lblquartos, "cell 0 21,alignx center");
+		
+		JLabel lblNewLabel_31 = new JLabel("Total à pagar:");
+		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(lblNewLabel_31, "cell 0 22");
+		
+		JLabel lbltotalpagar = new JLabel("-");
+		panel_2.add(lbltotalpagar, "cell 0 23,alignx center");
 		
 		JLabel lblOpcaoPagamento = new JLabel("Escolha outra forma de pagamento");
 		lblOpcaoPagamento.addMouseListener(new MouseAdapter() {
@@ -212,18 +275,55 @@ public class TelaReservas extends JFrame {
 				PainelPrincipal.add(comboBoxOpcaoPagmento, "cell 3 11,growx");
 			}
 		});
+		
+		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
+		PainelPrincipal.add(lblReservasRealizadas, "cell 2 3,alignx center,growy");
 		lblOpcaoPagamento.setHorizontalAlignment(SwingConstants.CENTER);
-		PainelPrincipal.add(lblOpcaoPagamento, "cell 3 12");
+		PainelPrincipal.add(lblOpcaoPagamento, "cell 3 3");
 		
+		JLabel lblNewLabel_34 = new JLabel("");
+		lblNewLabel_34.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Cancelar Reserva.png")));
+		PainelPrincipal.add(lblNewLabel_34, "cell 3 4");
 		
+		JPanel panel_3 = new JPanel();
+		PainelPrincipal.add(panel_3, "cell 14 4 11 1,grow");
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Cancelar Reserva.png")));
-		PainelPrincipal.add(lblNewLabel_20, "cell 3 15,grow");
+		JLabel lblEfetuarPagamento = new JLabel("");
+		lblEfetuarPagamento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+				 String nomeTitular = txtNometitular.getText();
+			        String numeroCartao = txtNumeroCartao.getText();
+			        String dataValidade = txtDataValidade.getText();
+			        String codigoSeguranca = txtCodigoSeguranca.getText();
+			        
+			       
+			        if (nomeTitular.isEmpty() || numeroCartao.isEmpty() || dataValidade.isEmpty() || codigoSeguranca.isEmpty()) {
+			            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+			            return; 
+			        }
+			        
+			      
+			        int quantidadeQuartos = Integer.parseInt(comboBoxFiltroPreco.getSelectedItem().toString());
+			        double precoQuarto = 250; 
+			        double totalPagar = quantidadeQuartos * precoQuarto;
+			        
+			
+			        JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso!\nTotal a pagar: R$ " + totalPagar, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			    }				
+			
+		});
+		lblEfetuarPagamento.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Efetuar Pagamento.png")));
+		panel_3.add(lblEfetuarPagamento);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(84, 113, 119));
 		panel_1.setForeground(new Color(84, 113, 119));
-		PainelPrincipal.add(panel_1, "cell 12 0 1 15,grow");
+		PainelPrincipal.add(panel_1, "cell 12 0 1 24,grow");
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		PainelPrincipal.add(lblNewLabel_20, "cell 3 5");
 	}
 }
