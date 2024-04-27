@@ -217,7 +217,7 @@ public class TelaQuartos extends JFrame {
 		});
 		
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Preço" }));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Disponibilidade", "Preço" }));
 		
 		JLabel lblNewLabel_20 = new JLabel("");
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
@@ -235,14 +235,20 @@ public class TelaQuartos extends JFrame {
 		
 	}
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Preço" });
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Disponibilidade", "Preço" });
 
 	    QuartosDAO QuartoDAO = QuartosDAO.getInstancia();
 	    listaQuartos = QuartoDAO.listarQuartos();
 
 	    for (int i = 0; i < listaQuartos.size(); i++) {
 	        Quartos quarto = listaQuartos.get(i);
-	        modelo.addRow(new Object[] {quarto.getIdQuarto(), quarto.getTipo(), quarto.getCap(), quarto.getPreco()});
+	        String disponibilidade;
+	        if (quarto.getDisp()) {
+	            disponibilidade = "Disponível";
+	        } else {
+	            disponibilidade = "Indisponível";
+	        }
+	        modelo.addRow(new Object[] {quarto.getIdQuarto(), quarto.getTipo(), quarto.getCap(), disponibilidade ,quarto.getPreco()});
 	    }
 	    
 	    table.setModel(modelo);
