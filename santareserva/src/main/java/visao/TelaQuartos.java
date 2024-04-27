@@ -5,8 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+<<<<<<< HEAD
 import modelo.Hospedes;
+=======
+import controle.Quarto;
+import controle.QuartosDAO;
+import modelo.Quartos;
+>>>>>>> JtableQuarto
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
 import modelo.comboBoxPreco;
@@ -27,13 +34,21 @@ import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JScrollPane;
+<<<<<<< HEAD
 
+=======
+import javax.swing.JTable;
+import javax.swing.JButton;
+>>>>>>> JtableQuarto
 
 public class TelaQuartos extends JFrame {
 
 	private ArrayList<Quartos> listaQuarto;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
+	private ArrayList<Quartos> listaQuartos = new ArrayList<Quartos>();
+	private Quartos quartoSelecionado;
 
 	/**
 	 * Launch the application.
@@ -87,16 +102,6 @@ public class TelaQuartos extends JFrame {
 		JPanel PainelFiltro = new JPanel();
 		contentPane.add(PainelFiltro, "cell 1 1,grow");
 		PainelFiltro.setLayout(new MigLayout("", "[250px][250px][144px]", "[58px]"));
-		
-		JComboBox comboBoxDisp = new JComboBox();
-		comboBoxDisp.setFont(new Font("Noto Sans", Font.PLAIN, 15));
-		comboBoxDisp.setModel(new DefaultComboBoxModel(comboBoxDisponivel.values()));
-		PainelFiltro.add(comboBoxDisp, "cell 0 0,growx");
-		
-		JComboBox comboBoxFiltroPreco = new JComboBox();
-		comboBoxFiltroPreco.setFont(new Font("Noto Sans", Font.PLAIN, 15));
-		comboBoxFiltroPreco.setModel(new DefaultComboBoxModel(comboBoxPreco.values()));
-		PainelFiltro.add(comboBoxFiltroPreco, "cell 1 0,growx");
 		
 		JPanel PainelIcones = new JPanel();
 		contentPane.add(PainelIcones, "cell 0 2,grow");
@@ -208,11 +213,49 @@ public class TelaQuartos extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");
+<<<<<<< HEAD
 		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow]"));
+=======
+		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][]"));
+>>>>>>> JtableQuarto
 		
 		JScrollPane scrollPane = new JScrollPane();
 		PainelPrincipal.add(scrollPane, "cell 0 0,grow");
 		
+<<<<<<< HEAD
+=======
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int posicaoQuarto = table.getSelectedRow();
+				quartoSelecionado = listaQuartos.get(posicaoQuarto);
+				
+			}
+		});
+		
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Preço", "Tipo", "Quantidade" }));
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
+		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
+		
+>>>>>>> JtableQuarto
 	}
+		protected void atualizarJTable() {
+		    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Preço", "Tipo", "Quantidade"});
 
+		    QuartosDAO QuartoDAO = QuartosDAO.getInstancia();
+		    listaQuartos = QuartoDAO.listarQuartos();
+
+		    for (int i = 0; i < listaQuartos.size(); i++) {
+		        Quartos quarto = listaQuartos.get(i);
+		        modelo.addRow(new Object[] { quarto.getpreco(), quarto.gettipo(), quarto.getcap()});
+		    }
+		    
+		    table.setModel(modelo);
+		
+
+}
 }
