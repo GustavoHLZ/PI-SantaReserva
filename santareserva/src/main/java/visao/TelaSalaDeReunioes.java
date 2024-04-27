@@ -253,13 +253,19 @@ public class TelaSalaDeReunioes extends JFrame {
 	}
 	protected void atualizarJTable() {
 	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" });
-
+	    
 	    SalaReunioesDAO SalaDAO = SalaReunioesDAO.getInstancia();
 	    listaSala = SalaDAO.listarSalaReunioes();
 
 	    for (int i = 0; i < listaSala.size(); i++) {
-	    	SalaReunioes sala = listaSala.get(i);
-	        modelo.addRow(new Object[] {sala.getIdSala(), sala.getPreco(), sala.getTemp(), sala.getCap(), sala.getDisp()});
+	        SalaReunioes sala = listaSala.get(i);
+	        String disponibilidade;
+	        if (sala.getDisp()) {
+	            disponibilidade = "Disponível";
+	        } else {
+	            disponibilidade = "Indisponível";
+	        }
+	        modelo.addRow(new Object[] {sala.getIdSala(), sala.getPreco(), sala.getTemp(), sala.getCap(), disponibilidade});
 	    }
 	    
 	    table.setModel(modelo);

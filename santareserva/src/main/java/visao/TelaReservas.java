@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import modelo.Computadores;
 import modelo.Quartos;
@@ -284,6 +285,7 @@ public class TelaReservas extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID da Reserva", "CheckIn", "CheckOut", "ID do Espaço"}));
 		
 		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
 		PainelPrincipal.add(lblReservasRealizadas, "cell 2 3,alignx center,growy");
