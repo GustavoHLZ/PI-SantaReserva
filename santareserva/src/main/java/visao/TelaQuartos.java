@@ -220,23 +220,29 @@ public class TelaQuartos extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Preço", "Tipo", "Quantidade" }));
 		
 		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				atualizarJTable();
+				
+			}
+		});
 		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
 		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
 		
 	}
-		protected void atualizarJTable() {
-		    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Preço", "Tipo", "Quantidade"});
+	protected void atualizarJTable() {
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Preço", "Tipo", "Capacidade"});
 
-		    QuartosDAO QuartoDAO = QuartosDAO.getInstancia();
-		    listaQuartos = QuartoDAO.listarQuartos();
+	    QuartosDAO QuartoDAO = QuartosDAO.getInstancia();
+	    listaQuartos = QuartoDAO.listarQuartos();
 
-		    for (int i = 0; i < listaQuartos.size(); i++) {
-		        Quartos quarto = listaQuartos.get(i);
-		        modelo.addRow(new Object[] { quarto.getpreco(), quarto.gettipo(), quarto.getcap()});
-		    }
-		    
-		    table.setModel(modelo);
-		
-
-}
+	    for (int i = 0; i < listaQuartos.size(); i++) {
+	        Quartos quarto = listaQuartos.get(i);
+	        modelo.addRow(new Object[] {quarto.getPreco(), quarto.getTipo(), quarto.getCap()});
+	    }
+	    
+	    table.setModel(modelo);
+	}
 }
