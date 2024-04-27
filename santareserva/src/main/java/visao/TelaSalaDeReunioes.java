@@ -5,8 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import modelo.comboBoxPreco;
+import controle.SalaReunioesDAO;
+import modelo.SalaReunioes;
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
 import net.miginfocom.swing.MigLayout;
@@ -22,12 +25,18 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TelaSalaDeReunioes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String valor;
+	private ArrayList<SalaReunioes> listaSala = new ArrayList<SalaReunioes>();
+	private SalaReunioes salaSelecionado;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -78,16 +87,6 @@ public class TelaSalaDeReunioes extends JFrame {
 		JPanel PainelFiltro = new JPanel();
 		contentPane.add(PainelFiltro, "cell 1 1,grow");
 		PainelFiltro.setLayout(new MigLayout("", "[250px][250px][144px]", "[][58px]"));
-		
-		JComboBox comboBoxDisp = new JComboBox();
-		comboBoxDisp.setFont(new Font("Noto Sans", Font.PLAIN, 11));
-		comboBoxDisp.setModel(new DefaultComboBoxModel(comboBoxDisponivel.values()));
-		PainelFiltro.add(comboBoxDisp, "cell 0 0,growx");
-		
-		JComboBox comboFiltroPreco = new JComboBox();
-		comboFiltroPreco.setFont(new Font("Noto Sans", Font.PLAIN, 11));
-		comboFiltroPreco.setModel(new DefaultComboBoxModel(comboBoxPreco.values()));
-		PainelFiltro.add(comboFiltroPreco, "cell 1 0,growx");
 		
 		JPanel PainelIcones = new JPanel();
 		contentPane.add(PainelIcones, "cell 0 2,grow");
@@ -229,150 +228,41 @@ public class TelaSalaDeReunioes extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");
-		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][grow][grow]"));
+		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][]"));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setPreferredSize(new Dimension(100, 50));
-		PainelPrincipal.add(panel_1, "cell 0 0,grow");
-		panel_1.setLayout(new MigLayout("", "[][750px][200px][200px][][100px]", "[][][][]"));
+		JScrollPane scrollPane = new JScrollPane();
+		PainelPrincipal.add(scrollPane, "cell 0 0,grow");
 		
-		JLabel lblNewLabel_21 = new JLabel("");
-		lblNewLabel_21.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
-		panel_1.add(lblNewLabel_21, "cell 0 0");
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" }));
 		
-		JLabel lblNewLabel_26 = new JLabel("Sala de Reunião 1");
-		lblNewLabel_26.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_26, "cell 1 0,aligny top");
-		
-		JLabel lblNewLabel_28 = new JLabel("Preço Hora");
-		lblNewLabel_28.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblNewLabel_28, "cell 2 0,alignx center");
-		
-		JLabel lblNewLabel_30 = new JLabel("Quantidade");
-		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblNewLabel_30, "cell 3 0,alignx center");
-		
-		JLabel lblNewLabel_29 = new JLabel("");
-		panel_1.add(lblNewLabel_29, "cell 1 1");
-		
-		JLabel lblNewLabel_27 = new JLabel("Detalhes: 4 Cadeiras, Mesa e Televisão.");
-		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_1.add(lblNewLabel_27, "cell 1 2");
-		
-		JLabel lblPrecoHora1 = new JLabel("R$ 35,00");
-		lblPrecoHora1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_1.add(lblPrecoHora1, "cell 2 2,alignx center");
-		
-		JComboBox<String> cbHora = new JComboBox<>();
-		for (TipoHoras tipo : TipoHoras.values()) {
-			cbHora.addItem(tipo.getDesc());
-		
-		panel_1.add(cbHora, "cell 3 2,growx");
-		}
-		
-		JLabel lblNewLabel_32 = new JLabel("");
-		lblNewLabel_32.addMouseListener(new MouseAdapter() {
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				//Reservar1//
-			}
-			
-		});
-		lblNewLabel_32.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
-		panel_1.add(lblNewLabel_32, "cell 5 2,alignx center");
-		
-		JPanel panel_2 = new JPanel();
-		PainelPrincipal.add(panel_2, "cell 0 1,grow");
-		panel_2.setLayout(new MigLayout("", "[][750px][200px][200px][][]", "[][][]"));
-		
-		JLabel lblNewLabel_24 = new JLabel("");
-		lblNewLabel_24.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
-		panel_2.add(lblNewLabel_24, "cell 0 0");
-		
-		JLabel lblNewLabel_26_1 = new JLabel("Sala de Reunião 2");
-		lblNewLabel_26_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_2.add(lblNewLabel_26_1, "cell 1 0,aligny top");
-		
-		JLabel lblNewLabel_28_1 = new JLabel("Preço Hora");
-		lblNewLabel_28_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_2.add(lblNewLabel_28_1, "cell 2 0,alignx center");
-		
-		JLabel lblNewLabel_30_1 = new JLabel("Quantidade");
-		lblNewLabel_30_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_2.add(lblNewLabel_30_1, "cell 3 0,alignx center");
-		
-		JLabel lblNewLabel_27_1 = new JLabel("Detalhes: 4 Cadeiras, Mesa e Televisão.");
-		lblNewLabel_27_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_27_1, "cell 1 2");
-		
-		JLabel lblNewLabel_31_1 = new JLabel("R$ 35,00");
-		lblNewLabel_31_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_2.add(lblNewLabel_31_1, "cell 2 2,alignx center");
-		
-		JComboBox<String> cbHora1 = new JComboBox<>();
-		for (TipoHoras tipo : TipoHoras.values()) {
-			cbHora1.addItem(tipo.getDesc());
-		
-		panel_2.add(cbHora1, "cell 3 2,growx");
-		}
-		
-		JLabel lblNewLabel_32_1 = new JLabel("");
-		lblNewLabel_32_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				//Reservar//
+				atualizarJTable();
 			}
 		});
-		lblNewLabel_32_1.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
-		panel_2.add(lblNewLabel_32_1, "cell 5 2,alignx center");
 		
-		JPanel panel_3 = new JPanel();
-		PainelPrincipal.add(panel_3, "cell 0 2,grow");
-		panel_3.setLayout(new MigLayout("", "[][750px][200px][200px][][]", "[][][]"));
 		
-		JLabel lblNewLabel_25 = new JLabel("");
-		lblNewLabel_25.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Fotos/SalaDeReuniao.png")));
-		panel_3.add(lblNewLabel_25, "cell 0 0");
+		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
+		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
 		
-		JLabel lblNewLabel_26_1_1 = new JLabel("Sala de Reunião 3");
-		lblNewLabel_26_1_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_3.add(lblNewLabel_26_1_1, "cell 1 0,aligny top");
 		
-		JLabel lblNewLabel_28_1_1 = new JLabel("Preço Hora");
-		lblNewLabel_28_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_3.add(lblNewLabel_28_1_1, "cell 2 0,alignx center");
-		
-		JLabel lblNewLabel_30_1_1 = new JLabel("Quantidade");
-		lblNewLabel_30_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_3.add(lblNewLabel_30_1_1, "cell 3 0,alignx center");
-		
-		JLabel lblNewLabel_27_1_1 = new JLabel("Detalhes: 4 Cadeiras, Mesa e Televisão.");
-		lblNewLabel_27_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_3.add(lblNewLabel_27_1_1, "cell 1 2");
-		
-		JLabel lblNewLabel_31_1_1 = new JLabel("R$ 35,00");
-		lblNewLabel_31_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel_3.add(lblNewLabel_31_1_1, "cell 2 2,alignx center");
-		
-		JComboBox<String> cbHora2 = new JComboBox<>();
-		for (TipoHoras tipo : TipoHoras.values()) {
-			cbHora2.addItem(tipo.getDesc());
-		
-		panel_3.add(cbHora2, "cell 3 2,growx");
-		}
-		
-		JLabel lblNewLabel_32_1_1 = new JLabel("");
-		lblNewLabel_32_1_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				//Reservar//
-			}
-		});
-		lblNewLabel_32_1_1.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
-		panel_3.add(lblNewLabel_32_1_1, "cell 5 2");
 	}
+	protected void atualizarJTable() {
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" });
 
+	    SalaReunioesDAO SalaDAO = SalaReunioesDAO.getInstancia();
+	    listaSala = SalaDAO.listarSalaReunioes();
+
+	    for (int i = 0; i < listaSala.size(); i++) {
+	    	SalaReunioes sala = listaSala.get(i);
+	        modelo.addRow(new Object[] {sala.getIdSala(), sala.getPreco(), sala.getTemp(), sala.getCap(), sala.getDisp()});
+	    }
+	    
+	    table.setModel(modelo);
+
+}
 }

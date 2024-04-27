@@ -27,6 +27,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TelaReservas extends JFrame {
 
@@ -40,6 +42,7 @@ public class TelaReservas extends JFrame {
 	private static TelaSalaDeReunioes salaalugada;
 	private static Computadores computadoralugado;
 	private static TelaLogin usuariologado;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -197,7 +200,7 @@ public class TelaReservas extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");
-		PainelPrincipal.setLayout(new MigLayout("", "[][][][200px:n:200px,grow][][][][][][][][650px][][][grow][][][][][][][][][][][]", "[][][grow][100px:n][][]"));
+		PainelPrincipal.setLayout(new MigLayout("", "[grow][][][200px:n:200px,grow][][][][][][][][650px][][][grow][][][][][][][][][][][]", "[][][grow][100px:n][][]"));
 		
 		JPanel panel_2 = new JPanel();
 		PainelPrincipal.add(panel_2, "cell 13 0 13 4,grow");
@@ -275,6 +278,12 @@ public class TelaReservas extends JFrame {
 				PainelPrincipal.add(comboBoxOpcaoPagmento, "cell 3 11,growx");
 			}
 		});
+		
+		JScrollPane scrollPane = new JScrollPane();
+		PainelPrincipal.add(scrollPane, "cell 0 0 12 3,grow");
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		
 		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
 		PainelPrincipal.add(lblReservasRealizadas, "cell 2 3,alignx center,growy");
