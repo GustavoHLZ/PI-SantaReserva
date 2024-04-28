@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controle.Quarto;
 import controle.QuartosDAO;
+import modelo.Hospedes;
 import modelo.Quartos;
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
@@ -40,6 +41,8 @@ public class TelaQuartos extends JFrame {
 	private JTable table;
 	private ArrayList<Quartos> listaQuartos = new ArrayList<Quartos>();
 	private Quartos quartoSelecionado;
+	private static Hospedes hosplogado;
+	private Hospedes usuariologado;
 
 	/**
 	 * Launch the application.
@@ -48,7 +51,7 @@ public class TelaQuartos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaQuartos frame = new TelaQuartos();
+					TelaQuartos frame = new TelaQuartos(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +63,10 @@ public class TelaQuartos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaQuartos() {
+	public TelaQuartos(Hospedes hospede) {
+		hosplogado = hospede;
+		usuariologado = hosplogado;
+		
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
@@ -70,6 +76,8 @@ public class TelaQuartos extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][grow][grow]"));
+		
+	
 		
 		JPanel PainelTopo = new JPanel();
 		PainelTopo.setBackground(new Color(119, 165, 175));
@@ -103,7 +111,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome();
+				TelaHome c = new TelaHome(null);
 				c.setVisible(true);
 				dispose();
 			}
@@ -119,7 +127,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil();
+				TelaPerfil c = new TelaPerfil(hosplogado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -135,7 +143,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas();
+				TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null);
 				c.setVisible(true);
 				dispose();
 			}
@@ -151,7 +159,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes();
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hospede);
 				c.setVisible(true);
 				dispose();
 			}
@@ -210,8 +218,13 @@ public class TelaQuartos extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int posicaoQuarto = table.getSelectedRow();
-				quartoSelecionado = listaQuartos.get(posicaoQuarto);
+				if (e.getClickCount() == 1) {
+		            JTable source = (JTable) e.getSource();
+		            int posicaoQuarto = source.getSelectedRow();
+		            if (posicaoQuarto != -1) {
+		                quartoSelecionado = listaQuartos.get(posicaoQuarto);
+		            }
+		        }
 			
 			}
 		});
@@ -223,7 +236,8 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			
+				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, null, null);
+		        telaReservas.setVisible(true);
 				atualizarJTable();
 				
 			}
@@ -232,7 +246,7 @@ public class TelaQuartos extends JFrame {
 		
 		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
 		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
-		
+		atualizarJTable();
 	}
 	protected void atualizarJTable() {
 	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Disponibilidade", "Preço" });
