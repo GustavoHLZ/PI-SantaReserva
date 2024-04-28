@@ -293,14 +293,14 @@ public class TelaReservas extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID da Reserva", "CheckIn", "CheckOut", "ID do Espaço"}));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "CheckIn", "CheckOut", "ID da Reserva"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		if (quartoSelecionado != null) {
 		    model.addRow(new Object[] {
 		        quartoSelecionado.getIdQuarto(),
-		        quartoSelecionado.getTipo(),
-		        quartoSelecionado.getPreco()
+		        quartoSelecionado.getCheckIn(),
+		        quartoSelecionado.getCheckOut()
 		    });
 		} else if (salaalugada != null) {
 		    model.addRow(new Object[] {
