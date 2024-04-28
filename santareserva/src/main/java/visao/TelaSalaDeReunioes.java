@@ -38,6 +38,8 @@ public class TelaSalaDeReunioes extends JFrame {
 	private ArrayList<SalaReunioes> listaSala = new ArrayList<SalaReunioes>();
 	private SalaReunioes salaSelecionado;
 	private Hospedes hosplogado;
+	private Hospedes usuariologado;
+	private SalaReunioes salaalugada;
 	private JTable table;
 
 	/**
@@ -61,6 +63,8 @@ public class TelaSalaDeReunioes extends JFrame {
 	 */
 	public TelaSalaDeReunioes(Hospedes hospede) {
 		hosplogado = hospede;
+		usuariologado = hosplogado;
+		
 		setTitle("Sala De Reunioes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
@@ -138,7 +142,9 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				TelaReservas c = new TelaReservas(hospede, null, null , salaalugada, null);
+				c.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -239,6 +245,20 @@ public class TelaSalaDeReunioes extends JFrame {
 		PainelPrincipal.add(scrollPane, "cell 0 0,grow");
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+		            JTable source = (JTable) e.getSource();
+		            int posicaoSala = source.getSelectedRow();
+		            if (posicaoSala != -1) {
+		                salaalugada = listaSala.get(posicaoSala);
+		            }
+		        }
+			
+			}
+		});
+		
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" }));
 		
@@ -246,6 +266,8 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , null , salaalugada, null);
+		        telaReservas.setVisible(true);
 				atualizarJTable();
 			}
 		});
