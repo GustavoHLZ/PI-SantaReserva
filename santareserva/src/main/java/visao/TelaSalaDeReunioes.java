@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo.comboBoxPreco;
 import controle.SalaReunioesDAO;
+import modelo.Hospedes;
 import modelo.SalaReunioes;
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
@@ -36,6 +37,7 @@ public class TelaSalaDeReunioes extends JFrame {
 	private String valor;
 	private ArrayList<SalaReunioes> listaSala = new ArrayList<SalaReunioes>();
 	private SalaReunioes salaSelecionado;
+	private Hospedes hosplogado;
 	private JTable table;
 
 	/**
@@ -45,7 +47,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaSalaDeReunioes frame = new TelaSalaDeReunioes();
+					TelaSalaDeReunioes frame = new TelaSalaDeReunioes(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +59,8 @@ public class TelaSalaDeReunioes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaSalaDeReunioes() {
+	public TelaSalaDeReunioes(Hospedes hospede) {
+		hosplogado = hospede;
 		setTitle("Sala De Reunioes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
@@ -65,6 +68,8 @@ public class TelaSalaDeReunioes extends JFrame {
 		contentPane.setBackground(new Color(228, 228, 228));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+	
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][grow][grow]"));
 		
@@ -101,7 +106,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaHome c = new TelaHome();
+				TelaHome c = new TelaHome(null);
 				c.setVisible(true);
 				dispose();
 		
@@ -172,7 +177,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos();
+				TelaQuartos c = new TelaQuartos(hospede);
 				c.setVisible(true);
 				dispose();
 				
@@ -249,7 +254,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
 		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
 		
-		
+		atualizarJTable();
 	}
 	protected void atualizarJTable() {
 	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" });

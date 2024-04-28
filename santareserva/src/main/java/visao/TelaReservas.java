@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Computadores;
+import modelo.Hospedes;
+import modelo.Infologin;
 import modelo.Quartos;
 import modelo.SalaReunioes;
 import modelo.comboBoxDisponivel;
@@ -39,10 +41,12 @@ public class TelaReservas extends JFrame {
 	private JTextField txtNumeroCartao;
 	private JTextField txtDataValidade;
 	private JTextField txtCodigoSeguranca;
-	private static TelaQuartos quartoalugado;
-	private static TelaSalaDeReunioes salaalugada;
-	private static Computadores computadoralugado;
-	private static TelaLogin usuariologado;
+	private static Quartos quartoalugado;
+	private SalaReunioes salaalugada;
+	private Computadores computadoralugado;
+	private Hospedes usuariologado;
+	private Hospedes hosplogado;
+	private Quartos quartoSelecionado;
 	private JTable table;
 	/**
 	 * Launch the application.
@@ -51,10 +55,13 @@ public class TelaReservas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaReservas(TelaLogin login ,TelaQuartos quarto, TelaSalaDeReunioes salareunioes) {
-		usuariologado = login;
+	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, SalaReunioes salareunioes, Computadores computador) {
+		hosplogado = hospede;
+		usuariologado = hosplogado;
 		quartoalugado = quarto;
+		quartoSelecionado = quarto;
 		salaalugada = salareunioes;
+		computadoralugado = computador;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		setBounds(0, 0, 1920, 1080);
@@ -107,7 +114,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome();
+				TelaHome c = new TelaHome(null);
 				c.setVisible(true);
 				dispose();
 			}
@@ -123,7 +130,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil();
+				TelaPerfil c = new TelaPerfil(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -286,6 +293,14 @@ public class TelaReservas extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID da Reserva", "CheckIn", "CheckOut", "ID do Espaço"}));
+		
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.addRow(new Object[] {
+		    quartoSelecionado.getIdQuarto(),
+		    quartoSelecionado.getTipo(),
+		    quartoSelecionado.getPreco(),
+		    
+		});
 		
 		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
 		PainelPrincipal.add(lblReservasRealizadas, "cell 2 3,alignx center,growy");
