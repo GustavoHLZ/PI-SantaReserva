@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controle.QuartosDAO;
 import modelo.Computadores;
 import modelo.Hospedes;
 import modelo.Infologin;
@@ -295,12 +296,19 @@ public class TelaReservas extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID da Reserva", "CheckIn", "CheckOut", "ID do Espaço"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		model.addRow(new Object[] {
-		    quartoSelecionado.getIdQuarto(),
-		    quartoSelecionado.getTipo(),
-		    quartoSelecionado.getPreco(),
-		    
-		});
+		if (quartoSelecionado != null) {
+		    model.addRow(new Object[] {
+		        quartoSelecionado.getIdQuarto(),
+		        quartoSelecionado.getTipo(),
+		        quartoSelecionado.getPreco()
+		    });
+		} else if (salaalugada != null) {
+		    model.addRow(new Object[] {
+		        salaalugada.getIdSala(),
+		        salaalugada.getCap(),
+		        salaalugada.getPreco()
+		    });
+		}
 		
 		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
 		PainelPrincipal.add(lblReservasRealizadas, "cell 2 3,alignx center,growy");
@@ -351,5 +359,7 @@ public class TelaReservas extends JFrame {
 		
 		JLabel lblNewLabel_20 = new JLabel("");
 		PainelPrincipal.add(lblNewLabel_20, "cell 3 5");
+		
 	}
+	
 }
