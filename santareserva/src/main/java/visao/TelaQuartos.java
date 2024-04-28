@@ -33,6 +33,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class TelaQuartos extends JFrame {
 
@@ -43,6 +44,8 @@ public class TelaQuartos extends JFrame {
 	private Quartos quartoSelecionado;
 	private static Hospedes hosplogado;
 	private Hospedes usuariologado;
+	private JTextField textCheckIn;
+	private JTextField textCheckOut;
 
 	/**
 	 * Launch the application.
@@ -239,13 +242,33 @@ public class TelaQuartos extends JFrame {
 				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, null, null);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
-				
+				String checkin = textCheckIn.getText();
+				String checkout = textCheckOut.getText();
+				Quartos p = new Quartos();
+				p.setCheckIn(checkin);
+				p.setCheckOut(checkout);
+				listaQuartos.add(p);
+				atualizarJTable();
 			}
 		});
 		
+		JLabel lblNewLabel_21 = new JLabel("Check-In");
+		PainelPrincipal.add(lblNewLabel_21, "flowx,cell 0 1");
+		
+		textCheckIn = new JTextField();
+		PainelPrincipal.add(textCheckIn, "cell 0 1");
+		textCheckIn.setColumns(10);
+		
+		JLabel lblNewLabel_22 = new JLabel("Check-Out");
+		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
+		
+		textCheckOut = new JTextField();
+		PainelPrincipal.add(textCheckOut, "cell 0 1");
+		textCheckOut.setColumns(10);
+		
 		
 		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
-		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
+		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center,aligny center");
 		atualizarJTable();
 	}
 	protected void atualizarJTable() {

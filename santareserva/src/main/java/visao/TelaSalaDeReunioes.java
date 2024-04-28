@@ -29,6 +29,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class TelaSalaDeReunioes extends JFrame {
 
@@ -41,6 +42,8 @@ public class TelaSalaDeReunioes extends JFrame {
 	private Hospedes usuariologado;
 	private SalaReunioes salaalugada;
 	private JTable table;
+	private JTextField textCheckIn;
+	private JTextField textCheckOut;
 
 	/**
 	 * Launch the application.
@@ -271,6 +274,20 @@ public class TelaSalaDeReunioes extends JFrame {
 				atualizarJTable();
 			}
 		});
+		
+		JLabel lblNewLabel_21 = new JLabel("Check-in");
+		PainelPrincipal.add(lblNewLabel_21, "flowx,cell 0 1");
+		
+		textCheckIn = new JTextField();
+		PainelPrincipal.add(textCheckIn, "cell 0 1");
+		textCheckIn.setColumns(10);
+		
+		JLabel lblNewLabel_22 = new JLabel("Check-Out");
+		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
+		
+		textCheckOut = new JTextField();
+		PainelPrincipal.add(textCheckOut, "cell 0 1");
+		textCheckOut.setColumns(10);
 		
 		
 		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));

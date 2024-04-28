@@ -8,6 +8,21 @@ public class Quartos {
 	private Boolean disp;
 	private int cap;
 	private int temp;
+	private String CheckIn;
+	private String CheckOut;
+	
+	public String getCheckIn() {
+		return CheckIn;
+	}
+	public void setCheckIn(String checkIn) {
+		CheckIn = checkIn;
+	}
+	public String getCheckOut() {
+		return CheckOut;
+	}
+	public void setCheckOut(String checkOut) {
+		CheckOut = checkOut;
+	}
 	public int getIdQuarto() {
 		return idQuarto;
 	}
