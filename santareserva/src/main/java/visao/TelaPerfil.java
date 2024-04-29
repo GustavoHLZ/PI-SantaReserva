@@ -164,11 +164,9 @@ public class TelaPerfil extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String email = hospedeLogado.getLogin().getLogin();
-				
 				InfologinDAO dao = InfologinDAO.getInstancia();
 				
-				Infologin delete = dao.removerInfologin(email);
+				Infologin delete = dao.removerInfologin(hospedeLogado.getLogin().getLogin());
 				
 			}
 		});

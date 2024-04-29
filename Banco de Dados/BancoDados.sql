@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `infologin` (
 
 -- -----------------------------------------------------
 -- Table `hospedes`
--- -----------------------------------------------------
+-- --------------------------------alu---------------------
 CREATE TABLE IF NOT EXISTS `hospedes` (
   `idHospede` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
@@ -37,6 +37,9 @@ CREATE TABLE IF NOT EXISTS `hospedes` (
   CONSTRAINT `fkHospedesInfologin1`
     FOREIGN KEY (`fkidUsuario`)
     REFERENCES `infologin` (`idUsuario`)
+    
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 -- -----------------------------------------------------
