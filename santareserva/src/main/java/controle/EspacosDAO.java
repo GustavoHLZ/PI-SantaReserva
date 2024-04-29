@@ -27,7 +27,7 @@ public class EspacosDAO implements IEspacosDAO {
 
 	public int InserirEspacos(Espacos esp) {
 		
-		String SQL = "INSERT INTO Espacos (ocupante, checkIn, checkOut, fkidComputador, fkidSalaReuniao, fkidQuartos, fkidHospede, fkidPagamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Espacos (ocupante, fkidComputador, fkidSalaReuniao, fkidQuartos, fkidHospede, fkidPagamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -38,8 +38,7 @@ public class EspacosDAO implements IEspacosDAO {
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setInt(1, esp.getOcupante());
-			ps.setDate(2, esp.getCheckIn());
-			ps.setDate(3, esp.getCheckOut());
+
 			ps.setInt(4, esp.getFkidComputador());
 			ps.setInt(5, esp.getFkidSalaReuniao());
 			ps.setInt(6, esp.getFkidQuartos());
@@ -81,13 +80,10 @@ public class EspacosDAO implements IEspacosDAO {
 
 				Integer IDEspaco = rs.getInt("idEspaco");
 				Integer OcupanteEspaco = rs.getInt("ocupante");
-				Date CheckIn = rs.getDate("checkIn");
-				Date CheckOut = rs.getDate("checkOut");
+		
 
 				esp.setIdEspaco(IDEspaco);
 				esp.setOcupante(OcupanteEspaco);
-				esp.setCheckIn(CheckIn);
-				esp.setCheckOut(CheckOut);
 
 				espacos.add(esp);
 
@@ -115,8 +111,7 @@ public class EspacosDAO implements IEspacosDAO {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			ps.setInt(1, espc.getOcupante());
-			ps.setDate(2, espc.getCheckIn());
-			ps.setDate(3, espc.getCheckOut());
+	
 			
 			
 			retorno = ps.executeUpdate();

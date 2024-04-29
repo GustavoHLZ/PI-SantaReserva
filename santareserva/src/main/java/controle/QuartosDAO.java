@@ -26,7 +26,7 @@ public class QuartosDAO implements IQuartosDAO {
 
 	public int InserirQuartos(Quartos qua) {
 		
-		String SQL = "INSERT INTO Quartos (idQuarto, tipo, preco, disp, cap, temp) VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn,checkOut) VALUES (?, ?, ?, ?, ?, ?,?,?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -40,6 +40,8 @@ public class QuartosDAO implements IQuartosDAO {
 			ps.setBoolean(4, qua.getDisp());
 			ps.setInt(5, qua.getCap());
 			ps.setInt(6, qua.getTemp());
+			ps.setString(7,qua.getCheckIn());
+			ps.setString(8,qua.getCheckOut());
 			
 			return ps.executeUpdate();
 			
@@ -75,6 +77,8 @@ public class QuartosDAO implements IQuartosDAO {
 				Boolean disp = rs.getBoolean("disp");
 				Integer cap = rs.getInt("cap");
 				Integer temp = rs.getInt("temp");
+				String checkIn = rs.getString("checkIn");
+				String checkOut = rs.getString("checkOut");
 				
 				qua.setIdQuarto(idQuarto);
 				qua.setTipo(tipo);
@@ -82,6 +86,8 @@ public class QuartosDAO implements IQuartosDAO {
 				qua.setDisp(disp);
 				qua.setCap(cap);
 				qua.setTemp(temp);
+				qua.setCheckIn(checkIn);
+				qua.setCheckOut(checkOut);
 				
 				quartos.add(qua);
 				
