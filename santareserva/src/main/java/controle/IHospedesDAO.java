@@ -1,5 +1,6 @@
 package controle;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
@@ -10,7 +11,7 @@ public interface IHospedesDAO {
 	
 	public ArrayList<Hospedes> listarHospedes();
 	
-	public Hospedes atualizarHospedes(Hospedes hosp);
+	public Hospedes atualizarHospedes(String nome, String sobrenome, LocalDate nascimento, String telefone,  Integer id);
 	
 	public Hospedes removerHospedes(String email);
 	

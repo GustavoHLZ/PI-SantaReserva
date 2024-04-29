@@ -98,8 +98,8 @@ public class InfologinDAO implements IInfologinDAO {
 		return info_login;
 	}
 
-	public Infologin atualizarInfologin(String email, String senha) {
-		String SQL = "UPDATE Infologin SET email = ?, senha = ? WHERE email = ?";
+	public Infologin atualizarInfologin(String email, String senha, Integer id) {
+		String SQL = "UPDATE Infologin SET email = ?, senha = ? WHERE idUsuario = ?";
 
 		Infologin login = null;
 
@@ -111,6 +111,7 @@ public class InfologinDAO implements IInfologinDAO {
 
 			ps.setString(1, email);
 			ps.setString(2, senha);
+			ps.setInt(3, id);
 
 			ps.executeUpdate();
 
@@ -118,7 +119,7 @@ public class InfologinDAO implements IInfologinDAO {
 
 			if (rs.next()) {
 				login = new Infologin();
-				int idUser = rs.getInt("idUsuario");
+				Integer idUser = rs.getInt("idUsuario");
 				String Email = rs.getString("email");
 				String Senha = rs.getString("senha");
 				login.setIdUsuario(idUser);

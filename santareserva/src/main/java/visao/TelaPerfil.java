@@ -202,7 +202,7 @@ public class TelaPerfil extends JFrame {
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				
 				String nome = txtNome.getText();
-				String Sobrenome = txtSobrenome.getText();
+				String sobrenome = txtSobrenome.getText();
 				
 				String dataNascTxt = txtNascimento.getText();
 
@@ -229,29 +229,31 @@ public class TelaPerfil extends JFrame {
 				String telefone = txtTelefone.getText();
 				String email = txtEmail.getText();
 				String senha = txtSenha.getText();
+				Integer id = hospedeLogado.getIdHospede();
+				Integer idlogin = hospedeLogado.getLogin().getIdUsuario();
 				
-				Hospedes hospede = new Hospedes();
+				Hospedes hospedes = new Hospedes();
 				Infologin login = new Infologin();
 				
 				login.setLogin(email);
 				login.setSenha(senha);
 				
-				hospede.setNome(nome);
-				hospede.setSobrenome(Sobrenome);
-				hospede.setNascimento(nascimento);
-				hospede.setTelefone(telefone);
+				hospedes.setNome(nome);
+				hospedes.setSobrenome(sobrenome);
+				hospedes.setNascimento(nascimento);
+				hospedes.setTelefone(telefone);
 				
-				HospedesDAO dao = HospedesDAO.getInstancia();
 				InfologinDAO idao = InfologinDAO.getInstancia();
+				HospedesDAO dao = HospedesDAO.getInstancia();
+				
+				dao.atualizarHospedes(nome, sobrenome, nascimento, telefone, id);
 				
 					// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
 					// mações no Login do usuário
-					idao.atualizarInfologin(email, senha);
+					idao.atualizarInfologin(email, senha, idlogin);
 					// insere o retorno como o id do Infologin
 					// insere as informações de login a partir da chave estrangeira em Hospedes
-					hospede.setLogin(login);
-					// insere as informações em hospede
-					dao.atualizarHospedes(hospede);
+
 					
 					
 			}

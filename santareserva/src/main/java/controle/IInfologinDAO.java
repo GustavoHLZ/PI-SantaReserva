@@ -10,7 +10,7 @@ public interface IInfologinDAO {
 	
 	public ArrayList<Infologin> listarInfologin();
 	
-	public Infologin atualizarInfologin(String email, String senha);
+	public Infologin atualizarInfologin(String email, String senha, Integer id);
 	
 	public Infologin removerInfologin(String email);
 	

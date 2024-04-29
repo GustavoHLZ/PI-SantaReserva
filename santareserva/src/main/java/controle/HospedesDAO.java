@@ -49,8 +49,8 @@ private static HospedesDAO instancia;
 			 
 			ps.executeUpdate();
 			
-			ResultSet rs = ps.executeQuery();
-			if(rs!=null) {
+			ResultSet rs = ps.getGeneratedKeys();
+			if(rs.next()) {
 				chavePrimariaGerada = rs.getInt(1);
 			}
 
@@ -82,18 +82,19 @@ private static HospedesDAO instancia;
 				
 				Hospedes hosp = new Hospedes();
 				
-				Integer IDHospede = rs.getInt("idHospede");
+				Integer id = rs.getInt("idHospede");
 				String NomeHospede = rs.getString("nome");
 				String sobrenomehospede = rs.getString("sobrenome");
-//				LocalDate nascimentohospede = rs.getDate.valueOf("nascimento");
+				java.sql.Date sqlNascimento = rs.getDate("nascimento");
+				LocalDate nascimentohospede = sqlNascimento == null ? null : sqlNascimento.toLocalDate();
 				String telefonehospede = rs.getString("telefone");
 				String emailhospede = rs.getString("email");
 				String senhahospede = rs.getString("senha");
 				
-				hosp.setIdHospede(0);
+				hosp.setIdHospede(id);
 				hosp.setNome(NomeHospede);
 				hosp.setSobrenome(sobrenomehospede);
-//				hosp.setNascimento(nascimentohospede);
+				hosp.setNascimento(nascimentohospede);
 				hosp.setTelefone(telefonehospede);
 				hosp.getLogin().setLogin(emailhospede);
 				hosp.getLogin().setSenha(senhahospede);
@@ -111,9 +112,9 @@ private static HospedesDAO instancia;
 		return hospedes;
 	}
 	
-	public Hospedes atualizarHospedes(Hospedes hosp) {
+	public Hospedes atualizarHospedes(String nome, String sobrenome, LocalDate nascimento, String telefone, Integer id) {
 		
-		String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, telefone = ?, email = ?, senha = ? WHERE senha LIKE ?";
+		String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, telefone = ? WHERE idHospede = ?";
 		
 		Hospedes update = null;
 		
@@ -123,12 +124,13 @@ private static HospedesDAO instancia;
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setString(1, hosp.getNome());
-			ps.setString(2, hosp.getSobrenome());
-			ps.setDate(3, java.sql.Date.valueOf(hosp.getNascimento()));
-			ps.setString(4, hosp.getTelefone());
-			ps.setString(5, hosp.getLogin().getLogin());
-			ps.setString(6, hosp.getLogin().getSenha());
+			ps.setString(1, nome);
+			ps.setString(2, sobrenome);
+			java.sql.Date sqlNascimento = Date.valueOf(nascimento);
+			ps.setDate(3, sqlNascimento);
+			ps.setString(4, telefone);
+			ps.setInt(5, id);
+			
 			
 			
 			ps.executeUpdate();
@@ -137,19 +139,18 @@ private static HospedesDAO instancia;
 
 			if (rs.next()) {
 				update = new Hospedes();
-				String nome = rs.getString("nome");
-				String sobrenome = rs.getString("sobrenome");
-//				LocalDate nascimento = rs.getDate("nascimento");
-				String telefone = rs.getString("telefone");
-				String email = rs.getString("email");
-				String senha = rs.getString("senha");
+				String Unome = rs.getString("nome");
+				String Usobrenome = rs.getString("sobrenome");
+				java.sql.Date sqlUnascimento = rs.getDate("nascimento");
+				LocalDate Unascimento = sqlUnascimento == null ? null : sqlUnascimento.toLocalDate();
+				String Utelefone = rs.getString("telefone");
+				Integer Uid = rs.getInt("idHospede");
 				
-				update.setNome(nome);
-				update.setSobrenome(sobrenome);;
-//				update.setNascimento(nascimento);
-				update.setTelefone(telefone);
-				update.getLogin().setLogin(email);
-				update.getLogin().setSenha(senha);
+				update.setNome(Unome);
+				update.setSobrenome(Usobrenome);;
+				update.setNascimento(Unascimento);
+				update.setTelefone(Utelefone);
+				update.setIdHospede(Uid);
 			}
 			
 		} catch (SQLException e) {
