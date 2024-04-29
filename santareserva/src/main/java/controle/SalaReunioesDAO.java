@@ -25,7 +25,7 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 
 	public int InserirSalaReunioes(SalaReunioes sala) {
 		
-		String SQL = "INSERT INTO SalaReunioes (idSala, disp, temp, cap, preco) VALUES (?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -38,6 +38,8 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 			ps.setInt(3, sala.getTemp());
 			ps.setInt(4, sala.getCap());
 			ps.setFloat(5, sala.getPreco());
+			ps.setString(6, sala.getCheckIn());
+			ps.setString(7, sala.getCheckOut());
 			
 			return ps.executeUpdate();
 			
@@ -73,12 +75,16 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 				Integer temp = rs.getInt("temp");
 				Integer cap = rs.getInt("cap");
 				Float preco = rs.getFloat("preco");
+				String checkIn = rs.getString("checkIn");
+				String checkOut = rs.getString("checkOut");
 				
 				sala.setIdSala(idSala);
 				sala.setDisp(disp);
 				sala.setTemp(temp);
 				sala.setCap(cap);
 				sala.setPreco(preco);
+				sala.setCheckIn(checkIn);
+				sala.setCheckOut(checkOut);
 				
 				sala_reunioes.add(sala);
 				

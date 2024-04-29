@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -15,8 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controle.EspacosDAO;
 import controle.QuartosDAO;
 import modelo.Computadores;
+import modelo.Espacos;
 import modelo.Hospedes;
 import modelo.Infologin;
 import modelo.Quartos;
@@ -49,6 +53,9 @@ public class TelaReservas extends JFrame {
 	private Hospedes hosplogado;
 	private Quartos quartoSelecionado;
 	private JTable table;
+	private JTextField txtcheckin;
+	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private JTextField txtcheckout;
 	/**
 	 * Launch the application.
 	 */
@@ -203,7 +210,7 @@ public class TelaReservas extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		PainelPrincipal.add(panel_2, "cell 13 0 13 4,grow");
-		panel_2.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][][][][][][][][][][][][][][][]"));
+		panel_2.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]"));
 		
 		JLabel lblNewLabel_21 = new JLabel("Nome Titular");
 		lblNewLabel_21.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -268,6 +275,14 @@ public class TelaReservas extends JFrame {
 		JLabel lbltotalpagar = new JLabel("-");
 		panel_2.add(lbltotalpagar, "cell 0 23,alignx center");
 		
+		txtcheckin = new JTextField();
+		panel_2.add(txtcheckin, "cell 0 27,growx");
+		txtcheckin.setColumns(10);
+		
+		txtcheckout = new JTextField();
+		panel_2.add(txtcheckout, "cell 0 29,growx");
+		txtcheckout.setColumns(10);
+		
 		JLabel lblOpcaoPagamento = new JLabel("Escolha outra forma de pagamento");
 		lblOpcaoPagamento.addMouseListener(new MouseAdapter() {
 			@Override
@@ -324,6 +339,42 @@ public class TelaReservas extends JFrame {
 			        String numeroCartao = txtNumeroCartao.getText();
 			        String dataValidade = txtDataValidade.getText();
 			        String codigoSeguranca = txtCodigoSeguranca.getText();
+			        Date checkin = Date.valueOf(txtcheckin.getText());
+			        Date checkout= Date.valueOf(txtcheckout.getText());
+			        Espacos p = new Espacos();
+			        
+			        p.setCheckIn(checkin);
+			        p.setCheckOut(checkout);
+			        
+			        EspacosDAO dao = EspacosDAO.getInstancia();
+			        
+			        try {
+						// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
+						// mações no Login do usuário
+						int retorno = dao.InserirEspacos(p);
+						// insere o retorno como o id do Infologin
+						p.setIdEspaco(retorno);
+						// insere as informações de login a partir da chave estrangeira em Hospedes
+				
+						int id = dao.InserirEspacos(p);
+
+						if (id != 1) {
+							JOptionPane.showMessageDialog(null, "inserido");
+							TelaLogin c = new TelaLogin();
+							atualizarJTable();
+							c.setVisible(true);
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Erro");
+						}
+
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, "Erro ao inserir informações");
+					}
+
+			        
+			        
+			        
 			        
 			       
 			        if (nomeTitular.isEmpty() || numeroCartao.isEmpty() || dataValidade.isEmpty() || codigoSeguranca.isEmpty()) {
@@ -350,6 +401,22 @@ public class TelaReservas extends JFrame {
 		JLabel lblNewLabel_20 = new JLabel("");
 		PainelPrincipal.add(lblNewLabel_20, "cell 3 5");
 		
+	}
+	
+	protected void atualizarJTable() {
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaco", "CheckIn", "CheckOut" });
+
+	    EspacosDAO EspacoDAO = EspacosDAO.getInstancia();
+	    listarEspaco = EspacoDAO.listarEspacos();
+
+	    for (int i = 0; i < listarEspaco.size(); i++) {
+	        Espacos espaco = listarEspaco.get(i);
+
+	       
+	        modelo.addRow(new Object[] {espaco.getFkidQuartos(), espaco.getCheckIn(), espaco.getCheckOut()});
+	    }
+	    
+	    table.setModel(modelo);
 	}
 	
 }

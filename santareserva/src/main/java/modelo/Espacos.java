@@ -5,8 +5,6 @@ import java.sql.Date;
 public class Espacos {
 	private int idEspaco;
 	private int ocupante;
-	private Date checkIn;
-	private Date checkOut;
 	private int fkidComputador;
 	private int fkidSalaReuniao;
 	private int fkidQuartos;
@@ -37,18 +35,7 @@ public class Espacos {
 	public void setOcupante(int ocupante) {
 		this.ocupante = ocupante;
 	}
-	public Date getCheckIn() {
-		return checkIn;
-	}
-	public void setCheckIn(Date checkIn) {
-		this.checkIn = checkIn;
-	}
-	public Date getCheckOut() {
-		return checkOut;
-	}
-	public void setCheckOut(Date checkOut) {
-		this.checkOut = checkOut;
-	}
+
 	public int getFkidComputador() {
 		return fkidComputador;
 	}
