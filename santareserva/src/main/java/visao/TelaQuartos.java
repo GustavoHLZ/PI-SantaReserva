@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -226,6 +227,7 @@ public class TelaQuartos extends JFrame {
 		            int posicaoQuarto = source.getSelectedRow();
 		            if (posicaoQuarto != -1) {
 		                quartoSelecionado = listaQuartos.get(posicaoQuarto);
+		                
 		            }
 		        }
 			
@@ -241,23 +243,34 @@ public class TelaQuartos extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, null, null);
 		        telaReservas.setVisible(true);
-				atualizarJTable();
+				
 				String checkin = textCheckIn.getText();
 				String checkout = textCheckOut.getText();
 				Quartos p = new Quartos();
 				p.setCheckIn(checkin);
 				p.setCheckOut(checkout);
 				listaQuartos.add(p);
-				atualizarJTable();
+				
+				
+				
+				 
+				 
+				 atualizarJTable();
 			}
 		});
 		
+		JPanel panel = new JPanel();
+		PainelPrincipal.add(panel, "flowx,cell 0 1");
+		
 		JLabel lblNewLabel_21 = new JLabel("Check-In");
-		PainelPrincipal.add(lblNewLabel_21, "flowx,cell 0 1");
+		PainelPrincipal.add(lblNewLabel_21, "cell 0 1");
 		
 		textCheckIn = new JTextField();
 		PainelPrincipal.add(textCheckIn, "cell 0 1");
 		textCheckIn.setColumns(10);
+		
+		JPanel panel_1 = new JPanel();
+		PainelPrincipal.add(panel_1, "cell 0 1");
 		
 		JLabel lblNewLabel_22 = new JLabel("Check-Out");
 		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
@@ -265,6 +278,54 @@ public class TelaQuartos extends JFrame {
 		textCheckOut = new JTextField();
 		PainelPrincipal.add(textCheckOut, "cell 0 1");
 		textCheckOut.setColumns(10);
+		
+		JPanel panel_2 = new JPanel();
+		PainelPrincipal.add(panel_2, "cell 0 1");
+		
+		JPanel panel_3 = new JPanel();
+		PainelPrincipal.add(panel_3, "cell 0 1");
+		
+		JPanel panel_5 = new JPanel();
+		PainelPrincipal.add(panel_5, "cell 0 1");
+		
+		JPanel panel_6 = new JPanel();
+		PainelPrincipal.add(panel_6, "cell 0 1");
+		
+		JPanel panel_7 = new JPanel();
+		PainelPrincipal.add(panel_7, "cell 0 1");
+		
+		JPanel panel_8 = new JPanel();
+		PainelPrincipal.add(panel_8, "cell 0 1");
+		
+		JPanel panel_9 = new JPanel();
+		PainelPrincipal.add(panel_9, "cell 0 1");
+		
+		JPanel panel_10 = new JPanel();
+		PainelPrincipal.add(panel_10, "cell 0 1");
+		
+		JPanel panel_11 = new JPanel();
+		PainelPrincipal.add(panel_11, "cell 0 1");
+		
+		JPanel panel_12 = new JPanel();
+		PainelPrincipal.add(panel_12, "cell 0 1");
+		
+		JPanel panel_13 = new JPanel();
+		PainelPrincipal.add(panel_13, "cell 0 1");
+		
+		JPanel panel_14 = new JPanel();
+		PainelPrincipal.add(panel_14, "cell 0 1");
+		
+		JPanel panel_15 = new JPanel();
+		PainelPrincipal.add(panel_15, "cell 0 1");
+		
+		JPanel panel_16 = new JPanel();
+		PainelPrincipal.add(panel_16, "cell 0 1");
+		
+		JPanel panel_17 = new JPanel();
+		PainelPrincipal.add(panel_17, "cell 0 1");
+		
+		JPanel panel_18 = new JPanel();
+		PainelPrincipal.add(panel_18, "cell 0 1");
 		
 		
 		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
@@ -285,6 +346,10 @@ public class TelaQuartos extends JFrame {
 	        } else {
 	            disponibilidade = "Indisponível";
 	        }
+	        if (quartoSelecionado != null && quartoSelecionado.getDisp().equals("Indisponível")) {
+                JOptionPane.showMessageDialog(null, "O quarto selecionado está indisponível.");
+                return;
+            }
 	        modelo.addRow(new Object[] {quarto.getIdQuarto(), quarto.getTipo(), quarto.getCap(), disponibilidade ,quarto.getPreco()});
 	    }
 	    

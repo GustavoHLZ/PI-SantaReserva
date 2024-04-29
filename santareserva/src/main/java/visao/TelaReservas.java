@@ -93,16 +93,6 @@ public class TelaReservas extends JFrame {
 		contentPane.add(PainelFiltro, "cell 1 1,grow");
 		PainelFiltro.setLayout(new MigLayout("", "[250px][250px][144px]", "[58px]"));
 		
-		JComboBox comboBoxDisp = new JComboBox();
-		comboBoxDisp.setFont(new Font("Noto Sans", Font.PLAIN, 15));
-		comboBoxDisp.setModel(new DefaultComboBoxModel(comboBoxDisponivel.values()));
-		PainelFiltro.add(comboBoxDisp, "cell 0 0,growx");
-		
-		JComboBox comboBoxFiltroPreco = new JComboBox();
-		comboBoxFiltroPreco.setFont(new Font("Noto Sans", Font.PLAIN, 15));
-		comboBoxFiltroPreco.setModel(new DefaultComboBoxModel(comboBoxPreco.values()));
-		PainelFiltro.add(comboBoxFiltroPreco, "cell 1 0,growx");
-		
 		JPanel PainelIcones = new JPanel();
 		contentPane.add(PainelIcones, "cell 0 2,grow");
 		PainelIcones.setLayout(new MigLayout("", "[][]", "[][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][][300px][][][][][][][][][]"));
@@ -293,20 +283,22 @@ public class TelaReservas extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "CheckIn", "CheckOut", "ID da Reserva"}));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "Preço", "Capacidade", "Tipo"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		if (quartoSelecionado != null) {
 		    model.addRow(new Object[] {
 		        quartoSelecionado.getIdQuarto(),
-		        quartoSelecionado.getCheckIn(),
-		        quartoSelecionado.getCheckOut()
+		        quartoSelecionado.getPreco(),
+		        quartoSelecionado.getCap(),
+		        quartoSelecionado.getTipo()
 		    });
 		} else if (salaalugada != null) {
 		    model.addRow(new Object[] {
 		        salaalugada.getIdSala(),
+		        salaalugada.getPreco(),
 		        salaalugada.getCap(),
-		        salaalugada.getPreco()
+		        "Sala de Reunião"
 		    });
 		}
 		
@@ -339,10 +331,8 @@ public class TelaReservas extends JFrame {
 			            return; 
 			        }
 			        
-			      
-			        int quantidadeQuartos = Integer.parseInt(comboBoxFiltroPreco.getSelectedItem().toString());
 			        double precoQuarto = 250; 
-			        double totalPagar = quantidadeQuartos * precoQuarto;
+			        double totalPagar =  precoQuarto;
 			        
 			
 			        JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso!\nTotal a pagar: R$ " + totalPagar, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
