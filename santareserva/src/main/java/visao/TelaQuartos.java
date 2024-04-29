@@ -241,9 +241,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, listaQuartos, null, null);
-		        telaReservas.setVisible(true);
-				
+
 				String checkin = textCheckIn.getText();
 				String checkout = textCheckOut.getText();
 				Quartos p = new Quartos();
@@ -251,9 +249,12 @@ public class TelaQuartos extends JFrame {
 				p.setCheckOut(checkout);
 				listaQuartos.add(p);
 				
+				quartoSelecionado.setCheckIn(checkin);
+				quartoSelecionado.setCheckOut(checkout);
 				
+				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, listaQuartos, null, null);
+		        telaReservas.setVisible(true);
 				
-				 
 				 
 				 atualizarJTable();
 			}
