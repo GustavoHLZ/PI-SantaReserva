@@ -275,12 +275,18 @@ public class TelaSalaDeReunioes extends JFrame {
 			}
 		});
 		
+		JPanel panel_19 = new JPanel();
+		PainelPrincipal.add(panel_19, "flowx,cell 0 1");
+		
 		JLabel lblNewLabel_21 = new JLabel("Check-in");
-		PainelPrincipal.add(lblNewLabel_21, "flowx,cell 0 1");
+		PainelPrincipal.add(lblNewLabel_21, "cell 0 1");
 		
 		textCheckIn = new JTextField();
 		PainelPrincipal.add(textCheckIn, "cell 0 1");
 		textCheckIn.setColumns(10);
+		
+		JPanel panel_20 = new JPanel();
+		PainelPrincipal.add(panel_20, "cell 0 1");
 		
 		JLabel lblNewLabel_22 = new JLabel("Check-Out");
 		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
@@ -288,6 +294,54 @@ public class TelaSalaDeReunioes extends JFrame {
 		textCheckOut = new JTextField();
 		PainelPrincipal.add(textCheckOut, "cell 0 1");
 		textCheckOut.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		PainelPrincipal.add(panel, "cell 0 1");
+		
+		JPanel panel_1 = new JPanel();
+		PainelPrincipal.add(panel_1, "cell 0 1");
+		
+		JPanel panel_2 = new JPanel();
+		PainelPrincipal.add(panel_2, "cell 0 1");
+		
+		JPanel panel_3 = new JPanel();
+		PainelPrincipal.add(panel_3, "cell 0 1");
+		
+		JPanel panel_5 = new JPanel();
+		PainelPrincipal.add(panel_5, "cell 0 1");
+		
+		JPanel panel_6 = new JPanel();
+		PainelPrincipal.add(panel_6, "cell 0 1");
+		
+		JPanel panel_7 = new JPanel();
+		PainelPrincipal.add(panel_7, "cell 0 1");
+		
+		JPanel panel_8 = new JPanel();
+		PainelPrincipal.add(panel_8, "cell 0 1");
+		
+		JPanel panel_9 = new JPanel();
+		PainelPrincipal.add(panel_9, "cell 0 1");
+		
+		JPanel panel_10 = new JPanel();
+		PainelPrincipal.add(panel_10, "cell 0 1");
+		
+		JPanel panel_11 = new JPanel();
+		PainelPrincipal.add(panel_11, "cell 0 1");
+		
+		JPanel panel_12 = new JPanel();
+		PainelPrincipal.add(panel_12, "cell 0 1");
+		
+		JPanel panel_13 = new JPanel();
+		PainelPrincipal.add(panel_13, "cell 0 1");
+		
+		JPanel panel_14 = new JPanel();
+		PainelPrincipal.add(panel_14, "cell 0 1");
+		
+		JPanel panel_15 = new JPanel();
+		PainelPrincipal.add(panel_15, "cell 0 1");
+		
+		JPanel panel_16 = new JPanel();
+		PainelPrincipal.add(panel_16, "cell 0 1");
 		
 		
 		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
