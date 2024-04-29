@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import controle.Quarto;
 import controle.QuartosDAO;
@@ -26,8 +27,11 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -265,17 +269,41 @@ public class TelaQuartos extends JFrame {
 		JLabel lblNewLabel_21 = new JLabel("Check-In");
 		PainelPrincipal.add(lblNewLabel_21, "cell 0 1");
 		
-		textCheckIn = new JTextField();
+		MaskFormatter mascaraIn = null;
+
+		try {
+
+			mascaraIn = new MaskFormatter("##/##/####");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
+		textCheckIn = new JFormattedTextField(mascaraIn);
 		PainelPrincipal.add(textCheckIn, "cell 0 1");
 		textCheckIn.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		PainelPrincipal.add(panel_1, "cell 0 1");
 		
+		MaskFormatter mascaraOut = null;
+
+		try {
+
+			mascaraOut = new MaskFormatter("##/##/####");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
 		JLabel lblNewLabel_22 = new JLabel("Check-Out");
 		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
 		
-		textCheckOut = new JTextField();
+		textCheckOut = new JFormattedTextField(mascaraOut);
 		PainelPrincipal.add(textCheckOut, "cell 0 1");
 		textCheckOut.setColumns(10);
 		

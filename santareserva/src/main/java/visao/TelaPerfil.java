@@ -202,7 +202,7 @@ public class TelaPerfil extends JFrame {
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				
 				String nome = txtNome.getText();
-				String Sobrenome = txtSobrenome.getText();
+				String sobrenome = txtSobrenome.getText();
 				
 				String dataNascTxt = txtNascimento.getText();
 
@@ -229,20 +229,35 @@ public class TelaPerfil extends JFrame {
 				String telefone = txtTelefone.getText();
 				String email = txtEmail.getText();
 				String senha = txtSenha.getText();
+				Integer id = hospedeLogado.getIdHospede();
+				Integer idlogin = hospedeLogado.getLogin().getIdUsuario();
 				
-				Hospedes hospede = new Hospedes();
+				Hospedes hospedes = new Hospedes();
+				Infologin login = new Infologin();
 				
-				hospede.setNome(nome);
-				hospede.setSobrenome(Sobrenome);
-				hospede.setNascimento(nascimento);
-				hospede.setTelefone(telefone);
-				hospede.getLogin().setLogin(email);
-				hospede.getLogin().setSenha(senha);
+				login.setLogin(email);
+				login.setSenha(senha);
 				
+				hospedes.setNome(nome);
+				hospedes.setSobrenome(sobrenome);
+				hospedes.setNascimento(nascimento);
+				hospedes.setTelefone(telefone);
+				
+				InfologinDAO idao = InfologinDAO.getInstancia();
 				HospedesDAO dao = HospedesDAO.getInstancia();
 				
-				Hospedes update = dao.atualizarHospedes(hospede);
+				dao.atualizarHospedes(nome, sobrenome, nascimento, telefone, id);
+				
+					// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
+					// mações no Login do usuário
+					idao.atualizarInfologin(email, senha, idlogin);
+					// insere o retorno como o id do Infologin
+					// insere as informações de login a partir da chave estrangeira em Hospedes
+
+					
+					
 			}
+				
 		});
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
 		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 22 3 1,alignx center,aligny center");
