@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -48,6 +49,7 @@ public class TelaReservas extends JFrame {
 	private Hospedes usuariologado;
 	private Hospedes hosplogado;
 	private Quartos quartoSelecionado;
+	private ArrayList<Quartos> listarQuartos;
 	private JTable table;
 	/**
 	 * Launch the application.
@@ -56,13 +58,14 @@ public class TelaReservas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, SalaReunioes salareunioes, Computadores computador) {
+	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, Computadores computador) {
 		hosplogado = hospede;
 		usuariologado = hosplogado;
 		quartoalugado = quarto;
 		quartoSelecionado = quarto;
 		salaalugada = salareunioes;
 		computadoralugado = computador;
+		listarQuartos = listaQuartos;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		setBounds(0, 0, 1920, 1080);
@@ -283,15 +286,16 @@ public class TelaReservas extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "Preço", "Capacidade", "Tipo"}));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "Preço", "CheckIn", "CheckOut"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		if (quartoSelecionado != null) {
 		    model.addRow(new Object[] {
 		        quartoSelecionado.getIdQuarto(),
 		        quartoSelecionado.getPreco(),
-		        quartoSelecionado.getCap(),
-		        quartoSelecionado.getTipo()
+		        quartoSelecionado.getCheckIn(),
+		        quartoSelecionado.getCheckOut()
+		        
 		    });
 		} else if (salaalugada != null) {
 		    model.addRow(new Object[] {
