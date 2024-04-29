@@ -48,6 +48,11 @@ private static HospedesDAO instancia;
 		
 			 
 			ps.executeUpdate();
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs!=null) {
+				chavePrimariaGerada = rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,8 +120,6 @@ private static HospedesDAO instancia;
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
-		int retorno = 0;
-		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
@@ -128,7 +131,7 @@ private static HospedesDAO instancia;
 			ps.setString(6, hosp.getLogin().getSenha());
 			
 			
-			retorno = ps.executeUpdate();
+			ps.executeUpdate();
 			
 			ResultSet rs = ps.executeQuery();
 

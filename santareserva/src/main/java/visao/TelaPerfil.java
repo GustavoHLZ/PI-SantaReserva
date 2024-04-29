@@ -231,18 +231,31 @@ public class TelaPerfil extends JFrame {
 				String senha = txtSenha.getText();
 				
 				Hospedes hospede = new Hospedes();
+				Infologin login = new Infologin();
+				
+				login.setLogin(email);
+				login.setSenha(senha);
 				
 				hospede.setNome(nome);
 				hospede.setSobrenome(Sobrenome);
 				hospede.setNascimento(nascimento);
 				hospede.setTelefone(telefone);
-				hospede.getLogin().setLogin(email);
-				hospede.getLogin().setSenha(senha);
 				
 				HospedesDAO dao = HospedesDAO.getInstancia();
+				InfologinDAO idao = InfologinDAO.getInstancia();
 				
-				Hospedes update = dao.atualizarHospedes(hospede);
+					// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
+					// mações no Login do usuário
+					idao.atualizarInfologin(email, senha);
+					// insere o retorno como o id do Infologin
+					// insere as informações de login a partir da chave estrangeira em Hospedes
+					hospede.setLogin(login);
+					// insere as informações em hospede
+					dao.atualizarHospedes(hospede);
+					
+					
 			}
+				
 		});
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
 		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 22 3 1,alignx center,aligny center");

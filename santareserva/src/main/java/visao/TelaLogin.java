@@ -165,7 +165,7 @@ public class TelaLogin extends JFrame {
 				Infologin usuarioLogado = dao.buscarInfologin(Login, Senha);
 
 				if (usuarioLogado != null) {
-					JOptionPane.showMessageDialog(null, "Usuário Cadastro");
+					JOptionPane.showMessageDialog(null, "Usuário Cadastrado");
 					HospedesDAO daohosp = HospedesDAO.getInstancia();
 					Hospedes hospede = daohosp.buscarHospedes(Login, Senha);
 					TelaPerfil c = new TelaPerfil(hospede);
@@ -229,7 +229,7 @@ public class TelaLogin extends JFrame {
 
 				InfologinDAO dao = InfologinDAO.getInstancia();
 
-				Infologin update = dao.atualizarInfologin(email, senha, id);
+				Infologin update = dao.atualizarInfologin(email, senha);
 
 			}
 		});
