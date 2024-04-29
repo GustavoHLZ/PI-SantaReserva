@@ -10,7 +10,7 @@
 DROP DATABASE IF EXISTS `mydb`;
 
 CREATE DATABASE IF NOT EXISTS `mydb`;
-USE `mydb` ;
+USE `mydb`;
 
 -- -----------------------------------------------------
 -- Table `infologin`
@@ -20,109 +20,108 @@ CREATE TABLE IF NOT EXISTS `infologin` (
   `admin` INT NULL DEFAULT '0',
   `email` VARCHAR(255) NOT NULL,
   `senha` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`idUsuario`));
-
+  PRIMARY KEY (`idUsuario`)
+);
 
 -- -----------------------------------------------------
 -- Table `hospedes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hospedes` (
-  `idHospede` INT NOT NULL AUTO_INCREMENT,
+  `idHospede` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `sobrenome` VARCHAR(45) NOT NULL,
   `nascimento` DATE NOT NULL,
   `telefone` CHAR(15) NOT NULL,
-  `fkidUsuario` INT NOT NULL,
+  `fkidUsuario` INT(11) NOT NULL,
   PRIMARY KEY (`idHospede`),
   CONSTRAINT `fkHospedesInfologin1`
     FOREIGN KEY (`fkidUsuario`)
-    REFERENCES `infologin` (`idUsuario`));
+    REFERENCES `infologin` (`idUsuario`)
+);
 
 -- -----------------------------------------------------
 -- Table `avaliacoes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `avaliacoes` (
-  `idAvaliacao` INT NOT NULL AUTO_INCREMENT,
+  `idAvaliacao` INT(11) NOT NULL AUTO_INCREMENT,
   `avaliacao` FLOAT NOT NULL,
   `avaliador` VARCHAR(45) NOT NULL,
-  `fkIDHospede` INT NOT NULL,
-  PRIMARY KEY (`idAvaliacao`, `fkIDHospede`),
-  INDEX `fkAvaliacoesHospedes1` (`fkIDHospede`),
+  `fkIDHospede` INT(11) NOT NULL,
+  PRIMARY KEY (`idAvaliacao`),
   CONSTRAINT `fkAvaliacoesHospedes1`
     FOREIGN KEY (`fkIDHospede`)
-    REFERENCES `hospedes` (`idHospede`));
+    REFERENCES `hospedes` (`idHospede`)
+);
 
 -- -----------------------------------------------------
 -- Table `computadores`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `computadores` (
-  `idPC` INT NOT NULL,
-  `num` INT NOT NULL,
-  `temp` INT NOT NULL,
+  `idPC` INT(11) NOT NULL AUTO_INCREMENT,
+  `num` INT(11) NOT NULL,
+  `temp` INT(11) NOT NULL,
   `preco` FLOAT NOT NULL,
-  `disp` TINYINT NOT NULL,
-  PRIMARY KEY (`idPC`));
-
-
--- -----------------------------------------------------
--- Table `pagamento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pagamento` (
-  `idPagamento` INT NOT NULL AUTO_INCREMENT,
-  `nometitular` VARCHAR(255) NOT NULL,
-  `numeroCartao` VARCHAR(16) NOT NULL,
-  `dataValidade` VARCHAR(4) NOT NULL,
-  `codigoSeguranca` VARCHAR(3) NOT NULL,
-  `numeroBoleto` VARCHAR(48) NOT NULL,
-  `numeroPix` VARCHAR(32) NOT NULL,
-  PRIMARY KEY (`idPagamento`));
-
+  `disp` TINYINT(4) NOT NULL,
+  `checkIn` VARCHAR(6) NULL,
+  `checkOut` VARCHAR(6) NULL,
+  PRIMARY KEY (`idPC`)
+);
 
 -- -----------------------------------------------------
 -- Table `quartos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `quartos` (
-  `idQuarto` INT NOT NULL AUTO_INCREMENT,
+  `idQuarto` INT(11) NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(45) NOT NULL,
   `preco` FLOAT NOT NULL,
-  `disp` TINYINT NOT NULL,
-  `cap` INT NOT NULL,
-  `temp` INT NOT NULL,
-  PRIMARY KEY (`idQuarto`));
-
+  `disp` TINYINT(4) NOT NULL,
+  `cap` INT(11) NOT NULL,
+  `temp` INT(11) NOT NULL,
+  `checkIn` VARCHAR(6) NULL,
+  `checkOut` VARCHAR(6) NULL,
+  PRIMARY KEY (`idQuarto`)
+);
 
 -- -----------------------------------------------------
 -- Table `salareunioes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `salareunioes` (
-  `idSala` INT NOT NULL,
-  `disp` TINYINT NOT NULL,
-  `temp` INT NOT NULL,
-  `cap` INT NOT NULL,
+  `idSala` INT(11) NOT NULL AUTO_INCREMENT,
+  `disp` TINYINT(4) NOT NULL,
+  `temp` INT(11) NOT NULL,
+  `cap` INT(11) NOT NULL,
   `preco` FLOAT NOT NULL,
-  PRIMARY KEY (`idSala`));
+  `checkIn` VARCHAR(6) NULL,
+  `checkOut` VARCHAR(6) NULL,
+  PRIMARY KEY (`idSala`)
+);
 
+-- -----------------------------------------------------
+-- Table `pagamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pagamento` (
+  `idPagamento` INT(11) NOT NULL AUTO_INCREMENT,
+  `nometitular` VARCHAR(255) NOT NULL,
+  `numeroCartao` CHAR(16) NOT NULL,
+  `dataValidade` VARCHAR(4) NOT NULL,
+  `codigoSeguranca` CHAR(3) NOT NULL,
+  `numeroBoleto` VARCHAR(48) NOT NULL,
+  `numeroPix` VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`idPagamento`)
+);
 
 -- -----------------------------------------------------
 -- Table `espacos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `espacos` (
-  `idEspaco` INT NOT NULL AUTO_INCREMENT,
-  `ocupante` INT NOT NULL,
-  `checkIn` DATE NOT NULL,
-  `checkOut` DATE NOT NULL,
-  `fkidComputador` INT NOT NULL,
-  `fkidSalaReuniao` INT NOT NULL,
-  `fkidQuartos` INT NOT NULL,
-  `fkidHospede` INT NOT NULL,
-  `fkidPagamento` INT NOT NULL,
+  `idEspaco` INT(11) NOT NULL AUTO_INCREMENT,
+  `ocupante` INT(11) NOT NULL,
+  `fkidComputador` INT(11) NOT NULL,
+  `fkidSalaReuniao` INT(11) NOT NULL,
+  `fkidQuartos` INT(11) NOT NULL,
+  `fkidHospede` INT(11) NOT NULL,
+  `fkidPagamento` INT(11) NOT NULL,
   PRIMARY KEY (`idEspaco`),
-  CONSTRAINT `fk_espacos_hospedes1`
-    FOREIGN KEY (`fkidHospede`)
-    REFERENCES `hospedes` (`idHospede`),
-  CONSTRAINT `fk_espacos_Pagamento1`
-    FOREIGN KEY (`fkidPagamento`)
-    REFERENCES `pagamento` (`idPagamento`),
   CONSTRAINT `fkEspacosComputadores1`
     FOREIGN KEY (`fkidComputador`)
     REFERENCES `computadores` (`idPC`),
@@ -131,34 +130,41 @@ CREATE TABLE IF NOT EXISTS `espacos` (
     REFERENCES `quartos` (`idQuarto`),
   CONSTRAINT `fkEspacosSalaReunioes1`
     FOREIGN KEY (`fkidSalaReuniao`)
-    REFERENCES `salareunioes` (`idSala`));
-
+    REFERENCES `salareunioes` (`idSala`),
+  CONSTRAINT `fk_espacos_Pagamento1`
+    FOREIGN KEY (`fkidPagamento`)
+    REFERENCES `pagamento` (`idPagamento`),
+  CONSTRAINT `fk_espacos_hospedes1`
+    FOREIGN KEY (`fkidHospede`)
+    REFERENCES `hospedes` (`idHospede`)
+);
 
 -- -----------------------------------------------------
 -- Table `servicos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `servicos` (
-  `idServico` INT NOT NULL,
+  `idServico` INT(11) NOT NULL,
   `nomeServico` VARCHAR(45) NOT NULL,
   `precoServico` FLOAT NOT NULL,
-  `pagEfetuado` TINYINT NOT NULL,
-  PRIMARY KEY (`idServico`));
-
+  `pagEfetuado` TINYINT(4) NOT NULL,
+  PRIMARY KEY (`idServico`)
+);
 
 -- -----------------------------------------------------
 -- Table `servicosconsumidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `servicosconsumidos` (
-  `idServicoConsumido` INT NOT NULL AUTO_INCREMENT,
-  `fkIDHospede` INT NOT NULL,
-  `fkServico` INT NOT NULL,
-  PRIMARY KEY (`idServicoConsumido`, `fkIDHospede`, `fkServico`),
+  `idServicoConsumido` INT(11) NOT NULL AUTO_INCREMENT,
+  `fkIDHospede` INT(11) NOT NULL,
+  `fkServico` INT(11) NOT NULL,
+  PRIMARY KEY (`idServicoConsumido`),
   CONSTRAINT `fkServicosConsumidosHospedes1`
     FOREIGN KEY (`fkIDHospede`)
     REFERENCES `hospedes` (`idHospede`),
   CONSTRAINT `fkServicosConsumidosServicos1`
     FOREIGN KEY (`fkServico`)
-    REFERENCES `servicos` (`idServico`));
+    REFERENCES `servicos` (`idServico`)
+);
 
 insert into Servicos (idServico, pagEfetuado, precoServico, nomeServico) values (101, true, 149.99, 'Frigobar1');
 insert into Servicos (idServico, pagEfetuado, precoServico, nomeServico) values (102, true, 249.99, 'Frigobar2');
@@ -293,6 +299,3 @@ insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) val
 insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (168, true, 60, 4, 100.00, NULL, NULL);
 insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (169, true, 90, 6, 100.00, NULL, NULL);
 insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (170, false, 60, 8, 100.00, NULL, NULL);
-
-
-
