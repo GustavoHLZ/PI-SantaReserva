@@ -4,10 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-<<<<<<< HEAD
-=======
+
 import java.sql.Date;
->>>>>>> DAOS-Novos
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
