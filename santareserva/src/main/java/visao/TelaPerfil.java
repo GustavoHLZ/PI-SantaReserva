@@ -19,6 +19,9 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,12 +29,12 @@ import java.awt.event.ActionEvent;
 public class TelaPerfil extends JFrame {
 
 	private JPanel PainelGeral;
-	private JTextField txtRua;
-	private JTextField txtUsuario;
+	private JTextField txtSobrenome;
+	private JTextField txtNome;
 	private JTextField txtCep;
-	private JTextField txtBairro;
+	private JTextField txtTelefone;
 	private JTextField txtSenha;
-	private JTextField txtCidade;
+	private JTextField txtNascimento;
 	private JTextField txtEmail;
 	private JTextField txtVerSenha;
 	private JTextField txtConfSenha;
@@ -88,37 +91,39 @@ public class TelaPerfil extends JFrame {
 		lblUser.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblUser, "cell 3 1,alignx center");
 		
-		JLabel lblAltRua = new JLabel("Alterar Rua");
-		lblAltRua.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltRua, "cell 1 3,alignx left,aligny center");
+		JLabel lblAltSobrenome = new JLabel("Alterar Sobrenome");
+		lblAltSobrenome.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltSobrenome, "cell 1 3,alignx left,aligny center");
 		
-		JLabel lblAltusuario = new JLabel("Alterar Nome de Usuário");
-		lblAltusuario.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltusuario, "cell 4 3 3 1");
+		JLabel lblAltNome = new JLabel("Alterar Nome");
+		lblAltNome.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltNome, "cell 4 3 3 1");
 		
-		txtRua = new JTextField();
-		txtRua.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtRua, "cell 1 4 2 1,grow");
-		txtRua.setColumns(10);
+		txtSobrenome = new JTextField();
+		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtSobrenome, "cell 1 4 2 1,grow");
+		txtSobrenome.setColumns(10);
+		txtSobrenome.setText(hospedeLogado.getSobrenome());
 		
-		txtUsuario = new JTextField();
-		txtUsuario.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtUsuario, "cell 4 4 3 1,grow");
-		txtUsuario.setColumns(10);
-		txtUsuario.setText(hospedeLogado.getNome() + " " + hospedeLogado.getSobrenome());
+		txtNome = new JTextField();
+		txtNome.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtNome, "cell 4 4 3 1,grow");
+		txtNome.setColumns(10);
+		txtNome.setText(hospedeLogado.getNome());
 		
-		JLabel lblAltBairro = new JLabel("Alterar Bairro");
-		lblAltBairro.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltBairro, "cell 1 5");
+		JLabel lblAltTelefone = new JLabel("Alterar Telefone");
+		lblAltTelefone.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltTelefone, "cell 1 5");
 		
 		JLabel lblAltSenha = new JLabel("Alterar Senha");
 		lblAltSenha.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblAltSenha, "cell 4 5 3 1");
 		
-		txtBairro = new JTextField();
-		txtBairro.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtBairro, "cell 1 6 2 1,grow");
-		txtBairro.setColumns(10);
+		txtTelefone = new JTextField();
+		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtTelefone, "cell 1 6 2 1,grow");
+		txtTelefone.setColumns(10);
+		txtTelefone.setText(hospedeLogado.getTelefone());
 		
 		txtSenha = new JTextField();
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -126,24 +131,25 @@ public class TelaPerfil extends JFrame {
 		txtSenha.setColumns(10);
 		txtSenha.setText(hospedeLogado.getLogin().getSenha());
 		
-		JLabel lblAltCidade = new JLabel("Alterar Cidade");
-		lblAltCidade.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltCidade, "cell 1 7");
+		JLabel lblAltNascimento = new JLabel("Alterar Data de nascimento");
+		lblAltNascimento.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltNascimento, "cell 1 7");
 		
 		JLabel lblAltEmail = new JLabel("Alterar Email");
 		lblAltEmail.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblAltEmail, "cell 4 7 3 1");
 		
-		txtCidade = new JTextField();
-		txtCidade.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtCidade, "cell 1 8 2 1,grow");
-		txtCidade.setColumns(10);
+		txtNascimento = new JTextField();
+		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtNascimento, "cell 1 8 2 1,grow");
+		txtNascimento.setColumns(10);
+//		txtNascimento.setText(hospedeLogado.getNascimento());
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtEmail, "cell 4 8 3 1,grow");
 		txtEmail.setColumns(10);
-		txtEmail.setText(hospedeLogado.getLogin().getSenha());
+		txtEmail.setText(hospedeLogado.getLogin().getLogin());
 		
 		JLabel lblNewLabel_6 = new JLabel("Alterar CEP");
 		lblNewLabel_6.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -176,6 +182,7 @@ public class TelaPerfil extends JFrame {
 		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtVerSenha, "cell 2 17 3 1,grow");
 		txtVerSenha.setColumns(10);
+		txtVerSenha.setText(hospedeLogado.getLogin().getSenha());
 		
 		JLabel lblNewLabel_8 = new JLabel("Confirmar Senha");
 		lblNewLabel_8.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -185,8 +192,58 @@ public class TelaPerfil extends JFrame {
 		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtConfSenha, "cell 2 21 3 1,grow");
 		txtConfSenha.setColumns(10);
+		txtConfSenha.setText(hospedeLogado.getLogin().getSenha());
 		
 		JLabel BtnAtualizarInfo = new JLabel("");
+		BtnAtualizarInfo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				
+				String nome = txtNome.getText();
+				String Sobrenome = txtSobrenome.getText();
+				
+				String dataNascTxt = txtNascimento.getText();
+
+				dataNascTxt = dataNascTxt.replace("/", "");
+				dataNascTxt = dataNascTxt.trim();
+
+				LocalDate nascimento = null;
+				if (dataNascTxt.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Nenhuma data preenchida!");
+				} else {
+
+					String diaTxt = dataNascTxt.substring(0, 2);
+					String mesTxt = dataNascTxt.substring(2, 4);
+					String anoTxt = dataNascTxt.substring(4, 8);
+
+					Integer dia = Integer.valueOf(diaTxt);
+					Integer mes = Integer.valueOf(mesTxt);
+					Integer ano = Integer.valueOf(anoTxt);
+
+					nascimento = LocalDate.of(ano, mes, dia);
+
+				}
+				
+				String telefone = txtTelefone.getText();
+				String email = txtEmail.getText();
+				String senha = txtSenha.getText();
+				
+				Hospedes hospede = new Hospedes();
+				
+				hospede.setNome(nome);
+				hospede.setSobrenome(Sobrenome);
+				hospede.setNascimento(nascimento);
+				hospede.setTelefone(telefone);
+				hospede.getLogin().setLogin(email);
+				hospede.getLogin().setSenha(senha);
+				
+				HospedesDAO dao = HospedesDAO.getInstancia();
+				
+				Hospedes update = dao.atualizarHospedes(hospede);
+			}
+		});
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
 		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 22 3 1,alignx center,aligny center");
 		

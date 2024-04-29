@@ -10,7 +10,7 @@ public interface IHospedesDAO {
 	
 	public ArrayList<Hospedes> listarHospedes();
 	
-	public boolean atualizarHospedes(Hospedes end);
+	public Hospedes atualizarHospedes(Hospedes hosp);
 	
 	public Hospedes removerHospedes(String email);
 	

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
@@ -79,7 +80,7 @@ private static HospedesDAO instancia;
 				Integer IDHospede = rs.getInt("idHospede");
 				String NomeHospede = rs.getString("nome");
 				String sobrenomehospede = rs.getString("sobrenome");
-				Date nascimentohospede = rs.getDate("nascimento");
+//				LocalDate nascimentohospede = rs.getDate.valueOf("nascimento");
 				String telefonehospede = rs.getString("telefone");
 				String emailhospede = rs.getString("email");
 				String senhahospede = rs.getString("senha");
@@ -89,8 +90,8 @@ private static HospedesDAO instancia;
 				hosp.setSobrenome(sobrenomehospede);
 //				hosp.setNascimento(nascimentohospede);
 				hosp.setTelefone(telefonehospede);
-//				hosp.setEmail(emailhospede);
-//				hosp.setSenha(senhahospede);
+				hosp.getLogin().setLogin(emailhospede);
+				hosp.getLogin().setSenha(senhahospede);
 				
 				hospedes.add(hosp);
 				
@@ -105,9 +106,11 @@ private static HospedesDAO instancia;
 		return hospedes;
 	}
 	
-	public boolean atualizarHospedes(Hospedes hosp) {
+	public Hospedes atualizarHospedes(Hospedes hosp) {
 		
-String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, telefone = ?, email = ?, senha = ? WHERE idHospede = ?";
+		String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, telefone = ?, email = ?, senha = ? WHERE senha LIKE ?";
+		
+		Hospedes update = null;
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -119,14 +122,32 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 			
 			ps.setString(1, hosp.getNome());
 			ps.setString(2, hosp.getSobrenome());
-//			ps.setDate(3, hosp.getNascimento());
+			ps.setDate(3, java.sql.Date.valueOf(hosp.getNascimento()));
 			ps.setString(4, hosp.getTelefone());
-//			ps.setString(5, hosp.getEmail());
-//			ps.setString(6, hosp.getSenha());
+			ps.setString(5, hosp.getLogin().getLogin());
+			ps.setString(6, hosp.getLogin().getSenha());
 			
 			
 			retorno = ps.executeUpdate();
 			
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				update = new Hospedes();
+				String nome = rs.getString("nome");
+				String sobrenome = rs.getString("sobrenome");
+//				LocalDate nascimento = rs.getDate("nascimento");
+				String telefone = rs.getString("telefone");
+				String email = rs.getString("email");
+				String senha = rs.getString("senha");
+				
+				update.setNome(nome);
+				update.setSobrenome(sobrenome);;
+//				update.setNascimento(nascimento);
+				update.setTelefone(telefone);
+				update.getLogin().setLogin(email);
+				update.getLogin().setSenha(senha);
+			}
 			
 		} catch (SQLException e) {
 			
@@ -136,7 +157,7 @@ String SQL = "UPDATE Hospedes SET nome = ? , sobrenome = ?, nascimento = ?, tele
 		}
 		
 		
-		return (retorno == 0 ? false : true);
+		return update;
 		
 
 	}
