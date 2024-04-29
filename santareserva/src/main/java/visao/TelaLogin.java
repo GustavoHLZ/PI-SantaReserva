@@ -37,6 +37,7 @@ import java.awt.event.MouseEvent;
 
 public class TelaLogin extends JFrame {
 
+	protected static final Hospedes Hospedes = null;
 	private JPanel contentPane;
 	private JTextField txtLogin;
 	private JTextField txtSenha;
@@ -49,6 +50,7 @@ public class TelaLogin extends JFrame {
 	private JTextField testesenha;
 	private JTextField testeid;
 	private JTextField txtdelete;
+	private Hospedes hospedelogado;
 
 	/**
 	 * Launch the application.
@@ -73,6 +75,7 @@ public class TelaLogin extends JFrame {
 	}
 
 	public TelaLogin() {
+		
 
 		listarInfo_Login = new ArrayList<Infologin>();
 
@@ -165,7 +168,7 @@ public class TelaLogin extends JFrame {
 				Infologin usuarioLogado = dao.buscarInfologin(Login, Senha);
 
 				if (usuarioLogado != null) {
-					JOptionPane.showMessageDialog(null, "Usuário Cadastro");
+					JOptionPane.showMessageDialog(null, "Usuário Cadastrado");
 					HospedesDAO daohosp = HospedesDAO.getInstancia();
 					Hospedes hospede = daohosp.buscarHospedes(Login, Senha);
 					TelaPerfil c = new TelaPerfil(hospede);

@@ -119,7 +119,7 @@ public class InfologinDAO implements IInfologinDAO {
 
 			if (rs.next()) {
 				login = new Infologin();
-				int idUser = rs.getInt("idUsuario");
+				Integer idUser = rs.getInt("idUsuario");
 				String Email = rs.getString("email");
 				String Senha = rs.getString("senha");
 				login.setIdUsuario(idUser);
