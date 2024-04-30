@@ -25,35 +25,34 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	}
 	
 	public int InserirAvaliacao(Avaliacoes ava) {
-	
-		String SQL = "INSERT INTO Avaliacoes (avaliacao, avaliador) VALUES (?, ?)";
-		
-		Conexao con = Conexao.getInstancia();
-		Connection conBD = con.conectar();
-		
-		int chavePrimariaGerada = Integer.MIN_VALUE;
-		
-		try {
-			PreparedStatement ps= conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-			
-			
-			ps.setFloat(1, ava.getAvaliacao());
-			ps.setString(2, ava.getAvaliador());
-			
-			ps.executeUpdate();
-			
-			ResultSet rs = ps.executeQuery();
-			if(rs!=null) {
-				chavePrimariaGerada = rs.getInt(1);
-			}
-		
-		} 	catch (SQLException e) {
-		     e.printStackTrace();
-		} 	finally {
-		     con.fecharConexao();
-		}
-	
-		return chavePrimariaGerada;
+	    String SQL = "INSERT INTO Avaliacoes (avaliacao, avaliador, fkIDHospede) VALUES (?, ?, ?)";
+	    
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+	    
+	    int chavePrimariaGerada = Integer.MIN_VALUE;
+	    
+	    try {
+	        PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+	        
+	        ps.setFloat(1, ava.getAvaliacao());
+	        ps.setString(2, ava.getAvaliador());
+	        ps.setInt(3, ava.getFkIDHospede().getIdHospede()); // Supondo que getId() retorna o ID do hospede
+	        
+	        ps.executeUpdate();
+	        
+	        ResultSet rs = ps.getGeneratedKeys();
+	        if (rs.next()) {
+	            chavePrimariaGerada = rs.getInt(1);
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+	    
+	    return chavePrimariaGerada;
 	}
 	
 	public ArrayList<Avaliacoes> listarAvaliacoes() {
@@ -98,10 +97,10 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	 * Tem que possuir a chave primeira (ID, etc.)
 	 */
 	
-	public boolean atualizarAvaliacoes(Avaliacoes end) {
+	public boolean atualizarAvaliacoes(String nome, Float avalia) {
 		
 		// Comando SQL a se executado
-		String SQL = "UPDATE Avaliacoes SET avaliacao = ? Where avaliador = ?";
+		String SQL = "UPDATE Avaliacoes SET nome = ?, avalia = ? Where idAvaliacao = ?";
 		
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -113,8 +112,8 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
 			
-			ps.setFloat(1, end.getAvaliacao());
-			ps.setString(2, end.getAvaliador());
+			ps.setFloat(1, avalia);
+			ps.setString(2, nome);
 			
 			retorno = ps.executeUpdate();
 			
@@ -132,7 +131,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	return (retorno == 0 ? false : true);
 	}
 	
-	public boolean removerAvaliacoes(Avaliacoes end) {
+	public boolean removerAvaliacoes(int idAvaliacao) {
 		
 		String SQL = "DELETE FROM Avaliacoes WHERE idAvaliacao = ?";
 		
@@ -144,7 +143,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getIdAvaliacao());
+			ps.setInt(1,idAvaliacao);
 			retorno = ps.executeUpdate();
 			
 			
