@@ -6,34 +6,25 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
-import controle.Quarto;
 import controle.QuartosDAO;
 import modelo.Hospedes;
 import modelo.Quartos;
-import modelo.TipoHoras;
-import modelo.comboBoxDisponivel;
-import modelo.comboBoxPreco;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JButton;
 import javax.swing.JTextField;
 
 public class TelaQuartos extends JFrame {
@@ -226,8 +217,7 @@ public class TelaQuartos extends JFrame {
 		            JTable source = (JTable) e.getSource();
 		            int posicaoQuarto = source.getSelectedRow();
 		            if (posicaoQuarto != -1) {
-		                quartoSelecionado = listaQuartos.get(posicaoQuarto);
-		                
+		                quartoSelecionado = listaQuartos.get(posicaoQuarto); 
 		            }
 		        }
 			
@@ -241,29 +231,106 @@ public class TelaQuartos extends JFrame {
 		lblReservar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//validação pra ver se o usuário não selecionou nada e também se o quarto selecionado está vazio ou não
+				if (quartoSelecionado != null) { 
+		            if (quartoSelecionado.getDisp()) {
+		            	
+		            	if (textCheckIn.getText().equals("")) {
+							JOptionPane.showMessageDialog(null, "Preencha o campo Check-In");
+							return;
 
+						}
+		            	if (textCheckOut.getText().equals("")) {
+							JOptionPane.showMessageDialog(null, "Preencha o campo Check-Out");
+							return;
+
+						}
+		            	
+		            	if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+							JOptionPane.showMessageDialog(null, "A data de Check-In deve estar no formato dd/MM/yyyy.");
+							return;
+						}
+		            	if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+							JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy.");
+							return;
+						}			
+		            	
+		            	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		            	
 				String checkin = textCheckIn.getText();
 				String checkout = textCheckOut.getText();
 				Integer idquarto = quartoSelecionado.getIdQuarto();				
+				
+				String dataCheckInTxt = textCheckIn.getText();
+				String dataCheckOutTxt = textCheckOut.getText();
+				
+				dataCheckInTxt = dataCheckInTxt.replace("/", "");
+				dataCheckInTxt = dataCheckInTxt.trim();
+				
+				dataCheckOutTxt = dataCheckOutTxt.replace("/", "");
+				dataCheckOutTxt = dataCheckOutTxt.trim();
+				
+				LocalDate checkINN = null;
+				if (checkin.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-In preenchida!");
+				} else {
+
+					String diaTxt = dataCheckInTxt.substring(0, 2);
+					String mesTxt = dataCheckInTxt.substring(2, 4);
+					String anoTxt = dataCheckInTxt.substring(4, 8);
+
+					Integer dia = Integer.valueOf(diaTxt);
+					Integer mes = Integer.valueOf(mesTxt);
+					Integer ano = Integer.valueOf(anoTxt);
+
+					checkINN = LocalDate.of(ano, mes, dia);
+
+				}
+				
+				LocalDate checkOUTT = null;
+				if (checkout.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-Out preenchida!");
+				} else {
+
+					String diaTxt = dataCheckOutTxt.substring(0, 2);
+					String mesTxt = dataCheckOutTxt.substring(2, 4);
+					String anoTxt = dataCheckOutTxt.substring(4, 8);
+
+					Integer dia = Integer.valueOf(diaTxt);
+					Integer mes = Integer.valueOf(mesTxt);
+					Integer ano = Integer.valueOf(anoTxt);
+
+					checkOUTT = LocalDate.of(ano, mes, dia);
+
+				}
+				
 				Quartos quartos = new Quartos();
 				
-				quartos.setCheckIn(checkin);
-				quartos.setCheckOut(checkout);
+				quartos.setCheckIn(checkINN);
+				quartos.setCheckOut(checkOUTT);
 				
 				QuartosDAO dao = QuartosDAO.getInstancia();
 				
-				dao.atualizarQuartos(checkin, checkout, idquarto);
+				dao.atualizarQuartos(checkINN, checkOUTT, idquarto);
 				
 				
 				listaQuartos.add(quartos);
-				quartoSelecionado.setCheckIn(checkin);
-				quartoSelecionado.setCheckOut(checkout);
+				quartoSelecionado.setCheckIn(checkINN);
+				quartoSelecionado.setCheckOut(checkOUTT);
 				
 				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, listaQuartos, null, null);
 		        telaReservas.setVisible(true);
 				
 				 
 				 atualizarJTable();
+				 
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Este quarto não está disponível para reserva.");
+		            }
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Por favor, selecione um quarto antes de fazer uma reserva.");
+		        }
+				dispose();
 			}
 		});
 		
@@ -272,6 +339,14 @@ public class TelaQuartos extends JFrame {
 		
 		JLabel lblNewLabel_21 = new JLabel("Check-In");
 		PainelPrincipal.add(lblNewLabel_21, "cell 0 1");
+		
+		MaskFormatter mascaraDat = null;
+
+		try {
+			mascaraDat = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 		textCheckIn = new JTextField();
 		PainelPrincipal.add(textCheckIn, "cell 0 1");
@@ -282,6 +357,12 @@ public class TelaQuartos extends JFrame {
 		
 		JLabel lblNewLabel_22 = new JLabel("Check-Out");
 		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
+		
+		try {
+			mascaraDat = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 		textCheckOut = new JTextField();
 		PainelPrincipal.add(textCheckOut, "cell 0 1");
@@ -354,10 +435,6 @@ public class TelaQuartos extends JFrame {
 	        } else {
 	            disponibilidade = "Indisponível";
 	        }
-	        if (quartoSelecionado != null && quartoSelecionado.getDisp().equals("Indisponível")) {
-                JOptionPane.showMessageDialog(null, "O quarto selecionado está indisponível.");
-                return;
-            }
 	        modelo.addRow(new Object[] {quarto.getIdQuarto(), quarto.getTipo(), quarto.getCap(), disponibilidade ,quarto.getPreco()});
 	    }
 	    

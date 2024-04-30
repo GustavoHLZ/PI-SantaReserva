@@ -1,5 +1,7 @@
 package modelo;
 
+import java.time.LocalDate;
+
 public class Quartos {
 
 	private int idQuarto;
@@ -8,19 +10,20 @@ public class Quartos {
 	private Boolean disp;
 	private int cap;
 	private int temp;
-	private String CheckIn;
-	private String CheckOut;
+	private LocalDate CheckIn;
+	private LocalDate CheckOut;
 	
-	public String getCheckIn() {
+	
+	public LocalDate getCheckIn() {
 		return CheckIn;
 	}
-	public void setCheckIn(String checkIn) {
+	public void setCheckIn(LocalDate checkIn) {
 		CheckIn = checkIn;
 	}
-	public String getCheckOut() {
+	public LocalDate getCheckOut() {
 		return CheckOut;
 	}
-	public void setCheckOut(String checkOut) {
+	public void setCheckOut(LocalDate checkOut) {
 		CheckOut = checkOut;
 	}
 	public int getIdQuarto() {
