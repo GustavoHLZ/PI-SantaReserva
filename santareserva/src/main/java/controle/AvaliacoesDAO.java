@@ -97,34 +97,28 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	 * Tem que possuir a chave primeira (ID, etc.)
 	 */
 	
-	public boolean atualizarAvaliacoes(String nome, Float avalia) {
-		
-		// Comando SQL a se executado
-		String SQL = "UPDATE Avaliacoes SET nome = ?, avalia = ? Where idAvaliacao = ?";
-		
-		// Abre a conexão e cria a "ponte de conexao " com MYSQL
-		Conexao con = Conexao.getInstancia();
-		Connection conBD = con.conectar();
-		
-		int retorno = 0;
-		
-		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
-			
-			
-			ps.setFloat(1, avalia);
-			ps.setString(2, nome);
-			
-			retorno = ps.executeUpdate();
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-			}
+	public boolean atualizarAvaliacoes(int idAvaliacao, String nome, Float avalia, int idUsuario) {
+	    String SQL = "UPDATE Avaliacoes SET avaliador = ?, avaliacao = ? WHERE idAvaliacao = ? AND fkIDHospede = ?";
+	    
+	    // Abre a conexão e cria a "ponte de conexão" com o MySQL
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+	    
+	    int retorno = 0;
+	    
+	    try {
+	        PreparedStatement ps = conBD.prepareStatement(SQL);
+	        ps.setString(1, nome);
+	        ps.setFloat(2, avalia);
+	        ps.setInt(3, idAvaliacao);
+	        ps.setInt(4, idUsuario); // Verifica se o ID do usuário é o mesmo associado à avaliação
+	        retorno = ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+	    
 		
 		
 	// Usando IF ternário // isso é if ternário (operador condicional ternário)

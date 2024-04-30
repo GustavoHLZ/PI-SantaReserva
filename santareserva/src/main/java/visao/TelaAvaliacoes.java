@@ -45,12 +45,13 @@ public class TelaAvaliacoes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Quartos quartoSelecionado;
 	private ArrayList<Avaliacoes> listarAvaliacoes = new ArrayList<Avaliacoes>();
 	private Hospedes hospedeLogado;
+	private Avaliacoes avaliacoesselc;
 	private JTextField txtNome;
 	private JTextField txtComentario;
 	private JTable table;
+
 
 	/**
 	 * Launch the application.
@@ -149,9 +150,9 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(hosplogado, null, quartoSelecionado, null, null, null);
-				c.setVisible(true);
-				dispose();
+				//TelaReservas c = new TelaReservas(hosplogado);
+				//c.setVisible(true);
+				//();
 			}
 		});
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -314,56 +315,69 @@ public class TelaAvaliacoes extends JFrame {
 		PainelPrincipal.add(panel_19);
 		panel_19.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", "[][][][]"));
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.addMouseListener(new MouseAdapter() {
+		JLabel lbApagar = new JLabel("");
+		lbApagar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
-				
-				Avaliacoes c = new Avaliacoes();
-				
-				int id = c.getIdAvaliacao();
-				
-				dao.removerAvaliacoes(id);
+				 int idHospede = hospedeLogado.getIdHospede(); 
+			        AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
+			        dao.removerAvaliacoes(idHospede); 
+			        atualizarJTable();
 			}
 		});
-		lblNewLabel_20.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Apagar Avalição.png")));
-		panel_19.add(lblNewLabel_20, "cell 2 2,grow");
+		lbApagar.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Apagar Avalição.png")));
+		panel_19.add(lbApagar, "cell 2 2,grow");
 		
-		JLabel lblReservar = new JLabel("");
-		panel_19.add(lblReservar, "cell 12 2,grow");
-		lblReservar.addMouseListener(new MouseAdapter() {
+		JLabel lblatualizar = new JLabel("");
+		panel_19.add(lblatualizar, "cell 12 2,grow");
+		lblatualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				String nome = txtNome.getText();
-				Float avalia = Float.valueOf(txtComentario.getText());
-				Avaliacoes avaliacao = new Avaliacoes();
-				
-				avaliacao.setAvaliador(nome);
-				avaliacao.setAvaliacao(avalia);
-				
-				AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
-				
-				dao.atualizarAvaliacoes(nome,avalia);
-				
-				
-				listarAvaliacoes.add(avaliacao);
-				
-				
+				int linhaSelecionada = table.getSelectedRow();
+				if (linhaSelecionada >= 0) {
+				    int idAvaliacao = (int) table.getValueAt(linhaSelecionada, 0);
+				    String novoNome = txtNome.getText();
+				    Float novaAvaliacao = Float.valueOf(txtComentario.getText());
 
-				 
-				 atualizarJTable();		    
-				
+	
+				    int idUsuario = hospedeLogado.getIdHospede();
+
+				    AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
+				    boolean atualizado = dao.atualizarAvaliacoes(idAvaliacao, novoNome, novaAvaliacao, idUsuario);
+				    
+				    if (atualizado) {
+				        JOptionPane.showMessageDialog(null, "Avaliação atualizada com sucesso!");
+				        atualizarJTable(); 
+				    } else {
+	
+				        JOptionPane.showMessageDialog(null, "Falha ao atualizar avaliação!");
+				    }
+				}
 			}
 		});
 		
 		
-		lblReservar.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Atualizar Avaliação.png")));
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+		            JTable source = (JTable) e.getSource();
+		            int posicaoavaliacao = source.getSelectedRow();
+		            if (posicaoavaliacao != -1) {
+		            	avaliacoesselc = listarAvaliacoes.get(posicaoavaliacao); 
+		            }
+		        }
+			
+			}
+		});
 		
-		JLabel lblNewLabel_23 = new JLabel("");
-		lblNewLabel_23.addMouseListener(new MouseAdapter() {
+		
+		lblatualizar.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Atualizar Avaliação.png")));
+		
+		JLabel lblFazerAvaliacao = new JLabel("");
+		lblFazerAvaliacao.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -392,19 +406,27 @@ public class TelaAvaliacoes extends JFrame {
 				
 			}
 		});
-		lblNewLabel_23.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/BTN Fazer Avaliação.png")));
-		panel_19.add(lblNewLabel_23, "cell 16 2,grow");
+		lblFazerAvaliacao.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/BTN Fazer Avaliação.png")));
+		panel_19.add(lblFazerAvaliacao, "cell 16 2,grow");
 		
 		JPanel panel_20 = new JPanel();
 		panel_20.setBounds(513, 26, 566, 307);
 		PainelPrincipal.add(panel_20);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_20.add(scrollPane);
+		
 		table = new JTable();
 		panel_20.add(table);
-		atualizarJTable();
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "fkIDHospede" }));
+		
+		
+		
+		
+		
 	}
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Avaliador", "Avaliacao" });
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Avaliador", "Avaliação", "fkIDHospede" });
 
 	    AvaliacoesDAO Avaliacoesdao = AvaliacoesDAO.getInstancia();
 	    listarAvaliacoes = Avaliacoesdao.listarAvaliacoes();
@@ -412,7 +434,8 @@ public class TelaAvaliacoes extends JFrame {
 	    for (int i = 0; i < listarAvaliacoes.size(); i++) {
 	        Avaliacoes avalia = listarAvaliacoes.get(i);
 
-	        modelo.addRow(new Object[] {avalia.getIdAvaliacao(), avalia.getAvaliador(), avalia.getAvaliacao()});
+	        modelo.addRow(new Object[] {avalia.getIdAvaliacao(), avalia.getAvaliador(), avalia.getAvaliacao(), avalia.getFkIDHospede()});
 	    }
+	    table.setModel(modelo);
 	}
 }
