@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 import modelo.Quartos;
 
 
@@ -102,23 +101,31 @@ public class QuartosDAO implements IQuartosDAO {
 		return quartos;
 	}
 	
-	public boolean atualizarQuartos(Quartos end) {
+	public Quartos atualizarQuartos(String checkin, String checkout, Integer idquarto) {
 	    // Comando SQL a ser executado
-	    String SQL = "UPDATE Quartos SET disp = ? WHERE idQuarto = ?";
+	    String SQL = "UPDATE Quartos SET checkIn = ?, checkOut = ? WHERE idQuarto = ?";
 
+	    Quartos quarto = null;
+	    
 	    // Abre a conexão e cria a "ponte de conexão" com o MySQL
 	    Conexao con = Conexao.getInstancia();
 	    Connection conBD = con.conectar();
 
-	    int retorno = 0;
-
 	    try {
 	        PreparedStatement ps = conBD.prepareStatement(SQL);
 
-	        ps.setBoolean(1, end.getDisp());
-	        ps.setInt(2, end.getIdQuarto());
+	        ps.setString(1, checkin);
+	        ps.setString(2, checkout);
+	        ps.setInt(3, idquarto);
 
-	        retorno = ps.executeUpdate();
+	        int linhasAfetadas = ps.executeUpdate();
+	        
+	        if (linhasAfetadas > 0) {
+	            quarto = new Quartos();
+	            quarto.setIdQuarto(idquarto);
+	            quarto.setCheckIn(checkin);
+	            quarto.setCheckOut(checkout);
+	        }
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -126,8 +133,9 @@ public class QuartosDAO implements IQuartosDAO {
 	        con.fecharConexao();
 	    }
 
-	    return (retorno != 0);
+	    return quarto;
 	}
+
 	
 	public boolean removerQuartos(Quartos end) {
 		// Provalmente não vai ser usado este metodo pois não irá ser removido um quarto do hotel
@@ -158,6 +166,12 @@ public class QuartosDAO implements IQuartosDAO {
 	public Quartos buscarQuartos(Quartos end) {
 	
 		return null;
+	}
+
+	@Override
+	public boolean atualizarQuartos(Quartos end) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

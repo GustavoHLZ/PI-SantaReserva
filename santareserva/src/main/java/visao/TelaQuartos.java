@@ -237,18 +237,25 @@ public class TelaQuartos extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Disponibilidade", "Preço" }));
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.addMouseListener(new MouseAdapter() {
+		JLabel lblReservar = new JLabel("");
+		lblReservar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 				String checkin = textCheckIn.getText();
 				String checkout = textCheckOut.getText();
-				Quartos p = new Quartos();
-				p.setCheckIn(checkin);
-				p.setCheckOut(checkout);
-				listaQuartos.add(p);
+				Integer idquarto = quartoSelecionado.getIdQuarto();				
+				Quartos quartos = new Quartos();
 				
+				quartos.setCheckIn(checkin);
+				quartos.setCheckOut(checkout);
+				
+				QuartosDAO dao = QuartosDAO.getInstancia();
+				
+				dao.atualizarQuartos(checkin, checkout, idquarto);
+				
+				
+				listaQuartos.add(quartos);
 				quartoSelecionado.setCheckIn(checkin);
 				quartoSelecionado.setCheckOut(checkout);
 				
@@ -329,8 +336,8 @@ public class TelaQuartos extends JFrame {
 		PainelPrincipal.add(panel_18, "cell 0 1");
 		
 		
-		lblNewLabel_20.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
-		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center,aligny center");
+		lblReservar.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Botões/BTN Reserva.png")));
+		PainelPrincipal.add(lblReservar, "cell 0 1,alignx center,aligny center");
 		atualizarJTable();
 	}
 	protected void atualizarJTable() {
