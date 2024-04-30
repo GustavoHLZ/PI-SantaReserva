@@ -415,9 +415,11 @@ public class TelaAvaliacoes extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel_20.add(scrollPane);
-		
+
 		table = new JTable();
-		panel_20.add(table);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(560, 300)); // Defina as dimensões do JScrollPane conforme necessário
+		panel_20.add(scrollPane);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "fkIDHospede" }));
 		
 		
