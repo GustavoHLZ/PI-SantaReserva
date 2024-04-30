@@ -80,8 +80,8 @@ CREATE TABLE IF NOT EXISTS `quartos` (
   `disp` TINYINT(4) NOT NULL,
   `cap` INT(11) NOT NULL,
   `temp` INT(11) NOT NULL,
-  `checkIn` VARCHAR(6) NULL,
-  `checkOut` VARCHAR(6) NULL,
+  `checkIn` DATE NOT NULL,
+  `checkOut` DATE NOT NULL,
   PRIMARY KEY (`idQuarto`)
 );
 
@@ -190,36 +190,36 @@ insert into Servicos (idServico, pagEfetuado, precoServico, nomeServico) values 
 insert into Servicos (idServico, pagEfetuado, precoServico, nomeServico) values (119, true, 28.60, 'Cuervo Margarita‫');
 insert into Servicos (idServico, pagEfetuado, precoServico, nomeServico) values (120, false, 28.60, 'Negroni');
 
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (81, 'Solteiro', 250.00, false, 1,1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (82, 'Suíte', 350.00, true, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (83, 'Cama Dupla', 450.00, true, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (84, 'Cama Dupla', 450.00, true, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (85, 'Cama Dupla', 450.00, false, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (86, 'Cama Dupla', 450.00, false, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (87, 'Suíte', 350.00, false, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (88, 'Suíte', 350.00, false, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (89, 'Cama Dupla', 450.00, true, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (90, 'Solteiro', 250.00, true, 1, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (91, 'Solteiro', 250.00, false, 1, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (92, 'Cama Dupla', 450.00, false, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (93, 'Cama Dupla', 450.00, false, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (94, 'Suíte', 350.00, true, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (95, 'Solteiro', 250.00, false, 1, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (96, 'Solteiro', 250.00, false, 1, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (97, 'Cama Dupla', 450.00, true, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (98, 'Suíte', 350.00, true, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (99, 'Solteiro', 250.00, false, 1, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (100, 'Suíte', 350.00, false, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (121, 'Solteiro', 250.00, false, 1,1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (122, 'Solteiro', 250.00, true, 1,1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (123, 'Solteiro', 250.00, false, 1,1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (124, 'Solteiro', 250.00, true, 1,1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (125, 'Suíte', 350.00, true, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (126, 'Suíte', 350.00, false, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (127, 'Suíte', 350.00, true, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (128, 'Suíte', 350.00, false, 2, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (129, 'Cama Dupla', 450.00, true, 4, 1, NULL, NULL);
-insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (130, 'Cama Dupla', 450.00, false, 4, 1, NULL, NULL);
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (81, 'Solteiro', 250.00, false, 1,1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (82, 'Suíte', 350.00, true, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (83, 'Cama Dupla', 450.00, true, 4, 1,'0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (84, 'Cama Dupla', 450.00, true, 4, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (85, 'Cama Dupla', 450.00, false, 4, 1,'0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (86, 'Cama Dupla', 450.00, false, 4, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (87, 'Suíte', 350.00, false, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (88, 'Suíte', 350.00, false, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (89, 'Cama Dupla', 450.00, true, 4, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (90, 'Solteiro', 250.00, true, 1, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (91, 'Solteiro', 250.00, false, 1, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (92, 'Cama Dupla', 450.00, false, 4, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (93, 'Cama Dupla', 450.00, false, 4, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (94, 'Suíte', 350.00, true, 2, 1,'0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (95, 'Solteiro', 250.00, false, 1, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (96, 'Solteiro', 250.00, false, 1, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (97, 'Cama Dupla', 450.00, true, 4, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (98, 'Suíte', 350.00, true, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (99, 'Solteiro', 250.00, false, 1, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (100, 'Suíte', 350.00, false, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (121, 'Solteiro', 250.00, false, 1,1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (122, 'Solteiro', 250.00, true, 1,1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (123, 'Solteiro', 250.00, false, 1,1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (124, 'Solteiro', 250.00, true, 1,1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (125, 'Suíte', 350.00, true, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (126, 'Suíte', 350.00, false, 2, 1,'0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (127, 'Suíte', 350.00, true, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (128, 'Suíte', 350.00, false, 2, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (129, 'Cama Dupla', 450.00, true, 4, 1, '0001-01-01', '0001-01-01');
+insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (130, 'Cama Dupla', 450.00, false, 4, 1, '0001-01-01', '0001-01-01');
 
 insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (41, 1, 1, 250.00,1, NULL, NULL);
 insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (42, 2, 2, 250.00,1, NULL, NULL);
