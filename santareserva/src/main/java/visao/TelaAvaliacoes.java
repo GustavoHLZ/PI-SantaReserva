@@ -310,6 +310,21 @@ public class TelaAvaliacoes extends JFrame {
 		panel_18.setBounds(527, 447, 10, 10);
 		PainelPrincipal.add(panel_18);
 		
+		JPanel panel_20 = new JPanel();
+		panel_20.setBounds(513, 26, 566, 307);
+		PainelPrincipal.add(panel_20);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_20.add(scrollPane);
+
+		table = new JTable();
+		scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(560, 300)); // Defina as dimensões do JScrollPane conforme necessário
+		panel_20.add(scrollPane);
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "fkIDHospede" }));
+		
+		
+		
 		JPanel panel_19 = new JPanel();
 		panel_19.setBounds(17, 365, 1088, 103);
 		PainelPrincipal.add(panel_19);
@@ -408,19 +423,6 @@ public class TelaAvaliacoes extends JFrame {
 		});
 		lblFazerAvaliacao.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/BTN Fazer Avaliação.png")));
 		panel_19.add(lblFazerAvaliacao, "cell 16 2,grow");
-		
-		JPanel panel_20 = new JPanel();
-		panel_20.setBounds(513, 26, 566, 307);
-		PainelPrincipal.add(panel_20);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		panel_20.add(scrollPane);
-
-		table = new JTable();
-		scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(560, 300)); // Defina as dimensões do JScrollPane conforme necessário
-		panel_20.add(scrollPane);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "fkIDHospede" }));
 		
 		
 		
