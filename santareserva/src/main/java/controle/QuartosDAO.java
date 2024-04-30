@@ -1,9 +1,11 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Quartos;
@@ -39,8 +41,8 @@ public class QuartosDAO implements IQuartosDAO {
 			ps.setBoolean(4, qua.getDisp());
 			ps.setInt(5, qua.getCap());
 			ps.setInt(6, qua.getTemp());
-			ps.setString(7,qua.getCheckIn());
-			ps.setString(8,qua.getCheckOut());
+			ps.setDate(7, java.sql.Date.valueOf(qua.getCheckIn()));
+			ps.setDate(8, java.sql.Date.valueOf(qua.getCheckOut()));
 			
 			return ps.executeUpdate();
 			
@@ -76,8 +78,10 @@ public class QuartosDAO implements IQuartosDAO {
 				Boolean disp = rs.getBoolean("disp");
 				Integer cap = rs.getInt("cap");
 				Integer temp = rs.getInt("temp");
-				String checkIn = rs.getString("checkIn");
-				String checkOut = rs.getString("checkOut");
+				java.sql.Date sqlcheckIn = rs.getDate("checkIn");
+				LocalDate checkinquarto = sqlcheckIn == null ? null : sqlcheckIn.toLocalDate();
+				java.sql.Date sqlcheckOut = rs.getDate("checkOut");
+				LocalDate checkoutquarto = sqlcheckOut == null ? null : sqlcheckOut.toLocalDate();
 				
 				qua.setIdQuarto(idQuarto);
 				qua.setTipo(tipo);
@@ -85,8 +89,8 @@ public class QuartosDAO implements IQuartosDAO {
 				qua.setDisp(disp);
 				qua.setCap(cap);
 				qua.setTemp(temp);
-				qua.setCheckIn(checkIn);
-				qua.setCheckOut(checkOut);
+				qua.setCheckIn(checkinquarto);
+				qua.setCheckOut(checkoutquarto);
 				
 				quartos.add(qua);
 				
@@ -101,7 +105,7 @@ public class QuartosDAO implements IQuartosDAO {
 		return quartos;
 	}
 	
-	public Quartos atualizarQuartos(String checkin, String checkout, Integer idquarto) {
+	public Quartos atualizarQuartos(LocalDate checkin, LocalDate checkout, Integer idquarto) {
 	    // Comando SQL a ser executado
 	    String SQL = "UPDATE Quartos SET checkIn = ?, checkOut = ? WHERE idQuarto = ?";
 
@@ -114,8 +118,10 @@ public class QuartosDAO implements IQuartosDAO {
 	    try {
 	        PreparedStatement ps = conBD.prepareStatement(SQL);
 
-	        ps.setString(1, checkin);
-	        ps.setString(2, checkout);
+	        java.sql.Date sqlcheckIn = Date.valueOf(checkin);
+	        ps.setDate(1, sqlcheckIn);
+	        java.sql.Date sqlcheckOut = Date.valueOf(checkout);
+	        ps.setDate(2, sqlcheckOut);
 	        ps.setInt(3, idquarto);
 
 	        int linhasAfetadas = ps.executeUpdate();
