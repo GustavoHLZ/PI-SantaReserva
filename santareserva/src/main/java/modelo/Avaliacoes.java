@@ -4,7 +4,7 @@ public class Avaliacoes {
 	private int idAvaliacao;
 	private float avaliacao;
 	private String avaliador;
-	private int fkIDHospede;
+	private Hospedes fkIDHospede;
 	
 	public int getIdAvaliacao() {
 		return idAvaliacao;
@@ -24,11 +24,11 @@ public class Avaliacoes {
 	public void setAvaliador(String avaliador) {
 		this.avaliador = avaliador;
 	}
-	public int getFkIDHospede() {
+	public Hospedes getFkIDHospede() {
 		return fkIDHospede;
 	}
-	public void setFkIDHospede(int fkIDHospede) {
-		this.fkIDHospede = fkIDHospede;
+	public void setFkIDHospede(Hospedes usuariologado) {
+		this.fkIDHospede = usuariologado;
 	}
 	
 	
