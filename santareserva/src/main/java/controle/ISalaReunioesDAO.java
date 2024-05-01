@@ -6,7 +6,7 @@ import modelo.SalaReunioes;
 
 public interface ISalaReunioesDAO {
 	
-public int InserirSala_Reunioes(SalaReunioes end);
+public int InserirSalaReunioes(SalaReunioes end);
 	
 	public ArrayList<SalaReunioes> listarSalaReunioes();
 	
