@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import modelo.Computadores;
 	
@@ -38,8 +39,8 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			ps.setInt(3, comp.getTemp());
 			ps.setFloat(4, comp.getPreco());
 			ps.setBoolean(5, comp.getDisp());
-			ps.setString(6, comp.getCheckIn());
-			ps.setString(7, comp.getCheckOut());
+			ps.setDate(6, java.sql.Date.valueOf(comp.getCheckIn()));
+			ps.setDate(7, java.sql.Date.valueOf(comp.getCheckOut()));
 		
 			ps.executeUpdate();
 		
@@ -73,16 +74,19 @@ public class ComputadoresDAO implements IComputadoresDAO {
 				Integer Num_PC = rs.getInt("num");
 				Float Preco = rs.getFloat("preco");
 				Boolean Disp = rs.getBoolean("disp");
-				String checkIn = rs.getString("checkIn");
-				String checkOut = rs.getString("checkOut");
+				
+				java.sql.Date sqlcheckIn = rs.getDate("checkIn"); 
+				LocalDate checkincomp = sqlcheckIn == null ? null : sqlcheckIn.toLocalDate(); 
+				java.sql.Date sqlcheckOut = rs.getDate("checkOut"); 
+				LocalDate checkoutcomp = sqlcheckOut == null ? null : sqlcheckOut.toLocalDate(); 
 				
 				comp.setIdPC(idPC);
 				comp.setTemp(Temp_alugado);
 				comp.setNum(Num_PC);
 				comp.setPreco(Preco);
 				comp.setDisp(Disp);
-				comp.setCheckIn(checkIn);
-				comp.setCheckOut(checkOut);
+				comp.setCheckIn(checkincomp);
+				comp.setCheckOut(checkoutcomp);
 				
 				computadores.add(comp);
 		

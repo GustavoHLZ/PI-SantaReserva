@@ -1,24 +1,27 @@
 package modelo;
 
+import java.time.LocalDate;
+
 public class Computadores {
 
 	private int idPC;
 	private int num;
 	private int temp;
 	private float preco;
-	private String checkIn;
-	private String checkOut;
-	public String getCheckIn() {
+	private LocalDate checkIn;
+	private LocalDate checkOut;
+	
+	public LocalDate getCheckIn() {
 		return checkIn;
 	}
-	public void setCheckIn(String checkIn) {
-		this.checkIn = checkIn;
+	public void setCheckIn(LocalDate checkincomp) {
+		this.checkIn = checkincomp;
 	}
-	public String getCheckOut() {
+	public LocalDate getCheckOut() {
 		return checkOut;
 	}
-	public void setCheckOut(String checkOut) {
-		this.checkOut = checkOut;
+	public void setCheckOut(LocalDate checkoutcomp) {
+		this.checkOut = checkoutcomp;
 	}
 	private Boolean disp;
 	

@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `computadores` (
   `temp` INT(11) NOT NULL,
   `preco` FLOAT NOT NULL,
   `disp` TINYINT(4) NOT NULL,
-  `checkIn` VARCHAR(6) NULL,
-  `checkOut` VARCHAR(6) NULL,
+  `checkIn` DATE NOT NULL,
+  `checkOut` DATE NOT NULL,
   PRIMARY KEY (`idPC`)
 );
 
@@ -221,45 +221,45 @@ insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) 
 insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (129, 'Cama Dupla', 450.00, true, 4, 1, '0001-01-01', '0001-01-01');
 insert into Quartos (idQuarto, tipo, preco, disp, cap, temp, checkIn, checkOut) values (130, 'Cama Dupla', 450.00, false, 4, 1, '0001-01-01', '0001-01-01');
 
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (41, 1, 1, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (42, 2, 2, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (43, 3, 3, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (44, 4, 4, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (45, 5, 5, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (46, 6, 6, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (47, 7, 7, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (48, 8, 8, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (49, 9, 9, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (50, 10, 10, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (51, 11, 11, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (52, 12, 12, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (53, 13, 13, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (54, 14, 14, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (55, 15, 15, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (56, 16, 16, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (57, 17, 17, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (58, 18, 18, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (59, 19, 19, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (60, 20, 20, 250.00,1, NULL, NULL);
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (41, 1, 1, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (42, 2, 2, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (43, 3, 3, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (44, 4, 4, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (45, 5, 5, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (46, 6, 6, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (47, 7, 7, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (48, 8, 8, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (49, 9, 9, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (50, 10, 10, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (51, 11, 11, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (52, 12, 12, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (53, 13, 13, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (54, 14, 14, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (55, 15, 15, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (56, 16, 16, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (57, 17, 17, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (58, 18, 18, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (59, 19, 19, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (60, 20, 20, 250.00,1, '0001-01-01', '0001-01-01');
 
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (131, 1, 1, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (132, 2, 2, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (133, 3, 3, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (134, 4, 4, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (135, 5, 5, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (136, 6, 6, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (137, 7, 7, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (138, 8, 8, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (139, 9, 9, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (141, 11, 11, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (142, 12, 12, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (143, 13, 13, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (144, 14, 14, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (146, 16, 16, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (147, 17, 17, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (148, 18, 18, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (149, 19, 19, 250.00,1, NULL, NULL);
-insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (150, 20, 20, 250.00,1, NULL, NULL);
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (131, 1, 1, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (132, 2, 2, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (133, 3, 3, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (134, 4, 4, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (135, 5, 5, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (136, 6, 6, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (137, 7, 7, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (138, 8, 8, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (139, 9, 9, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (141, 11, 11, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (142, 12, 12, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (143, 13, 13, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (144, 14, 14, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (146, 16, 16, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (147, 17, 17, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (148, 18, 18, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (149, 19, 19, 250.00,1, '0001-01-01', '0001-01-01');
+insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (150, 20, 20, 250.00,1, '0001-01-01', '0001-01-01');
 
 insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (61, false, 80, 4, 100.00, '0001-01-01', '0001-01-01');
 insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (62, false, 90, 8, 100.00, '0001-01-01', '0001-01-01');
