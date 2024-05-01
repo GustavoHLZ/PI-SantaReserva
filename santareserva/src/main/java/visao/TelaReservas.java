@@ -338,14 +338,61 @@ public class TelaReservas extends JFrame {
 			        //String dataValidade = txtDataValidade.getText();
 			        //String codigoSeguranca = txtCodigoSeguranca.getText();
 			        
+				
+					Integer ocupantetest = 18;
+					Integer idcomputadortest = 18;
+					Integer idreuniaotest = 19;
+					Integer idquartotest = 20;
+					Integer idhospedetest = 21;
+					Integer idpagamentotest = 22;
+					
 			        Espacos reserva = new Espacos();
 			       
-			        reserva.setFkidQuartos(quartoalugado.getIdQuarto());
+			        if(quartoalugado == null) {
+			        	quartoalugado.setIdQuarto(idquartotest);
+			        }
+			        reserva.setFkidQuartos(quartoalugado.getIdQuarto()); 
+			        
+			        
+			        if(usuariologado == null) {
+			        	usuariologado.setIdHospede(ocupantetest);
+			        }
 			        reserva.setOcupante(usuariologado.getIdHospede());
+			        
+			        
+			        if(computadoralugado == null) {
+			        	computadoralugado.setIdPC(idcomputadortest);
+			        }
+			        reserva.setFkidComputador(computadoralugado.getIdPC());
+			        
+			        
+			        if(salaalugada == null) {
+			        	salaalugada.setIdSala(idreuniaotest);
+			        }
+			        reserva.setFkidSalaReuniao(salaalugada.getIdSala());
+			        
+			        
+			        if(salaalugada == null) {
+			        	salaalugada.setIdSala(idreuniaotest);
+			        }
+			        reserva.setFkidQuartos(quartoalugado.getIdQuarto());
+			        
+			        if(usuariologado == null) {
+			        	usuariologado.setIdHospede(idhospedetest);
+			        }
+			        reserva.setFkidHospede(usuariologado.getIdHospede());
+			        
+			        //if(usuariologado == null) {
+			        //	usuariologado.setIdHospede(idhospedetest);
+			       // }
+			        //reserva.setFkidPagamento();
+			        
 			        
 			        EspacosDAO dao = EspacosDAO.getInstancia();
 			        
 			        int retorno = dao.InserirEspacos(reserva);
+			        
+			        
 			        if (retorno > 0) {
 			            JOptionPane.showMessageDialog(null, "Avaliação inserida com sucesso!");
 			            reserva.setIdEspaco(retorno);
