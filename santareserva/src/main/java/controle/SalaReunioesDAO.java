@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-
 import modelo.Infologin;
 import modelo.SalaReunioes;
 
@@ -24,76 +24,78 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 	}
 
 	public int InserirSalaReunioes(SalaReunioes sala) {
-		
+
 		String SQL = "INSERT INTO SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		
+
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
-		
+
 		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
-			
-			ps.setInt(1, sala.getIdSala());
-			ps.setBoolean(2, sala.getDisp());
-			ps.setInt(3, sala.getTemp());
-			ps.setInt(4, sala.getCap());
-			ps.setFloat(5, sala.getPreco());
-			ps.setString(6, sala.getCheckIn());
-			ps.setString(7, sala.getCheckOut());
-			
-			return ps.executeUpdate();
-			
+		PreparedStatement ps = conBD.prepareStatement(SQL);
+
+		ps.setInt(1, sala.getIdSala());
+		ps.setBoolean(2, sala.getDisp());
+		ps.setInt(3, sala.getTemp());
+		ps.setInt(4, sala.getCap());
+		ps.setFloat(5, sala.getPreco());
+		ps.setDate(6, java.sql.Date.valueOf(sala.getCheckIn()));
+		ps.setDate(7, java.sql.Date.valueOf(sala.getCheckOut()));
+
+		return ps.executeUpdate();
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+		e.printStackTrace();
 		} finally {
-			con.fecharConexao();
+		con.fecharConexao();
 		}
-	
-		return 0;
-	}
 
-	public ArrayList<SalaReunioes> listarSalaReunioes() {
-		
+		return 0;
+		}
+
+		public ArrayList<SalaReunioes> listarSalaReunioes() {
+
 		ArrayList<SalaReunioes> sala_reunioes = new ArrayList<SalaReunioes>();
-		
+
 		String SQL = "SELECT * FROM SalaReunioes";
-		
+
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
-		
+
 		try {
-			PreparedStatement ps= conBD.prepareStatement(SQL);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				
-				SalaReunioes sala = new SalaReunioes();
-				
-				Integer idSala = rs.getInt("idSala");
-				Boolean disp = rs.getBoolean("disp");
-				Integer temp = rs.getInt("temp");
-				Integer cap = rs.getInt("cap");
-				Float preco = rs.getFloat("preco");
-				String checkIn = rs.getString("checkIn");
-				String checkOut = rs.getString("checkOut");
-				
-				sala.setIdSala(idSala);
-				sala.setDisp(disp);
-				sala.setTemp(temp);
-				sala.setCap(cap);
-				sala.setPreco(preco);
-				sala.setCheckIn(checkIn);
-				sala.setCheckOut(checkOut);
-				
-				sala_reunioes.add(sala);
-				
-			}
+		PreparedStatement ps= conBD.prepareStatement(SQL);
+
+		ResultSet rs = ps.executeQuery();
+
+		while(rs.next()) {
+
+		SalaReunioes sala = new SalaReunioes();
+
+		Integer idSala = rs.getInt("idSala");
+		Boolean disp = rs.getBoolean("disp");
+		Integer temp = rs.getInt("temp");
+		Integer cap = rs.getInt("cap");
+		Float preco = rs.getFloat("preco");
+		java.sql.Date sqlcheckIn = rs.getDate("checkIn");
+		LocalDate checkinsala = sqlcheckIn == null ? null : sqlcheckIn.toLocalDate();
+		java.sql.Date sqlcheckOut = rs.getDate("checkOut");
+		LocalDate checkoutsala = sqlcheckOut == null ? null : sqlcheckOut.toLocalDate();
+
+		sala.setIdSala(idSala);
+		sala.setDisp(disp);
+		sala.setTemp(temp);
+		sala.setCap(cap);
+		sala.setPreco(preco);
+		sala.setCheckIn(checkinsala);
+		sala.setCheckOut(checkoutsala);
+
+		sala_reunioes.add(sala);
+
+		}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+		e.printStackTrace();
 		} finally {
-			con.fecharConexao();
+		con.fecharConexao();
 		}
 	
 		return sala_reunioes;
