@@ -94,8 +94,8 @@ CREATE TABLE IF NOT EXISTS `salareunioes` (
   `temp` INT(11) NOT NULL,
   `cap` INT(11) NOT NULL,
   `preco` FLOAT NOT NULL,
-  `checkIn` VARCHAR(6) NULL,
-  `checkOut` VARCHAR(6) NULL,
+  `checkIn` DATE NOT NULL,
+  `checkOut` DATE NOT NULL,
   PRIMARY KEY (`idSala`)
 );
 
@@ -261,44 +261,44 @@ insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) value
 insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (149, 19, 19, 250.00,1, NULL, NULL);
 insert into Computadores (idPC, num, temp, preco, disp, checkIn, checkOut) values (150, 20, 20, 250.00,1, NULL, NULL);
 
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (61, false, 80, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (62, false, 90, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (63, true, 60, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (64, false, 70, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (65, false, 100, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (66, false, 60, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (67, false, 70, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (68, true, 90, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (69, true, 60, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (70, true, 100, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (71, false, 100, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (72, true, 100, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (73, true, 60, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (74, false, 70, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (75, false, 90, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (76, false, 100, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (77, false, 70, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (78, true, 60, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (79, true, 90, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (80, false, 60, 8, 100.00, NULL, NULL);
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (61, false, 80, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (62, false, 90, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (63, true, 60, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (64, false, 70, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (65, false, 100, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (66, false, 60, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (67, false, 70, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (68, true, 90, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (69, true, 60, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (70, true, 100, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (71, false, 100, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (72, true, 100, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (73, true, 60, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (74, false, 70, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (75, false, 90, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (76, false, 100, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (77, false, 70, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (78, true, 60, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (79, true, 90, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (80, false, 60, 8, 100.00, '0001-01-01', '0001-01-01');
 
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (151, false, 80, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (152, false, 90, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (153, true, 60, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (154, false, 70, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (155, false, 100, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (156, false, 60, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (157, false, 70, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (158, true, 90, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (159, true, 60, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (160, true, 100, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (161, false, 100, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (162, true, 100, 8, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (163, true, 60, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (164, false, 70, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (165, false, 90, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (166, false, 100, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (167, false, 70, 10, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (168, true, 60, 4, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (169, true, 90, 6, 100.00, NULL, NULL);
-insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (170, false, 60, 8, 100.00, NULL, NULL);
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (151, false, 80, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (152, false, 90, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (153, true, 60, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (154, false, 70, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (155, false, 100, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (156, false, 60, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (157, false, 70, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (158, true, 90, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (159, true, 60, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (160, true, 100, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (161, false, 100, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (162, true, 100, 8, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (163, true, 60, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (164, false, 70, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (165, false, 90, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (166, false, 100, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (167, false, 70, 10, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (168, true, 60, 4, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (169, true, 90, 6, 100.00, '0001-01-01', '0001-01-01');
+insert into SalaReunioes (idSala, disp, temp, cap, preco, checkIn, checkOut) values (170, false, 60, 8, 100.00, '0001-01-01', '0001-01-01');

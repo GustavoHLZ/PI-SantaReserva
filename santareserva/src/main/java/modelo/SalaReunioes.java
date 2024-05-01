@@ -1,5 +1,7 @@
 package modelo;
 
+import java.time.LocalDate;
+
 public class SalaReunioes {
 
 	private int idSala;
@@ -7,20 +9,20 @@ public class SalaReunioes {
 	private int temp;
 	private int cap;
 	private float preco;
-	private String checkIn;
-	private String checkOut;
+	private LocalDate checkIn;
+	private LocalDate checkOut;
 	
-	public String getCheckIn() {
+	public LocalDate getCheckIn() {
 		return checkIn;
 	}
-	public void setCheckIn(String checkIn) {
-		this.checkIn = checkIn;
+	public void setCheckIn(LocalDate checkinsala) {
+		this.checkIn = checkinsala;
 	}
-	public String getCheckOut() {
+	public LocalDate getCheckOut() {
 		return checkOut;
 	}
-	public void setCheckOut(String checkOut) {
-		this.checkOut = checkOut;
+	public void setCheckOut(LocalDate checkoutsala) {
+		this.checkOut = checkoutsala;
 	}
 	public int getIdSala() {
 		return idSala;
