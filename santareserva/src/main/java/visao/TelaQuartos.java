@@ -11,6 +11,7 @@ import javax.swing.text.MaskFormatter;
 import controle.QuartosDAO;
 import modelo.Hospedes;
 import modelo.Quartos;
+import modelo.SalaReunioes;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -154,7 +155,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hospede);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -308,11 +309,12 @@ public class TelaQuartos extends JFrame {
 				
 				quartos.setCheckIn(checkINN);
 				quartos.setCheckOut(checkOUTT);
+				quartos.setIdQuarto(idquarto);
+				
 				
 				QuartosDAO dao = QuartosDAO.getInstancia();
 				
 				dao.atualizarQuartos(checkINN, checkOUTT, idquarto);
-				
 				
 				listaQuartos.add(quartos);
 				quartoSelecionado.setCheckIn(checkINN);
