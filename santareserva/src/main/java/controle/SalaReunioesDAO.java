@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import modelo.Infologin;
 import modelo.SalaReunioes;
 
@@ -158,12 +159,6 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 	public SalaReunioes buscarSalaReunioes(SalaReunioes end) {
 	
 		return null;
-	}
-
-	@Override
-	public int InserirSala_Reunioes(SalaReunioes end) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
