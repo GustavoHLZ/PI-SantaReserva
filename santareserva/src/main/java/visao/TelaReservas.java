@@ -55,9 +55,7 @@ public class TelaReservas extends JFrame {
 	private Quartos quartoSelecionado;
 	private ArrayList<Quartos> listarQuartos;
 	private JTable table;
-	private JTextField txtcheckin;
 	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
-	private JTextField txtcheckout;
 	/**
 	 * Launch the application.
 	 */
@@ -68,8 +66,8 @@ public class TelaReservas extends JFrame {
 	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, Computadores computador) {
 		hosplogado = hospede;
 		usuariologado = hosplogado;
-		quartoalugado = quarto;
 		quartoSelecionado = quarto;
+		quartoalugado = quartoSelecionado;
 		salaalugada = salareunioes;
 		computadoralugado = computador;
 		listarQuartos = listaQuartos;
@@ -278,14 +276,6 @@ public class TelaReservas extends JFrame {
 		JLabel lbltotalpagar = new JLabel("-");
 		panel_2.add(lbltotalpagar, "cell 0 23,alignx center");
 		
-		txtcheckin = new JTextField();
-		panel_2.add(txtcheckin, "cell 0 27,growx");
-		txtcheckin.setColumns(10);
-		
-		txtcheckout = new JTextField();
-		panel_2.add(txtcheckout, "cell 0 29,growx");
-		txtcheckout.setColumns(10);
-		
 		JLabel lblOpcaoPagamento = new JLabel("Escolha outra forma de pagamento");
 		lblOpcaoPagamento.addMouseListener(new MouseAdapter() {
 			@Override
@@ -301,23 +291,27 @@ public class TelaReservas extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "Preço", "CheckIn", "CheckOut"}));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede", "ID Pagamento"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		if (quartoSelecionado != null) {
 		    model.addRow(new Object[] {
-		        quartoSelecionado.getIdQuarto(),
-		        quartoSelecionado.getPreco(),
-		        quartoSelecionado.getCheckIn(),
-		        quartoSelecionado.getCheckOut()
+		        quartoalugado.getIdQuarto(),
+		        quartoalugado.getPreco(),
+		        quartoalugado.getCheckIn(),
+		        quartoalugado.getCheckOut(),
+		        hosplogado.getNome(),
+		        hosplogado.getIdHospede(),
+		       
 		        
 		    });
 		} else if (salaalugada != null) {
 		    model.addRow(new Object[] {
 		        salaalugada.getIdSala(),
 		        salaalugada.getPreco(),
-		        salaalugada.getCap(),
-		        "Sala de Reunião"
+		        salaalugada.getCheckIn(),
+		        salaalugada.getCheckOut(),
+		        
 		    });
 		}
 		
@@ -339,58 +333,44 @@ public class TelaReservas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				 String nomeTitular = txtNometitular.getText();
-			        String numeroCartao = txtNumeroCartao.getText();
-			        String dataValidade = txtDataValidade.getText();
-			        String codigoSeguranca = txtCodigoSeguranca.getText();
-			        Date checkin = Date.valueOf(txtcheckin.getText());
-			        Date checkout= Date.valueOf(txtcheckout.getText());
-			        Espacos p = new Espacos();
+				    //String nomeTitular = txtNometitular.getText();
+			        //String numeroCartao = txtNumeroCartao.getText();
+			        //String dataValidade = txtDataValidade.getText();
+			        //String codigoSeguranca = txtCodigoSeguranca.getText();
 			        
-			        p.setCheckIn(checkin);
-			        p.setCheckOut(checkout);
+			        Espacos reserva = new Espacos();
+			       
+			        reserva.setFkidQuartos(quartoalugado.getIdQuarto());
+			        reserva.setOcupante(usuariologado.getIdHospede());
 			        
 			        EspacosDAO dao = EspacosDAO.getInstancia();
 			        
-			        try {
-						// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
-						// mações no Login do usuário
-						int retorno = dao.InserirEspacos(p);
-						// insere o retorno como o id do Infologin
-						p.setIdEspaco(retorno);
-						// insere as informações de login a partir da chave estrangeira em Hospedes
-				
-						int id = dao.InserirEspacos(p);
-
-						if (id != 1) {
-							JOptionPane.showMessageDialog(null, "inserido");
-							TelaLogin c = new TelaLogin();
-							atualizarJTable();
-							c.setVisible(true);
-							dispose();
-						} else {
-							JOptionPane.showMessageDialog(null, "Erro");
-						}
-
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, "Erro ao inserir informações");
-					}
+			        int retorno = dao.InserirEspacos(reserva);
+			        if (retorno > 0) {
+			            JOptionPane.showMessageDialog(null, "Avaliação inserida com sucesso!");
+			            reserva.setIdEspaco(retorno);
+			            listarEspaco.add(reserva);
+			            atualizarJTable();
+			        } else {
+			            JOptionPane.showMessageDialog(null, "Falha ao inserir avaliação!");
+			        }
+			       
 
 			        
 			        
 			        
 			        
 			       
-			        if (nomeTitular.isEmpty() || numeroCartao.isEmpty() || dataValidade.isEmpty() || codigoSeguranca.isEmpty()) {
-			            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
-			            return; 
-			        }
+			        //if (nomeTitular.isEmpty() || numeroCartao.isEmpty() || dataValidade.isEmpty() || codigoSeguranca.isEmpty()) {
+			        //    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+			        //    return; 
+			        //}
 			        
-			        double precoQuarto = 250; 
-			        double totalPagar =  precoQuarto;
+			        //double precoQuarto = 250; 
+			        //double totalPagar =  precoQuarto;
 			        
 			
-			        JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso!\nTotal a pagar: R$ " + totalPagar, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			        //JOptionPane.showMessageDialog(null, "Reserva efetuada com sucesso!\nTotal a pagar: R$ " + totalPagar, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			    }				
 			
 		});
@@ -408,16 +388,14 @@ public class TelaReservas extends JFrame {
 	}
 	
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaco", "CheckIn", "CheckOut" });
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"ID do Espaço" , "Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede", "ID Pagamento" });
 
 	    EspacosDAO EspacoDAO = EspacosDAO.getInstancia();
 	    listarEspaco = EspacoDAO.listarEspacos();
 
 	    for (int i = 0; i < listarEspaco.size(); i++) {
 	        Espacos espaco = listarEspaco.get(i);
-
-	       
-	        modelo.addRow(new Object[] {espaco.getFkidQuartos(), espaco.getCheckIn(), espaco.getCheckOut()});
+	        modelo.addRow(new Object[] {espaco.getFkidQuartos()});
 	    }
 	    
 	    table.setModel(modelo);
