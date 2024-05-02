@@ -10,7 +10,7 @@ public interface IPagamentoDAO {
 	
 	public ArrayList<Pagamento> listarPagamento();
 	
-	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, int validade, int seg, int numboleto,
+	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, String validade, int seg, int numboleto,
 			int numpix);
 	
 	public boolean removerPagamento(int idpagamento);

@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `pagamento` (
   `idPagamento` INT(11) NOT NULL AUTO_INCREMENT,
   `nometitular` VARCHAR(255) NOT NULL,
   `numeroCartao` CHAR(16) NOT NULL,
-  `dataValidade` VARCHAR(4) NOT NULL,
+  `dataValidade` VARCHAR(5) NOT NULL,
   `codigoSeguranca` CHAR(3) NOT NULL,
   `numeroBoleto` VARCHAR(48) NOT NULL,
   `numeroPix` VARCHAR(32) NOT NULL,

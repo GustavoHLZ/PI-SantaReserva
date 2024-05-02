@@ -41,7 +41,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 			
 			ps.setString(1, pag.getNometitular());
 			ps.setInt(2, pag.getNumeroCartao());
-			ps.setInt(3, pag.getDataValidade());
+			ps.setString(3, pag.getDataValidade());
 			ps.setInt(4, pag.getCodigoSeguranca());
 			ps.setInt(5, pag.getNumeroBoleto());
 			ps.setInt(6, pag.getNumeroPix());
@@ -85,7 +85,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 				Integer ID_pagamento = rs.getInt("idPagamento");
 				String nometitular = rs.getString("nometitular");
 				Integer numeroCartao = rs.getInt("numeroCartao");
-				Integer dataValidade = rs.getInt("dataValidade");
+				String dataValidade = rs.getString("dataValidade");
 				Integer codigoSeguranca = rs.getInt("codigoSeguranca");
 				Integer numeroBoleto = rs.getInt("numeroBoleto");
 				Integer numeroPix = rs.getInt("numeroPix");
@@ -113,7 +113,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 	}
 
 	@Override
-	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, int validade, int seg, int numboleto, int numpix) {
+	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, String validade, int seg, int numboleto, int numpix) {
 		
 		String SQL = "UPDATE Pagamento SET nometitular = ?, numeroCartao = ?,  dataValidade = ?,  codigoSeguranca = ?, numeroBoleto = ?, numeroPix = ? WHERE idPagamento = ?";
 		
@@ -125,13 +125,14 @@ public class PagamentoDAO implements IPagamentoDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, idpagamento);
-			ps.setString(2,nome);
-			ps.setInt(3,numcartao);
-			ps.setInt(4,validade);
-			ps.setInt(5,seg);
-			ps.setInt(6,numboleto);
-			ps.setInt(7,numpix);
+			
+			ps.setString(1,nome);
+			ps.setInt(2,numcartao);
+			ps.setString(3,validade);
+			ps.setInt(4,seg);
+			ps.setInt(5,numboleto);
+			ps.setInt(6,numpix);
+			ps.setInt(7, idpagamento);
 			retorno = ps.executeUpdate();
 			
 			

@@ -5,7 +5,7 @@ public class Pagamento {
 	private int idPagamento;
 	private String nometitular;
 	private int numeroCartao;
-	private int dataValidade;
+	private String dataValidade;
 	private int codigoSeguranca;
 	private int numeroBoleto;
 	private int numeroPix;
@@ -31,10 +31,11 @@ public class Pagamento {
 	public void setNumeroCartao(int numeroCartao) {
 		this.numeroCartao = numeroCartao;
 	}
-	public int getDataValidade() {
+	
+	public String getDataValidade() {
 		return dataValidade;
 	}
-	public void setDataValidade(int dataValidade) {
+	public void setDataValidade(String dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 	public int getCodigoSeguranca() {
