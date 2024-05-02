@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `avaliacoes` (
   `idAvaliacao` INT(11) NOT NULL AUTO_INCREMENT,
   `avaliacao` FLOAT NOT NULL,
   `avaliador` VARCHAR(45) NOT NULL,
+  `comentario` VARCHAR(1000) NOT NULL,
   `fkIDHospede` INT(11) NOT NULL,
   PRIMARY KEY (`idAvaliacao`),
   CONSTRAINT `fkAvaliacoesHospedes1`

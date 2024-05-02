@@ -55,6 +55,7 @@ public class TelaAvaliacoes extends JFrame {
 	private JTextField txtNome;
 	private JTextField txtAvaliacao;
 	private JTable table;
+	private JTextField txtComentario;
 
 
 	/**
@@ -337,7 +338,7 @@ public class TelaAvaliacoes extends JFrame {
 		scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(560, 300)); // Defina as dimensões do JScrollPane conforme necessário
 		panel_20.add(scrollPane);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "fkIDHospede" }));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "comentario", "fkIDHospede" }));
 		
 		
 		
@@ -368,15 +369,16 @@ public class TelaAvaliacoes extends JFrame {
 
 				int linhaSelecionada = table.getSelectedRow();
 				if (linhaSelecionada >= 0) {
+					
 				    int idAvaliacao = (int) table.getValueAt(linhaSelecionada, 0);
 				    String novoNome = txtNome.getText();
 				    Float novaAvaliacao = Float.valueOf(txtAvaliacao.getText());
-
+				    String comentario = txtComentario.getText();
 	
 				    int idUsuario = hospedeLogado.getIdHospede();
 
 				    AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
-				    boolean atualizado = dao.atualizarAvaliacoes(idAvaliacao, novoNome, novaAvaliacao, idUsuario);
+				    boolean atualizado = dao.atualizarAvaliacoes(idAvaliacao, novoNome, novaAvaliacao, comentario, idUsuario);
 				    
 				    if (atualizado) {
 				        JOptionPane.showMessageDialog(null, "Avaliação atualizada com sucesso!");
@@ -415,9 +417,11 @@ public class TelaAvaliacoes extends JFrame {
 				String nome = txtNome.getText();
 		        Float av = Float.valueOf(txtAvaliacao.getText());
 		        Avaliacoes avaliacao = new Avaliacoes();
+		        String comentario = txtComentario.getText();
 		        
 		        avaliacao.setAvaliador(nome);
 		        avaliacao.setAvaliacao(av);
+		        avaliacao.setComentario(comentario);
 		        avaliacao.setFkIDHospede(hospedeLogado);
 		        
 		        AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
@@ -440,13 +444,22 @@ public class TelaAvaliacoes extends JFrame {
 		lblFazerAvaliacao.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/BTN Fazer Avaliação.png")));
 		panel_19.add(lblFazerAvaliacao, "cell 16 2,grow");
 		
+		txtComentario = new JTextField();
+		txtComentario.setBounds(35, 185, 390, 34);
+		PainelPrincipal.add(txtComentario);
+		txtComentario.setColumns(10);
+		
+		JLabel lblNewLabel_20 = new JLabel("Comentario:");
+		lblNewLabel_20.setBounds(32, 160, 97, 14);
+		PainelPrincipal.add(lblNewLabel_20);
+		
 		
 		
 		
 		
 	}
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Avaliador", "Avaliação", "fkIDHospede" });
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Avaliador", "Avaliação","comentario", "fkIDHospede" });
 
 	    AvaliacoesDAO Avaliacoesdao = AvaliacoesDAO.getInstancia();
 	    listarAvaliacoes = Avaliacoesdao.listarAvaliacoes();
@@ -454,7 +467,7 @@ public class TelaAvaliacoes extends JFrame {
 	    for (int i = 0; i < listarAvaliacoes.size(); i++) {
 	        Avaliacoes avalia = listarAvaliacoes.get(i);
 	        
-	        modelo.addRow(new Object[] {avalia.getIdAvaliacao(), avalia.getAvaliador(), avalia.getAvaliacao(), avalia.getFkIDHospede().getIdHospede()});
+	        modelo.addRow(new Object[] {avalia.getIdAvaliacao(), avalia.getAvaliador(), avalia.getAvaliacao(), avalia.getComentario() ,avalia.getFkIDHospede().getIdHospede()});
 	    }
 	    table.setModel(modelo);
 	}

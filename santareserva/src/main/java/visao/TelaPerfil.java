@@ -143,7 +143,7 @@ public class TelaPerfil extends JFrame {
 		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtNascimento, "cell 1 8 2 1,grow");
 		txtNascimento.setColumns(10);
-//		txtNascimento.setText(hospedeLogado.getNascimento());
+		txtNascimento.setText(String.valueOf(hospedeLogado.getNascimento()));
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
