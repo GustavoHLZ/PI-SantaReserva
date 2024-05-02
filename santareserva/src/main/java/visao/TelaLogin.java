@@ -171,7 +171,7 @@ public class TelaLogin extends JFrame {
 					JOptionPane.showMessageDialog(null, "Usuário Cadastrado");
 					HospedesDAO daohosp = HospedesDAO.getInstancia();
 					Hospedes hospede = daohosp.buscarHospedes(Login, Senha);
-					TelaPerfil c = new TelaPerfil(hospede);
+					TelaHome c = new TelaHome(hospede);
 					c.setVisible(true);
 					dispose();
 				} else {
