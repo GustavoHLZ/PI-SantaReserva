@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelo.Avaliacoes;
+import modelo.Hospedes;
 
 public class AvaliacoesDAO implements IAvaliacoesDAO{
 
@@ -59,7 +60,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	
 		ArrayList<Avaliacoes> avaliacoes = new ArrayList<Avaliacoes>();
 		
-		String SQL = "SELECT * FROM Avaliacoes";
+		String SQL = "SELECT * FROM Avaliacoes inner join Hospedes on Avaliacoes.fkIdHospede=hospedes.IdHospede";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -71,14 +72,19 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 			while(rs.next()) {
 			
 				Avaliacoes ava = new Avaliacoes();
+				Hospedes hosp=new Hospedes();
 				
+				hosp.setIdHospede(rs.getInt("IdHospede"));
 				Integer ID_avaliacao = rs.getInt("idAvaliacao");
 				Float Avaliacao = rs.getFloat("avaliacao");
 				String Avaliador = rs.getString("avaliador");
 				
+			
 				ava.setIdAvaliacao(ID_avaliacao);
 				ava.setAvaliacao(Avaliacao);
 				ava.setAvaliador(Avaliador);
+				ava.setFkIDHospede(hosp);
+		
 				
 				avaliacoes.add(ava);
 	

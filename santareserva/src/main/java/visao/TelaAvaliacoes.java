@@ -453,8 +453,8 @@ public class TelaAvaliacoes extends JFrame {
 
 	    for (int i = 0; i < listarAvaliacoes.size(); i++) {
 	        Avaliacoes avalia = listarAvaliacoes.get(i);
-
-	        modelo.addRow(new Object[] {avalia.getIdAvaliacao(), avalia.getAvaliador(), avalia.getAvaliacao(), avalia.getFkIDHospede()});
+	        
+	        modelo.addRow(new Object[] {avalia.getIdAvaliacao(), avalia.getAvaliador(), avalia.getAvaliacao(), avalia.getFkIDHospede().getIdHospede()});
 	    }
 	    table.setModel(modelo);
 	}
