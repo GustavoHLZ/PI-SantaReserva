@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import controle.AvaliacoesDAO;
 import controle.HospedesDAO;
@@ -31,8 +32,11 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -49,7 +53,7 @@ public class TelaAvaliacoes extends JFrame {
 	private Hospedes hospedeLogado;
 	private Avaliacoes avaliacoesselc;
 	private JTextField txtNome;
-	private JTextField txtComentario;
+	private JTextField txtAvaliacao;
 	private JTable table;
 
 
@@ -236,15 +240,27 @@ public class TelaAvaliacoes extends JFrame {
 		panel_1.setBounds(158, 447, 10, 10);
 		PainelPrincipal.add(panel_1);
 		
-		JLabel lblNewLabel_22 = new JLabel("Comentário:");
+		JLabel lblNewLabel_22 = new JLabel("Nota:");
 		lblNewLabel_22.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_22.setBounds(7, 85, 136, 14);
 		PainelPrincipal.add(lblNewLabel_22);
 		
-		txtComentario = new JTextField();
-		txtComentario.setBounds(35, 105, 390, 145);
-		PainelPrincipal.add(txtComentario);
-		txtComentario.setColumns(10);
+		MaskFormatter mascaraAva = null;
+
+		try {
+
+			mascaraAva = new MaskFormatter("#.#");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
+		txtAvaliacao = new JFormattedTextField(mascaraAva);
+		txtAvaliacao.setBounds(35, 105, 390, 34);
+		PainelPrincipal.add(txtAvaliacao);
+		txtAvaliacao.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(317, 447, 10, 10);
@@ -354,7 +370,7 @@ public class TelaAvaliacoes extends JFrame {
 				if (linhaSelecionada >= 0) {
 				    int idAvaliacao = (int) table.getValueAt(linhaSelecionada, 0);
 				    String novoNome = txtNome.getText();
-				    Float novaAvaliacao = Float.valueOf(txtComentario.getText());
+				    Float novaAvaliacao = Float.valueOf(txtAvaliacao.getText());
 
 	
 				    int idUsuario = hospedeLogado.getIdHospede();
@@ -397,7 +413,7 @@ public class TelaAvaliacoes extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				String nome = txtNome.getText();
-		        Float av = Float.valueOf(txtComentario.getText());
+		        Float av = Float.valueOf(txtAvaliacao.getText());
 		        Avaliacoes avaliacao = new Avaliacoes();
 		        
 		        avaliacao.setAvaliador(nome);
