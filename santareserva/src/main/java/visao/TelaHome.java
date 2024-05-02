@@ -62,6 +62,24 @@ public class TelaHome extends JFrame {
 		lblNewLabel_1.setBounds(44, 285, 46, 14);
 		panel.add(lblNewLabel_1);
 		
+		JLabel lblPerfil = new JLabel("Perfil");
+		lblPerfil.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPerfil.setBounds(44, 319, 46, 14);
+		panel.add(lblPerfil);
+		
+		JLabel IconPerfil = new JLabel("");
+		IconPerfil.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaPerfil perfil = new TelaPerfil(hosplogado);
+				perfil.setVisible(true);
+				dispose();
+			}
+		});
+		IconPerfil.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconePerfil.png")));
+		IconPerfil.setBounds(10, 310, 24, 23);
+		panel.add(IconPerfil);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(119, 165, 175));
 		panel_1.setBounds(0, 0, 1370, 100);
