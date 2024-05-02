@@ -50,7 +50,6 @@ public class TelaLogin extends JFrame {
 	private JTextField testesenha;
 	private JTextField testeid;
 	private JTextField txtdelete;
-	private Hospedes hospedelogado;
 
 	/**
 	 * Launch the application.
@@ -160,17 +159,25 @@ public class TelaLogin extends JFrame {
 
 				}
 
-				String Login = txtLogin.getText();
-				String Senha = txtSenha.getText();
+				String email = txtLogin.getText();
+				String senha = txtSenha.getText();
+				
+				Infologin login = new Infologin();
+				
+				login.setLogin(email);
+				login.setSenha(senha);
+				
+				Hospedes hospede = new Hospedes();
 
 				InfologinDAO dao = InfologinDAO.getInstancia();
 
-				Infologin usuarioLogado = dao.buscarInfologin(Login, Senha);
+				Infologin usuarioLogado = dao.buscarInfologin(login);
 
 				if (usuarioLogado != null) {
 					JOptionPane.showMessageDialog(null, "Usuário Cadastrado");
 					HospedesDAO daohosp = HospedesDAO.getInstancia();
-					Hospedes hospede = daohosp.buscarHospedes(Login, Senha);
+					hospede.setLogin(login);
+					hospede = daohosp.buscarHospedes(hospede);
 					TelaHome c = new TelaHome(hospede);
 					c.setVisible(true);
 					dispose();

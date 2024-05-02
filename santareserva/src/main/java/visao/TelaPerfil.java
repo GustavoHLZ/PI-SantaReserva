@@ -1,30 +1,31 @@
 package visao;
 
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import controle.HospedesDAO;
 import controle.InfologinDAO;
 import modelo.Hospedes;
 import modelo.Infologin;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-import javax.swing.JTextField;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaPerfil extends JFrame {
 
@@ -81,7 +82,7 @@ public class TelaPerfil extends JFrame {
 		});
 		PainelAlteracao.setBackground(new Color(238, 238, 238));
 		PainelGeral.add(PainelAlteracao, "cell 6 3 41 19,grow");
-		PainelAlteracao.setLayout(new MigLayout("", "[grow][178.00][142.00][::200.00px][69.00][][173.00][46px,grow]", "[66px][][][][40][][40][][40][46.00][][40][][40][130.00,grow][20][5px:n][40][15][][5px:n][40][100.00][28.00]"));
+		PainelAlteracao.setLayout(new MigLayout("", "[grow][178.00][142.00][::200.00px][69.00][][173.00][46px,grow]", "[66px][][][][40][][40][][40][46.00][][40][][][40][130.00,grow][20][5px:n][40][15][][5px:n][40][100.00][28.00]"));
 		
 		JLabel lblPerfil = new JLabel("");
 		PainelAlteracao.add(lblPerfil, "cell 3 0,alignx center,aligny center");
@@ -119,7 +120,19 @@ public class TelaPerfil extends JFrame {
 		lblAltSenha.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblAltSenha, "cell 4 5 3 1");
 		
-		txtTelefone = new JTextField();
+		MaskFormatter mascaraTel = null;
+
+		try {
+
+			mascaraTel = new MaskFormatter("(##) #####-####");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
+		txtTelefone = new JFormattedTextField(mascaraTel);
 		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtTelefone, "cell 1 6 2 1,grow");
 		txtTelefone.setColumns(10);
@@ -139,11 +152,23 @@ public class TelaPerfil extends JFrame {
 		lblAltEmail.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblAltEmail, "cell 4 7 3 1");
 		
-		txtNascimento = new JTextField();
+		MaskFormatter mascaraDat = null;
+		
+		try {
+
+			mascaraDat = new MaskFormatter("##/##/####");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
+		txtNascimento = new JFormattedTextField(mascaraDat);
 		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtNascimento, "cell 1 8 2 1,grow");
 		txtNascimento.setColumns(10);
-//		txtNascimento.setText(hospedeLogado.getNascimento());
+		txtNascimento.setText(String.valueOf(hospedeLogado.getNascimento()));
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -151,13 +176,17 @@ public class TelaPerfil extends JFrame {
 		txtEmail.setColumns(10);
 		txtEmail.setText(hospedeLogado.getLogin().getLogin());
 		
+		JPanel ColunaIcones = new JPanel();
+		PainelAlteracao.add(ColunaIcones, "cell 0 12");
+		ColunaIcones.setBackground(new Color(238, 238, 238));
+		
 		JLabel lblNewLabel_6 = new JLabel("Alterar CEP");
 		lblNewLabel_6.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblNewLabel_6, "cell 2 12 3 1,growy");
+		PainelAlteracao.add(lblNewLabel_6, "cell 2 13 3 1,growy");
 		
 		txtCep = new JTextField();
 		txtCep.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtCep, "cell 2 13 3 1,grow");
+		PainelAlteracao.add(txtCep, "cell 2 14 3 1,grow");
 		txtCep.setColumns(10);
 		
 		JButton btnExcluir = new JButton("Excluir");
@@ -170,25 +199,25 @@ public class TelaPerfil extends JFrame {
 				
 			}
 		});
-		PainelAlteracao.add(btnExcluir, "cell 6 13,grow");
+		PainelAlteracao.add(btnExcluir, "cell 6 14,grow");
 		
 		JLabel lblNewLabel_7 = new JLabel("Senha");
 		lblNewLabel_7.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblNewLabel_7, "cell 2 15 3 1,alignx left");
+		PainelAlteracao.add(lblNewLabel_7, "cell 2 16 3 1,alignx left");
 		
 		txtVerSenha = new JTextField();
 		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtVerSenha, "cell 2 17 3 1,grow");
+		PainelAlteracao.add(txtVerSenha, "cell 2 18 3 1,grow");
 		txtVerSenha.setColumns(10);
 		txtVerSenha.setText(hospedeLogado.getLogin().getSenha());
 		
 		JLabel lblNewLabel_8 = new JLabel("Confirmar Senha");
 		lblNewLabel_8.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblNewLabel_8, "cell 2 19 3 1,alignx left");
+		PainelAlteracao.add(lblNewLabel_8, "cell 2 20 3 1,alignx left");
 		
 		txtConfSenha = new JTextField();
 		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtConfSenha, "cell 2 21 3 1,grow");
+		PainelAlteracao.add(txtConfSenha, "cell 2 22 3 1,grow");
 		txtConfSenha.setColumns(10);
 		txtConfSenha.setText(hospedeLogado.getLogin().getSenha());
 		
@@ -258,11 +287,7 @@ public class TelaPerfil extends JFrame {
 				
 		});
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
-		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 22 3 1,alignx center,aligny center");
-		
-		JPanel ColunaIcones = new JPanel();
-		ColunaIcones.setBackground(new Color(238, 238, 238));
-		PainelGeral.add(ColunaIcones, "cell 1 2 2 20,grow");
+		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 23 3 1,alignx center,aligny center");
 	}
 
 }

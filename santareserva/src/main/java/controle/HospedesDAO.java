@@ -195,29 +195,49 @@ private static HospedesDAO instancia;
 		
 	}
 	
-	public Hospedes buscarHospedes(String email,String senha) {
+	public Hospedes buscarHospedes(Hospedes hospede) {
 		
 		
-		Hospedes login = null;
+		Infologin login = null;
 		String SQL = "SELECT * FROM Hospedes Inner Join Infologin ON Hospedes.fkidUsuario = infologin.idUsuario WHERE infologin.email = ? AND infologin.senha = ?";
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
 	try {
 		PreparedStatement ps = conBD.prepareStatement(SQL);
-		ps.setString(1,email);
-		ps.setString(2, senha);
-		System.out.println(ps);
-		ResultSet rs = ps.executeQuery();
+	
+		ps.setString(1, hospede.getLogin().getLogin());
+		ps.setString(2, hospede.getLogin().getSenha());
+			ResultSet rs = ps.executeQuery();
+			
+			/**
+		ps.setString(1, hospede.getNome());
+		ps.setString(2, hospede.getSobrenome());
+		java.sql.Date sqlNascimento = Date.valueOf(hospede.getNascimento());
+		ps.setDate(3, sqlNascimento);
+		ps.setString(4, hospede.getTelefone());**/
+	
+		
+		
 		
 		if (rs.next()) {
-			login = new Hospedes();
 			int ID = rs.getInt("idHospede");
-			String Email = rs.getString("email");
-			String Senha = rs.getString("senha");
-//			login.setEmail(Email);
-//			login.setSenha(Senha);
-			login.setIdHospede(ID);
+			String nome = rs.getString("nome");
+			String sobrenome = rs.getString("sobrenome");
+			java.sql.Date sqlUnascimento = rs.getDate("nascimento");
+			LocalDate Unascimento = sqlUnascimento == null ? null : sqlUnascimento.toLocalDate();
+			String telefone = rs.getString("telefone");
+			String email = rs.getString("email");
+			String senha = rs.getString("senha");
+			
+			hospede.setIdHospede(ID);
+			hospede.setNome(nome);
+			hospede.setSobrenome(sobrenome);
+			hospede.setNascimento(Unascimento);
+			hospede.setTelefone(telefone);
+			hospede.getLogin().setIdUsuario(ID);
+			hospede.getLogin().setLogin(email);
+			hospede.getLogin().setSenha(senha);
 		}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -227,11 +247,10 @@ private static HospedesDAO instancia;
 		
 		InfologinDAO loginDAO = InfologinDAO.getInstancia();
 		
-		Infologin info = loginDAO.buscarInfologin(email, senha);
+		Infologin info = loginDAO.buscarInfologin(login);
 		
-		login.setLogin(info);
 		
-		return login;
+		return hospede;
 	}
 	
 }
