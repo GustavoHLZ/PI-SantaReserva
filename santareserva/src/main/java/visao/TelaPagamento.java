@@ -6,9 +6,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import controle.PagamentoDAO;
 import modelo.Hospedes;
@@ -212,7 +215,7 @@ public class TelaPagamento extends JFrame {
 		PainelPrincipal.add(panel);
 		
 		JLabel lblNewLabel_21 = new JLabel("Nome:");
-		lblNewLabel_21.setBounds(35, 36, 43, 14);
+		lblNewLabel_21.setBounds(35, 36, 67, 14);
 		PainelPrincipal.add(lblNewLabel_21);
 		
 		JPanel panel_20 = new JPanel();
@@ -262,7 +265,7 @@ public class TelaPagamento extends JFrame {
 			            int idpagamento = (int) table.getValueAt(linhaSelecionada, 0);
 			            String novonome = textNome.getText();
 			            Integer novonumcartao = Integer.valueOf(textNumCartao.getText());
-			            Integer novovalidade = Integer.valueOf(textValidade.getText());
+			            String novovalidade = textValidade.getText();
 			            Integer novoseg = Integer.valueOf(textSeguranca.getText());
 			            Integer novonumboleto = Integer.valueOf(textBoleto.getText());
 			            Integer novonumpix = Integer.valueOf(textPix.getText());
@@ -305,7 +308,7 @@ public class TelaPagamento extends JFrame {
 				
 				String nome = textNome.getText();
 		        Integer numcartao = Integer.valueOf(textNumCartao.getText());
-		        Integer validade = Integer.valueOf(textValidade.getText());
+		        String validade = textValidade.getText();
 		        Integer seg = Integer.valueOf(textSeguranca.getText());
 		        Integer numboleto = Integer.valueOf(textBoleto.getText());
 		        Integer numpix = Integer.valueOf(textPix.getText());
@@ -334,56 +337,81 @@ public class TelaPagamento extends JFrame {
 				
 			}
 		});
-		lblFazerAvaliacao.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/BTN Fazer Avaliação.png")));
+		lblFazerAvaliacao.setIcon(new ImageIcon(TelaPagamento.class.getResource("/visao/Botões/BTN Efetuar Pagamento.png")));
 		panel_19.add(lblFazerAvaliacao, "cell 16 2,grow");
 		
 		textNome = new JTextField();
-		textNome.setBounds(82, 33, 86, 20);
+		textNome.setBounds(158, 33, 86, 20);
 		PainelPrincipal.add(textNome);
 		textNome.setColumns(10);
 		
 		JLabel lblNewLabel_20 = new JLabel("Número Cartão:");
-		lblNewLabel_20.setBounds(35, 75, 90, 14);
+		lblNewLabel_20.setBounds(35, 75, 110, 14);
 		PainelPrincipal.add(lblNewLabel_20);
 		
 		JLabel lblNewLabel_22 = new JLabel("Validade:");
-		lblNewLabel_22.setBounds(35, 115, 50, 14);
+		lblNewLabel_22.setBounds(35, 115, 86, 14);
 		PainelPrincipal.add(lblNewLabel_22);
 		
 		JLabel lblNewLabel_23 = new JLabel("Códico de Segurança:");
-		lblNewLabel_23.setBounds(35, 155, 110, 14);
+		lblNewLabel_23.setBounds(35, 155, 125, 14);
 		PainelPrincipal.add(lblNewLabel_23);
 		
 		JLabel lblNewLabel_24 = new JLabel("Num Boleto:");
-		lblNewLabel_24.setBounds(32, 198, 70, 14);
+		lblNewLabel_24.setBounds(32, 198, 89, 14);
 		PainelPrincipal.add(lblNewLabel_24);
 		
 		JLabel lblNewLabel_25 = new JLabel("Num Pix:");
-		lblNewLabel_25.setBounds(35, 240, 70, 14);
+		lblNewLabel_25.setBounds(35, 240, 110, 14);
 		PainelPrincipal.add(lblNewLabel_25);
 		
 		textNumCartao = new JTextField();
-		textNumCartao.setBounds(123, 72, 86, 20);
+		textNumCartao.setBounds(158, 72, 86, 20);
 		PainelPrincipal.add(textNumCartao);
 		textNumCartao.setColumns(10);
 		
-		textValidade = new JTextField();
-		textValidade.setBounds(93, 112, 86, 20);
+		MaskFormatter mascaradata = null;
+
+		try {
+
+			mascaradata = new MaskFormatter("##/##");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
+		textValidade = new JFormattedTextField(mascaradata);
+		textValidade.setBounds(158, 112, 86, 20);
 		PainelPrincipal.add(textValidade);
 		textValidade.setColumns(10);
 		
-		textSeguranca = new JTextField();
+		MaskFormatter mascaranum = null;
+
+		try {
+
+			mascaranum = new MaskFormatter("###");
+			mascaranum.setAllowsInvalid(false);
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
+		textSeguranca = new JFormattedTextField(mascaranum);
 		textSeguranca.setBounds(158, 152, 86, 20);
 		PainelPrincipal.add(textSeguranca);
 		textSeguranca.setColumns(10);
 		
 		textBoleto = new JTextField();
-		textBoleto.setBounds(93, 195, 86, 20);
+		textBoleto.setBounds(158, 195, 86, 20);
 		PainelPrincipal.add(textBoleto);
 		textBoleto.setColumns(10);
 		
 		textPix = new JTextField();
-		textPix.setBounds(82, 237, 86, 20);
+		textPix.setBounds(158, 237, 86, 20);
 		PainelPrincipal.add(textPix);
 		textPix.setColumns(10);
 		
