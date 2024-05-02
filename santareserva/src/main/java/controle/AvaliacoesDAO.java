@@ -26,7 +26,7 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	}
 	
 	public int InserirAvaliacao(Avaliacoes ava) {
-	    String SQL = "INSERT INTO Avaliacoes (avaliacao, avaliador, fkIDHospede) VALUES (?, ?, ?)";
+	    String SQL = "INSERT INTO Avaliacoes (avaliacao, avaliador, comentario, fkIDHospede) VALUES (?, ?, ?, ?)";
 	    
 	    Conexao con = Conexao.getInstancia();
 	    Connection conBD = con.conectar();
@@ -38,8 +38,8 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	        
 	        ps.setFloat(1, ava.getAvaliacao());
 	        ps.setString(2, ava.getAvaliador());
-	        ps.setInt(3, ava.getFkIDHospede().getIdHospede()); // Supondo que getId() retorna o ID do hospede
-	        
+	        ps.setString(3, ava.getComentario());
+	        ps.setInt(4, ava.getFkIDHospede().getIdHospede()); // Supondo que getId() retorna o ID do hospede   
 	        ps.executeUpdate();
 	        
 	        ResultSet rs = ps.getGeneratedKeys();
@@ -77,12 +77,14 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 				hosp.setIdHospede(rs.getInt("IdHospede"));
 				Integer ID_avaliacao = rs.getInt("idAvaliacao");
 				Float Avaliacao = rs.getFloat("avaliacao");
+				String comentario = rs.getString("comentario");
 				String Avaliador = rs.getString("avaliador");
 				
 			
 				ava.setIdAvaliacao(ID_avaliacao);
 				ava.setAvaliacao(Avaliacao);
 				ava.setAvaliador(Avaliador);
+				ava.setComentario(comentario);
 				ava.setFkIDHospede(hosp);
 		
 				
@@ -103,8 +105,8 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	 * Tem que possuir a chave primeira (ID, etc.)
 	 */
 	
-	public boolean atualizarAvaliacoes(int idAvaliacao, String nome, Float avalia, int idUsuario) {
-	    String SQL = "UPDATE Avaliacoes SET avaliador = ?, avaliacao = ? WHERE idAvaliacao = ? AND fkIDHospede = ?";
+	public boolean atualizarAvaliacoes(int idAvaliacao, String nome, Float avalia, String comentario,  int idUsuario) {
+	    String SQL = "UPDATE Avaliacoes SET avaliador = ?, avaliacao = ?, comentario = ? WHERE idAvaliacao = ? AND fkIDHospede = ?";
 	    
 	    // Abre a conexão e cria a "ponte de conexão" com o MySQL
 	    Conexao con = Conexao.getInstancia();
@@ -116,8 +118,10 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	        PreparedStatement ps = conBD.prepareStatement(SQL);
 	        ps.setString(1, nome);
 	        ps.setFloat(2, avalia);
-	        ps.setInt(3, idAvaliacao);
-	        ps.setInt(4, idUsuario); // Verifica se o ID do usuário é o mesmo associado à avaliação
+	        ps.setInt(4, idAvaliacao);
+	        ps.setString(3, comentario);
+	        ps.setInt(5, idUsuario); // Verifica se o ID do usuário é o mesmo associado à avaliação
+	        
 	        retorno = ps.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();

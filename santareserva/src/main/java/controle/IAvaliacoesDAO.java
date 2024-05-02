@@ -10,7 +10,7 @@ public interface IAvaliacoesDAO {
 	
 	public ArrayList<Avaliacoes> listarAvaliacoes();
 	
-	public boolean atualizarAvaliacoes(int idAvaliacao, String nome, Float avalia, int idUsuario);
+	public boolean atualizarAvaliacoes(int idAvaliacao, String nome, Float avalia, String comentario,  int idUsuario);
 	
 	public boolean removerAvaliacoes(int idAvaliacao);
 	

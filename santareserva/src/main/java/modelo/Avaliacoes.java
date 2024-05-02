@@ -5,7 +5,14 @@ public class Avaliacoes {
 	private float avaliacao;
 	private String avaliador;
 	private Hospedes fkIDHospede;
+	private String comentario;
 	
+	public String getComentario() {
+		return comentario;
+	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
 	public int getIdAvaliacao() {
 		return idAvaliacao;
 	}
@@ -30,6 +37,7 @@ public class Avaliacoes {
 	public void setFkIDHospede(Hospedes usuariologado) {
 		this.fkIDHospede = usuariologado;
 	}
+
 	
 	
 	
