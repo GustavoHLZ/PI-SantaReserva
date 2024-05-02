@@ -14,6 +14,6 @@ public interface IInfologinDAO {
 	
 	public Infologin removerInfologin(String email);
 	
-    public Infologin buscarInfologin(Infologin login);
+    public Infologin buscarInfologin(String email, String senha);
 
 }

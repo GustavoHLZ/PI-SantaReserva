@@ -162,26 +162,28 @@ public class InfologinDAO implements IInfologinDAO {
 		return login;
 	}
 
-	public Infologin buscarInfologin(Infologin login) {
+	public Infologin buscarInfologin(String email, String senha) {
 
-		Infologin loginbuscado = null;
+		Infologin login = null;
 		String SQL = "SELECT * FROM Infologin WHERE email = ? and senha = ?";
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setString(1, login.getLogin());
-			ps.setString(2, login.getSenha());
+			ps.setString(1, email);
+			ps.setString(2, senha);
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				loginbuscado = new Infologin();
+				login = new Infologin();
 				int id = rs.getInt("idUsuario");
-				loginbuscado.setIdUsuario(id);
-				loginbuscado.setLogin(login.getSenha());
-				loginbuscado.setSenha(login.getSenha());
+				String Email = rs.getString("email");
+				String Senha = rs.getString("senha");
+				login.setIdUsuario(id);
+				login.setLogin(Email);
+				login.setSenha(Senha);
 
 			}
 		} catch (SQLException e) {
@@ -190,7 +192,7 @@ public class InfologinDAO implements IInfologinDAO {
 			con.fecharConexao();
 		}
 
-		return loginbuscado;
+		return login;
 
 	}
 

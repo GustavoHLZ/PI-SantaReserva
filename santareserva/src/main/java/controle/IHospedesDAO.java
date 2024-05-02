@@ -15,6 +15,6 @@ public interface IHospedesDAO {
 	
 	public Hospedes removerHospedes(String email);
 	
-    public Hospedes buscarHospedes(Hospedes hospede);
+    public Hospedes buscarHospedes(String email_hospede,String senha_hospede);
 	
 }

@@ -296,9 +296,9 @@ public class TelaCadastro extends JFrame {
 					// insere as informações em hospede
 					int id = dao.InserirHospedes(hospede);
 
-					if (id != 0) {
+					if (id != 1) {
 						JOptionPane.showMessageDialog(null, "inserido");
-						TelaHome c = new TelaHome(hospede);
+						TelaLogin c = new TelaLogin();
 						c.setVisible(true);
 						dispose();
 					} else {
