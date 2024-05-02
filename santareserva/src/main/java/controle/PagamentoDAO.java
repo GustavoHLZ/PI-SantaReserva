@@ -1,7 +1,6 @@
 package controle;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,28 +40,29 @@ public class PagamentoDAO implements IPagamentoDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, pag.getNometitular());
-			ps.setString(2, pag.getNumeroCartao());
-			ps.setString(3, pag.getDataValidade());
-			ps.setString(4, pag.getCodigoSeguranca());
-			ps.setString(5, pag.getNumeroBoleto());
-			ps.setString(6, pag.getNumeroPix());
+			ps.setInt(2, pag.getNumeroCartao());
+			ps.setInt(3, pag.getDataValidade());
+			ps.setInt(4, pag.getCodigoSeguranca());
+			ps.setInt(5, pag.getNumeroBoleto());
+			ps.setInt(6, pag.getNumeroPix());
 			
 			
 			ps.executeUpdate();
 			
-			ResultSet rs = ps.executeQuery();
-			if(rs!=null) {
-				chavePrimariaGerada = rs.getInt(1);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
+			 ResultSet rs = ps.getGeneratedKeys();
+		        if (rs.next()) {
+		            chavePrimariaGerada = rs.getInt(1);
+		        }
+		        
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        con.fecharConexao();
+		    }
+		    
+		    return chavePrimariaGerada;
 		}
-
-		return chavePrimariaGerada;
-	}
+		
 
 	@Override
 	public ArrayList<Pagamento> listarPagamento() {
@@ -82,13 +82,16 @@ public class PagamentoDAO implements IPagamentoDAO{
 
 				Pagamento pags = new Pagamento();
 
+				Integer ID_pagamento = rs.getInt("idPagamento");
 				String nometitular = rs.getString("nometitular");
-				String numeroCartao = rs.getString("numeroCartao");
-				String dataValidade = rs.getString("dataValidade");
-				String codigoSeguranca = rs.getString("codigoSeguranca");
-				String numeroBoleto = rs.getString("numeroBoleto");
-				String numeroPix = rs.getString("numeroPix");
+				Integer numeroCartao = rs.getInt("numeroCartao");
+				Integer dataValidade = rs.getInt("dataValidade");
+				Integer codigoSeguranca = rs.getInt("codigoSeguranca");
+				Integer numeroBoleto = rs.getInt("numeroBoleto");
+				Integer numeroPix = rs.getInt("numeroPix");
 
+				
+				pags.setIdPagamento(ID_pagamento);
 				pags.setNometitular(nometitular);
 				pags.setNumeroCartao(numeroCartao);
 				pags.setDataValidade(dataValidade);
@@ -110,9 +113,9 @@ public class PagamentoDAO implements IPagamentoDAO{
 	}
 
 	@Override
-	public boolean atualizarPagamento(Pagamento end) {
+	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, int validade, int seg, int numboleto, int numpix) {
 		
-		String SQL = "UPDATE Pagamento SET nometitular = ? WHERE idPagamento = ?";
+		String SQL = "UPDATE Pagamento SET nometitular = ?, numeroCartao = ?,  dataValidade = ?,  codigoSeguranca = ?, numeroBoleto = ?, numeroPix = ? WHERE idPagamento = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -122,9 +125,13 @@ public class PagamentoDAO implements IPagamentoDAO{
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setInt(1, end.getIdPagamento());
-			
-			
+			ps.setInt(1, idpagamento);
+			ps.setString(2,nome);
+			ps.setInt(3,numcartao);
+			ps.setInt(4,validade);
+			ps.setInt(5,seg);
+			ps.setInt(6,numboleto);
+			ps.setInt(7,numpix);
 			retorno = ps.executeUpdate();
 			
 			
@@ -140,7 +147,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 	}
 
 	@Override
-	public boolean removerPagamento(Pagamento end) {
+	public boolean removerPagamento(int idpagamento) {
 		
 		String SQL = "DELETE FROM Pagamento WHERE idPagamento = ?";
 		
@@ -152,7 +159,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1, end.getIdPagamento());
+			ps.setInt(1, idpagamento);
 			retorno = ps.executeUpdate();
 			
 			
@@ -171,6 +178,9 @@ public class PagamentoDAO implements IPagamentoDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 	
 	

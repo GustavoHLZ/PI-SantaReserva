@@ -10,10 +10,11 @@ public interface IPagamentoDAO {
 	
 	public ArrayList<Pagamento> listarPagamento();
 	
-	public boolean atualizarPagamento(Pagamento end);
+	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, int validade, int seg, int numboleto,
+			int numpix);
 	
-	public boolean removerPagamento(Pagamento end);
+	public boolean removerPagamento(int idpagamento);
 	
     public Pagamento buscarPagamento(Pagamento end);
-	
+
 }

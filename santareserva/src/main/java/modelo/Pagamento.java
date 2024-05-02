@@ -4,11 +4,11 @@ public class Pagamento {
 
 	private int idPagamento;
 	private String nometitular;
-	private String numeroCartao;
-	private String dataValidade;
-	private String codigoSeguranca;
-	private String numeroBoleto;
-	private String numeroPix;
+	private int numeroCartao;
+	private int dataValidade;
+	private int codigoSeguranca;
+	private int numeroBoleto;
+	private int numeroPix;
 	
 	public int getIdPagamento() {
 		return idPagamento;
@@ -16,42 +16,46 @@ public class Pagamento {
 	public void setIdPagamento(int idPagamento) {
 		this.idPagamento = idPagamento;
 	}
+	
 	public String getNometitular() {
 		return nometitular;
 	}
 	public void setNometitular(String nometitular) {
 		this.nometitular = nometitular;
 	}
-	public String getNumeroCartao() {
+
+	
+	public int getNumeroCartao() {
 		return numeroCartao;
 	}
-	public void setNumeroCartao(String numeroCartao) {
+	public void setNumeroCartao(int numeroCartao) {
 		this.numeroCartao = numeroCartao;
 	}
-	public String getDataValidade() {
+	public int getDataValidade() {
 		return dataValidade;
 	}
-	public void setDataValidade(String dataValidade) {
+	public void setDataValidade(int dataValidade) {
 		this.dataValidade = dataValidade;
 	}
-	public String getCodigoSeguranca() {
+	public int getCodigoSeguranca() {
 		return codigoSeguranca;
 	}
-	public void setCodigoSeguranca(String codigoSeguranca) {
+	public void setCodigoSeguranca(int codigoSeguranca) {
 		this.codigoSeguranca = codigoSeguranca;
 	}
-	public String getNumeroBoleto() {
+	public int getNumeroBoleto() {
 		return numeroBoleto;
 	}
-	public void setNumeroBoleto(String numeroBoleto) {
+	public void setNumeroBoleto(int numeroBoleto) {
 		this.numeroBoleto = numeroBoleto;
 	}
-	public String getNumeroPix() {
+	public int getNumeroPix() {
 		return numeroPix;
 	}
-	public void setNumeroPix(String numeroPix) {
+	public void setNumeroPix(int numeroPix) {
 		this.numeroPix = numeroPix;
 	}
 	
-	
 }
+	
+	
