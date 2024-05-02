@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Hospedes;
+import modelo.Infologin;
 
 public interface IHospedesDAO {
 
@@ -15,6 +16,6 @@ public interface IHospedesDAO {
 	
 	public Hospedes removerHospedes(String email);
 	
-    public Hospedes buscarHospedes(String email_hospede,String senha_hospede);
+    public Hospedes buscarHospedes(Infologin login);
 	
 }
