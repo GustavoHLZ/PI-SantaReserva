@@ -80,6 +80,41 @@ public class TelaHome extends JFrame {
 		IconPerfil.setBounds(10, 310, 24, 23);
 		panel.add(IconPerfil);
 		
+		JLabel lblNewLabel_2 = new JLabel("Reserva");
+		lblNewLabel_2.setBounds(44, 353, 57, 13);
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaReservas reserva = new TelaReservas(hosplogado, hospedelogado, null, null, null, null);
+				reserva.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_3.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeReserva.png")));
+		lblNewLabel_3.setBounds(10, 343, 45, 32);
+		panel.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Quartos");
+		lblNewLabel_4.setBounds(45, 262, 45, 13);
+		panel.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaQuartos quartos = new TelaQuartos(hosplogado);
+				quartos.setVisible(true);
+				dispose();
+				
+			}
+		});
+		lblNewLabel_5.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeCama.png")));
+		lblNewLabel_5.setBounds(10, 252, 45, 23);
+		panel.add(lblNewLabel_5);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(119, 165, 175));
 		panel_1.setBounds(0, 0, 1370, 100);

@@ -157,163 +157,6 @@ public class TelaCadastro extends JFrame {
 		PainelCadastro.add(txtSenha, "cell 0 15,grow");
 		txtSenha.setColumns(10);
 
-		JLabel BTNRegistrar = new JLabel("");
-		BTNRegistrar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				if (txtEmail.getText().equals("")) {
-
-					JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
-
-					return;
-
-				}
-
-				if (txtNome.getText().equals("")) {
-
-					JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
-
-					return;
-
-				}
-
-				if (txtSobrenome.getText().equals("")) {
-
-					JOptionPane.showMessageDialog(null, "Preencha o campo Sobrenome.");
-
-					return;
-
-				}
-
-				if (txtNascimento.getText().equals("")) {
-
-					JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
-
-					return;
-
-				}
-
-				if (txtTelefone.getText().equals("")) {
-
-					JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
-
-					return;
-
-				}
-
-				if (txtSenha.getText().equals("")) {
-
-					JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
-
-					return;
-
-				}
-
-				if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
-
-					JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
-
-					return;
-
-				}
-
-				if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
-
-					JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
-
-					return;
-
-				}
-
-				if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
-
-					JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
-
-					return;
-
-				}
-
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-				String email = txtEmail.getText();
-				String nome = txtNome.getText();
-				String sobrenome = txtSobrenome.getText();
-
-				String dataNascTxt = txtNascimento.getText();
-
-				dataNascTxt = dataNascTxt.replace("/", "");
-				dataNascTxt = dataNascTxt.trim();
-
-				LocalDate nascimento = null;
-				if (dataNascTxt.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Nenhuma data preenchida!");
-				} else {
-
-					String diaTxt = dataNascTxt.substring(0, 2);
-					String mesTxt = dataNascTxt.substring(2, 4);
-					String anoTxt = dataNascTxt.substring(4, 8);
-
-					Integer dia = Integer.valueOf(diaTxt);
-					Integer mes = Integer.valueOf(mesTxt);
-					Integer ano = Integer.valueOf(anoTxt);
-
-					nascimento = LocalDate.of(ano, mes, dia);
-
-				}
-
-				String telefone = txtTelefone.getText();
-				String senha = txtSenha.getText();
-
-				Hospedes hospede = new Hospedes();
-				Infologin login = new Infologin();
-
-				login.setLogin(email);
-				login.setSenha(senha);
-
-				hospede.setNome(nome);
-				hospede.setSobrenome(sobrenome);
-				hospede.setNascimento(nascimento);
-
-				telefone = telefone.replace("(", "");
-				telefone = telefone.replace(")", "");
-				telefone = telefone.replace("-", "");
-				telefone = telefone.replace(" ", "");
-				telefone = telefone.trim();
-				hospede.setTelefone(telefone);
-
-				HospedesDAO dao = HospedesDAO.getInstancia();
-				InfologinDAO idao = InfologinDAO.getInstancia();
-
-				try {
-					// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
-					// mações no Login do usuário
-					int retorno = idao.InserirInfologin(login);
-					// insere o retorno como o id do Infologin
-					login.setIdUsuario(retorno);
-					// insere as informações de login a partir da chave estrangeira em Hospedes
-					hospede.setLogin(login);
-					// insere as informações em hospede
-					int id = dao.InserirHospedes(hospede);
-
-					if (id != 0) {
-						JOptionPane.showMessageDialog(null, "inserido");
-						TelaHome c = new TelaHome(hospede);
-						c.setVisible(true);
-						dispose();
-					} else {
-						JOptionPane.showMessageDialog(null, "Erro");
-					}
-
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Erro ao inserir informações");
-				}
-
-			}
-		});
-		BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
-		PainelCadastro.add(BTNRegistrar, "cell 0 21");
-
 		JLabel lblJapossui = new JLabel("Já possui registro? Faça o Login");
 		lblJapossui.addMouseListener(new MouseAdapter() {
 			@Override
@@ -324,6 +167,163 @@ public class TelaCadastro extends JFrame {
 				frame.setVisible(true);
 			}
 		});
+		
+				JLabel BTNRegistrar = new JLabel("");
+				BTNRegistrar.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+
+						if (txtEmail.getText().equals("")) {
+
+							JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
+
+							return;
+
+						}
+
+						if (txtNome.getText().equals("")) {
+
+							JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
+
+							return;
+
+						}
+
+						if (txtSobrenome.getText().equals("")) {
+
+							JOptionPane.showMessageDialog(null, "Preencha o campo Sobrenome.");
+
+							return;
+
+						}
+
+						if (txtNascimento.getText().equals("")) {
+
+							JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
+
+							return;
+
+						}
+
+						if (txtTelefone.getText().equals("")) {
+
+							JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
+
+							return;
+
+						}
+
+						if (txtSenha.getText().equals("")) {
+
+							JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
+
+							return;
+
+						}
+
+						if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
+
+							JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+
+							return;
+
+						}
+
+						if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
+
+							JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
+
+							return;
+
+						}
+
+						if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+
+							JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
+
+							return;
+
+						}
+
+						SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+						String email = txtEmail.getText();
+						String nome = txtNome.getText();
+						String sobrenome = txtSobrenome.getText();
+
+						String dataNascTxt = txtNascimento.getText();
+
+						dataNascTxt = dataNascTxt.replace("/", "");
+						dataNascTxt = dataNascTxt.trim();
+
+						LocalDate nascimento = null;
+						if (dataNascTxt.isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Nenhuma data preenchida!");
+						} else {
+
+							String diaTxt = dataNascTxt.substring(0, 2);
+							String mesTxt = dataNascTxt.substring(2, 4);
+							String anoTxt = dataNascTxt.substring(4, 8);
+
+							Integer dia = Integer.valueOf(diaTxt);
+							Integer mes = Integer.valueOf(mesTxt);
+							Integer ano = Integer.valueOf(anoTxt);
+
+							nascimento = LocalDate.of(ano, mes, dia);
+
+						}
+
+						String telefone = txtTelefone.getText();
+						String senha = txtSenha.getText();
+
+						Hospedes hospede = new Hospedes();
+						Infologin login = new Infologin();
+
+						login.setLogin(email);
+						login.setSenha(senha);
+
+						hospede.setNome(nome);
+						hospede.setSobrenome(sobrenome);
+						hospede.setNascimento(nascimento);
+
+						telefone = telefone.replace("(", "");
+						telefone = telefone.replace(")", "");
+						telefone = telefone.replace("-", "");
+						telefone = telefone.replace(" ", "");
+						telefone = telefone.trim();
+						hospede.setTelefone(telefone);
+
+						HospedesDAO dao = HospedesDAO.getInstancia();
+						InfologinDAO idao = InfologinDAO.getInstancia();
+
+						try {
+							// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
+							// mações no Login do usuário
+							int retorno = idao.InserirInfologin(login);
+							// insere o retorno como o id do Infologin
+							login.setIdUsuario(retorno);
+							// insere as informações de login a partir da chave estrangeira em Hospedes
+							hospede.setLogin(login);
+							// insere as informações em hospede
+							int id = dao.InserirHospedes(hospede);
+
+							if (id != 0) {
+								JOptionPane.showMessageDialog(null, "inserido");
+								TelaHome c = new TelaHome(hospede);
+								c.setVisible(true);
+								dispose();
+							} else {
+								JOptionPane.showMessageDialog(null, "Erro");
+							}
+
+						} catch (Exception e2) {
+							JOptionPane.showMessageDialog(null, "Erro ao inserir informações");
+						}
+
+					}
+				});
+				BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
+				PainelCadastro.add(BTNRegistrar, "cell 0 16");
 		lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelCadastro.add(lblJapossui, "cell 0 22,alignx center,aligny bottom");
 		
