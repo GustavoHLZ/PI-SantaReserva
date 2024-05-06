@@ -193,5 +193,28 @@ public class InfologinDAO implements IInfologinDAO {
 		return loginbuscado;
 
 	}
+	
+	public boolean verificarEmailExistente(String email) {
+	    String SQL = "SELECT COUNT(*) FROM Infologin WHERE email = ?";
+
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+
+	    try (PreparedStatement ps = conBD.prepareStatement(SQL)) {
+	        ps.setString(1, email);
+
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            int count = rs.getInt(1);
+	            return count > 0;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+
+	    return false;
+	}
 
 }

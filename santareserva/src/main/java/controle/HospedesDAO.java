@@ -246,5 +246,29 @@ private static HospedesDAO instancia;
 		return hospede;
 	}
 	
+	public boolean verificarHospedeExistente(String nome, String sobrenome) {
+	    String SQL = "SELECT COUNT(*) FROM Hospedes WHERE nome = ? AND sobrenome = ?";
+
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+
+	    try (PreparedStatement ps = conBD.prepareStatement(SQL)) {
+	        ps.setString(1, nome);
+	        ps.setString(2, sobrenome);
+
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            int count = rs.getInt(1);
+	            return count > 0;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+
+	    return false;
+	}
+	
 }
 

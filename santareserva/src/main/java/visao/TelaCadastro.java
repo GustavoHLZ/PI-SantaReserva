@@ -331,5 +331,14 @@ public class TelaCadastro extends JFrame {
 		lblJapossui_1.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelCadastro.add(lblJapossui_1, "cell 0 23");
 	}
-
+	public boolean verificarhospede(String nome, String sobrenome) {
+	    HospedesDAO dao = HospedesDAO.getInstancia();
+	    return dao.verificarHospedeExistente(nome, sobrenome);
+	}
+	
+	public boolean verificaremail(String email) {
+	    InfologinDAO dao = InfologinDAO.getInstancia();
+	    return dao.verificarEmailExistente(email);
+	}
 }
+	

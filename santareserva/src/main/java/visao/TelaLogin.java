@@ -292,4 +292,5 @@ public class TelaLogin extends JFrame {
 
 		table.setModel(modelo);
 	}
+	
 }
