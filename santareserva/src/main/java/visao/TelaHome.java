@@ -88,7 +88,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas reserva = new TelaReservas(hosplogado, hospedelogado, null, null, null, null);
+				TelaReservas reserva = new TelaReservas(hosplogado, hospedelogado, null, null, null, null, null);
 				reserva.setVisible(true);
 				dispose();
 			}
@@ -114,6 +114,20 @@ public class TelaHome extends JFrame {
 		lblNewLabel_5.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeCama.png")));
 		lblNewLabel_5.setBounds(10, 252, 45, 23);
 		panel.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Computadores");
+		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaComputadores computadores = new TelaComputadores(hosplogado);
+				computadores.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_6.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeComputadores.png")));
+		lblNewLabel_6.setBounds(10, 219, 102, 23);
+		panel.add(lblNewLabel_6);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(119, 165, 175));
