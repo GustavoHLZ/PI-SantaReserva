@@ -248,6 +248,11 @@ public class TelaCadastro extends JFrame {
 						SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 						String email = txtEmail.getText();
+						String emailformat = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+						if(!email.matches(emailformat)) {
+							JOptionPane.showMessageDialog(null, "Insira um endereço de email válido");
+							return;
+						}
 						String nome = txtNome.getText();
 						String sobrenome = txtSobrenome.getText();
 
@@ -308,6 +313,7 @@ public class TelaCadastro extends JFrame {
 							int id = dao.InserirHospedes(hospede);
 
 							if (id != 0) {
+								
 								JOptionPane.showMessageDialog(null, "inserido");
 								TelaHome c = new TelaHome(hospede);
 								c.setVisible(true);

@@ -46,10 +46,6 @@ public class TelaLogin extends JFrame {
 	private JLabel lblNewLabel_2;
 	private Infologin endSelecionado;
 	ArrayList<Infologin> listarInfo_Login;
-	private JTextField testelogin;
-	private JTextField testesenha;
-	private JTextField testeid;
-	private JTextField txtdelete;
 
 	/**
 	 * Launch the application.
@@ -210,68 +206,6 @@ public class TelaLogin extends JFrame {
 		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(372, 631, 210, 14);
 		panel.add(lblNewLabel_4);
-
-		testeid = new JTextField();
-		testeid.setFont(new Font("Arial", Font.PLAIN, 32));
-		testeid.setColumns(10);
-		testeid.setBounds(319, 687, 335, 30);
-		panel.add(testeid);
-
-		testelogin = new JTextField();
-		testelogin.setFont(new Font("Arial", Font.PLAIN, 32));
-		testelogin.setColumns(10);
-		testelogin.setBounds(319, 728, 335, 30);
-		panel.add(testelogin);
-
-		testesenha = new JTextField();
-		testesenha.setFont(new Font("Arial", Font.PLAIN, 32));
-		testesenha.setColumns(10);
-		testesenha.setBounds(319, 769, 335, 30);
-		panel.add(testesenha);
-
-		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				Integer id = Integer.valueOf(testeid.getText());
-				String email = testelogin.getText();
-				String senha = testesenha.getText();
-
-				InfologinDAO dao = InfologinDAO.getInstancia();
-
-				Infologin update = dao.atualizarInfologin(email, senha, id);
-
-			}
-		});
-		btnAlterar.setForeground(Color.WHITE);
-		btnAlterar.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnAlterar.setBackground(new Color(119, 165, 175));
-		btnAlterar.setBounds(359, 810, 243, 40);
-		panel.add(btnAlterar);
-
-		txtdelete = new JTextField();
-		txtdelete.setFont(new Font("Arial", Font.PLAIN, 32));
-		txtdelete.setColumns(10);
-		txtdelete.setBounds(319, 925, 335, 30);
-		panel.add(txtdelete);
-
-		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				String email = txtdelete.getText();
-
-				InfologinDAO dao = InfologinDAO.getInstancia();
-
-				Infologin deletelog = dao.removerInfologin(email);
-
-			}
-		});
-		btnExcluir.setForeground(Color.WHITE);
-		btnExcluir.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnExcluir.setBackground(new Color(119, 165, 175));
-		btnExcluir.setBounds(359, 875, 243, 40);
-		panel.add(btnExcluir);
 
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Fotos/Hotel.png")));
