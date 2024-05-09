@@ -249,8 +249,9 @@ public class TelaCadastro extends JFrame {
 
 						String email = txtEmail.getText();
 						String emailformat = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-						if(!email.matches(emailformat)){
+						if(!email.matches(emailformat)) {
 							JOptionPane.showMessageDialog(null, "Insira um endereço de email válido");
+							return;
 						}
 						String nome = txtNome.getText();
 						String sobrenome = txtSobrenome.getText();
