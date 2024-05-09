@@ -12,7 +12,7 @@ public interface IComputadoresDAO {
 	
 	public boolean atualizarComputadores(Computadores end);
 	
-	public boolean removerComputadores(Computadores end);
+	public Computadores removerComputadores(Computadores end);
 	
 	public Computadores buscarComputadores(Computadores end);
 

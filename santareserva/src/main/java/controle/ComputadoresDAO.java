@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import modelo.Computadores;
+import modelo.Infologin;
 	
 public class ComputadoresDAO implements IComputadoresDAO {
 	
@@ -104,39 +105,41 @@ public class ComputadoresDAO implements IComputadoresDAO {
 		
 	public boolean atualizarComputadores(Computadores comp) {
 		
-		String SQL = "UPDATE Computadores SET temp = ? Where idPC = ?";
-		
-		// Abre a conexão e cria a "ponte de conexao " com MYSQL
-		Conexao con = Conexao.getInstancia();
-		Connection conBD = con.conectar();
-		
-		int retorno = 0;
-		
-		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
-			
-			
-			ps.setInt(1, comp.getTemp());
-			
-			retorno = ps.executeUpdate();
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-			}
-		
-			return (retorno == 0 ? false : true);
+	    String SQL = "UPDATE Computadores SET num = ?, temp = ?, preco = ?, disp = ? WHERE idPC = ?";
+	    
+	    boolean atualizacaoRealizada = false;
+
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+
+	    try {
+	        PreparedStatement ps = conBD.prepareStatement(SQL);
+	        ps.setInt(1, comp.getNum());
+	        ps.setInt(2, comp.getTemp());
+	        ps.setFloat(3, comp.getPreco());
+	        ps.setBoolean(4, comp.getDisp());
+	        ps.setInt(5, comp.getIdPC());
+
+	        int linhasAfetadas = ps.executeUpdate();
+
+	        if (linhasAfetadas > 0) {
+	            atualizacaoRealizada = true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+
+	    return atualizacaoRealizada;
 	}
-		
-		
-	public boolean removerComputadores(Computadores comp) {
+	    
+	public Computadores removerComputadores(Computadores comp) {
 		
 		
 		String SQL = "DELETE FROM Computadores WHERE idPC = ?";
+		
+		Computadores computador = null;
 
 		// Abre a conexão e cria a "ponte de conexao " com MYSQL
 		Conexao con = Conexao.getInstancia();
@@ -157,7 +160,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 			con.fecharConexao();
 			}
 	
-		return (retorno == 0 ? false : true);
+		return computador;
 		
 	
 	}
@@ -168,4 +171,58 @@ public class ComputadoresDAO implements IComputadoresDAO {
 		return null;
 	}
 	
+	public boolean removerComputadoresPorId(int idPC) {
+	    String SQL = "DELETE FROM Computadores WHERE idPC = ?";
+	    boolean remocaoRealizada = false;
+
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+
+	    try {
+	        PreparedStatement ps = conBD.prepareStatement(SQL);
+	        ps.setInt(1, idPC);
+	        int linhasAfetadas = ps.executeUpdate();
+
+	        if (linhasAfetadas > 0) {
+	            remocaoRealizada = true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+
+	    return remocaoRealizada;
+	}
+
+	public Computadores buscarComputadoresPorId(int idPC) {
+	    String SQL = "SELECT * FROM Computadores WHERE idPC = ?";
+	    Computadores comp = null;
+	
+	    Conexao con = Conexao.getInstancia();
+	    Connection conBD = con.conectar();
+	
+	    try {
+	        PreparedStatement ps = conBD.prepareStatement(SQL);
+	        ps.setInt(1, idPC);
+	        ResultSet rs = ps.executeQuery();
+	
+	        if (rs.next()) {
+	            comp = new Computadores();
+	
+	            comp.setIdPC(rs.getInt("idPC"));
+	            comp.setNum(rs.getInt("num"));
+	            comp.setTemp(rs.getInt("temp"));
+	            comp.setPreco(rs.getFloat("preco"));
+	            comp.setDisp(rs.getBoolean("disp"));
+	            // Defina outras propriedades, se necessário
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
+	
+	    return comp;
+	}
 }
