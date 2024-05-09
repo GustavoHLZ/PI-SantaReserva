@@ -145,7 +145,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(hospede, null, null , null, salaalugada, null);
+				TelaReservas c = new TelaReservas(hospede, null, null , null, salaalugada, null, null);
 				c.setVisible(true);
 				dispose();
 				
@@ -269,7 +269,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , null , null, salaalugada, null);
+				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , null , null, salaalugada, null, null);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
 			}

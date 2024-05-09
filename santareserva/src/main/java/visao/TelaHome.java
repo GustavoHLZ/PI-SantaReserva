@@ -88,7 +88,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas reserva = new TelaReservas(hosplogado, hospedelogado, null, null, null, null);
+				TelaReservas reserva = new TelaReservas(hosplogado, hospedelogado, null, null, null, null, null);
 				reserva.setVisible(true);
 				dispose();
 			}

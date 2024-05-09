@@ -63,7 +63,7 @@ public class TelaReservas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, Computadores computador) {
+	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador) {
 		hosplogado = hospede;
 		usuariologado = hosplogado;
 		quartoSelecionado = quarto;
@@ -313,6 +313,16 @@ public class TelaReservas extends JFrame {
 		        salaalugada.getCheckOut(),
 		        
 		    });
+		} else if (computadoralugado != null) {
+		    model.addRow(new Object[] {
+		    		computadoralugado.getIdPC(),
+		    		computadoralugado.getNum(),
+		    		computadoralugado.getTemp(),
+		    		computadoralugado.getPreco(),
+		    		computadoralugado.getCheckIn(),
+		    		computadoralugado.getCheckOut(),
+			        
+			    });
 		}
 		
 		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");

@@ -1,14 +1,18 @@
 package controle;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao { // Connection
 
-	private static final String USERNAME = "root";
-	private static final String SENHA = "aluno";
-	private static final String BD = "mydb";
+	private static String DATABASE;
+	private static String USER;
+	private static String PSW;
 	private Connection con; // jdbc
 	private static Conexao instancia; // singleton
 
@@ -24,8 +28,31 @@ public class Conexao { // Connection
 	public static Conexao getInstancia() {
 		if (instancia == null) {
 			instancia = new Conexao();
+			lerArquivoBD();
 		}
 		return instancia;
+	}
+
+	public static void lerArquivoBD() {
+		FileReader arquivo;
+		try {
+			arquivo = new FileReader("credenciais.txt");
+
+			if (arquivo != null) {
+				
+				BufferedReader conteudo = new BufferedReader(arquivo);
+				
+				DATABASE = conteudo.readLine();
+				USER = conteudo.readLine();
+				PSW = conteudo.readLine();
+
+				conteudo.close();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -36,7 +63,7 @@ public class Conexao { // Connection
 
 	public Connection conectar() {
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/" + BD + "?serverTimezone=UTC", USERNAME, SENHA);
+			con = DriverManager.getConnection("jdbc:mysql://localhost/" + DATABASE + "?serverTimezone=UTC", PSW, USER);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -62,3 +89,5 @@ public class Conexao { // Connection
 	}
 
 }
+
+
