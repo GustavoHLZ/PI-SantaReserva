@@ -199,6 +199,11 @@ public class TelaPerfil extends JFrame {
 				
 				Infologin delete = dao.removerInfologin(hospedeLogado.getLogin().getLogin());
 				
+				JOptionPane.showMessageDialog(null, "Informações excluidas com sucesso");
+				TelaLogin login = new TelaLogin();
+				login.setVisible(true);
+				dispose();
+				
 			}
 		});
 		PainelAlteracao.add(btnExcluir, "cell 6 14,grow");
@@ -282,6 +287,7 @@ public class TelaPerfil extends JFrame {
 					idao.atualizarInfologin(email, senha, idlogin);
 					// insere o retorno como o id do Infologin
 					// insere as informações de login a partir da chave estrangeira em Hospedes
+					JOptionPane.showMessageDialog(null, "Informações atualizadas com sucesso");
 
 					
 					
