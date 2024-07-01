@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.FlowLayout;
 
 public class TelaHome extends JFrame {
 	
@@ -41,7 +42,7 @@ public class TelaHome extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][][200px]"));
+		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][grow][200px]"));
 		
 	
 		
@@ -188,6 +189,51 @@ public class TelaHome extends JFrame {
 		PainelInferior.setLayout(new MigLayout("", "[grow]", "[300px][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]"));
 		PainelTopo.setBackground(new Color(119, 165, 175));
 		PainelTopo.setLayout(new MigLayout("", "[1800px][]", "[]"));
+		
+	
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, "cell 1 2, grow");
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_1.add(panel_2);
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/QuartoHomeGrande.png")));
+		panel_2.add(lblNewLabel_20);
+		
+		JPanel panel_3 = new JPanel();
+		panel_1.add(panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JPanel panel_5 = new JPanel();
+		panel_3.add(panel_5);
+		
+		JLabel lblNewLabel_21 = new JLabel("");
+		lblNewLabel_21.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP1.png")));
+		panel_5.add(lblNewLabel_21);
+		
+		JPanel panel_6 = new JPanel();
+		panel_3.add(panel_6);
+		
+		JLabel lblNewLabel_22 = new JLabel("");
+		lblNewLabel_22.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP2.png")));
+		panel_6.add(lblNewLabel_22);
+		
+		JPanel panel_7 = new JPanel();
+		panel_3.add(panel_7);
+		
+		JLabel lblNewLabel_23 = new JLabel("New label");
+		panel_7.add(lblNewLabel_23);
+		
+		JPanel panel_8 = new JPanel();
+		panel_3.add(panel_8);
+		
+		JLabel lblNewLabel_24 = new JLabel("New label");
+		panel_8.add(lblNewLabel_24);
 	
 	
 	
