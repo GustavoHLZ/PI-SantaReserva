@@ -155,6 +155,14 @@ public class TelaHome extends JFrame {
 		PainelIcones.add(lblNewLabel_15, "cell 0 13");
 		
 		JLabel lblNewLabel_9 = new JLabel("Avalie-nos");
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_9, "cell 1 13");
 		
