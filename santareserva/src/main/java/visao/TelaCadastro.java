@@ -313,7 +313,7 @@ public class TelaCadastro extends JFrame {
 							int id = dao.InserirHospedes(hospede);
 
 							if (id != 0) {
-								
+								hospede.setIdHospede(id);
 								JOptionPane.showMessageDialog(null, "inserido");
 								TelaHome c = new TelaHome(hospede);
 								c.setVisible(true);
