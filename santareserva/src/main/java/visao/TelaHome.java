@@ -36,39 +36,25 @@ public class TelaHome extends JFrame {
 		
 		setTitle("Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(0, 0, 1920, 1080);
 		contentPane = new JPanel();
+		setUndecorated(true);
 		contentPane.setBackground(new Color(228, 228, 228));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][grow][200px]"));
-		
-	
+		contentPane.setLayout(new MigLayout("", "[grow][grow]", "[grow][grow][grow]"));
 		
 		JPanel PainelTopo = new JPanel();
 		PainelTopo.setBackground(new Color(119, 165, 175));
 		contentPane.add(PainelTopo, "cell 0 0 2 1,grow");
-		PainelTopo.setLayout(new MigLayout("", "[][]", "[]"));
+		PainelTopo.setLayout(new MigLayout("", "[]", "[]"));
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/LogoAPP.png")));
-		PainelTopo.add(lblNewLabel, "cell 0 0");
-		
-		JLabel lblNewLabel_19 = new JLabel("");
-		lblNewLabel_19.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeUser.png")));
-		PainelTopo.add(lblNewLabel_19, "cell 1 0");
-		
-		JPanel panel_4 = new JPanel();
-		contentPane.add(panel_4, "cell 0 1,grow");
-		
-		JPanel PainelFiltro = new JPanel();
-		contentPane.add(PainelFiltro, "cell 1 1,grow");
-		PainelFiltro.setLayout(new MigLayout("", "[]", "[]"));
 		
 		JPanel PainelIcones = new JPanel();
 		PainelIcones.setBackground(new Color(240, 240, 240));
-		contentPane.add(PainelIcones, "cell 0 2,grow");
+		contentPane.add(PainelIcones, "cell 0 1,grow");
 		PainelIcones.setLayout(new MigLayout("", "[][]", "[grow][grow][grow][grow][grow][grow][grow][grow][grow]"));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -186,7 +172,7 @@ public class TelaHome extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout("", "[grow][grow]", "[grow][grow]"));
 
-		contentPane.add(panel, "cell 1 2,grow");
+		contentPane.add(panel, "cell 1 1,grow");
 		
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, "cell 0 0,alignx center,aligny bottom");
@@ -284,7 +270,7 @@ public class TelaHome extends JFrame {
 		
 		JPanel PainelInferior = new JPanel();
 		PainelInferior.setBackground(new Color(119, 165, 175));
-		contentPane.add(PainelInferior, "cell 0 3 2 1,grow");
+		contentPane.add(PainelInferior, "cell 0 2 2 1,grow");
 		PainelInferior.setLayout(new MigLayout("", "[grow][grow][grow][grow][grow]", "[grow]"));
 		
 		JLabel lblNewLabel_25 = new JLabel("Espaços");
