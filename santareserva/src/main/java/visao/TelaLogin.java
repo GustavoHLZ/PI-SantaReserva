@@ -140,7 +140,7 @@ public class TelaLogin extends JFrame {
 												
 														JLabel lblNewLabel_3 = new JLabel("Esqueceu a senha?");
 														lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-														lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 12));
+														lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
 														lblNewLabel_3.setBounds(515, 494, 129, 14);
 														PainelLogin.add(lblNewLabel_3, "cell 0 5,aligny top");
 												
@@ -210,9 +210,9 @@ public class TelaLogin extends JFrame {
 															}
 														});
 														lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-														lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 12));
+														lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 20));
 														lblNewLabel_4.setBounds(372, 631, 210, 14);
-														PainelLogin.add(lblNewLabel_4, "cell 0 7,alignx center,aligny bottom");
+														PainelLogin.add(lblNewLabel_4, "cell 0 7,alignx center,aligny top");
 	}
 
 	protected void atualizarJTable() {

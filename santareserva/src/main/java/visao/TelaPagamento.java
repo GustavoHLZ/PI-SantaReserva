@@ -68,6 +68,7 @@ public class TelaPagamento extends JFrame {
 	public TelaPagamento() {
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(228, 228, 228));
