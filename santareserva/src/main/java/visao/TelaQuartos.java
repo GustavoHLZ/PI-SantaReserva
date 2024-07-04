@@ -1,22 +1,7 @@
 package visao;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
-
-import controle.QuartosDAO;
-import modelo.Hospedes;
-import modelo.Quartos;
-import modelo.SalaReunioes;
-import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,9 +9,24 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
+
+import controle.QuartosDAO;
+import modelo.Hospedes;
+import modelo.Quartos;
+import net.miginfocom.swing.MigLayout;
 
 public class TelaQuartos extends JFrame {
 
@@ -350,7 +350,7 @@ public class TelaQuartos extends JFrame {
 			e.printStackTrace();
 		}
 		
-		textCheckIn = new JTextField();
+		textCheckIn = new JFormattedTextField(mascaraDat);
 		PainelPrincipal.add(textCheckIn, "cell 0 1");
 		textCheckIn.setColumns(10);
 		
@@ -360,13 +360,8 @@ public class TelaQuartos extends JFrame {
 		JLabel lblNewLabel_22 = new JLabel("Check-Out");
 		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
 		
-		try {
-			mascaraDat = new MaskFormatter("##/##/####");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
-		textCheckOut = new JTextField();
+		textCheckOut = new JFormattedTextField(mascaraDat);
 		PainelPrincipal.add(textCheckOut, "cell 0 1");
 		textCheckOut.setColumns(10);
 		
