@@ -6,17 +6,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import controle.EspacosDAO;
 import controle.QuartosDAO;
@@ -225,7 +228,15 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_22.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_22, "cell 0 3");
 		
-		txtNumeroCartao = new JTextField();
+		MaskFormatter mascaraCart = null;
+
+		try {
+			mascaraCart = new MaskFormatter("####  ####  ####  ####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtNumeroCartao = new JFormattedTextField(mascaraCart);
 		panel_2.add(txtNumeroCartao, "cell 0 4,growx");
 		txtNumeroCartao.setColumns(10);
 		
@@ -233,15 +244,31 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_23.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_23, "cell 0 6");
 		
-		txtDataValidade = new JTextField();
+		MaskFormatter mascaraDat = null;
+
+		try {
+			mascaraDat = new MaskFormatter("##/##");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtDataValidade = new JFormattedTextField(mascaraDat);
 		panel_2.add(txtDataValidade, "cell 0 7,growx");
 		txtDataValidade.setColumns(10);
+		
+		MaskFormatter mascaraCod = null;
+
+		try {
+			mascaraCod = new MaskFormatter("###");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 		JLabel lblNewLabel_24 = new JLabel("Código de Segurança");
 		lblNewLabel_24.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_24, "cell 0 9");
 		
-		txtCodigoSeguranca = new JTextField();
+		txtCodigoSeguranca = new JFormattedTextField(mascaraCod);
 		panel_2.add(txtCodigoSeguranca, "cell 0 10,growx");
 		txtCodigoSeguranca.setColumns(10);
 		
@@ -337,16 +364,17 @@ public class TelaReservas extends JFrame {
 		JPanel panel_3 = new JPanel();
 		PainelPrincipal.add(panel_3, "cell 14 4 11 1,grow");
 		
-		JLabel lblEfetuarPagamento = new JLabel("");
+		JLabel lblEfetuarPagamento = 
+				new JLabel("");
 		lblEfetuarPagamento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				    //String nomeTitular = txtNometitular.getText();
-			        //String numeroCartao = txtNumeroCartao.getText();
-			        //String dataValidade = txtDataValidade.getText();
-			        //String codigoSeguranca = txtCodigoSeguranca.getText();
+				    String nomeTitular = txtNometitular.getText();
+			        String numeroCartao = txtNumeroCartao.getText();
+			        String dataValidade = txtDataValidade.getText();
+			        String codigoSeguranca = txtCodigoSeguranca.getText();
 			        
 				
 					Integer ocupantetest = 18;

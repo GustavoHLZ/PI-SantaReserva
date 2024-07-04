@@ -1,41 +1,31 @@
 package visao; 
  
-import java.awt.EventQueue; 
- 
-import javax.swing.JFrame; 
-import javax.swing.JPanel; 
-import javax.swing.border.EmptyBorder; 
-import javax.swing.table.DefaultTableModel; 
- 
-import modelo.comboBoxPreco; 
-import controle.ComputadoresDAO; 
-import controle.InfologinDAO; 
-import controle.SalaReunioesDAO; 
-import modelo.Computadores; 
-import modelo.Hospedes; 
-import modelo.Infologin; 
-import modelo.SalaReunioes; 
-import modelo.TipoHoras; 
-import modelo.comboBoxDisponivel; 
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
+
+import controle.ComputadoresDAO;
+import modelo.Computadores;
+import modelo.Hospedes;
 import net.miginfocom.swing.MigLayout; 
-import java.awt.Color; 
-import java.awt.Dimension; 
- 
-import javax.swing.JLabel; 
-import javax.swing.JOptionPane; 
-import javax.swing.DefaultComboBoxModel; 
-import javax.swing.ImageIcon; 
-import java.awt.Font; 
-import java.awt.FlowLayout; 
-import javax.swing.SwingConstants; 
-import javax.swing.JComboBox; 
-import java.awt.event.MouseAdapter; 
-import java.awt.event.MouseEvent; 
-import java.util.ArrayList; 
-import javax.swing.JScrollPane; 
-import javax.swing.JTable; 
-import javax.swing.JTextField; 
-import javax.swing.JButton; 
  
 public class TelaComputadores extends JFrame { 
  
@@ -287,11 +277,23 @@ public class TelaComputadores extends JFrame {
 		 
 		JPanel panel_19 = new JPanel(); 
 		PainelPrincipal.add(panel_19, "cell 0 7,alignx left,aligny top"); 
+		
+		MaskFormatter mascaraDat = null;
+
+		try {
+
+			mascaraDat = new MaskFormatter("##/##/####");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
 		 
 		JLabel lblNewLabel_21 = new JLabel("Check-in"); 
 		PainelPrincipal.add(lblNewLabel_21, "cell 2 7,alignx left,aligny top"); 
 		 
-		textCheckIn = new JTextField(); 
+		textCheckIn = new JFormattedTextField(mascaraDat); 
 		PainelPrincipal.add(textCheckIn, "cell 4 7 2 1,alignx left,aligny top"); 
 		textCheckIn.setColumns(10); 
 		 
@@ -301,7 +303,7 @@ public class TelaComputadores extends JFrame {
 		JLabel lblNewLabel_22 = new JLabel("Check-Out"); 
 		PainelPrincipal.add(lblNewLabel_22, "cell 8 7,alignx left,aligny top"); 
 		 
-		textCheckOut = new JTextField(); 
+		textCheckOut = new JFormattedTextField(mascaraDat); 
 		PainelPrincipal.add(textCheckOut, "cell 10 7 3 1,alignx left,aligny top"); 
 		textCheckOut.setColumns(10); 
 		 

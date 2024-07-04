@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import modelo.comboBoxPreco;
 import controle.SalaReunioesDAO;
@@ -24,8 +25,11 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -278,10 +282,22 @@ public class TelaSalaDeReunioes extends JFrame {
 		JPanel panel_19 = new JPanel();
 		PainelPrincipal.add(panel_19, "flowx,cell 0 1");
 		
+		MaskFormatter mascaraDat = null;
+
+		try {
+
+			mascaraDat = new MaskFormatter("##/##/####");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+		
 		JLabel lblNewLabel_21 = new JLabel("Check-in");
 		PainelPrincipal.add(lblNewLabel_21, "cell 0 1");
 		
-		textCheckIn = new JTextField();
+		textCheckIn = new JFormattedTextField(mascaraDat);
 		PainelPrincipal.add(textCheckIn, "cell 0 1");
 		textCheckIn.setColumns(10);
 		
@@ -291,7 +307,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		JLabel lblNewLabel_22 = new JLabel("Check-Out");
 		PainelPrincipal.add(lblNewLabel_22, "cell 0 1");
 		
-		textCheckOut = new JTextField();
+		textCheckOut = new JFormattedTextField(mascaraDat);
 		PainelPrincipal.add(textCheckOut, "cell 0 1");
 		textCheckOut.setColumns(10);
 		

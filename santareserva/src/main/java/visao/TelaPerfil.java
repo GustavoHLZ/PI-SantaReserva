@@ -33,7 +33,6 @@ public class TelaPerfil extends JFrame {
 	private JPanel PainelGeral;
 	private JTextField txtSobrenome;
 	private JTextField txtNome;
-	private JTextField txtCep;
 	private JTextField txtTelefone;
 	private JTextField txtSenha;
 	private JTextField txtNascimento;
@@ -93,25 +92,25 @@ public class TelaPerfil extends JFrame {
 		lblUser.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblUser, "cell 3 1,alignx center");
 		
-		JLabel lblAltSobrenome = new JLabel("Alterar Sobrenome");
-		lblAltSobrenome.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltSobrenome, "cell 1 3,alignx left,aligny center");
-		
 		JLabel lblAltNome = new JLabel("Alterar Nome");
 		lblAltNome.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltNome, "cell 4 3 3 1");
+		PainelAlteracao.add(lblAltNome, "cell 1 3");
 		
-		txtSobrenome = new JTextField();
-		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtSobrenome, "cell 1 4 2 1,grow");
-		txtSobrenome.setColumns(10);
-		txtSobrenome.setText(hospedeLogado.getSobrenome());
+		JLabel lblAltSobrenome = new JLabel("Alterar Sobrenome");
+		lblAltSobrenome.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltSobrenome, "cell 4 3,alignx left,aligny center");
 		
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtNome, "cell 4 4 3 1,grow");
+		PainelAlteracao.add(txtNome, "cell 1 4 2 1,grow");
 		txtNome.setColumns(10);
 		txtNome.setText(hospedeLogado.getNome());
+		
+		txtSobrenome = new JTextField();
+		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtSobrenome, "cell 4 4 3 1,grow");
+		txtSobrenome.setColumns(10);
+		txtSobrenome.setText(hospedeLogado.getSobrenome());
 		
 		JLabel lblAltTelefone = new JLabel("Alterar Telefone");
 		lblAltTelefone.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -182,18 +181,10 @@ public class TelaPerfil extends JFrame {
 		PainelAlteracao.add(ColunaIcones, "cell 0 12");
 		ColunaIcones.setBackground(new Color(238, 238, 238));
 		
-		JLabel lblNewLabel_6 = new JLabel("Alterar CEP");
-		lblNewLabel_6.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblNewLabel_6, "cell 2 13 3 1,growy");
-		
-		txtCep = new JTextField();
-		txtCep.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtCep, "cell 2 14 3 1,grow");
-		txtCep.setColumns(10);
-		
-		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				
 				InfologinDAO dao = InfologinDAO.getInstancia();
 				
@@ -203,10 +194,10 @@ public class TelaPerfil extends JFrame {
 				TelaLogin login = new TelaLogin();
 				login.setVisible(true);
 				dispose();
-				
 			}
 		});
-		PainelAlteracao.add(btnExcluir, "cell 6 14,grow");
+		lblNewLabel.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BtnExcluirPerfil.png")));
+		PainelAlteracao.add(lblNewLabel, "cell 2 13 3 1");
 		
 		JLabel lblNewLabel_7 = new JLabel("Senha");
 		lblNewLabel_7.setFont(new Font("Arial", Font.PLAIN, 18));
