@@ -186,9 +186,73 @@ public class TelaHome extends JFrame {
 		JPanel PainelInferior = new JPanel();
 		PainelInferior.setBackground(new Color(119, 165, 175));
 		contentPane.add(PainelInferior, "cell 0 3 2 1,grow");
-		PainelInferior.setLayout(new MigLayout("", "[grow]", "[300px][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]"));
+		PainelInferior.setLayout(new MigLayout("", "[350px][400px][400px][400px][400px]", "[300px][24px][24px][24px][24px][24px]"));
+		
+		JLabel lblNewLabel_25 = new JLabel("Espaços");
+		lblNewLabel_25.setFont(new Font("Tahoma", Font.BOLD, 15));
+		PainelInferior.add(lblNewLabel_25, "flowx,cell 1 0,alignx left");
+		
+		JLabel lblNewLabel_26 = new JLabel("Agendamento");
+		lblNewLabel_26.setFont(new Font("Tahoma", Font.BOLD, 14));
+		PainelInferior.add(lblNewLabel_26, "cell 2 0");
+		
+		JLabel lblNewLabel_27 = new JLabel("Fale Conosco");
+		lblNewLabel_27.setFont(new Font("Tahoma", Font.BOLD, 14));
+		PainelInferior.add(lblNewLabel_27, "cell 3 0");
+		
+		JLabel lblNewLabel_31 = new JLabel("Redes Sociais");
+		lblNewLabel_31.setFont(new Font("Tahoma", Font.BOLD, 14));
+		PainelInferior.add(lblNewLabel_31, "cell 4 0");
+		
+		JLabel lblNewLabel_28 = new JLabel("Quartos");
+		lblNewLabel_28.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_28, "cell 1 1");
+		
+		JLabel lblNewLabel_32 = new JLabel("Reservas");
+		lblNewLabel_32.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_32, "cell 2 1");
+		
+		JLabel lblNewLabel_34 = new JLabel("(47) 93333-3333");
+		lblNewLabel_34.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_34, "cell 3 1");
+		
+		JLabel lblNewLabel_37 = new JLabel("");
+		lblNewLabel_37.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeInstagram.png")));
+		PainelInferior.add(lblNewLabel_37, "flowx,cell 4 1");
+		
+		JLabel lblNewLabel_29 = new JLabel("Sala de Reuniões");
+		lblNewLabel_29.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_29, "cell 1 2");
+		
+		JLabel lblNewLabel_33 = new JLabel("Termos de Uso");
+		lblNewLabel_33.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_33, "cell 2 2");
+		
+		JLabel lblNewLabel_35 = new JLabel("(47) 99999-9999");
+		lblNewLabel_35.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_35, "cell 3 2");
+		
+		JLabel lblNewLabel_38 = new JLabel("");
+		lblNewLabel_38.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeFaceBook.png")));
+		PainelInferior.add(lblNewLabel_38, "flowx,cell 4 2");
+		
+		JLabel lblNewLabel_30 = new JLabel("Computadores");
+		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_30, "cell 1 3 1 2");
+		
+		JLabel lblNewLabel_36 = new JLabel("SantaReserva@gmail.com");
+		lblNewLabel_36.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_36, "cell 3 3 1 2");
+		
+		JLabel lblNewLabel_39 = new JLabel("@SantaReserva");
+		lblNewLabel_39.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_39, "cell 4 1");
+		
+		JLabel lblNewLabel_40 = new JLabel("@SantaReserva");
+		lblNewLabel_40.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PainelInferior.add(lblNewLabel_40, "cell 4 2");
 		PainelTopo.setBackground(new Color(119, 165, 175));
-		PainelTopo.setLayout(new MigLayout("", "[1800px][]", "[]"));
+		PainelTopo.setLayout(new MigLayout("", "[1800px][]", "[][][][]"));
 		
 	
 		
