@@ -49,8 +49,8 @@ public class TelaPerfil extends JFrame {
 		hospedeLogado = hospede;
 		setFont(new Font("Arial", Font.PLAIN, 18));
 		setTitle("Perfil");
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);
 		PainelGeral = new JPanel();
 		PainelGeral.setBackground(new Color(255, 255, 255));
