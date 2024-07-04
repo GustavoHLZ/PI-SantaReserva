@@ -55,6 +55,7 @@ public class TelaCadastro extends JFrame {
 				"C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Icones\\LogoAPP.png"));
 		setTitle("Bem-vindo à Santa Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);
 		Tela = new JPanel();
 		Tela.setBackground(new Color(238, 238, 238));
@@ -73,42 +74,38 @@ public class TelaCadastro extends JFrame {
 
 		JPanel PainelCadastro = new JPanel();
 		Tela.add(PainelCadastro, "flowx,cell 1 0 1 6,alignx center,growy");
-		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]", "[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][][][][][][]"));
+		PainelCadastro.setLayout(new MigLayout("", "[grow]", "[250px][][][][][][][][][][][][][][grow]"));
 
 		JLabel lblRegistro = new JLabel("Registrar-se");
 		lblRegistro.setFont(new Font("Arial", Font.PLAIN, 36));
-		PainelCadastro.add(lblRegistro, "cell 0 0,alignx center,aligny top");
-
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(lblEmail, "cell 0 4");
-
-		txtEmail = new JTextField();
-		txtEmail.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtEmail, "cell 0 5,grow");
-		txtEmail.setColumns(10);
-
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(lblNome, "cell 0 6");
-
-		txtNome = new JTextField();
-		txtNome.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtNome, "cell 0 7,grow");
-		txtNome.setColumns(10);
-
-		JLabel lblSobrenome = new JLabel("Sobrenome");
-		lblSobrenome.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(lblSobrenome, "cell 0 8");
-
-		txtSobrenome = new JTextField();
-		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtSobrenome, "cell 0 9,grow");
-		txtSobrenome.setColumns(10);
-
-		JLabel lblNascimento = new JLabel("Data de nascimento");
-		lblNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(lblNascimento, "cell 0 10");
+		PainelCadastro.add(lblRegistro, "cell 0 0,alignx center,aligny center");
+		
+				JLabel lblEmail = new JLabel("Email");
+				lblEmail.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(lblEmail, "cell 0 1");
+		
+				txtEmail = new JTextField();
+				txtEmail.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(txtEmail, "cell 0 2,grow");
+				txtEmail.setColumns(10);
+		
+				JLabel lblNome = new JLabel("Nome");
+				lblNome.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(lblNome, "cell 0 3");
+		
+				txtNome = new JTextField();
+				txtNome.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(txtNome, "cell 0 4,grow");
+				txtNome.setColumns(10);
+		
+				JLabel lblSobrenome = new JLabel("Sobrenome");
+				lblSobrenome.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(lblSobrenome, "cell 0 5");
+		
+				txtSobrenome = new JTextField();
+				txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(txtSobrenome, "cell 0 6,grow");
+				txtSobrenome.setColumns(10);
 
 		MaskFormatter mascaraDat = null;
 
@@ -121,15 +118,15 @@ public class TelaCadastro extends JFrame {
 			e.printStackTrace();
 
 		}
-
-		txtNascimento = new JFormattedTextField(mascaraDat);
-		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtNascimento, "cell 0 11,grow");
-		txtNascimento.setColumns(10);
-
-		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(lblTelefone, "cell 0 12");
+		
+				JLabel lblNascimento = new JLabel("Data de nascimento");
+				lblNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(lblNascimento, "cell 0 7");
+		
+				txtNascimento = new JFormattedTextField(mascaraDat);
+				txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(txtNascimento, "cell 0 8,grow");
+				txtNascimento.setColumns(10);
 
 		MaskFormatter mascaraTel = null;
 
@@ -142,196 +139,200 @@ public class TelaCadastro extends JFrame {
 			e.printStackTrace();
 
 		}
-
-		txtTelefone = new JFormattedTextField(mascaraTel);
-		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtTelefone, "cell 0 13,grow");
-		txtTelefone.setColumns(10);
-
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(lblSenha, "cell 0 14");
-
-		txtSenha = new JTextField();
-		txtSenha.setFont(new Font("Arial", Font.PLAIN, 32));
-		PainelCadastro.add(txtSenha, "cell 0 15,grow");
-		txtSenha.setColumns(10);
-
-		JLabel lblJapossui = new JLabel("Já possui registro? Faça o Login");
-		lblJapossui.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dispose();
-				TelaLogin frame = new TelaLogin();
-				frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // maximizado
-				frame.setVisible(true);
-			}
-		});
 		
-				JLabel BTNRegistrar = new JLabel("");
-				BTNRegistrar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
+				JLabel lblTelefone = new JLabel("Telefone");
+				lblTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(lblTelefone, "cell 0 9");
+		
+				txtTelefone = new JFormattedTextField(mascaraTel);
+				txtTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(txtTelefone, "cell 0 10,grow");
+				txtTelefone.setColumns(10);
+		
+				JLabel lblSenha = new JLabel("Senha");
+				lblSenha.setFont(new Font("Arial", Font.PLAIN, 32));
+				PainelCadastro.add(lblSenha, "cell 0 11");
+				
+						txtSenha = new JTextField();
+						txtSenha.setFont(new Font("Arial", Font.PLAIN, 32));
+						PainelCadastro.add(txtSenha, "cell 0 12,grow");
+						txtSenha.setColumns(10);
+				
+						JLabel BTNRegistrar = new JLabel("");
+						BTNRegistrar.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
 
-						if (txtEmail.getText().equals("")) {
+								if (txtEmail.getText().equals("")) {
 
-							JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
+									JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (txtNome.getText().equals("")) {
+								if (txtNome.getText().equals("")) {
 
-							JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
+									JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (txtSobrenome.getText().equals("")) {
+								if (txtSobrenome.getText().equals("")) {
 
-							JOptionPane.showMessageDialog(null, "Preencha o campo Sobrenome.");
+									JOptionPane.showMessageDialog(null, "Preencha o campo Sobrenome.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (txtNascimento.getText().equals("")) {
+								if (txtNascimento.getText().equals("")) {
 
-							JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
+									JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (txtTelefone.getText().equals("")) {
+								if (txtTelefone.getText().equals("")) {
 
-							JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
+									JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (txtSenha.getText().equals("")) {
+								if (txtSenha.getText().equals("")) {
 
-							JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
+									JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
+								if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
 
-							JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+									JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
+								if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
 
-							JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
+									JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
 
-							return;
+									return;
 
-						}
+								}
 
-						if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+								if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
 
-							JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
+									JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
 
-							return;
+									return;
 
-						}
+								}
 
-						SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+								SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-						String email = txtEmail.getText();
-						String emailformat = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-						if(!email.matches(emailformat)) {
-							JOptionPane.showMessageDialog(null, "Insira um endereço de email válido");
-							return;
-						}
-						String nome = txtNome.getText();
-						String sobrenome = txtSobrenome.getText();
+								String email = txtEmail.getText();
+								String emailformat = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+								if(!email.matches(emailformat)) {
+									JOptionPane.showMessageDialog(null, "Insira um endereço de email válido");
+									return;
+								}
+								String nome = txtNome.getText();
+								String sobrenome = txtSobrenome.getText();
 
-						String dataNascTxt = txtNascimento.getText();
+								String dataNascTxt = txtNascimento.getText();
 
-						dataNascTxt = dataNascTxt.replace("/", "");
-						dataNascTxt = dataNascTxt.trim();
+								dataNascTxt = dataNascTxt.replace("/", "");
+								dataNascTxt = dataNascTxt.trim();
 
-						LocalDate nascimento = null;
-						if (dataNascTxt.isEmpty()) {
-							JOptionPane.showMessageDialog(null, "Nenhuma data preenchida!");
-						} else {
+								LocalDate nascimento = null;
+								if (dataNascTxt.isEmpty()) {
+									JOptionPane.showMessageDialog(null, "Nenhuma data preenchida!");
+								} else {
 
-							String diaTxt = dataNascTxt.substring(0, 2);
-							String mesTxt = dataNascTxt.substring(2, 4);
-							String anoTxt = dataNascTxt.substring(4, 8);
+									String diaTxt = dataNascTxt.substring(0, 2);
+									String mesTxt = dataNascTxt.substring(2, 4);
+									String anoTxt = dataNascTxt.substring(4, 8);
 
-							Integer dia = Integer.valueOf(diaTxt);
-							Integer mes = Integer.valueOf(mesTxt);
-							Integer ano = Integer.valueOf(anoTxt);
+									Integer dia = Integer.valueOf(diaTxt);
+									Integer mes = Integer.valueOf(mesTxt);
+									Integer ano = Integer.valueOf(anoTxt);
 
-							nascimento = LocalDate.of(ano, mes, dia);
+									nascimento = LocalDate.of(ano, mes, dia);
 
-						}
+								}
 
-						String telefone = txtTelefone.getText();
-						String senha = txtSenha.getText();
+								String telefone = txtTelefone.getText();
+								String senha = txtSenha.getText();
 
-						Hospedes hospede = new Hospedes();
-						Infologin login = new Infologin();
+								Hospedes hospede = new Hospedes();
+								Infologin login = new Infologin();
 
-						login.setLogin(email);
-						login.setSenha(senha);
+								login.setLogin(email);
+								login.setSenha(senha);
 
-						hospede.setNome(nome);
-						hospede.setSobrenome(sobrenome);
-						hospede.setNascimento(nascimento);
+								hospede.setNome(nome);
+								hospede.setSobrenome(sobrenome);
+								hospede.setNascimento(nascimento);
 
-						telefone = telefone.replace("(", "");
-						telefone = telefone.replace(")", "");
-						telefone = telefone.replace("-", "");
-						telefone = telefone.replace(" ", "");
-						telefone = telefone.trim();
-						hospede.setTelefone(telefone);
+								telefone = telefone.replace("(", "");
+								telefone = telefone.replace(")", "");
+								telefone = telefone.replace("-", "");
+								telefone = telefone.replace(" ", "");
+								telefone = telefone.trim();
+								hospede.setTelefone(telefone);
 
-						HospedesDAO dao = HospedesDAO.getInstancia();
-						InfologinDAO idao = InfologinDAO.getInstancia();
+								HospedesDAO dao = HospedesDAO.getInstancia();
+								InfologinDAO idao = InfologinDAO.getInstancia();
 
-						try {
-							// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
-							// mações no Login do usuário
-							int retorno = idao.InserirInfologin(login);
-							// insere o retorno como o id do Infologin
-							login.setIdUsuario(retorno);
-							// insere as informações de login a partir da chave estrangeira em Hospedes
-							hospede.setLogin(login);
-							// insere as informações em hospede
-							int id = dao.InserirHospedes(hospede);
+								try {
+									// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
+									// mações no Login do usuário
+									int retorno = idao.InserirInfologin(login);
+									// insere o retorno como o id do Infologin
+									login.setIdUsuario(retorno);
+									// insere as informações de login a partir da chave estrangeira em Hospedes
+									hospede.setLogin(login);
+									// insere as informações em hospede
+									int id = dao.InserirHospedes(hospede);
 
-							if (id != 0) {
-								hospede.setIdHospede(id);
-								JOptionPane.showMessageDialog(null, "inserido");
-								TelaHome c = new TelaHome(hospede);
-								c.setVisible(true);
-								dispose();
-							} else {
-								JOptionPane.showMessageDialog(null, "Erro");
+									if (id != 0) {
+										hospede.setIdHospede(id);
+										JOptionPane.showMessageDialog(null, "inserido");
+										TelaHome c = new TelaHome(hospede);
+										c.setVisible(true);
+										dispose();
+									} else {
+										JOptionPane.showMessageDialog(null, "Erro");
+									}
+
+								} catch (Exception e2) {
+									JOptionPane.showMessageDialog(null, "Erro ao inserir informações");
+								}
+
 							}
-
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Erro ao inserir informações");
-						}
-
-					}
-				});
-				BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
-				PainelCadastro.add(BTNRegistrar, "cell 0 16");
-		lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelCadastro.add(lblJapossui, "cell 0 22,alignx center,aligny bottom");
+						});
+						BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
+						PainelCadastro.add(BTNRegistrar, "cell 0 13");
+				
+						JLabel lblJapossui = new JLabel("Já possui registro? Faça o Login");
+						lblJapossui.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								dispose();
+								TelaLogin frame = new TelaLogin();
+								frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // maximizado
+								frame.setVisible(true);
+							}
+						});
+						lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
+						PainelCadastro.add(lblJapossui, "cell 0 14,alignx center,aligny top");
 	}
 
 }
