@@ -184,7 +184,103 @@ public class TelaHome extends JFrame {
 		PainelIcones.add(lblNewLabel_17, "cell 1 17");
 		
 		JPanel panel = new JPanel();
+		panel.setLayout(new MigLayout("", "[grow][grow]", "[grow][grow]"));
+
 		contentPane.add(panel, "cell 1 2,grow");
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, "cell 0 0,alignx center,aligny bottom");
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/QuartoHomeGrande.png")));
+		panel_1.add(lblNewLabel_20);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(new MigLayout("", "[grow]", "[grow][grow]"));
+		panel.add(panel_3, "cell 1 0,growx,aligny bottom");
+		
+		JPanel panel_5 = new JPanel();
+		panel_3.add(panel_5, "cell 0 0,alignx left,aligny center");
+		
+		JLabel lblNewLabel_47 = new JLabel("Nossos Espaços");
+		lblNewLabel_47.setFont(new Font("Tahoma", Font.BOLD, 50));
+		panel_5.add(lblNewLabel_47);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setLayout(new MigLayout("", "[grow][grow]", "[grow][grow]"));
+		panel_3.add(panel_6, "cell 0 1,grow");
+		
+		JPanel panel_7 = new JPanel();
+		panel_6.add(panel_7, "cell 0 0,growx,aligny center");
+		
+		JLabel lblNewLabel_48 = new JLabel("");
+		lblNewLabel_48.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP1.png")));
+		panel_7.add(lblNewLabel_48);
+		
+		JPanel panel_9 = new JPanel();
+		panel_6.add(panel_9, "cell 1 0,growx,aligny center");
+		
+		JLabel lblNewLabel_49 = new JLabel("");
+		lblNewLabel_49.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP2.png")));
+		panel_9.add(lblNewLabel_49);
+		
+		JPanel panel_8 = new JPanel();
+		panel_6.add(panel_8, "cell 0 1,growx,aligny center");
+		
+		JLabel lblNewLabel_52 = new JLabel("");
+		lblNewLabel_52.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP4.png")));
+		panel_8.add(lblNewLabel_52);
+		
+		JPanel panel_10 = new JPanel();
+		panel_6.add(panel_10, "cell 1 1,alignx center,aligny center");
+		
+		JLabel lblNewLabel_50 = new JLabel("");
+		panel_10.add(lblNewLabel_50);
+		lblNewLabel_50.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP3.png")));
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(new MigLayout("", "[grow][grow][grow][grow][grow]", "[20px][20px]"));
+		panel.add(panel_2, "cell 0 1 2 1,growx,aligny center");
+		
+		JLabel lblNewLabel_21 = new JLabel("");
+		lblNewLabel_21.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeCama.png")));
+		panel_2.add(lblNewLabel_21, "cell 0 0,alignx center");
+		
+		JLabel lblNewLabel_23 = new JLabel("");
+		lblNewLabel_23.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeWifi.png")));
+		panel_2.add(lblNewLabel_23, "cell 1 0,alignx center");
+		
+		JLabel lblNewLabel_41 = new JLabel("");
+		lblNewLabel_41.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeComputadores.png")));
+		panel_2.add(lblNewLabel_41, "cell 2 0,alignx center");
+		
+		JLabel lblNewLabel_43 = new JLabel("");
+		lblNewLabel_43.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeSalaReunioes.png")));
+		panel_2.add(lblNewLabel_43, "cell 3 0,alignx center");
+		
+		JLabel lblNewLabel_45 = new JLabel("");
+		lblNewLabel_45.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/IconeMapa.png")));
+		panel_2.add(lblNewLabel_45, "cell 4 0,alignx center");
+		
+		JLabel lblNewLabel_22 = new JLabel("Acomodações Confortáveis");
+		lblNewLabel_22.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel_2.add(lblNewLabel_22, "cell 0 1,alignx center");
+		
+		JLabel lblNewLabel_24 = new JLabel("Internet Rápida e Gratuita");
+		lblNewLabel_24.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel_2.add(lblNewLabel_24, "cell 1 1,alignx center");
+		
+		JLabel lblNewLabel_42 = new JLabel("Salas com Computadores de de última geração");
+		lblNewLabel_42.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel_2.add(lblNewLabel_42, "cell 2 1,alignx center");
+		
+		JLabel lblNewLabel_44 = new JLabel("Salas Prontas para Conferências e Reuniões");
+		lblNewLabel_44.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel_2.add(lblNewLabel_44, "cell 3 1,alignx center");
+		
+		JLabel lblNewLabel_46 = new JLabel("Localização Privilegiada");
+		lblNewLabel_46.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel_2.add(lblNewLabel_46, "cell 4 1,alignx center");
 		
 		JPanel PainelInferior = new JPanel();
 		PainelInferior.setBackground(new Color(119, 165, 175));

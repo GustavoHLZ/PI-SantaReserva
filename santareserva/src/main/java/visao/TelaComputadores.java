@@ -242,7 +242,7 @@ public class TelaComputadores extends JFrame {
 		 
 		JPanel PainelPrincipal = new JPanel(); 
 		contentPane.add(PainelPrincipal, "cell 1 2,grow"); 
-		PainelPrincipal.setLayout(new MigLayout("", "[10px][4px][39px][4px][96px][4px][10px][4px][47px][4px][45px][10px][45px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][12px][2px][10px][4px][10px][4px][10px][4px][10px][4px][164px][10px][551px]", "[1030px][13px][9px][6px][10px][3px][10px][31px]")); 
+		PainelPrincipal.setLayout(new MigLayout("", "[][][39px][4px][96px][4px][10px][4px][47px][4px][45px][10px][45px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][10px][4px][12px][2px][10px][4px][10px][4px][10px][4px][10px][4px][164px][10px][551px]", "[1030px][13px][9px][6px][10px][3px][10px][31px]")); 
 		 
 		JScrollPane scrollPane = new JScrollPane(); 
 		PainelPrincipal.add(scrollPane, "cell 0 0 48 1,grow"); 
