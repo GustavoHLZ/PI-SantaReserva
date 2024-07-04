@@ -64,12 +64,12 @@ public class TelaHome extends JFrame {
 		
 		JPanel PainelFiltro = new JPanel();
 		contentPane.add(PainelFiltro, "cell 1 1,grow");
-		PainelFiltro.setLayout(new MigLayout("", "[250px][250px][144px]", "[58px]"));
+		PainelFiltro.setLayout(new MigLayout("", "[]", "[]"));
 		
 		JPanel PainelIcones = new JPanel();
 		PainelIcones.setBackground(new Color(240, 240, 240));
 		contentPane.add(PainelIcones, "cell 0 2,grow");
-		PainelIcones.setLayout(new MigLayout("", "[][]", "[][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][][100px][][][][][][][][][]"));
+		PainelIcones.setLayout(new MigLayout("", "[][]", "[][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][][100px]"));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeHome.png")));
@@ -183,10 +183,13 @@ public class TelaHome extends JFrame {
 		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_17, "cell 1 17");
 		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, "cell 1 2,grow");
+		
 		JPanel PainelInferior = new JPanel();
 		PainelInferior.setBackground(new Color(119, 165, 175));
 		contentPane.add(PainelInferior, "cell 0 3 2 1,grow");
-		PainelInferior.setLayout(new MigLayout("", "[350px][400px][400px][400px][400px]", "[300px][24px][24px][24px][24px][24px]"));
+		PainelInferior.setLayout(new MigLayout("", "[350px][400px][400px][400px][400px]", "[50px][24px][24px][24px][24px][24px]"));
 		
 		JLabel lblNewLabel_25 = new JLabel("Espaços");
 		lblNewLabel_25.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -253,51 +256,6 @@ public class TelaHome extends JFrame {
 		PainelInferior.add(lblNewLabel_40, "cell 4 2");
 		PainelTopo.setBackground(new Color(119, 165, 175));
 		PainelTopo.setLayout(new MigLayout("", "[1800px][]", "[][][][]"));
-		
-	
-		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, "cell 1 2, grow");
-		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
-		
-		JPanel panel_2 = new JPanel();
-		panel_1.add(panel_2);
-		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/QuartoHomeGrande.png")));
-		panel_2.add(lblNewLabel_20);
-		
-		JPanel panel_3 = new JPanel();
-		panel_1.add(panel_3);
-		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JPanel panel_5 = new JPanel();
-		panel_3.add(panel_5);
-		
-		JLabel lblNewLabel_21 = new JLabel("");
-		lblNewLabel_21.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP1.png")));
-		panel_5.add(lblNewLabel_21);
-		
-		JPanel panel_6 = new JPanel();
-		panel_3.add(panel_6);
-		
-		JLabel lblNewLabel_22 = new JLabel("");
-		lblNewLabel_22.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/HomeP2.png")));
-		panel_6.add(lblNewLabel_22);
-		
-		JPanel panel_7 = new JPanel();
-		panel_3.add(panel_7);
-		
-		JLabel lblNewLabel_23 = new JLabel("New label");
-		panel_7.add(lblNewLabel_23);
-		
-		JPanel panel_8 = new JPanel();
-		panel_3.add(panel_8);
-		
-		JLabel lblNewLabel_24 = new JLabel("New label");
-		panel_8.add(lblNewLabel_24);
 	
 	
 	

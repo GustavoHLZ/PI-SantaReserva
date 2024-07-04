@@ -55,13 +55,13 @@ public class TelaCadastro extends JFrame {
 				"C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\Icones\\LogoAPP.png"));
 		setTitle("Bem-vindo à Santa Reserva");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1920, 1080);
+		setBounds(0, 0, 1920, 1080);
 		Tela = new JPanel();
 		Tela.setBackground(new Color(238, 238, 238));
 		Tela.setBorder(null);
 
 		setContentPane(Tela);
-		Tela.setLayout(new MigLayout("", "[960][][][][][][][][][][][][][][][1000px]", "[800px,grow][][][][][60px]"));
+		Tela.setLayout(new MigLayout("", "[960px][grow]", "[grow]"));
 
 		JPanel PainelHotel = new JPanel();
 		Tela.add(PainelHotel, "cell 0 0,grow");
@@ -72,7 +72,7 @@ public class TelaCadastro extends JFrame {
 		PainelHotel.add(ImgHotel, "cell 0 0,alignx left,aligny top");
 
 		JPanel PainelCadastro = new JPanel();
-		Tela.add(PainelCadastro, "flowx,cell 15 0 1 6,alignx center,growy");
+		Tela.add(PainelCadastro, "flowx,cell 1 0 1 6,alignx center,growy");
 		PainelCadastro.setLayout(new MigLayout("", "[195px,grow]", "[][40px][][40px][][40px][][40px][][40px][][40px][][40px][][40px][180px][][][][][][][]"));
 
 		JLabel lblRegistro = new JLabel("Registrar-se");
@@ -332,10 +332,6 @@ public class TelaCadastro extends JFrame {
 				PainelCadastro.add(BTNRegistrar, "cell 0 16");
 		lblJapossui.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelCadastro.add(lblJapossui, "cell 0 22,alignx center,aligny bottom");
-		
-		JLabel lblJapossui_1 = new JLabel("Já possui registro? Faça o Login");
-		lblJapossui_1.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelCadastro.add(lblJapossui_1, "cell 0 23");
 	}
 
 }
