@@ -69,7 +69,7 @@ public class TelaHome extends JFrame {
 		JPanel PainelIcones = new JPanel();
 		PainelIcones.setBackground(new Color(240, 240, 240));
 		contentPane.add(PainelIcones, "cell 0 2,grow");
-		PainelIcones.setLayout(new MigLayout("", "[][]", "[][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][50px][][100px]"));
+		PainelIcones.setLayout(new MigLayout("", "[][]", "[][][][][][][][][][][][][][][][][100px]"));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeHome.png")));
