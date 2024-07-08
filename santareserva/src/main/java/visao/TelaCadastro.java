@@ -211,7 +211,7 @@ public class TelaCadastro extends JFrame {
 
 								}
 
-								if (!txtNome.getText().matches("[a-zA-Z\\s]+")) {
+								if (!txtNome.getText().matches("[\\p{L}\\s~^]+")) {
 
 									JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
 
@@ -219,7 +219,7 @@ public class TelaCadastro extends JFrame {
 
 								}
 
-								if (!txtSobrenome.getText().matches("[a-zA-Z\\s]+")) {
+								if (!txtSobrenome.getText().matches("[\\p{L}\\s~^]+")) {
 
 									JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
 

@@ -26,6 +26,7 @@ import controle.HospedesDAO;
 import controle.InfologinDAO;
 import modelo.Hospedes;
 import modelo.Infologin;
+import modelo.Quartos;
 import net.miginfocom.swing.MigLayout;
 
 public class TelaPerfil extends JFrame {
@@ -39,7 +40,8 @@ public class TelaPerfil extends JFrame {
 	private JTextField txtEmail;
 	private JTextField txtVerSenha;
 	private JTextField txtConfSenha;
-	private Hospedes hospedeLogado;
+	private static Hospedes hospedeLogado;
+	private Quartos quartoSelecionado;
 
 
 	/**
@@ -57,68 +59,16 @@ public class TelaPerfil extends JFrame {
 		PainelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(PainelGeral);
-		PainelGeral.setLayout(new MigLayout("", "[][][210.00,grow 25][][39.00][21.00][1487.00,grow 25][grow][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", "[][][40.00][grow][][][][][grow][][][][][][][][][][][][][]"));
+		PainelGeral.setLayout(new MigLayout("", "[][grow]", "[][grow]"));
 		
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\BackgroundsPI\\Rectangle 3 barra s home.png"));
-		PainelGeral.add(lblLogo, "cell 0 0 8 1");
+		JPanel PainelLog = new JPanel();
+		PainelLog.setBackground(new Color(119, 165, 175));
+		PainelGeral.add(PainelLog, "cell 0 0 3 1,grow");
+		PainelLog.setLayout(new MigLayout("", "[][]", "[grow]"));
 		
-		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\PI-SantaReserva\\santareserva\\src\\main\\resources\\BackgroundsPI\\Line 1.png"));
-		PainelGeral.add(lblNewLabel_10, "cell 0 1 8 1,aligny top");
-		
-		JLabel lblNewLabel_11 = new JLabel("");
-		PainelGeral.add(lblNewLabel_11, "cell 7 2");
-		
-		JLabel lblNewLabel_12 = new JLabel("");
-		PainelGeral.add(lblNewLabel_12, "flowx,cell 2 5");
-		
-		JPanel PainelAlteracao = new JPanel();
-		PainelAlteracao.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
-		PainelAlteracao.setBackground(new Color(238, 238, 238));
-		PainelGeral.add(PainelAlteracao, "cell 6 3 41 19,grow");
-		PainelAlteracao.setLayout(new MigLayout("", "[grow][178.00][142.00][::200.00px][69.00][][173.00][46px,grow]", "[66px][][][][40][][40][][40][46.00][][40][][][40][130.00,grow][20][5px:n][40][15][][5px:n][40][100.00][28.00]"));
-		
-		JLabel lblPerfil = new JLabel("");
-		PainelAlteracao.add(lblPerfil, "cell 3 0,alignx center,aligny center");
-		lblPerfil.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/IconeUser.png")));
-		
-		JLabel lblUser = new JLabel("User");
-		lblUser.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblUser, "cell 3 1,alignx center");
-		
-		JLabel lblAltNome = new JLabel("Alterar Nome");
-		lblAltNome.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltNome, "cell 1 3");
-		
-		JLabel lblAltSobrenome = new JLabel("Alterar Sobrenome");
-		lblAltSobrenome.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltSobrenome, "cell 4 3,alignx left,aligny center");
-		
-		txtNome = new JTextField();
-		txtNome.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtNome, "cell 1 4 2 1,grow");
-		txtNome.setColumns(10);
-		txtNome.setText(hospedeLogado.getNome());
-		
-		txtSobrenome = new JTextField();
-		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtSobrenome, "cell 4 4 3 1,grow");
-		txtSobrenome.setColumns(10);
-		txtSobrenome.setText(hospedeLogado.getSobrenome());
-		
-		JLabel lblAltTelefone = new JLabel("Alterar Telefone");
-		lblAltTelefone.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltTelefone, "cell 1 5");
-		
-		JLabel lblAltSenha = new JLabel("Alterar Senha");
-		lblAltSenha.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltSenha, "cell 4 5 3 1");
+		JLabel lblNewLabel_19 = new JLabel("");
+		lblNewLabel_19.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/LogoCerta2.png")));
+		PainelLog.add(lblNewLabel_19);
 		
 		MaskFormatter mascaraTel = null;
 
@@ -132,26 +82,6 @@ public class TelaPerfil extends JFrame {
 
 		}
 		
-		txtTelefone = new JFormattedTextField(mascaraTel);
-		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtTelefone, "cell 1 6 2 1,grow");
-		txtTelefone.setColumns(10);
-		txtTelefone.setText(hospedeLogado.getTelefone());
-		
-		txtSenha = new JTextField();
-		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtSenha, "cell 4 6 3 1,grow");
-		txtSenha.setColumns(10);
-		txtSenha.setText(hospedeLogado.getLogin().getSenha());
-		
-		JLabel lblAltNascimento = new JLabel("Alterar Data de nascimento");
-		lblAltNascimento.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltNascimento, "cell 1 7");
-		
-		JLabel lblAltEmail = new JLabel("Alterar Email");
-		lblAltEmail.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltEmail, "cell 4 7 3 1");
-		
 		MaskFormatter mascaraDat = null;
 		
 		try {
@@ -163,23 +93,201 @@ public class TelaPerfil extends JFrame {
 			e.printStackTrace();
 
 		}
+		DateTimeFormatter idtFormater = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		JPanel PainelIcones = new JPanel();
+		PainelIcones.setBackground(new Color(240, 240, 240));
+		PainelGeral.add(PainelIcones, "cell 0 1,alignx leading,growy");
+		PainelIcones.setLayout(new MigLayout("", "[][]", "[grow]"));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeHome.png")));
+		PainelIcones.add(lblNewLabel_1, "cell 0 0");
+		
+		JLabel lblNewLabel_2 = new JLabel("Home");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaHome c = new TelaHome(null);
+				c.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_2, "cell 1 0");
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconePerfil.png")));
+		PainelIcones.add(lblNewLabel_3, "cell 0 1");
+		
+		JLabel lblNewLabel_4 = new JLabel("Perfil");
+		
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_4, "cell 1 1");
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeReserva.png")));
+		PainelIcones.add(lblNewLabel_11, "cell 0 2");
+		
+		JLabel lblNewLabel_5 = new JLabel("Reserva");
+		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null, null, null);
+				c.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_5, "cell 1 2");
+		
+		JLabel lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeSalaReunioes.png")));
+		PainelIcones.add(lblNewLabel_12, "cell 0 3");
+		
+		JLabel lblNewLabel_6 = new JLabel("Sala de Reuniões");
+		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hospedeLogado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_6, "cell 1 3");
+		
+		JLabel lblNewLabel_13 = new JLabel("");
+		lblNewLabel_13.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeComputadores.png")));
+		PainelIcones.add(lblNewLabel_13, "cell 0 4");
+		
+		JLabel lblNewLabel_7 = new JLabel("Computadores");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_7, "cell 1 4");
+		
+		JLabel lblNewLabel_14 = new JLabel("");
+		lblNewLabel_14.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeQuartos.png")));
+		PainelIcones.add(lblNewLabel_14, "cell 0 5");
+		
+		JLabel lblNewLabel_8 = new JLabel("Quartos");
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_8, "cell 1 5");
+		
+		JLabel lblNewLabel_15 = new JLabel("");
+		lblNewLabel_15.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeAvalie.png")));
+		PainelIcones.add(lblNewLabel_15, "cell 0 6");
+		
+		JLabel lblNewLabel_9 = new JLabel("Avalie-nos");
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaAvaliacoes c = new TelaAvaliacoes(hospedeLogado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_9, "cell 1 6");
+		
+		JLabel lblNewLabel_16 = new JLabel("");
+		lblNewLabel_16.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeInformacoes.png")));
+		PainelIcones.add(lblNewLabel_16, "cell 0 7");
+		
+		JLabel lblNewLabel_10 = new JLabel("Nossas Informações");
+		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_10, "cell 1 7");
+		
+		JLabel lblNewLabel_18 = new JLabel("");
+		lblNewLabel_18.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeConfiguracoes.png")));
+		PainelIcones.add(lblNewLabel_18, "cell 0 8");
+		
+		JLabel lblNewLabel_17 = new JLabel("Configurações");
+		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		PainelIcones.add(lblNewLabel_17, "cell 1 8,growy");
+		
+		JPanel PainelAlteracao = new JPanel();
+		PainelAlteracao.setBackground(new Color(238, 238, 238));
+		PainelGeral.add(PainelAlteracao, "cell 1 1,grow");
+		PainelAlteracao.setLayout(new MigLayout("", "[grow][400px][500px][400px][grow]", "[200px][100px][][][][][][][][][][][grow][grow]"));
+		
+		JLabel lblPerfil = new JLabel("");
+		PainelAlteracao.add(lblPerfil, "cell 2 0,alignx center,aligny bottom");
+		lblPerfil.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/IconeUser.png")));
+		
+		JLabel lblUser = new JLabel("User");
+		lblUser.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblUser, "cell 2 1,alignx center,aligny top");
+		lblUser.setText("Olá, " + hospedeLogado.getNome() + " " + hospedeLogado.getSobrenome());
+		
+		JLabel lblAltNome = new JLabel("Alterar Nome");
+		lblAltNome.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltNome, "cell 1 2,growx");
+		
+		JLabel lblAltSobrenome = new JLabel("Alterar Sobrenome");
+		lblAltSobrenome.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltSobrenome, "cell 3 2,alignx left,aligny center");
+		
+		txtNome = new JTextField();
+		txtNome.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtNome, "cell 1 3,grow");
+		txtNome.setColumns(10);
+		txtNome.setText(hospedeLogado.getNome());
+		
+		txtSobrenome = new JTextField();
+		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtSobrenome, "cell 3 3,grow");
+		txtSobrenome.setColumns(10);
+		txtSobrenome.setText(hospedeLogado.getSobrenome());
+		
+		JLabel lblAltTelefone = new JLabel("Alterar Telefone");
+		lblAltTelefone.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltTelefone, "cell 1 4");
+		
+		JLabel lblAltSenha = new JLabel("Alterar Senha");
+		lblAltSenha.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltSenha, "cell 3 4");
+		
+		txtTelefone = new JFormattedTextField(mascaraTel);
+		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtTelefone, "cell 1 5,grow");
+		txtTelefone.setColumns(10);
+		txtTelefone.setText(hospedeLogado.getTelefone());
+		
+		txtSenha = new JTextField();
+		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtSenha, "cell 3 5,grow");
+		txtSenha.setColumns(10);
+		txtSenha.setText(hospedeLogado.getLogin().getSenha());
+		
+		JLabel lblAltNascimento = new JLabel("Alterar Data de nascimento");
+		lblAltNascimento.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltNascimento, "cell 1 6");
+		
+		JLabel lblAltEmail = new JLabel("Alterar Email");
+		lblAltEmail.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblAltEmail, "cell 3 6");
 		
 		txtNascimento = new JFormattedTextField(mascaraDat);
 		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtNascimento, "cell 1 8 2 1,grow");
+		PainelAlteracao.add(txtNascimento, "cell 1 7,grow");
 		txtNascimento.setColumns(10);
-		DateTimeFormatter idtFormater = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		txtNascimento.setText(hospedeLogado.getNascimento().format(idtFormater));
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtEmail, "cell 4 8 3 1,grow");
+		PainelAlteracao.add(txtEmail, "cell 3 7,grow");
 		txtEmail.setColumns(10);
 		txtEmail.setText(hospedeLogado.getLogin().getLogin());
 		
-		JPanel ColunaIcones = new JPanel();
-		PainelAlteracao.add(ColunaIcones, "cell 0 12");
-		ColunaIcones.setBackground(new Color(238, 238, 238));
+		JLabel lblNewLabel7 = new JLabel("Senha");
+		lblNewLabel7.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblNewLabel7, "cell 2 8,alignx left");
+		
+		txtVerSenha = new JTextField();
+		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtVerSenha, "cell 2 9,grow");
+		txtVerSenha.setColumns(10);
+		txtVerSenha.setText(hospedeLogado.getLogin().getSenha());
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.addMouseListener(new MouseAdapter() {
@@ -196,28 +304,6 @@ public class TelaPerfil extends JFrame {
 				dispose();
 			}
 		});
-		lblNewLabel.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BtnExcluirPerfil.png")));
-		PainelAlteracao.add(lblNewLabel, "cell 2 13 3 1");
-		
-		JLabel lblNewLabel_7 = new JLabel("Senha");
-		lblNewLabel_7.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblNewLabel_7, "cell 2 16 3 1,alignx left");
-		
-		txtVerSenha = new JTextField();
-		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtVerSenha, "cell 2 18 3 1,grow");
-		txtVerSenha.setColumns(10);
-		txtVerSenha.setText(hospedeLogado.getLogin().getSenha());
-		
-		JLabel lblNewLabel_8 = new JLabel("Confirmar Senha");
-		lblNewLabel_8.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblNewLabel_8, "cell 2 20 3 1,alignx left");
-		
-		txtConfSenha = new JTextField();
-		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtConfSenha, "cell 2 22 3 1,grow");
-		txtConfSenha.setColumns(10);
-		txtConfSenha.setText(hospedeLogado.getLogin().getSenha());
 		
 		JLabel BtnAtualizarInfo = new JLabel("");
 		BtnAtualizarInfo.addMouseListener(new MouseAdapter() {
@@ -285,8 +371,20 @@ public class TelaPerfil extends JFrame {
 			}
 				
 		});
+		
+		JLabel lblNewLabel8 = new JLabel("Confirmar Senha");
+		lblNewLabel8.setFont(new Font("Arial", Font.PLAIN, 18));
+		PainelAlteracao.add(lblNewLabel8, "cell 2 10,alignx left");
+		
+		txtConfSenha = new JTextField();
+		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelAlteracao.add(txtConfSenha, "cell 2 11,grow");
+		txtConfSenha.setColumns(10);
+		txtConfSenha.setText(hospedeLogado.getLogin().getSenha());
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
-		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 23 3 1,alignx center,aligny center");
+		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 12,alignx center,aligny center");
+		lblNewLabel.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BtnExcluirPerfil.png")));
+		PainelAlteracao.add(lblNewLabel, "cell 2 13,alignx center,aligny top");
 	}
 
 }
