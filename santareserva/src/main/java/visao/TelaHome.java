@@ -19,6 +19,10 @@ import java.awt.FlowLayout;
 
 public class TelaHome extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Hospedes hosplogado;
 	private Hospedes usuariologado;
 	private JPanel contentPane;
@@ -126,6 +130,14 @@ public class TelaHome extends JFrame {
 		PainelIcones.add(lblNewLabel_13, "cell 0 4");
 		
 		JLabel lblNewLabel_7 = new JLabel("Computadores");
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaComputadores c = new TelaComputadores(hosplogado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_7, "cell 1 4");
 		
@@ -134,6 +146,14 @@ public class TelaHome extends JFrame {
 		PainelIcones.add(lblNewLabel_14, "cell 0 5");
 		
 		JLabel lblNewLabel_8 = new JLabel("Quartos");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaQuartos c = new TelaQuartos(hosplogado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_8, "cell 1 5");
 		
@@ -336,8 +356,12 @@ public class TelaHome extends JFrame {
 		JLabel lblNewLabel_40 = new JLabel("@SantaReserva");
 		lblNewLabel_40.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		PainelInferior.add(lblNewLabel_40, "cell 4 2");
-		PainelTopo.setBackground(new Color(119, 165, 175));
-		PainelTopo.setLayout(new MigLayout("", "[1800px][]", "[][][][]"));
+	
+	
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/LogoCerta2.png")));
+		PainelTopo.add(lblNewLabel, "cell 0 0");
 	
 	
 	
