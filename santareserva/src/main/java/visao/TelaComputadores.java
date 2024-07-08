@@ -45,25 +45,7 @@ public class TelaComputadores extends JFrame {
 	private JTextField txtTemp; 
 	private JTextField txtPreco; 
  
-	/** 
-	 * Launch the application. 
-	 */ 
-	public static void main(String[] args) { 
-		EventQueue.invokeLater(new Runnable() { 
-			public void run() { 
-				try { 
-					TelaComputadores frame = new TelaComputadores(null); 
-					frame.setVisible(true); 
-				} catch (Exception e) { 
-					e.printStackTrace(); 
-				} 
-			} 
-		}); 
-	} 
- 
-	/** 
-	 * Create the frame. 
-	 */ 
+	
 	public TelaComputadores(Hospedes hospede) { 
 		hosplogado = hospede; 
 		usuariologado = hosplogado; 
@@ -360,90 +342,90 @@ public class TelaComputadores extends JFrame {
 		lblNewLabel_20.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Botões/BTN Reserva.png"))); 
 		PainelPrincipal.add(lblNewLabel_20, "cell 45 5 1 3,alignx left,aligny top"); 
 		 
-		txtIdPc = new JTextField(); 
-		PainelPrincipal.add(txtIdPc, "cell 4 3 1 3,alignx left,aligny top"); 
-		txtIdPc.setColumns(10); 
+		//txtIdPc = new JTextField(); 
+		//PainelPrincipal.add(txtIdPc, "cell 4 3 1 3,alignx left,aligny top"); 
+		//txtIdPc.setColumns(10); 
 		 
-		txtNum = new JTextField(); 
-		PainelPrincipal.add(txtNum, "cell 8 3 3 3,alignx left,aligny top"); 
-		txtNum.setColumns(10); 
+		//txtNum = new JTextField(); 
+		//PainelPrincipal.add(txtNum, "cell 8 3 3 3,alignx left,aligny top"); 
+		//txtNum.setColumns(10); 
 		 
-		txtTemp = new JTextField(); 
-		PainelPrincipal.add(txtTemp, "cell 12 3 8 3,alignx left,aligny top"); 
-		txtTemp.setColumns(10); 
+		//txtTemp = new JTextField(); 
+		//PainelPrincipal.add(txtTemp, "cell 12 3 8 3,alignx left,aligny top"); 
+		//txtTemp.setColumns(10); 
 		 
-		txtPreco = new JTextField(); 
-		PainelPrincipal.add(txtPreco, "cell 23 3 13 3,alignx left,aligny top"); 
-		txtPreco.setColumns(10); 
+		//txtPreco = new JTextField(); 
+		//PainelPrincipal.add(txtPreco, "cell 23 3 13 3,alignx left,aligny top"); 
+		//txtPreco.setColumns(10); 
 		 
-		JLabel lblNewLabel_23 = new JLabel("IdPC:"); 
-		PainelPrincipal.add(lblNewLabel_23, "cell 4 1,alignx left,aligny top"); 
+		//JLabel lblNewLabel_23 = new JLabel("IdPC:"); 
+		//PainelPrincipal.add(lblNewLabel_23, "cell 4 1,alignx left,aligny top"); 
 		 
-		JLabel lblNewLabel_24 = new JLabel("Numero:"); 
-		PainelPrincipal.add(lblNewLabel_24, "cell 8 1,growx,aligny top"); 
+		//JLabel lblNewLabel_24 = new JLabel("Numero:"); 
+		//PainelPrincipal.add(lblNewLabel_24, "cell 8 1,growx,aligny top"); 
 		 
-		JLabel lblNewLabel_25 = new JLabel("Tempo:"); 
-		PainelPrincipal.add(lblNewLabel_25, "cell 12 1,growx,aligny top"); 
+		//JLabel lblNewLabel_25 = new JLabel("Tempo:"); 
+		//PainelPrincipal.add(lblNewLabel_25, "cell 12 1,growx,aligny top"); 
 		 
-		JLabel lblNewLabel_26 = new JLabel("Preco:"); 
-		PainelPrincipal.add(lblNewLabel_26, "cell 23 1 7 1,growx,aligny top"); 
+		//JLabel lblNewLabel_26 = new JLabel("Preco:"); 
+		//PainelPrincipal.add(lblNewLabel_26, "cell 23 1 7 1,growx,aligny top"); 
 		 
-		JButton btnAtt = new JButton("atualizar"); 
-		btnAtt.addMouseListener(new MouseAdapter() { 
-			@Override 
-			public void mouseClicked(MouseEvent e) { 
-		        int idPC = Integer.parseInt(txtIdPc.getText()); 
-		        int num = Integer.parseInt(txtNum.getText()); 
-		        int temp = Integer.parseInt(txtTemp.getText()); 
-		        float preco = Float.parseFloat(txtPreco.getText()); 
-		        boolean disp = true;  
+		//JButton btnAtt = new JButton("atualizar"); 
+		//btnAtt.addMouseListener(new MouseAdapter() { 
+			//@Override 
+			//public void mouseClicked(MouseEvent e) { 
+		        //int idPC = Integer.parseInt(txtIdPc.getText()); 
+		        //int num = Integer.parseInt(txtNum.getText()); 
+		        //int temp = Integer.parseInt(txtTemp.getText()); 
+		        //float preco = Float.parseFloat(txtPreco.getText()); 
+		        //boolean disp = true;  
  
  
-		        ComputadoresDAO compDAO = ComputadoresDAO.getInstancia(); 
-		        Computadores comp = compDAO.buscarComputadoresPorId(idPC); 
+		        //ComputadoresDAO compDAO = ComputadoresDAO.getInstancia(); 
+		        //Computadores comp = compDAO.buscarComputadoresPorId(idPC); 
  
-		        if (comp != null) { 
+		        //if (comp != null) { 
  
-		            comp.setNum(num); 
-		            comp.setTemp(temp); 
-		            comp.setPreco(preco); 
-		            comp.setDisp(disp); 
+		            //comp.setNum(num); 
+		            //comp.setTemp(temp); 
+		            //comp.setPreco(preco); 
+		            //comp.setDisp(disp); 
  
  
-		            boolean atualizacaoRealizada = compDAO.atualizarComputadores(comp); 
+		            //boolean atualizacaoRealizada = compDAO.atualizarComputadores(comp); 
  
-		            if (atualizacaoRealizada) { 
-		                atualizarJTable(); 
-		                JOptionPane.showMessageDialog(null, "Computador atualizado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE); 
-		            } else { 
-		                JOptionPane.showMessageDialog(null, "Falha ao atualizar o computador.", "Erro", JOptionPane.ERROR_MESSAGE); 
-		            } 
-		        } else { 
-		            JOptionPane.showMessageDialog(null, "Computador com o ID fornecido não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE); 
-		        } 
-		    } 
-		}); 
-		PainelPrincipal.add(btnAtt, "cell 41 1 5 3,grow"); 
+		            //if (atualizacaoRealizada) { 
+		                //atualizarJTable(); 
+		                //JOptionPane.showMessageDialog(null, "Computador atualizado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE); 
+		            //} else { 
+		                //JOptionPane.showMessageDialog(null, "Falha ao atualizar o computador.", "Erro", JOptionPane.ERROR_MESSAGE); 
+		            //} 
+		        //} else { 
+		           // JOptionPane.showMessageDialog(null, "Computador com o ID fornecido não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE); 
+		        //} 
+		    //} 
+		//}); 
+		//PainelPrincipal.add(btnAtt, "cell 41 1 5 3,grow"); 
 		 
-		JButton btnDelete = new JButton("apagar"); 
-		btnDelete.addMouseListener(new MouseAdapter() { 
-			@Override 
-			public void mouseClicked(MouseEvent e) { 
-			    int idPC = Integer.parseInt(txtIdPc.getText()); 
+		//JButton btnDelete = new JButton("apagar"); 
+		//btnDelete.addMouseListener(new MouseAdapter() { 
+			//@Override 
+			//public void mouseClicked(MouseEvent e) { 
+			    //int idPC = Integer.parseInt(txtIdPc.getText()); 
 			     
-			    ComputadoresDAO compDAO = ComputadoresDAO.getInstancia(); 
-			    boolean remocaoRealizada = compDAO.removerComputadoresPorId(idPC); 
+			    //ComputadoresDAO compDAO = ComputadoresDAO.getInstancia(); 
+			    //boolean remocaoRealizada = compDAO.removerComputadoresPorId(idPC); 
 			     
-			    if (remocaoRealizada) { 
-			        atualizarJTable(); 
-			        JOptionPane.showMessageDialog(null, "Computador removido com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE); 
-			    } else { 
-			        JOptionPane.showMessageDialog(null, "Falha ao remover o computador.", "Erro", JOptionPane.ERROR_MESSAGE); 
-			    } 
-			} 
-		}); 
+			    //if (remocaoRealizada) { 
+			        //atualizarJTable(); 
+			        //JOptionPane.showMessageDialog(null, "Computador removido com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE); 
+			   // } else { 
+			       // JOptionPane.showMessageDialog(null, "Falha ao remover o computador.", "Erro", JOptionPane.ERROR_MESSAGE); 
+			    ///} 
+			//} 
+		//}); 
 		 
-		PainelPrincipal.add(btnDelete, "cell 47 1 1 3,alignx left,growy"); 
+		//PainelPrincipal.add(btnDelete, "cell 47 1 1 3,alignx left,growy"); 
 		 
 		atualizarJTable(); 
 	} 
