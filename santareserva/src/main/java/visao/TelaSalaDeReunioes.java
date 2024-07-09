@@ -49,29 +49,12 @@ public class TelaSalaDeReunioes extends JFrame {
 	private JTextField textCheckIn;
 	private JTextField textCheckOut;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaSalaDeReunioes frame = new TelaSalaDeReunioes(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public TelaSalaDeReunioes(Hospedes hospede) {
+		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
 		usuariologado = hosplogado;
-		
+		/* TEM Q TER EM TODAS AS TELAS */
 		setTitle("Sala De Reunioes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);

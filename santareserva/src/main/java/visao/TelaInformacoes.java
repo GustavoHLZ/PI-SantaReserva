@@ -27,10 +27,13 @@ public class TelaInformacoes extends JFrame {
 	
 	public TelaInformacoes(Hospedes hospede) {
 		
+		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
 		usuariologado = hosplogado;
+		/* TEM Q TER EM TODAS AS TELAS */
 		
-setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setBounds(0, 0, 1920, 1080);
 		contentPane1 = new JPanel();

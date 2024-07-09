@@ -47,8 +47,10 @@ public class TelaComputadores extends JFrame {
  
 	
 	public TelaComputadores(Hospedes hospede) { 
-		hosplogado = hospede; 
-		usuariologado = hosplogado; 
+		/* TEM Q TER EM TODAS AS TELAS */
+		hosplogado = hospede;
+		usuariologado = hosplogado;
+		/* TEM Q TER EM TODAS AS TELAS */
 		 
 		setTitle("Sala De Computadores"); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 

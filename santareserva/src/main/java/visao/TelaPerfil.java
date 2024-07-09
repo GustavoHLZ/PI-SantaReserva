@@ -40,7 +40,8 @@ public class TelaPerfil extends JFrame {
 	private JTextField txtEmail;
 	private JTextField txtVerSenha;
 	private JTextField txtConfSenha;
-	private static Hospedes hospedeLogado;
+	private Hospedes hosplogado;
+	private Hospedes usuariologado;
 	private Quartos quartoSelecionado;
 
 
@@ -48,7 +49,10 @@ public class TelaPerfil extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPerfil(Hospedes hospede) {
-		hospedeLogado = hospede;
+		/* TEM Q TER EM TODAS AS TELAS */
+		hosplogado = hospede;
+		usuariologado = hosplogado;
+		/* TEM Q TER EM TODAS AS TELAS */
 		setFont(new Font("Arial", Font.PLAIN, 18));
 		setTitle("Perfil");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,7 +153,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hospedeLogado);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -181,7 +185,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaAvaliacoes c = new TelaAvaliacoes(hospedeLogado);
+				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -217,7 +221,7 @@ public class TelaPerfil extends JFrame {
 		JLabel lblUser = new JLabel("User");
 		lblUser.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblUser, "cell 2 1,alignx center,aligny top");
-		lblUser.setText("Olá, " + hospedeLogado.getNome() + " " + hospedeLogado.getSobrenome());
+		lblUser.setText("Olá, " + hosplogado.getNome() + " " + hosplogado.getSobrenome());
 		
 		JLabel lblAltNome = new JLabel("Alterar Nome");
 		lblAltNome.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -231,13 +235,13 @@ public class TelaPerfil extends JFrame {
 		txtNome.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtNome, "cell 1 3,grow");
 		txtNome.setColumns(10);
-		txtNome.setText(hospedeLogado.getNome());
+		txtNome.setText(hosplogado.getNome());
 		
 		txtSobrenome = new JTextField();
 		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtSobrenome, "cell 3 3,grow");
 		txtSobrenome.setColumns(10);
-		txtSobrenome.setText(hospedeLogado.getSobrenome());
+		txtSobrenome.setText(hosplogado.getSobrenome());
 		
 		JLabel lblAltTelefone = new JLabel("Alterar Telefone");
 		lblAltTelefone.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -251,13 +255,13 @@ public class TelaPerfil extends JFrame {
 		txtTelefone.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtTelefone, "cell 1 5,grow");
 		txtTelefone.setColumns(10);
-		txtTelefone.setText(hospedeLogado.getTelefone());
+		txtTelefone.setText(hosplogado.getTelefone());
 		
 		txtSenha = new JTextField();
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtSenha, "cell 3 5,grow");
 		txtSenha.setColumns(10);
-		txtSenha.setText(hospedeLogado.getLogin().getSenha());
+		txtSenha.setText(hosplogado.getLogin().getSenha());
 		
 		JLabel lblAltNascimento = new JLabel("Alterar Data de nascimento");
 		lblAltNascimento.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -271,13 +275,13 @@ public class TelaPerfil extends JFrame {
 		txtNascimento.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtNascimento, "cell 1 7,grow");
 		txtNascimento.setColumns(10);
-		txtNascimento.setText(hospedeLogado.getNascimento().format(idtFormater));
+		txtNascimento.setText(hosplogado.getNascimento().format(idtFormater));
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtEmail, "cell 3 7,grow");
 		txtEmail.setColumns(10);
-		txtEmail.setText(hospedeLogado.getLogin().getLogin());
+		txtEmail.setText(hosplogado.getLogin().getLogin());
 		
 		JLabel lblNewLabel7 = new JLabel("Senha");
 		lblNewLabel7.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -287,7 +291,7 @@ public class TelaPerfil extends JFrame {
 		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtVerSenha, "cell 2 9,grow");
 		txtVerSenha.setColumns(10);
-		txtVerSenha.setText(hospedeLogado.getLogin().getSenha());
+		txtVerSenha.setText(hosplogado.getLogin().getSenha());
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.addMouseListener(new MouseAdapter() {
@@ -296,7 +300,7 @@ public class TelaPerfil extends JFrame {
 				
 				InfologinDAO dao = InfologinDAO.getInstancia();
 				
-				Infologin delete = dao.removerInfologin(hospedeLogado.getLogin().getLogin());
+				Infologin delete = dao.removerInfologin(hosplogado.getLogin().getLogin());
 				
 				JOptionPane.showMessageDialog(null, "Informações excluidas com sucesso");
 				TelaLogin login = new TelaLogin();
@@ -340,15 +344,14 @@ public class TelaPerfil extends JFrame {
 				String telefone = txtTelefone.getText();
 				String email = txtEmail.getText();
 				String senha = txtSenha.getText();
-				Integer id = hospedeLogado.getIdHospede();
-				Integer idlogin = hospedeLogado.getLogin().getIdUsuario();
+				Integer id = hosplogado.getIdHospede();
+				Integer idlogin = hosplogado.getLogin().getIdUsuario();
 				
 				Hospedes hospedes = new Hospedes();
 				Infologin login = new Infologin();
 				
 				login.setLogin(email);
 				login.setSenha(senha);
-				hospedes.setIdHospede(id);
 				
 				hospedes.setNome(nome);
 				hospedes.setSobrenome(sobrenome);
@@ -381,7 +384,7 @@ public class TelaPerfil extends JFrame {
 		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtConfSenha, "cell 2 11,grow");
 		txtConfSenha.setColumns(10);
-		txtConfSenha.setText(hospedeLogado.getLogin().getSenha());
+		txtConfSenha.setText(hosplogado.getLogin().getSenha());
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
 		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 12,alignx center,aligny center");
 		lblNewLabel.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BtnExcluirPerfil.png")));

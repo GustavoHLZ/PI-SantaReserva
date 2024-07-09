@@ -82,6 +82,8 @@ public class TelaAvaliacoes extends JFrame {
 	public TelaAvaliacoes(Hospedes hospede) {
 		hosplogado = hospede;
 		hospedeLogado = hosplogado;
+		
+		
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
