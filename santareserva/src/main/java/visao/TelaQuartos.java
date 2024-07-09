@@ -42,8 +42,10 @@ public class TelaQuartos extends JFrame {
 
 
 	public TelaQuartos(Hospedes hospede) {
+		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
 		usuariologado = hosplogado;
+		/* TEM Q TER EM TODAS AS TELAS */
 		
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

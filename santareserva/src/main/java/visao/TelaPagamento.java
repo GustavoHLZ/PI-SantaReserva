@@ -44,28 +44,16 @@ public class TelaPagamento extends JFrame {
 	private JTextField textSeguranca;
 	private JTextField textBoleto;
 	private JTextField textPix;
+	private static Hospedes hosplogado;
+	private Hospedes usuariologado;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaPagamento frame = new TelaPagamento();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public TelaPagamento() {
+	public TelaPagamento(Hospedes hospede) {
+		
+		/* TEM Q TER EM TODAS AS TELAS */
+		hosplogado = hospede;
+		usuariologado = hosplogado;
+		/* TEM Q TER EM TODAS AS TELAS */
+		
 		setTitle("Quartos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);

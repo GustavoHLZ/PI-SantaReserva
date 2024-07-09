@@ -34,9 +34,10 @@ public class TelaHome extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaHome(Hospedes hospede) {
-	
+		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
 		usuariologado = hosplogado;
+		/* TEM Q TER EM TODAS AS TELAS */
 		
 		setTitle("Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +70,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(hosplogado);
 				c.setVisible(true);
 				dispose();
 			}

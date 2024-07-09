@@ -67,8 +67,12 @@ public class TelaReservas extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador) {
+		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
 		usuariologado = hosplogado;
+		/* TEM Q TER EM TODAS AS TELAS */
+		
+		
 		quartoSelecionado = quarto;
 		quartoalugado = quartoSelecionado;
 		salaalugada = salareunioes;
