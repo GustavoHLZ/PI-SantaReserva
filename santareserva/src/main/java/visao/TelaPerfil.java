@@ -112,7 +112,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(hospedeLogado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -137,7 +137,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null, null, null);
+				TelaReservas c = new TelaReservas(hospedeLogado, null, quartoSelecionado, null, null, null, null);
 				c.setVisible(true);
 				dispose();
 			}
@@ -221,7 +221,11 @@ public class TelaPerfil extends JFrame {
 		JLabel lblUser = new JLabel("User");
 		lblUser.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblUser, "cell 2 1,alignx center,aligny top");
+<<<<<<< Updated upstream
 		lblUser.setText("Olá, " + hosplogado.getNome() + " " + hosplogado.getSobrenome());
+=======
+
+>>>>>>> Stashed changes
 		
 		JLabel lblAltNome = new JLabel("Alterar Nome");
 		lblAltNome.setFont(new Font("Arial", Font.PLAIN, 18));

@@ -86,7 +86,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(hosplogado);
+				TelaPerfil c = new TelaPerfil(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
