@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controle.HospedesDAO;
 import controle.InfologinDAO;
+import controle.RoundedBorder;
 import modelo.Hospedes;
 import modelo.Infologin;
 
@@ -80,7 +81,9 @@ public class TelaLogin extends JFrame {
 		Tela = new JPanel();
 		Tela.setBackground(new Color(238, 238, 238));
 		Tela.setBorder(null);
-
+		RoundedBorder bordaVermelha = new RoundedBorder(Color.red, 10);
+		RoundedBorder bordaPreta = new RoundedBorder(Color.black, 10);
+		
 		setContentPane(Tela);
 		Tela.setLayout(new MigLayout("", "[960px][960px]", "[grow]"));
 		
@@ -108,7 +111,8 @@ public class TelaLogin extends JFrame {
 																				lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 40));
 														
 																txtLogin = new JTextField();
-																txtLogin.setFont(new Font("Arial", Font.PLAIN, 32));
+																txtLogin.setBorder(bordaPreta);
+																txtLogin.setFont(new Font("Arial", Font.PLAIN, 25));
 																txtLogin.addFocusListener(new FocusAdapter() {
 																	@Override
 																	public void focusGained(FocusEvent e) {
@@ -133,7 +137,8 @@ public class TelaLogin extends JFrame {
 														lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 40));
 														
 																txtSenha = new JTextField();
-																txtSenha.setFont(new Font("Arial", Font.PLAIN, 32));
+																txtSenha.setBorder(bordaPreta);
+																txtSenha.setFont(new Font("Arial", Font.PLAIN, 25));
 																txtSenha.setBounds(309, 453, 335, 30);
 																PainelLogin.add(txtSenha, "cell 0 4,aligny top");
 																txtSenha.setColumns(10);
@@ -152,21 +157,28 @@ public class TelaLogin extends JFrame {
 
 																	public void actionPerformed(ActionEvent e) {
 
-																		if (txtLogin.getText().equals("")) {
-
+																		if(txtLogin.getText().equals("") && txtSenha.getText().equals("")) {
+																			JOptionPane.showMessageDialog(null, "Os campos estão vazios.");
+																			txtLogin.setBorder(bordaVermelha);
+																			txtSenha.setBorder(bordaVermelha);
+																			
+																		}
+																																			
+																		else if (txtLogin.getText().equals("")) {
 																			JOptionPane.showMessageDialog(null, "Preencha o campo Login.");
-
+																			txtLogin.setBorder(bordaVermelha);
+																			txtSenha.setBorder(bordaPreta);
 																			return;
-
 																		}
 
-																		if (txtSenha.getText().equals("")) {
-
+																		else if (txtSenha.getText().equals("")) {
 																			JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
-
+																			txtSenha.setBorder(bordaVermelha);
+																			txtLogin.setBorder(bordaPreta);
 																			return;
 
 																		}
+																		
 
 																		String email = txtLogin.getText();
 										

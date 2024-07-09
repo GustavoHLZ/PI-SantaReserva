@@ -39,7 +39,7 @@ setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane1.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane1);
-		contentPane1.setLayout(new MigLayout("", "[grow][grow]", "[grow][grow][grow]"));
+		contentPane1.setLayout(new MigLayout("", "[300px][grow]", "[100px][grow][grow]"));
 		
 		JPanel PainelTopo = new JPanel();
 		PainelTopo.setBackground(new Color(119, 165, 175));
@@ -186,11 +186,56 @@ setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane1.add(panel, "cell 1 1,grow");
 		
 		JPanel panel_1 = new JPanel();
-		panel.add(panel_1, "cell 0 0,alignx center,aligny bottom");
+		panel.add(panel_1, "cell 0 0,grow");
+		panel_1.setLayout(new MigLayout("", "[][]", "[30px][30px][30px][30px][30px][250px,bottom][25px][25px][25px][25px]"));
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Fotos/QuartoHomeGrande.png")));
-		panel_1.add(lblNewLabel_20);
+		JLabel lblNewLabel_19 = new JLabel("\r\n");
+		lblNewLabel_19.setIcon(new ImageIcon(TelaInformacoes.class.getResource("/visao/Icones/IconMaps.png")));
+		panel_1.add(lblNewLabel_19, "cell 0 0 1 3,alignx center");
+		
+		JLabel lblNewLabel_20 = new JLabel("Rua Avenida Asfaltada,  2299 \r\n");
+		lblNewLabel_20.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_20, "cell 1 0");
+		
+		JLabel lblGasparSc = new JLabel("Gaspar -  SC,\r\n");
+		lblGasparSc.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblGasparSc, "cell 1 1");
+		
+		JLabel lblNewLabel_54 = new JLabel("CEP – 89112-900");
+		lblNewLabel_54.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_54, "cell 1 2");
+		
+		JLabel lblNewLabel_51 = new JLabel("");
+		lblNewLabel_51.setIcon(new ImageIcon(TelaInformacoes.class.getResource("/visao/Icones/IconeTelefone.png")));
+		panel_1.add(lblNewLabel_51, "cell 0 3 1 2,alignx center,aligny center");
+		
+		JLabel lblNewLabel_53 = new JLabel("(47) 99999-9999");
+		lblNewLabel_53.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_53, "cell 1 3");
+		
+		JLabel lblNewLabel_55 = new JLabel("\n\n(47) 3333-3333\r\n");
+		lblNewLabel_55.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_55, "cell 1 4");
+		
+		JLabel lblNewLabel_56 = new JLabel("Sobre nós:");
+		lblNewLabel_56.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_56, "cell 0 5");
+		
+		JLabel lblNewLabel_57 = new JLabel("Localizado bem localizado proximo ao centro, nosso Hotel");
+		lblNewLabel_57.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_57, "cell 0 6 2 1");
+		
+		JLabel lblNewLabel_58 = new JLabel("oferece o refúgio ideal para quem  busca conforto e ");
+		lblNewLabel_58.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_58, "cell 0 7 2 1");
+		
+		JLabel lblNewLabel_59 = new JLabel("tranquilidade. Quartos elegantes, gastronomia refinada  e ");
+		lblNewLabel_59.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_59, "cell 0 8 2 1");
+		
+		JLabel lblNewLabel_60 = new JLabel("serviço excepcional garantem uma estadia \n\nmemorável. ");
+		lblNewLabel_60.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(lblNewLabel_60, "cell 0 9 2 1");
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(new MigLayout("", "[grow]", "[grow][grow]"));
