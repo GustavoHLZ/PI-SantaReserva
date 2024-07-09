@@ -48,7 +48,7 @@ public class TelaHome extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow][grow]", "[grow][grow][grow]"));
+		contentPane.setLayout(new MigLayout("", "[grow][grow]", "[100px][grow][grow]"));
 		
 		JPanel PainelTopo = new JPanel();
 		PainelTopo.setBackground(new Color(119, 165, 175));

@@ -348,6 +348,7 @@ public class TelaPerfil extends JFrame {
 				
 				login.setLogin(email);
 				login.setSenha(senha);
+				hospedes.setIdHospede(id);
 				
 				hospedes.setNome(nome);
 				hospedes.setSobrenome(sobrenome);
