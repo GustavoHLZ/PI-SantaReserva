@@ -156,9 +156,6 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				TelaComputadores c = new TelaComputadores(usuariologado);
-				c.setVisible(true);
-				dispose();
 			} 
 		}); 
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20)); 

@@ -248,11 +248,19 @@ public class TelaReservas extends JFrame {
 		PainelPrincipal.add(panel_2, "cell 13 0 13 4,grow");
 		panel_2.setLayout(new MigLayout("", "[grow]", "[grow][30px][grow][30px][grow][30px][grow][30px][grow][grow][grow][grow][grow][grow][grow]"));
 		
+		MaskFormatter mascaraNome = null;
+		
+		try {
+			mascaraNome = new MaskFormatter("**** **** **** ****");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		JLabel lblNewLabel_21 = new JLabel("Nome Titular");
 		lblNewLabel_21.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_21, "cell 0 0");
 		
-		txtNometitular = new JTextField();
+		txtNometitular = new JFormattedTextField(mascaraNome);
 		panel_2.add(txtNometitular, "cell 0 1,grow");
 		txtNometitular.setColumns(10);
 		
@@ -452,11 +460,15 @@ public class TelaReservas extends JFrame {
 			        }
 			        reserva.setFkidHospede(usuariologado.getIdHospede());
 			        
-			        //if(usuariologado == null) {
-			        //	usuariologado.setIdHospede(idhospedetest);
-			       // }
-			        //reserva.setFkidPagamento();
 			        
+			        
+			        if (!txtNometitular.getText().matches("[\\p{L}\\s~^]+")) {
+
+						JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+
+						return;
+
+					}
 			        
 			        EspacosDAO dao = EspacosDAO.getInstancia();
 			        
@@ -464,12 +476,12 @@ public class TelaReservas extends JFrame {
 			        
 			        
 			        if (retorno > 0) {
-			            JOptionPane.showMessageDialog(null, "Avaliação inserida com sucesso!");
+			            JOptionPane.showMessageDialog(null, "Quarto reservado com sucesso!");
 			            reserva.setIdEspaco(retorno);
 			            listarEspaco.add(reserva);
 			            atualizarJTable();
 			        } else {
-			            JOptionPane.showMessageDialog(null, "Falha ao inserir avaliação!");
+			            JOptionPane.showMessageDialog(null, "Falha ao efetuar reserva!");
 			        }
 			       
 
