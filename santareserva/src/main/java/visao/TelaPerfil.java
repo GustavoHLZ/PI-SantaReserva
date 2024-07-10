@@ -315,6 +315,49 @@ public class TelaPerfil extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+
+				if (txtNome.getText().trim().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "O campo Nome não pode estar vazio.");
+					return;
+				}
+				
+				if (txtSobrenome.getText().trim().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "O campo Sobrenome não pode estar vazio.");
+					return;
+				}
+				if (txtTelefone.getText().trim().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "O campo Telefone não pode estar vazio.");
+					return;
+				}
+				if (txtNascimento.getText().trim().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "O campo Data de Nascimento não pode estar vazio.");
+					return;
+				}
+				if (txtEmail.getText().trim().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "O campo Email não pode estar vazio.");
+					return;
+				}
+				if (!txtSenha.getText().equals(txtConfSenha.getText())) {
+					JOptionPane.showMessageDialog(null, "As senhas não coincidem.");
+					return;
+				}
+				
+				if (!txtNome.getText().matches("[\\p{L}\\s~^]+")) {
+
+					JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+
+					return;
+
+				}
+
+				if (!txtSobrenome.getText().matches("[\\p{L}\\s~^]+")) {
+
+					JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
+
+					return;
+
+				}
+				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				
 				String nome = txtNome.getText();
