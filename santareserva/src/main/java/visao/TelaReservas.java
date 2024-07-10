@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import java.time.YearMonth;
 
 import controle.EspacosDAO;
 import controle.QuartosDAO;
@@ -66,6 +67,41 @@ public class TelaReservas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	private boolean validarDataValidade(String dataValidade) {
+	    // Verificar se a data de validade está no formato correto
+	    if (!dataValidade.matches("\\d{2}/\\d{2}")) {
+	        return false; // Formato inválido
+	    }
+
+	    // Separar o mês e o ano
+	    String[] partes = dataValidade.split("/");
+	    int mes = Integer.parseInt(partes[0]);
+	    int ano = Integer.parseInt(partes[1]);
+
+	    // Verificar se o mês está entre 1 e 12
+	    if (mes < 1 || mes > 12) {
+	        return false; // Mês inválido
+	    }
+
+	    // Verificar se o ano é maior ou igual ao ano atual
+	    int anoAtual = java.time.Year.now().getValue();
+	    if (ano < anoAtual) {
+	        return false; // Ano inválido
+	    }
+
+	    // Verificar se o dia máximo do mês está correto
+	    int diaMaximo = java.time.YearMonth.of(ano, mes).lengthOfMonth();
+	    int dia = Integer.parseInt(partes[1].substring(0, 2)); // Pegar os dois primeiros caracteres como dia
+	    if (dia < 1 || dia > diaMaximo) {
+	        return false; // Dia inválido para o mês/ano especificados
+	    }
+
+	    return true;
+	}
+	
+	
+	
 	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador) {
 		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
@@ -364,6 +400,8 @@ public class TelaReservas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
+				
+				
 				    String nomeTitular = txtNometitular.getText();
 			        String numeroCartao = txtNumeroCartao.getText();
 			        String dataValidade = txtDataValidade.getText();
@@ -411,6 +449,12 @@ public class TelaReservas extends JFrame {
 			        if(usuariologado == null) {
 			        	usuariologado.setIdHospede(idhospedetest);
 			        }
+			        
+			        if (!validarDataValidade(dataValidade)) {
+			        	JOptionPane.showMessageDialog(null, "Data de validade inválida");
+			            return;
+			        }
+			        
 			        reserva.setFkidHospede(usuariologado.getIdHospede());
 			        
 			        //if(usuariologado == null) {
@@ -425,12 +469,12 @@ public class TelaReservas extends JFrame {
 			        
 			        
 			        if (retorno > 0) {
-			            JOptionPane.showMessageDialog(null, "Avaliação inserida com sucesso!");
+			            JOptionPane.showMessageDialog(null, "Efetuado com sucesso");
 			            reserva.setIdEspaco(retorno);
 			            listarEspaco.add(reserva);
 			            atualizarJTable();
 			        } else {
-			            JOptionPane.showMessageDialog(null, "Falha ao inserir avaliação!");
+			            JOptionPane.showMessageDialog(null, "Falha ao efetuar o pagamento");
 			        }
 			       
 
@@ -478,5 +522,7 @@ public class TelaReservas extends JFrame {
 	    
 	    table.setModel(modelo);
 	}
+	
+	
 	
 }
