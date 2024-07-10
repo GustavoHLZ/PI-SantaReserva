@@ -109,7 +109,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -156,6 +156,9 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -166,6 +169,15 @@ public class TelaReservas extends JFrame {
 		PainelIcones.add(lblNewLabel_13, "cell 0 4");
 		
 		JLabel lblNewLabel_7 = new JLabel("Computadores");
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaComputadores c = new TelaComputadores(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_7, "cell 1 4");
 		
@@ -174,6 +186,15 @@ public class TelaReservas extends JFrame {
 		PainelIcones.add(lblNewLabel_14, "cell 0 5");
 		
 		JLabel lblNewLabel_8 = new JLabel("Quartos");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaQuartos c = new TelaQuartos(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_8, "cell 1 5");
 		
@@ -182,6 +203,15 @@ public class TelaReservas extends JFrame {
 		PainelIcones.add(lblNewLabel_15, "cell 0 6");
 		
 		JLabel lblNewLabel_9 = new JLabel("Avalie-nos");
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_9, "cell 1 6");
 		
@@ -190,6 +220,15 @@ public class TelaReservas extends JFrame {
 		PainelIcones.add(lblNewLabel_16, "cell 0 7");
 		
 		JLabel lblNewLabel_10 = new JLabel("Nossas Informações");
+		lblNewLabel_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaInformacoes c = new TelaInformacoes(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_10, "cell 1 7");
 		

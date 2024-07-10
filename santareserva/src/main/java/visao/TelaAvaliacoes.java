@@ -50,7 +50,7 @@ public class TelaAvaliacoes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private ArrayList<Avaliacoes> listarAvaliacoes = new ArrayList<Avaliacoes>();
-	private Hospedes hospedeLogado;
+	private Hospedes usuariologado;
 	private Avaliacoes avaliacoesselc;
 	private JTextField txtNome;
 	private JTextField txtAvaliacao;
@@ -63,25 +63,13 @@ public class TelaAvaliacoes extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAvaliacoes frame = new TelaAvaliacoes(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaAvaliacoes(Hospedes hospede) {
 		hosplogado = hospede;
-		hospedeLogado = hosplogado;
+		usuariologado = hosplogado;
 		
 		
 		setTitle("Quartos");
@@ -113,7 +101,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -129,7 +117,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(hosplogado);
+				TelaPerfil c = new TelaPerfil(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -145,7 +133,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null, null, null);
+				TelaReservas c = new TelaReservas(usuariologado, null, quartoSelecionado, null, null, null, null);
 				c.setVisible(true);
 				dispose();
 			}
@@ -161,7 +149,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -177,7 +165,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaComputadores c = new TelaComputadores(hosplogado);
+				TelaComputadores c = new TelaComputadores(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -193,7 +181,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaQuartos c = new TelaQuartos(hosplogado);
+				TelaQuartos c = new TelaQuartos(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -209,7 +197,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -249,7 +237,7 @@ public class TelaAvaliacoes extends JFrame {
 		txtNome.setBounds(97, 26, 328, 34);
 		PainelPrincipal.add(txtNome);
 		txtNome.setColumns(10);
-		txtNome.setText(hospedeLogado.getNome());
+		txtNome.setText(usuariologado.getNome());
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(158, 447, 10, 10);
@@ -371,7 +359,7 @@ public class TelaAvaliacoes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				 int idHospede = hospedeLogado.getIdHospede(); 
+				 int idHospede = usuariologado.getIdHospede(); 
 			        AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
 			        dao.removerAvaliacoes(idHospede); 
 			        atualizarJTable();
@@ -394,7 +382,7 @@ public class TelaAvaliacoes extends JFrame {
 				    Float novaAvaliacao = Float.valueOf(txtAvaliacao.getText());
 				    String comentario = txtComentario.getText();
 	
-				    int idUsuario = hospedeLogado.getIdHospede();
+				    int idUsuario = usuariologado.getIdHospede();
 
 				    AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
 				    boolean atualizado = dao.atualizarAvaliacoes(idAvaliacao, novoNome, novaAvaliacao, comentario, idUsuario);
@@ -441,7 +429,7 @@ public class TelaAvaliacoes extends JFrame {
 		        avaliacao.setAvaliador(nome);
 		        avaliacao.setAvaliacao(av);
 		        avaliacao.setComentario(comentario);
-		        avaliacao.setFkIDHospede(hospedeLogado);
+		        avaliacao.setFkIDHospede(usuariologado);
 		        
 		        AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
 		        

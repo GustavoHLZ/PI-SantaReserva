@@ -166,6 +166,15 @@ public class TelaPerfil extends JFrame {
 		PainelIcones.add(lblNewLabel_13, "cell 0 4");
 		
 		JLabel lblNewLabel_7 = new JLabel("Computadores");
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaComputadores c = new TelaComputadores(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_7, "cell 1 4");
 		
@@ -174,6 +183,15 @@ public class TelaPerfil extends JFrame {
 		PainelIcones.add(lblNewLabel_14, "cell 0 5");
 		
 		JLabel lblNewLabel_8 = new JLabel("Quartos");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaQuartos c = new TelaQuartos(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_8, "cell 1 5");
 		
@@ -198,6 +216,15 @@ public class TelaPerfil extends JFrame {
 		PainelIcones.add(lblNewLabel_16, "cell 0 7");
 		
 		JLabel lblNewLabel_10 = new JLabel("Nossas Informações");
+		lblNewLabel_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaInformacoes c = new TelaInformacoes(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_10, "cell 1 7");
 		

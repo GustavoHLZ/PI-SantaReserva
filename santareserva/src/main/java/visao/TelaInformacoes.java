@@ -63,7 +63,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -79,7 +79,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(hosplogado);
+				TelaPerfil c = new TelaPerfil(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -111,7 +111,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -127,7 +127,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaComputadores c = new TelaComputadores(hosplogado);
+				TelaComputadores c = new TelaComputadores(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -143,7 +143,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaQuartos c = new TelaQuartos(hosplogado);
+				TelaQuartos c = new TelaQuartos(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}
@@ -159,7 +159,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}

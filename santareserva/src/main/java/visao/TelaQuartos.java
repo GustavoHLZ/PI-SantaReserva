@@ -84,7 +84,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(usuariologado);
 				c.setVisible(true);
 				dispose();
 			}

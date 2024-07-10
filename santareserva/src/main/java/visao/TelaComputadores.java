@@ -87,7 +87,7 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				TelaHome c = new TelaHome(null); 
+				TelaHome c = new TelaHome(usuariologado); 
 				c.setVisible(true); 
 				dispose(); 
 		 
@@ -105,7 +105,9 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				 
+				TelaPerfil c = new TelaPerfil(usuariologado);
+				c.setVisible(true);
+				dispose();
 			} 
 		}); 
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
@@ -133,6 +135,15 @@ public class TelaComputadores extends JFrame {
 		PainelIcones.add(lblNewLabel_12, "cell 0 3"); 
 		 
 		JLabel lblNewLabel_6 = new JLabel("Sala de Reuniões"); 
+		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
 		PainelIcones.add(lblNewLabel_6, "cell 1 3"); 
 		 
@@ -145,7 +156,9 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				 
+				TelaComputadores c = new TelaComputadores(usuariologado);
+				c.setVisible(true);
+				dispose();
 			} 
 		}); 
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
@@ -178,7 +191,9 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				 
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
+				c.setVisible(true);
+				dispose();
 			} 
 		}); 
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
@@ -193,7 +208,9 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				 
+				TelaInformacoes c = new TelaInformacoes(usuariologado);
+				c.setVisible(true);
+				dispose();
 			} 
 		}); 
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20)); 

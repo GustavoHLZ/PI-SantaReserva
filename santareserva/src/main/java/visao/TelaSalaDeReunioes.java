@@ -90,7 +90,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(usuariologado);
 				c.setVisible(true);
 				dispose();
 		
@@ -108,6 +108,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				TelaPerfil c = new TelaPerfil(usuariologado);
+				c.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -148,7 +151,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				TelaComputadores c = new TelaComputadores(usuariologado);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -181,7 +186,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -196,7 +203,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				TelaInformacoes c = new TelaInformacoes(usuariologado);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
