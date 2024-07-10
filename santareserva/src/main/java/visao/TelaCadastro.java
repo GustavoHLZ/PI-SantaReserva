@@ -202,14 +202,20 @@ public class TelaCadastro extends JFrame {
 									return;
 
 								}
-
+								
+								
 								if (txtSenha.getText().equals("")) {
-
 									JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
-
 									return;
-
 								}
+								
+								if (txtSenha.getText().length() < 8) {
+									JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 caracteres.");
+									return;
+								}
+								
+								
+
 
 								if (!txtNome.getText().matches("[\\p{L}\\s~^]+")) {
 
