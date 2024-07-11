@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
-import java.time.YearMonth;
 
 import controle.EspacosDAO;
 import controle.QuartosDAO;
@@ -427,8 +426,6 @@ public class TelaReservas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				
-				
 				    String nomeTitular = txtNometitular.getText();
 			        String numeroCartao = txtNumeroCartao.getText();
 			        String dataValidade = txtDataValidade.getText();
@@ -476,12 +473,6 @@ public class TelaReservas extends JFrame {
 			        if(usuariologado == null) {
 			        	usuariologado.setIdHospede(idhospedetest);
 			        }
-			        
-			        if (!validarDataValidade(dataValidade)) {
-			        	JOptionPane.showMessageDialog(null, "Data de validade inválida");
-			            return;
-			        }
-			        
 			        reserva.setFkidHospede(usuariologado.getIdHospede());
 			        
 			        
@@ -506,7 +497,6 @@ public class TelaReservas extends JFrame {
 			            atualizarJTable();
 			        } else {
 			            JOptionPane.showMessageDialog(null, "Falha ao efetuar reserva!");
-
 			        }
 			       
 
@@ -554,7 +544,5 @@ public class TelaReservas extends JFrame {
 	    
 	    table.setModel(modelo);
 	}
-	
-	
 	
 }

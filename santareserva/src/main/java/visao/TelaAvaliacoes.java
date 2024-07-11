@@ -306,7 +306,7 @@ public class TelaAvaliacoes extends JFrame {
 											atualizarJTable();
 											
 					JLabel lbApagar = new JLabel(""); 
-					PainelPrincipal1.add(lbApagar, "cell 0 1,aligny center");
+					PainelPrincipal1.add(lbApagar, "cell 0 1,alignx center,aligny center");
 					lbApagar.addMouseListener(new MouseAdapter() { 
 						@Override 
 						public void mouseClicked(MouseEvent e) { 
