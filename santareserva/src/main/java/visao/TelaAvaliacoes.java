@@ -234,26 +234,11 @@ public class TelaAvaliacoes extends JFrame {
 		 
 		JPanel panel = new JPanel(); 
 		panel.setBounds(7, 447, 10, 10); 
-		PainelPrincipal.add(panel); 
-		 
-		JLabel lblNewLabel_21 = new JLabel("Nome:"); 
-		lblNewLabel_21.setBounds(35, 36, 43, 14); 
-		PainelPrincipal.add(lblNewLabel_21); 
-		 
-		txtNome = new JTextField(); 
-		txtNome.setBounds(97, 26, 328, 34); 
-		PainelPrincipal.add(txtNome); 
-		txtNome.setColumns(10); 
-		txtNome.setText(usuariologado.getNome()); 
+		PainelPrincipal.add(panel);
 		 
 		JPanel panel_1 = new JPanel(); 
 		panel_1.setBounds(158, 447, 10, 10); 
-		PainelPrincipal.add(panel_1); 
-		 
-		JLabel lblNewLabel_22 = new JLabel("Nota:"); 
-		lblNewLabel_22.setHorizontalAlignment(SwingConstants.CENTER); 
-		lblNewLabel_22.setBounds(7, 85, 136, 14); 
-		PainelPrincipal.add(lblNewLabel_22); 
+		PainelPrincipal.add(panel_1);
 		 
 		MaskFormatter mascaraAva = null; 
  

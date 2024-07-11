@@ -389,16 +389,20 @@ public class TelaReservas extends JFrame {
 		        salaalugada.getPreco(),
 		        salaalugada.getCheckIn(),
 		        salaalugada.getCheckOut(),
+		        hosplogado.getNome(),
+		        hosplogado.getIdHospede(),
 		        
 		    });
 		} else if (computadoralugado != null) {
 		    model.addRow(new Object[] {
 		    		computadoralugado.getIdPC(),
-		    		computadoralugado.getNum(),
-		    		computadoralugado.getTemp(),
 		    		computadoralugado.getPreco(),
 		    		computadoralugado.getCheckIn(),
 		    		computadoralugado.getCheckOut(),
+			        hosplogado.getNome(),
+			        hosplogado.getIdHospede(),
+		    		//computadoralugado.getNum(),
+		    		//computadoralugado.getTemp(),
 			        
 			    });
 		}
