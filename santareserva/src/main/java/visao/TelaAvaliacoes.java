@@ -81,7 +81,7 @@ public class TelaAvaliacoes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); 
  
 		setContentPane(contentPane); 
-		contentPane.setLayout(new MigLayout("", "[350px,grow][grow]", "[200px][grow][grow][grow]")); 
+		contentPane.setLayout(new MigLayout("", "[350px][grow]", "[100px][grow][grow][grow]")); 
 		 
 		JPanel PainelTopo = new JPanel(); 
 		PainelTopo.setBackground(new Color(119, 165, 175)); 
@@ -90,7 +90,7 @@ public class TelaAvaliacoes extends JFrame {
 		 
 		JPanel PainelIcones = new JPanel(); 
 		PainelIcones.setBackground(new Color(240, 240, 240)); 
-		contentPane.add(PainelIcones, "cell 0 1,grow"); 
+		contentPane.add(PainelIcones, "cell 0 1 1 3,grow"); 
 		PainelIcones.setLayout(new MigLayout("", "[][]", "[grow][grow][grow][grow][grow][grow][grow][grow][grow]")); 
 		 
 		JLabel lblNewLabel_1 = new JLabel(""); 
@@ -226,19 +226,7 @@ public class TelaAvaliacoes extends JFrame {
 		 
 		JLabel lblNewLabel_17 = new JLabel("Configurações"); 
 		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
-		PainelIcones.add(lblNewLabel_17, "cell 1 8"); 
-		 
-		JPanel PainelPrincipal = new JPanel(); 
-		contentPane.add(PainelPrincipal, "cell 1 2,grow"); 
-		PainelPrincipal.setLayout(null); 
-		 
-		JPanel panel = new JPanel(); 
-		panel.setBounds(7, 447, 10, 10); 
-		PainelPrincipal.add(panel);
-		 
-		JPanel panel_1 = new JPanel(); 
-		panel_1.setBounds(158, 447, 10, 10); 
-		PainelPrincipal.add(panel_1);
+		PainelIcones.add(lblNewLabel_17, "cell 1 8");
 		 
 		MaskFormatter mascaraAva = null; 
  
@@ -258,66 +246,67 @@ public class TelaAvaliacoes extends JFrame {
 		 
 		JPanel PainelPrincipal1 = new JPanel(); 
 		contentPane.add(PainelPrincipal1, "cell 1 1 1 3,grow"); 
-		PainelPrincipal1.setLayout(new MigLayout("", "[][][][][][][][][][][grow]", "[34px][25px][14px][6px][34px][21px][14px][11px][148px][103px]")); 
+		PainelPrincipal1.setLayout(new MigLayout("", "[grow][grow][grow]", "[grow][grow]")); 
+		
+		JPanel panel = new JPanel();
+		PainelPrincipal1.add(panel, "cell 0 0,grow");
+		panel.setLayout(new MigLayout("", "[][grow]", "[40px][40px][40px]")); 
+		
+		JLabel lblNewLabel21 = new JLabel("Nome:");
+		lblNewLabel21.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(lblNewLabel21, "cell 0 0");
 		 
-		JLabel lblNewLabel21 = new JLabel("Nome:"); 
-		PainelPrincipal1.add(lblNewLabel21, "cell 0 0,alignx right,aligny center"); 
-		 
-		txtNome = new JTextField(); 
-		PainelPrincipal1.add(txtNome, "cell 1 0,grow"); 
+		txtNome = new JTextField();
+		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(txtNome, "cell 1 0,growx,aligny center");
 		txtNome.setColumns(10); 
 		txtNome.setText(usuariologado.getNome()); 
+		
+
 		 
 		JLabel lblNewLabel22 = new JLabel("Nota:"); 
-		lblNewLabel22.setHorizontalAlignment(SwingConstants.CENTER); 
-		PainelPrincipal1.add(lblNewLabel22, "cell 0 1,growx,aligny top"); 
-		 
-		txtAvaliacao = new JFormattedTextField(mascaraAva); 
-		PainelPrincipal1.add(txtAvaliacao, "cell 1 1,grow"); 
+		lblNewLabel22.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(lblNewLabel22, "cell 0 1");
+		lblNewLabel22.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		txtAvaliacao = new JFormattedTextField(mascaraAva);
+		txtAvaliacao.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(txtAvaliacao, "cell 1 1,growx,aligny center");
 		txtAvaliacao.setColumns(10); 
-		 
-		JLabel lblNewLabel_20 = new JLabel("Comentario:"); 
-		PainelPrincipal1.add(lblNewLabel_20, "cell 0 2,growx,aligny top"); 
-		 
-		txtComentario = new JTextField(); 
-		PainelPrincipal1.add(txtComentario, "cell 1 2 8 6,growx,aligny top"); 
-		txtComentario.setColumns(10); 
-					 
-					JPanel panel_20 = new JPanel(); 
-					PainelPrincipal1.add(panel_20, "cell 14 0 1 9,alignx left,growy"); 
-					 
-						 
-						JScrollPane scrollPane = new JScrollPane(); 
-						panel_20.add(scrollPane); 
-						 
-								table = new JTable(); 
-								scrollPane = new JScrollPane(table); 
-								scrollPane.setPreferredSize(new Dimension(560, 300)); // Defina as dimensões do JScrollPane conforme necessário 
-								panel_20.add(scrollPane); 
-								table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "comentario", "fkIDHospede" })); 
-								 
-								 
-								table.addMouseListener(new MouseAdapter() { 
-									@Override 
-									public void mouseClicked(MouseEvent e) { 
-										if (e.getClickCount() == 1) { 
-								            JTable source = (JTable) e.getSource(); 
-								            int posicaoavaliacao = source.getSelectedRow(); 
-								            if (posicaoavaliacao != -1) { 
-								            	avaliacoesselc = listarAvaliacoes.get(posicaoavaliacao);  
-								            } 
-								        } 
-									 
-									} 
-								}); 
-								atualizarJTable();
-					 
-					 
-					JPanel panel_19 = new JPanel(); 
-					PainelPrincipal1.add(panel_19, "cell 3 9 38 1,grow"); 
-					panel_19.setLayout(new MigLayout("", "[][][]", "[][][][][]")); 
-					 
+		
+		JLabel lblNewLabel_20 = new JLabel("Comentario:");
+		lblNewLabel_20.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(lblNewLabel_20, "cell 0 2");
+		
+		txtComentario = new JTextField();
+		txtComentario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(txtComentario, "cell 1 2,growx,aligny center");
+		txtComentario.setColumns(10);
+
+											table = new JTable(); 
+											JScrollPane scrollPane = new JScrollPane(table); 
+											PainelPrincipal1.add(scrollPane, "cell 1 0 2 1,grow");
+											scrollPane.setPreferredSize(new Dimension(560, 300));
+											table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDAvaliacao", "Avaliador", "Avaliação", "comentario", "fkIDHospede" })); 
+											
+											
+											table.addMouseListener(new MouseAdapter() { 
+												@Override 
+												public void mouseClicked(MouseEvent e) { 
+													if (e.getClickCount() == 1) { 
+											           JTable source = (JTable) e.getSource(); 
+											           int posicaoavaliacao = source.getSelectedRow(); 
+											           if (posicaoavaliacao != -1) { 
+											           	avaliacoesselc = listarAvaliacoes.get(posicaoavaliacao);  
+											           } 
+											       } 
+												 
+												} 
+											}); 
+											atualizarJTable();
+											
 					JLabel lbApagar = new JLabel(""); 
+					PainelPrincipal1.add(lbApagar, "cell 0 1,aligny center");
 					lbApagar.addMouseListener(new MouseAdapter() { 
 						@Override 
 						public void mouseClicked(MouseEvent e) { 
@@ -339,11 +328,10 @@ public class TelaAvaliacoes extends JFrame {
 						       }
 						   }
 						});
-					lbApagar.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Apagar Avalição.png"))); 
-					panel_19.add(lbApagar, "cell 0 0,grow"); 
-					 
-					JLabel lblatualizar = new JLabel(""); 
-					panel_19.add(lblatualizar, "cell 1 0,grow"); 
+					lbApagar.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Apagar Avalição.png")));
+					
+					JLabel lblatualizar = new JLabel("");
+					PainelPrincipal1.add(lblatualizar, "cell 1 1,alignx center,aligny center");
 					lblatualizar.addMouseListener(new MouseAdapter() { 
 						@Override 
 						public void mouseClicked(MouseEvent e) { 
@@ -371,11 +359,12 @@ public class TelaAvaliacoes extends JFrame {
 							} 
 						} 
 					}); 
-					 
-					 
+					
+					
 					lblatualizar.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Atualizar Avaliação.png"))); 
-					 
+					
 					JLabel lblFazerAvaliacao = new JLabel(""); 
+					PainelPrincipal1.add(lblFazerAvaliacao, "cell 2 1,alignx center,aligny center");
 					lblFazerAvaliacao.addMouseListener(new MouseAdapter() { 
 						@Override 
 						public void mouseClicked(MouseEvent e) { 
@@ -407,8 +396,7 @@ public class TelaAvaliacoes extends JFrame {
 							 
 						} 
 					}); 
-					lblFazerAvaliacao.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/BTN Fazer Avaliação.png"))); 
-					panel_19.add(lblFazerAvaliacao, "cell 2 0,grow"); 
+					lblFazerAvaliacao.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/BTN Fazer Avaliação.png")));
 		 
 		 
 		 
