@@ -7,7 +7,7 @@ public class Computadores {
 	private int idPC;
 	private int num;
 	private int temp;
-	private float preco;
+	private Float preco;
 	private LocalDate checkIn;
 	private LocalDate checkOut;
 	
@@ -25,10 +25,10 @@ public class Computadores {
 	}
 	private Boolean disp;
 	
-	public float getPreco() {
+	public Float getPreco() {
 		return preco;
 	}
-	public void setPreco(float preco) {
+	public void setPreco(Float preco) {
 		this.preco = preco;
 	}
 	public Boolean getDisp() {

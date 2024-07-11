@@ -8,7 +8,7 @@ public class SalaReunioes {
 	private Boolean disp;
 	private int temp;
 	private int cap;
-	private float preco;
+	private Float preco;
 	private LocalDate checkIn;
 	private LocalDate checkOut;
 	
@@ -48,10 +48,10 @@ public class SalaReunioes {
 	public void setCap(int cap) {
 		this.cap = cap;
 	}
-	public float getPreco() {
+	public Float getPreco() {
 		return preco;
 	}
-	public void setPreco(float preco) {
+	public void setPreco(Float preco) {
 		this.preco = preco;
 	}
 	
