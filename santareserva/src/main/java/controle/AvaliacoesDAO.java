@@ -135,31 +135,27 @@ public class AvaliacoesDAO implements IAvaliacoesDAO{
 	return (retorno == 0 ? false : true);
 	}
 	
-	public boolean removerAvaliacoes(int idAvaliacao) {
-		
-		String SQL = "DELETE FROM Avaliacoes WHERE idAvaliacao = ?";
-		
-		// Abre a conexão e cria a "ponte de conexao " com MYSQL
-		Conexao con = Conexao.getInstancia();
-		Connection conBD = con.conectar();
-		
-		int retorno = 0;
-		
-		try {
-			PreparedStatement ps = conBD.prepareStatement(SQL);
-			ps.setInt(1,idAvaliacao);
-			retorno = ps.executeUpdate();
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-			}
-	
-		return (retorno == 0 ? false : true);
-	}
+	public boolean removerAvaliacoes(int idAvaliacao, int idHospede) {
+        String SQL = "DELETE FROM Avaliacoes WHERE idAvaliacao = ? AND fkIDHospede = ?";
+
+        Conexao con = Conexao.getInstancia();
+        Connection conBD = con.conectar();
+
+        int rowsAffected = 0;
+
+        try (PreparedStatement ps = conBD.prepareStatement(SQL)) {
+            ps.setInt(1, idAvaliacao);
+            ps.setInt(2, idHospede);
+            rowsAffected = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            con.fecharConexao();
+        }
+
+        return rowsAffected > 0;
+    }
 	
 	public Avaliacoes buscarAvaliacoes(Avaliacoes end) {
 	

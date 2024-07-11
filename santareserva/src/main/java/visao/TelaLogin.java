@@ -200,7 +200,7 @@ public class TelaLogin extends JFrame {
 																			HospedesDAO daohosp = HospedesDAO.getInstancia();
 																			hospede.setLogin(login);
 																			hospede = daohosp.buscarHospedes(usuarioLogado);
-																			TelaHome c = new TelaHome(hospede);
+																			TelaHome c = new TelaHome(hospede, null, null, null, null, null, null);
 																			c.setVisible(true);
 																			dispose();
 																		} else {

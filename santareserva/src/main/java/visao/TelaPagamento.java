@@ -23,9 +23,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import controle.PagamentoDAO;
+import modelo.Computadores;
+import modelo.Espacos;
 import modelo.Hospedes;
 import net.miginfocom.swing.MigLayout;
 import modelo.Pagamento;
+import modelo.Quartos;
+import modelo.SalaReunioes;
 
 public class TelaPagamento extends JFrame {
 
@@ -36,6 +40,9 @@ public class TelaPagamento extends JFrame {
 	protected static final Hospedes Hospedes = null;
 	private JPanel contentPane;
 	private ArrayList<Pagamento> listarPagamento = new ArrayList<Pagamento>();
+	private ArrayList<Quartos> listarQuartos = new ArrayList<Quartos>();
+	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private ArrayList<Computadores> listarComputadores = new ArrayList<Computadores>();
 	private Pagamento pagamentoselecionado;
 	private JTable table;
 	private JTextField textNome;
@@ -44,14 +51,20 @@ public class TelaPagamento extends JFrame {
 	private JTextField textSeguranca;
 	private JTextField textBoleto;
 	private JTextField textPix;
-	private static Hospedes hosplogado;
-	private Hospedes usuariologado;
+	private static Quartos quartoAlugado;
+	private Quartos quartoSelecionado;
+	private static SalaReunioes salaAlugada;
+	private SalaReunioes salaSelecionada;
+	private static Computadores computadorAlugado;
+	private Computadores computadorSelecionado;
+	private static Hospedes usuariologado;
+	private Hospedes usuarioSelecionado;
 	
 	public TelaPagamento(Hospedes hospede) {
 		
 		/* TEM Q TER EM TODAS AS TELAS */
-		hosplogado = hospede;
-		usuariologado = hosplogado;
+		usuarioSelecionado = hospede;
+		usuariologado = usuarioSelecionado;
 		/* TEM Q TER EM TODAS AS TELAS */
 		
 		setTitle("Quartos");
@@ -99,7 +112,7 @@ public class TelaPagamento extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
 				c.setVisible(true);
 				dispose();
 			}
@@ -109,91 +122,127 @@ public class TelaPagamento extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconePerfil.png")));
-		PainelIcones.add(lblNewLabel_3, "cell 0 3");
+		PainelIcones.add(lblNewLabel_3, "cell 0 2");
 		
 		JLabel lblNewLabel_4 = new JLabel("Perfil");
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(null);
+				TelaPerfil c = new TelaPerfil(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
 				c.setVisible(true);
 				dispose();
 			}
 		});
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_4, "cell 1 3");
+		PainelIcones.add(lblNewLabel_4, "cell 1 2");
 		
 		JLabel lblNewLabel_11 = new JLabel("");
 		lblNewLabel_11.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeReserva.png")));
-		PainelIcones.add(lblNewLabel_11, "cell 0 5");
+		PainelIcones.add(lblNewLabel_11, "cell 0 3");
 		
 		JLabel lblNewLabel_5 = new JLabel("Reserva");
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TelaReservas c = new TelaReservas(hosplogado);
-				//c.setVisible(true);
-				//();
+				TelaReservas c = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_5, "cell 1 5");
+		PainelIcones.add(lblNewLabel_5, "cell 1 3");
 		
 		JLabel lblNewLabel_12 = new JLabel("");
 		lblNewLabel_12.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeSalaReunioes.png")));
-		PainelIcones.add(lblNewLabel_12, "cell 0 7");
+		PainelIcones.add(lblNewLabel_12, "cell 0 4");
 		
 		JLabel lblNewLabel_6 = new JLabel("Sala de Reuniões");
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado);
-				//c.setVisible(true);
-				//dispose();
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_6, "cell 1 7");
+		PainelIcones.add(lblNewLabel_6, "cell 1 4");
 		
 		JLabel lblNewLabel_13 = new JLabel("");
 		lblNewLabel_13.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeComputadores.png")));
-		PainelIcones.add(lblNewLabel_13, "cell 0 9");
+		PainelIcones.add(lblNewLabel_13, "cell 0 5");
 		
 		JLabel lblNewLabel_7 = new JLabel("Computadores");
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_7, "cell 1 9");
+		PainelIcones.add(lblNewLabel_7, "cell 1 5");
 		
 		JLabel lblNewLabel_14 = new JLabel("");
 		lblNewLabel_14.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeQuartos.png")));
-		PainelIcones.add(lblNewLabel_14, "cell 0 11");
+		PainelIcones.add(lblNewLabel_14, "cell 0 6");
 		
 		JLabel lblNewLabel_8 = new JLabel("Quartos");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_8, "cell 1 11");
+		PainelIcones.add(lblNewLabel_8, "cell 1 6");
 		
 		JLabel lblNewLabel_15 = new JLabel("");
 		lblNewLabel_15.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeAvalie.png")));
-		PainelIcones.add(lblNewLabel_15, "cell 0 13");
+		PainelIcones.add(lblNewLabel_15, "cell 0 7");
 		
 		JLabel lblNewLabel_9 = new JLabel("Avalie-nos");
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_9, "cell 1 13");
+		PainelIcones.add(lblNewLabel_9, "cell 1 7");
+		
+		JLabel lblNewLabel_10 = new JLabel("Nossas Informações");
+		lblNewLabel_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
+			}
+		});
 		
 		JLabel lblNewLabel_16 = new JLabel("");
 		lblNewLabel_16.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeInformacoes.png")));
-		PainelIcones.add(lblNewLabel_16, "cell 0 15");
-		
-		JLabel lblNewLabel_10 = new JLabel("Nossas Informações");
+		PainelIcones.add(lblNewLabel_16, "cell 0 8");
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_10, "cell 1 15");
+		PainelIcones.add(lblNewLabel_10, "cell 1 8");
 		
 		JLabel lblNewLabel_18 = new JLabel("");
 		lblNewLabel_18.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeConfiguracoes.png")));
-		PainelIcones.add(lblNewLabel_18, "cell 0 25");
+		PainelIcones.add(lblNewLabel_18, "cell 0 16");
 		
 		JLabel lblNewLabel_17 = new JLabel("Configurações");
 		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_17, "cell 1 25");
+		PainelIcones.add(lblNewLabel_17, "cell 1 16");
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 2,grow");

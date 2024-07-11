@@ -2,6 +2,7 @@ package modelo;
 
 public class Avaliacoes {
 	private int idAvaliacao;
+	private int idHospede;
 	private float avaliacao;
 	private String avaliador;
 	private Hospedes fkIDHospede;
@@ -12,6 +13,12 @@ public class Avaliacoes {
 	}
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
+	}
+	public int getIdHospede() {
+		return idHospede;
+	}
+	public void setIdHospede(int idHospede) {
+		this.idHospede = idHospede;
 	}
 	public int getIdAvaliacao() {
 		return idAvaliacao;

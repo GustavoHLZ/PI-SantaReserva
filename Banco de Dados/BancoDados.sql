@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `infologin` (
 
 -- -----------------------------------------------------
 -- Table `hospedes`
--- --------------------------------alu---------------------
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hospedes` (
   `idHospede` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,

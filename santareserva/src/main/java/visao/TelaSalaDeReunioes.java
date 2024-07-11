@@ -10,7 +10,10 @@ import javax.swing.text.MaskFormatter;
 
 import modelo.comboBoxPreco;
 import controle.SalaReunioesDAO;
+import modelo.Computadores;
+import modelo.Espacos;
 import modelo.Hospedes;
+import modelo.Quartos;
 import modelo.SalaReunioes;
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
@@ -41,20 +44,44 @@ public class TelaSalaDeReunioes extends JFrame {
 	private JPanel contentPane;
 	private String valor;
 	private ArrayList<SalaReunioes> listaSala = new ArrayList<SalaReunioes>();
-	private SalaReunioes salaSelecionado;
-	private Hospedes hosplogado;
-	private Hospedes usuariologado;
-	private SalaReunioes salaalugada;
+	private ArrayList<Quartos> listarQuartos = new ArrayList<Quartos>();
+	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private ArrayList<Computadores> listarComputadores = new ArrayList<Computadores>();
+	private static Quartos quartoAlugado;
+	private Quartos quartoSelecionado;
+	private static SalaReunioes salaAlugada;
+	private SalaReunioes salaSelecionada;
+	private static Computadores computadorAlugado;
+	private Computadores computadorSelecionado;
+	private static Hospedes usuariologado;
+	private Hospedes usuarioSelecionado;
 	private JTable table;
 	private JTextField textCheckIn;
 	private JTextField textCheckOut;
 
 
-	public TelaSalaDeReunioes(Hospedes hospede) {
+	public TelaSalaDeReunioes(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<Espacos> listarEspacos) {
+		
 		/* TEM Q TER EM TODAS AS TELAS */
-		hosplogado = hospede;
-		usuariologado = hosplogado;
+		usuarioSelecionado = hospede;
+		usuariologado = usuarioSelecionado;
 		/* TEM Q TER EM TODAS AS TELAS */
+		
+		quartoSelecionado = quarto;
+		quartoAlugado = quartoSelecionado;
+		
+		computadorSelecionado = computador;
+		computadorAlugado = computadorSelecionado;
+		
+		salaSelecionada = salareunioes;
+		salaAlugada = salaSelecionada;
+		
+		listarQuartos = listaQuartos;
+		
+		listarComputadores = listaComputadores;
+		
+		listarEspaco = listarEspacos;
+		
 		setTitle("Sala De Reunioes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
@@ -90,7 +117,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
 				c.setVisible(true);
 				dispose();
 		
@@ -108,6 +135,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				TelaPerfil c = new TelaPerfil(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -122,7 +152,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(hospede, null, null , null, salaalugada, null, null);
+				TelaReservas c = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
 				c.setVisible(true);
 				dispose();
 				
@@ -148,7 +178,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -163,7 +195,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos(hospede);
+				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
 				c.setVisible(true);
 				dispose();
 				
@@ -181,7 +213,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -196,7 +230,9 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				
+				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -232,7 +268,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		            JTable source = (JTable) e.getSource();
 		            int posicaoSala = source.getSelectedRow();
 		            if (posicaoSala != -1) {
-		                salaalugada = listaSala.get(posicaoSala);
+		                salaAlugada = listaSala.get(posicaoSala);
 		            }
 		        }
 			
@@ -246,7 +282,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , null , null, salaalugada, null, null);
+				TelaReservas telaReservas = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
 			}
