@@ -61,6 +61,7 @@ public class TelaReservas extends JFrame {
 	private Hospedes usuarioSelecionado;
 	private ArrayList<Quartos> listarQuartos = new ArrayList<Quartos>();
 	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private ArrayList<SalaReunioes> listarSalas = new ArrayList<SalaReunioes>();
 	private ArrayList<Computadores> listarComputadores = new ArrayList<Computadores>();
 	private JTable table;
 	/**
@@ -104,7 +105,7 @@ public class TelaReservas extends JFrame {
 	}
 	
 	
-	public TelaReservas(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<Espacos> listaEspacos) {
+	public TelaReservas(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<SalaReunioes> listaSalas) {
 		
 		/* TEM Q TER EM TODAS AS TELAS */
 		usuarioSelecionado = hospede;
@@ -124,7 +125,7 @@ public class TelaReservas extends JFrame {
 		
 		listarComputadores = listaComputadores;
 		
-		listarEspaco = listaEspacos;
+		listarSalas = listaSalas;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
@@ -157,7 +158,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -173,7 +174,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaPerfil c = new TelaPerfil(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -204,7 +205,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -221,7 +222,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -238,7 +239,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -255,7 +256,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -272,7 +273,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -359,7 +360,9 @@ public class TelaReservas extends JFrame {
 		JLabel lblsalareunioes = new JLabel("-");
 		lblsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblsalareunioes, "cell 0 9,grow");
-		lblsalareunioes.setText(salaAlugada.getPreco().toString());
+		if(salaAlugada != null) {
+			lblsalareunioes.setText(salaAlugada.getPreco().toString());
+		}
 		
 		JLabel lblNewLabel_27 = new JLabel("Total Computadores");
 		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -367,7 +370,9 @@ public class TelaReservas extends JFrame {
 		
 		JLabel lblcomputadores = new JLabel("-");
 		panel_2.add(lblcomputadores, "cell 0 11,alignx center");
-		lblcomputadores.setText(computadorAlugado.getPreco().toString());
+		if(computadorAlugado != null) {
+			lblcomputadores.setText(computadorAlugado.getPreco().toString());
+		}
 		
 		JLabel lblNewLabel_29 = new JLabel("Total Quartos");
 		lblNewLabel_29.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -375,11 +380,15 @@ public class TelaReservas extends JFrame {
 		
 		JLabel lblquartos = new JLabel("-");
 		panel_2.add(lblquartos, "cell 0 13,alignx center");
-		lblquartos.setText(quartoAlugado.getPreco().toString());
+		if(quartoAlugado != null) {
+			lblquartos.setText(quartoAlugado.getPreco().toString());
+		}
 		
 		JLabel lblNewLabel_31 = new JLabel("Total à pagar:");
 		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_31, "cell 0 14");
+		
+		
 		
 		Float total = (salaAlugada.getPreco() + computadorAlugado.getPreco() + quartoAlugado.getPreco());
 		

@@ -54,13 +54,14 @@ public class TelaPerfil extends JFrame {
 	private Hospedes usuarioSelecionado;
 	private ArrayList<Quartos> listarQuartos = new ArrayList<Quartos>();
 	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private ArrayList<SalaReunioes> listarSalas = new ArrayList<SalaReunioes>();
 	private ArrayList<Computadores> listarComputadores = new ArrayList<Computadores>();
 
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaPerfil(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<Espacos> listaEspacos) {
+	public TelaPerfil(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<SalaReunioes> listaSalas) {
 		
 		/* TEM Q TER EM TODAS AS TELAS */
 		usuarioSelecionado = hospede;
@@ -76,7 +77,7 @@ public class TelaPerfil extends JFrame {
 		salaSelecionada = salareunioes;
 		salaAlugada = salaSelecionada;
 		
-		listarEspaco = listaEspacos;
+		listarSalas = listaSalas;
 		
 		/* TEM Q TER EM TODAS AS TELAS */
 		setFont(new Font("Arial", Font.PLAIN, 18));
@@ -138,7 +139,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -163,7 +164,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaReservas c = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -179,7 +180,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -196,7 +197,7 @@ public class TelaPerfil extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -213,7 +214,7 @@ public class TelaPerfil extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -229,7 +230,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -246,7 +247,7 @@ public class TelaPerfil extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}

@@ -43,9 +43,9 @@ public class TelaSalaDeReunioes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String valor;
-	private ArrayList<SalaReunioes> listaSala = new ArrayList<SalaReunioes>();
+	private ArrayList<SalaReunioes> listarSalas = new ArrayList<SalaReunioes>();
 	private ArrayList<Quartos> listarQuartos = new ArrayList<Quartos>();
-	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private ArrayList<Espacos> listarEspacos = new ArrayList<Espacos>();
 	private ArrayList<Computadores> listarComputadores = new ArrayList<Computadores>();
 	private static Quartos quartoAlugado;
 	private Quartos quartoSelecionado;
@@ -60,7 +60,7 @@ public class TelaSalaDeReunioes extends JFrame {
 	private JTextField textCheckOut;
 
 
-	public TelaSalaDeReunioes(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<Espacos> listarEspacos) {
+	public TelaSalaDeReunioes(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<SalaReunioes> listaSalas) {
 		
 		/* TEM Q TER EM TODAS AS TELAS */
 		usuarioSelecionado = hospede;
@@ -80,7 +80,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		
 		listarComputadores = listaComputadores;
 		
-		listarEspaco = listarEspacos;
+		listarSalas= listaSalas;
 		
 		setTitle("Sala De Reunioes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,7 +117,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaHome c = new TelaHome(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 		
@@ -135,7 +135,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaPerfil c = new TelaPerfil(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaPerfil c = new TelaPerfil(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 				
@@ -152,7 +152,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaReservas c = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 				
@@ -178,7 +178,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaComputadores c = new TelaComputadores(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -195,7 +195,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaQuartos c = new TelaQuartos(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 				
@@ -213,7 +213,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -230,7 +230,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaInformacoes c = new TelaInformacoes(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 				c.setVisible(true);
 				dispose();
 			}
@@ -268,7 +268,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		            JTable source = (JTable) e.getSource();
 		            int posicaoSala = source.getSelectedRow();
 		            if (posicaoSala != -1) {
-		                salaAlugada = listaSala.get(posicaoSala);
+		                salaAlugada = listarSalas.get(posicaoSala);
 		            }
 		        }
 			
@@ -282,7 +282,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas telaReservas = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarEspaco);
+				TelaReservas telaReservas = new TelaReservas(usuariologado, quartoAlugado, listarQuartos, salaAlugada, listarComputadores, computadorAlugado, listarSalas);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
 			}
@@ -378,10 +378,10 @@ public class TelaSalaDeReunioes extends JFrame {
 	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" });
 	    
 	    SalaReunioesDAO SalaDAO = SalaReunioesDAO.getInstancia();
-	    listaSala = SalaDAO.listarSalaReunioes();
+	    listarSalas = SalaDAO.listarSalaReunioes();
 
-	    for (int i = 0; i < listaSala.size(); i++) {
-	        SalaReunioes sala = listaSala.get(i);
+	    for (int i = 0; i < listarSalas.size(); i++) {
+	        SalaReunioes sala = listarSalas.get(i);
 	        String disponibilidade;
 	        if (sala.getDisp()) {
 	            disponibilidade = "Disponível";
