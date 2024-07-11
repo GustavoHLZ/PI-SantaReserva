@@ -3,6 +3,7 @@ package controle;
 import java.util.ArrayList;
 
 import modelo.Avaliacoes;
+import modelo.Hospedes;
 
 public interface IAvaliacoesDAO {
 	
@@ -12,7 +13,7 @@ public interface IAvaliacoesDAO {
 	
 	public boolean atualizarAvaliacoes(int idAvaliacao, String nome, Float avalia, String comentario,  int idUsuario);
 	
-	public boolean removerAvaliacoes(int idAvaliacao);
+	public boolean removerAvaliacoes(int idAvaliacao, int idHospede);
 	
 	public Avaliacoes buscarAvaliacoes(Avaliacoes end);
 	

@@ -323,7 +323,7 @@ public class TelaAvaliacoes extends JFrame {
 									}
 								});
 					
-					
+						        atualizarJTable();
 					
 					JPanel panel_19 = new JPanel();
 					PainelPrincipal.add(panel_19, "cell 3 9 38 1,grow");
@@ -334,11 +334,22 @@ public class TelaAvaliacoes extends JFrame {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							
-							 int idHospede = usuariologado.getIdHospede(); 
-						        AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
-						        dao.removerAvaliacoes(idHospede); 
-						        atualizarJTable();
-						}
+							int linhaSelecionada = table.getSelectedRow();
+					        if (linhaSelecionada >= 0) {
+					            int idAvaliacao = (int) table.getValueAt(linhaSelecionada, 0);
+					            int idHospede = usuariologado.getIdHospede();
+
+					            AvaliacoesDAO dao = AvaliacoesDAO.getInstancia();
+					            boolean removido = dao.removerAvaliacoes(idAvaliacao, idHospede);
+
+					            if (removido) {
+					                JOptionPane.showMessageDialog(null, "Avaliação removida com sucesso!");
+					                atualizarJTable();
+					            } else {
+					                JOptionPane.showMessageDialog(null, "Falha ao remover avaliação!");
+					            }
+					        }
+					    }
 					});
 					lbApagar.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Botões/Apagar Avalição.png")));
 					panel_19.add(lbApagar, "cell 0 0,grow");
