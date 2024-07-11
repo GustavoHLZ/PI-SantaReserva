@@ -305,7 +305,7 @@ public class TelaCadastro extends JFrame {
 									if (id != 0) {
 										hospede.setIdHospede(id);
 										JOptionPane.showMessageDialog(null, "inserido");
-										TelaHome c = new TelaHome(hospede, null, null, null, null, null, null);
+										TelaHome c = new TelaHome(hospede);
 										c.setVisible(true);
 										dispose();
 									} else {
