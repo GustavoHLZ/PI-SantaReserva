@@ -70,7 +70,6 @@ public class TelaReservas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-<<<<<<< HEAD
 	
 	private boolean validarDataValidade(String dataValidade) {
 	    // Verificar se a data de validade está no formato correto
@@ -105,15 +104,7 @@ public class TelaReservas extends JFrame {
 	}
 	
 	
-	
-	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador) {
-		/* TEM Q TER EM TODAS AS TELAS */
-		hosplogado = hospede;
-		usuariologado = hosplogado;
-		/* TEM Q TER EM TODAS AS TELAS */
-=======
 	public TelaReservas(Hospedes hospede, Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, ArrayList<Espacos> listaEspacos) {
->>>>>>> TransicaoTelas
 		
 		/* TEM Q TER EM TODAS AS TELAS */
 		usuarioSelecionado = hospede;
@@ -537,20 +528,13 @@ public class TelaReservas extends JFrame {
 			        
 			        
 			        if (retorno > 0) {
-<<<<<<< HEAD
-			            JOptionPane.showMessageDialog(null, "Efetuado com sucesso");
-=======
 			            JOptionPane.showMessageDialog(null, "Quarto reservado com sucesso!");
->>>>>>> TransicaoTelas
 			            reserva.setIdEspaco(retorno);
 			            listarEspaco.add(reserva);
 			            atualizarJTable();
 			        } else {
-<<<<<<< HEAD
-			            JOptionPane.showMessageDialog(null, "Falha ao efetuar o pagamento");
-=======
 			            JOptionPane.showMessageDialog(null, "Falha ao efetuar reserva!");
->>>>>>> TransicaoTelas
+
 			        }
 			       
 
