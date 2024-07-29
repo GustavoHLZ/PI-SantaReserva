@@ -25,6 +25,7 @@ import controle.HospedesDAO;
 import controle.InfologinDAO;
 import modelo.Hospedes;
 import modelo.Infologin;
+import modelo.Reserva;
 import net.miginfocom.swing.MigLayout;
 
 public class TelaCadastro extends JFrame {
@@ -311,7 +312,8 @@ public class TelaCadastro extends JFrame {
 									if (id != 0) {
 										hospede.setIdHospede(id);
 										JOptionPane.showMessageDialog(null, "inserido");
-										TelaHome c = new TelaHome(hospede);
+										Reserva reserva = new Reserva();
+										TelaHome c = new TelaHome(hospede,reserva);
 										c.setVisible(true);
 										dispose();
 									} else {

@@ -11,6 +11,7 @@ import javax.swing.text.MaskFormatter;
 import modelo.comboBoxPreco;
 import controle.SalaReunioesDAO;
 import modelo.Hospedes;
+import modelo.Reserva;
 import modelo.SalaReunioes;
 import modelo.TipoHoras;
 import modelo.comboBoxDisponivel;
@@ -48,9 +49,11 @@ public class TelaSalaDeReunioes extends JFrame {
 	private JTable table;
 	private JTextField textCheckIn;
 	private JTextField textCheckOut;
+	private Reserva reserva;
 
 
-	public TelaSalaDeReunioes(Hospedes hospede) {
+	public TelaSalaDeReunioes(Hospedes hospede,Reserva reserva) {
+		this.reserva=reserva;
 		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
 		usuariologado = hosplogado;
@@ -90,7 +93,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaHome c = new TelaHome(usuariologado);
+				TelaHome c = new TelaHome(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 		
@@ -108,7 +111,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaPerfil c = new TelaPerfil(usuariologado);
+				TelaPerfil c = new TelaPerfil(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 				
@@ -125,7 +128,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(hospede, null, null , null, salaalugada, null, null);
+				TelaReservas c = new TelaReservas(hospede, null, null , null, salaalugada, null, null,reserva);
 				c.setVisible(true);
 				dispose();
 				
@@ -151,7 +154,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaComputadores c = new TelaComputadores(usuariologado);
+				TelaComputadores c = new TelaComputadores(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -168,7 +171,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos(hospede);
+				TelaQuartos c = new TelaQuartos(hospede,reserva);
 				c.setVisible(true);
 				dispose();
 				
@@ -186,7 +189,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -203,7 +206,7 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaInformacoes c = new TelaInformacoes(usuariologado);
+				TelaInformacoes c = new TelaInformacoes(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -255,7 +258,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , null , null, salaalugada, null, null);
+				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , null , null, salaalugada, null, null,reserva);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
 			}

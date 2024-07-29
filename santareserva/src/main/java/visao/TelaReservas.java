@@ -22,12 +22,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import controle.EspacosDAO;
+import controle.IReserva;
 import controle.QuartosDAO;
 import modelo.Computadores;
 import modelo.Espacos;
 import modelo.Hospedes;
 import modelo.Infologin;
 import modelo.Quartos;
+import modelo.Reserva;
 import modelo.SalaReunioes;
 import modelo.comboBoxDisponivel;
 import modelo.comboBoxOpcaoPagamento;
@@ -59,14 +61,17 @@ public class TelaReservas extends JFrame {
 	private ArrayList<Quartos> listarQuartos;
 	private JTable table;
 	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private Reserva reserva;
 	/**
 	 * Launch the application.
 	 */
 	
 	/**
 	 * Create the frame.
+	 * @param reserva 
 	 */
-	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador) {
+	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador, Reserva reserva) {
+		this.reserva=reserva;
 		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
 		usuariologado = hosplogado;
@@ -109,7 +114,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(usuariologado);
+				TelaHome c = new TelaHome(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -125,7 +130,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(usuariologado);
+				TelaPerfil c = new TelaPerfil(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -156,7 +161,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -173,7 +178,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaComputadores c = new TelaComputadores(usuariologado);
+				TelaComputadores c = new TelaComputadores(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -190,7 +195,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos(usuariologado);
+				TelaQuartos c = new TelaQuartos(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -207,7 +212,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -224,7 +229,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaInformacoes c = new TelaInformacoes(usuariologado);
+				TelaInformacoes c = new TelaInformacoes(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -372,6 +377,19 @@ public class TelaReservas extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede", "ID Pagamento"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		ArrayList<IReserva> listasespacos = reserva.getLista();
+		for (IReserva reser : listasespacos) {
+			   model.addRow(new Object[] {
+					   reser.getId(),
+					   reser.getPreco(),
+					   reser.getCheckIn(),
+					   reser.getCheckOut(),
+				        hosplogado.getNome(),
+				        hosplogado.getIdHospede(),
+			
+		
+		 });/*
 		if (quartoSelecionado != null) {
 		    model.addRow(new Object[] {
 		        quartoalugado.getIdQuarto(),
@@ -405,6 +423,7 @@ public class TelaReservas extends JFrame {
 		    		//computadoralugado.getTemp(),
 			        
 			    });
+			    */
 		}
 		
 		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");

@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import modelo.Hospedes;
 import modelo.Quartos;
+import modelo.Reserva;
 import net.miginfocom.swing.MigLayout;
 
 public class TelaInformacoes extends JFrame {
@@ -23,9 +24,11 @@ public class TelaInformacoes extends JFrame {
 	private Hospedes usuariologado;
 	private JPanel contentPane;
 	private Quartos quartoSelecionado;
+	private Reserva reserva;
 
 	
-	public TelaInformacoes(Hospedes hospede) {
+	public TelaInformacoes(Hospedes hospede,Reserva reserva) {
+		this.reserva=reserva;
 		
 		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
@@ -63,7 +66,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(usuariologado);
+				TelaHome c = new TelaHome(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -79,7 +82,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(usuariologado);
+				TelaPerfil c = new TelaPerfil(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -95,7 +98,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null, null, null);
+				TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null, null, null,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -111,7 +114,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -127,7 +130,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaComputadores c = new TelaComputadores(usuariologado);
+				TelaComputadores c = new TelaComputadores(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -143,7 +146,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaQuartos c = new TelaQuartos(usuariologado);
+				TelaQuartos c = new TelaQuartos(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -159,7 +162,7 @@ public class TelaInformacoes extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
+				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado,reserva);
 				c.setVisible(true);
 				dispose();
 			}

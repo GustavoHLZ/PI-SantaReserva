@@ -25,7 +25,8 @@ import javax.swing.text.MaskFormatter;
  
 import controle.QuartosDAO; 
 import modelo.Hospedes; 
-import modelo.Quartos; 
+import modelo.Quartos;
+import modelo.Reserva;
 import net.miginfocom.swing.MigLayout; 
  
 public class TelaQuartos extends JFrame { 
@@ -39,9 +40,11 @@ public class TelaQuartos extends JFrame {
 	private Hospedes usuariologado; 
 	private JTextField textCheckIn; 
 	private JTextField textCheckOut; 
+	private Reserva reserva;
  
  
-	public TelaQuartos(Hospedes hospede) { 
+	public TelaQuartos(Hospedes hospede, Reserva reserva) { 
+		this.reserva=reserva;
 		/* TEM Q TER EM TODAS AS TELAS */ 
 		hosplogado = hospede; 
 		usuariologado = hosplogado; 
@@ -84,7 +87,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaHome c = new TelaHome(usuariologado); 
+				TelaHome c = new TelaHome(usuariologado,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -100,7 +103,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaPerfil c = new TelaPerfil(hosplogado); 
+				TelaPerfil c = new TelaPerfil(hosplogado,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -116,9 +119,15 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null, null, null); 
+				if(quartoSelecionado==null) {
+					JOptionPane.showMessageDialog(null, "SelecioneQuarto");
+				}
+				else {
+					TelaReservas c = new TelaReservas(hospede, null, quartoSelecionado, null, null, null, null, reserva); 
 				c.setVisible(true); 
 				dispose(); 
+				}
+				
 			} 
 		}); 
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
@@ -132,7 +141,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado); 
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -148,7 +157,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_7.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaComputadores c = new TelaComputadores(hosplogado); 
+				TelaComputadores c = new TelaComputadores(hosplogado,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -178,7 +187,7 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado); 
+				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -195,7 +204,7 @@ public class TelaQuartos extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				TelaInformacoes c = new TelaInformacoes(usuariologado); 
+				TelaInformacoes c = new TelaInformacoes(usuariologado,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -222,6 +231,8 @@ public class TelaQuartos extends JFrame {
 		table.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
+				System.out.println("");
+				//
 				if (e.getClickCount() == 1) { 
 		            JTable source = (JTable) e.getSource(); 
 		            int posicaoQuarto = source.getSelectedRow(); 
@@ -323,12 +334,13 @@ public class TelaQuartos extends JFrame {
 				QuartosDAO dao = QuartosDAO.getInstancia(); 
 				 
 				dao.atualizarQuartos(checkINN, checkOUTT, idquarto); 
-				 
+				  
 				listaQuartos.add(quartos); 
+				reserva.adicionarReserva(quartos);
 				quartoSelecionado.setCheckIn(checkINN); 
 				quartoSelecionado.setCheckOut(checkOUTT); 
 				 
-				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, listaQuartos, null, null, null); 
+				TelaReservas telaReservas = new TelaReservas(hosplogado, usuariologado , quartoSelecionado, listaQuartos, null, null, null, reserva); 
 		        telaReservas.setVisible(true); 
 				 
 				  

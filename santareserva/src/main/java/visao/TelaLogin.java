@@ -13,8 +13,9 @@ import controle.HospedesDAO;
 import controle.InfologinDAO; 
 import controle.RoundedBorder; 
 import modelo.Hospedes; 
-import modelo.Infologin; 
- 
+import modelo.Infologin;
+import modelo.Reserva;
+
 import java.awt.GridLayout; 
 import javax.swing.JLabel; 
 import javax.swing.JOptionPane; 
@@ -199,8 +200,9 @@ public class TelaLogin extends JFrame {
 																			JOptionPane.showMessageDialog(null, "Usuário Cadastrado"); 
 																			HospedesDAO daohosp = HospedesDAO.getInstancia(); 
 																			hospede.setLogin(login); 
-																			hospede = daohosp.buscarHospedes(usuarioLogado); 
-																			TelaHome c = new TelaHome(hospede); 
+																			hospede = daohosp.buscarHospedes(usuarioLogado);
+																			Reserva reserva = new Reserva();
+																			TelaHome c = new TelaHome(hospede,reserva); 
 																			c.setVisible(true); 
 																			dispose(); 
 																		} else { 
