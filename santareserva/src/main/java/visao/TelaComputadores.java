@@ -52,7 +52,7 @@ public class TelaComputadores extends JFrame {
 		this.reserva=reserva;
 		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
-		usuariologado = hosplogado;
+	
 		/* TEM Q TER EM TODAS AS TELAS */
 		 
 		setTitle("Sala De Computadores"); 
@@ -124,7 +124,7 @@ public class TelaComputadores extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaReservas c = new TelaReservas(hospede, hospede, null, null, null, listaComp, compSelecionado,reserva); 
+				TelaReservas c = new TelaReservas(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 				 
@@ -261,7 +261,7 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				reserva.adicionarReserva(computadoralugado);
-				TelaReservas telaReservas = new TelaReservas(hospede, hospede, null, null, null, listaComp, computadoralugado,reserva); 
+				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva); 
 		        telaReservas.setVisible(true); 
 				atualizarJTable(); 
 			} 
