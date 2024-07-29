@@ -77,7 +77,7 @@ public class TelaPagamento extends JFrame {
 		PainelTopo.add(lblNewLabel, "cell 0 0");
 		
 		JLabel lblNewLabel_19 = new JLabel("");
-		lblNewLabel_19.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeUser.png")));
+		lblNewLabel_19.setIcon(new ImageIcon(TelaPagamento.class.getResource("/visao/Icones/iconeUser.png")));
 		PainelTopo.add(lblNewLabel_19, "cell 1 0");
 		
 		JPanel panel_4 = new JPanel();

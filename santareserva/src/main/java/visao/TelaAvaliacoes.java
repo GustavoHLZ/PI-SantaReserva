@@ -86,7 +86,7 @@ public class TelaAvaliacoes extends JFrame {
 		JPanel PainelTopo = new JPanel(); 
 		PainelTopo.setBackground(new Color(119, 165, 175)); 
 		contentPane.add(PainelTopo, "cell 0 0 2 1,grow"); 
-		PainelTopo.setLayout(new MigLayout("", "[]", "[]")); 
+		PainelTopo.setLayout(new MigLayout("", "[][grow][100px]", "[][]")); 
 		 
 		JPanel PainelIcones = new JPanel(); 
 		PainelIcones.setBackground(new Color(240, 240, 240)); 
@@ -241,8 +241,33 @@ public class TelaAvaliacoes extends JFrame {
 		} 
 		 
 		JLabel lblNewLabel = new JLabel(""); 
-		lblNewLabel.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/LogoCerta2.png"))); 
-		PainelTopo.add(lblNewLabel, "cell 0 0"); 
+		lblNewLabel.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/LogoCerta2.png"))); 
+		PainelTopo.add(lblNewLabel, "cell 0 0 1 2"); 
+		
+		JLabel lblNewLabel_53 = new JLabel("Olá ");
+		lblNewLabel_53.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelTopo.add(lblNewLabel_53, "flowx,cell 1 0,alignx right,aligny bottom");
+		
+		JLabel lblNameuser = new JLabel("");
+		lblNameuser.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelTopo.add(lblNameuser, "cell 1 0 1 2,alignx right,aligny bottom");
+		lblNameuser.setText(hosplogado.getNome());
+		
+		JLabel lblNewLabel_19 = new JLabel("");
+		lblNewLabel_19.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/iconeUser.png")));
+		PainelTopo.add(lblNewLabel_19, "cell 2 0,alignx center,aligny center");
+		
+		JLabel lblNewLabel_51 = new JLabel("");
+		lblNewLabel_51.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_51.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Botões/BtnSair.png")));
+		PainelTopo.add(lblNewLabel_51, "cell 2 1,alignx center");
 		 
 		JPanel PainelPrincipal1 = new JPanel(); 
 		contentPane.add(PainelPrincipal1, "cell 1 1 1 3,grow"); 
