@@ -68,14 +68,39 @@ public class TelaPerfil extends JFrame {
 		setContentPane(PainelGeral);
 		PainelGeral.setLayout(new MigLayout("", "[][grow]", "[][grow]"));
 		
-		JPanel PainelLog = new JPanel();
-		PainelLog.setBackground(new Color(119, 165, 175));
-		PainelGeral.add(PainelLog, "cell 0 0 3 1,grow");
-		PainelLog.setLayout(new MigLayout("", "[][]", "[grow]"));
+		JPanel PainelTopo = new JPanel();
+		PainelTopo.setBackground(new Color(119, 165, 175));
+		PainelGeral.add(PainelTopo, "cell 0 0 3 1,grow");
+		PainelTopo.setLayout(new MigLayout("", "[][grow][100px]", "[grow][]"));
+		
+		JLabel lblNewLabel = new JLabel(""); 
+		lblNewLabel.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/LogoCerta2.png"))); 
+		PainelTopo.add(lblNewLabel, "cell 0 0 1 2"); 
+		
+		JLabel lblNewLabel_53 = new JLabel("Olá ");
+		lblNewLabel_53.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelTopo.add(lblNewLabel_53, "flowx,cell 1 0,alignx right,aligny bottom");
+		
+		JLabel lblNameuser = new JLabel("");
+		lblNameuser.setFont(new Font("Arial", Font.PLAIN, 20));
+		PainelTopo.add(lblNameuser, "cell 1 0 1 2,alignx right,aligny bottom");
+		lblNameuser.setText(hosplogado.getNome());
 		
 		JLabel lblNewLabel_19 = new JLabel("");
-		lblNewLabel_19.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/LogoCerta2.png")));
-		PainelLog.add(lblNewLabel_19);
+		lblNewLabel_19.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/iconeUser.png")));
+		PainelTopo.add(lblNewLabel_19, "cell 2 0,alignx center,aligny center");
+		
+		JLabel lblNewLabel_51 = new JLabel("");
+		lblNewLabel_51.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaLogin tela = new TelaLogin();
+				tela.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_51.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Botões/BtnSair.png")));
+		PainelTopo.add(lblNewLabel_51, "cell 2 1,alignx center");
 		
 		MaskFormatter mascaraTel = null;
 
@@ -324,8 +349,8 @@ public class TelaPerfil extends JFrame {
 		txtVerSenha.setColumns(10);
 		txtVerSenha.setText(usuariologado.getLogin().getSenha());
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.addMouseListener(new MouseAdapter() {
+		JLabel lblNewLabel1 = new JLabel("");
+		lblNewLabel1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -461,8 +486,8 @@ public class TelaPerfil extends JFrame {
 		txtConfSenha.setText(usuariologado.getLogin().getSenha());
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
 		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 12,alignx center,aligny center");
-		lblNewLabel.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BtnExcluirPerfil.png")));
-		PainelAlteracao.add(lblNewLabel, "cell 2 13,alignx center,aligny top");
+		lblNewLabel1.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BtnExcluirPerfil.png")));
+		PainelAlteracao.add(lblNewLabel1, "cell 2 13,alignx center,aligny top");
 	}
 
 }
