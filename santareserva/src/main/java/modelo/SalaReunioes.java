@@ -2,7 +2,9 @@ package modelo;
 
 import java.time.LocalDate;
 
-public class SalaReunioes {
+import controle.IReserva;
+
+public class SalaReunioes implements IReserva{
 
 	private int idSala;
 	private Boolean disp;
@@ -53,6 +55,11 @@ public class SalaReunioes {
 	}
 	public void setPreco(Float preco) {
 		this.preco = preco;
+	}
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return idSala;
 	}
 	
 

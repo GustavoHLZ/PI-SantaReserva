@@ -2,7 +2,9 @@ package modelo;
 
 import java.time.LocalDate;
 
-public class Quartos {
+import controle.IReserva;
+
+public class Quartos implements IReserva{
 
 	private int idQuarto;
 	private String tipo;
@@ -61,6 +63,11 @@ public class Quartos {
 	}
 	public void setTemp(int temp) {
 		this.temp = temp;
+	}
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return idQuarto;
 	}
 	
 	

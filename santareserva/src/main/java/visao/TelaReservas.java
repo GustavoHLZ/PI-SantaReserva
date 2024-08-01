@@ -22,12 +22,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import controle.EspacosDAO;
+import controle.IReserva;
 import controle.QuartosDAO;
 import modelo.Computadores;
 import modelo.Espacos;
 import modelo.Hospedes;
 import modelo.Infologin;
 import modelo.Quartos;
+import modelo.Reserva;
 import modelo.SalaReunioes;
 import modelo.comboBoxDisponivel;
 import modelo.comboBoxOpcaoPagamento;
@@ -53,31 +55,30 @@ public class TelaReservas extends JFrame {
 	private static Quartos quartoalugado;
 	private SalaReunioes salaalugada;
 	private Computadores computadoralugado;
-	private Hospedes usuariologado;
+
 	private Hospedes hosplogado;
 	private Quartos quartoSelecionado;
 	private ArrayList<Quartos> listarQuartos;
 	private JTable table;
 	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
+	private Reserva reserva;
 	/**
 	 * Launch the application.
 	 */
 	
 	/**
 	 * Create the frame.
+	 * @param reserva 
 	 */
-	public TelaReservas(Hospedes hospede, Hospedes hosplogado , Quartos quarto, ArrayList<Quartos> listaQuartos,SalaReunioes salareunioes, ArrayList<Computadores> listaComputadores, Computadores computador) {
+	public TelaReservas(Hospedes hospede, Reserva reserva) {
+		this.reserva=reserva;
 		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
-		usuariologado = hosplogado;
+	
 		/* TEM Q TER EM TODAS AS TELAS */
 		
 		
-		quartoSelecionado = quarto;
-		quartoalugado = quartoSelecionado;
-		salaalugada = salareunioes;
-		computadoralugado = computador;
-		listarQuartos = listaQuartos;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);
@@ -109,7 +110,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(usuariologado);
+				TelaHome c = new TelaHome(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -125,7 +126,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(usuariologado);
+				TelaPerfil c = new TelaPerfil(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -156,7 +157,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -173,7 +174,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaComputadores c = new TelaComputadores(usuariologado);
+				TelaComputadores c = new TelaComputadores(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -190,7 +191,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaQuartos c = new TelaQuartos(usuariologado);
+				TelaQuartos c = new TelaQuartos(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -207,7 +208,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado);
+				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -224,7 +225,7 @@ public class TelaReservas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaInformacoes c = new TelaInformacoes(usuariologado);
+				TelaInformacoes c = new TelaInformacoes(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -319,9 +320,9 @@ public class TelaReservas extends JFrame {
 		JLabel lblsalareunioes = new JLabel("-");
 		lblsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblsalareunioes, "cell 0 9,grow");
-		if(salareunioes != null) {
-			lblsalareunioes.setText(salareunioes.getPreco().toString());
-		}
+		//if( != null) {
+		//	lblsalareunioes.setText(salareunioes.getPreco().toString());
+	//	}
 		
 		
 		
@@ -331,9 +332,9 @@ public class TelaReservas extends JFrame {
 		
 		JLabel lblcomputadores = new JLabel("-");
 		panel_2.add(lblcomputadores, "cell 0 11,alignx center");
-		if(computador != null) {
-			lblcomputadores.setText(computador.getPreco().toString());
-		}
+		//if(computador != null) {
+		//	lblcomputadores.setText(computador.getPreco().toString());
+	//	}
 
 		
 		JLabel lblNewLabel_29 = new JLabel("Total Quartos");
@@ -342,9 +343,9 @@ public class TelaReservas extends JFrame {
 		
 		JLabel lblquartos = new JLabel("-");
 		panel_2.add(lblquartos, "cell 0 13,alignx center");
-		if(quarto != null) {
-			lblquartos.setText(quarto.getPreco().toString());
-		}
+		//if(quarto != null) {
+		//	lblquartos.setText(quarto.getPreco().toString());
+		//}
 
 		
 		JLabel lblNewLabel_31 = new JLabel("Total à pagar:");
@@ -372,6 +373,19 @@ public class TelaReservas extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" , "Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede", "ID Pagamento"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		ArrayList<IReserva> listasespacos = reserva.getLista();
+		for (IReserva reser : listasespacos) {
+			   model.addRow(new Object[] {
+					   reser.getId(),
+					   reser.getPreco(),
+					   reser.getCheckIn(),
+					   reser.getCheckOut(),
+				        hosplogado.getNome(),
+				        hosplogado.getIdHospede(),
+			
+		
+		 });/*
 		if (quartoSelecionado != null) {
 		    model.addRow(new Object[] {
 		        quartoalugado.getIdQuarto(),
@@ -405,6 +419,7 @@ public class TelaReservas extends JFrame {
 		    		//computadoralugado.getTemp(),
 			        
 			    });
+			    */
 		}
 		
 		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
@@ -447,10 +462,10 @@ public class TelaReservas extends JFrame {
 			        reserva.setFkidQuartos(quartoalugado.getIdQuarto()); 
 			        
 			        
-			        if(usuariologado == null) {
-			        	usuariologado.setIdHospede(ocupantetest);
+			        if(hosplogado == null) {
+			        	hosplogado.setIdHospede(ocupantetest);
 			        }
-			        reserva.setOcupante(usuariologado.getIdHospede());
+			        reserva.setOcupante(hosplogado.getIdHospede());
 			        
 			        
 			        if(computadoralugado == null) {
@@ -470,10 +485,10 @@ public class TelaReservas extends JFrame {
 			        }
 			        reserva.setFkidQuartos(quartoalugado.getIdQuarto());
 			        
-			        if(usuariologado == null) {
-			        	usuariologado.setIdHospede(idhospedetest);
+			        if(hosplogado == null) {
+			        	hosplogado.setIdHospede(idhospedetest);
 			        }
-			        reserva.setFkidHospede(usuariologado.getIdHospede());
+			        reserva.setFkidHospede(hosplogado.getIdHospede());
 			        
 			        
 			        

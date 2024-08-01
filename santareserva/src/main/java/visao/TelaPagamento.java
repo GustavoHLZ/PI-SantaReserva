@@ -26,6 +26,7 @@ import controle.PagamentoDAO;
 import modelo.Hospedes;
 import net.miginfocom.swing.MigLayout;
 import modelo.Pagamento;
+import modelo.Reserva;
 
 public class TelaPagamento extends JFrame {
 
@@ -46,8 +47,10 @@ public class TelaPagamento extends JFrame {
 	private JTextField textPix;
 	private static Hospedes hosplogado;
 	private Hospedes usuariologado;
+	private Reserva reserva;
 	
-	public TelaPagamento(Hospedes hospede) {
+	public TelaPagamento(Hospedes hospede,Reserva reserva) {
+		this.reserva=reserva;
 		
 		/* TEM Q TER EM TODAS AS TELAS */
 		hosplogado = hospede;
@@ -99,7 +102,7 @@ public class TelaPagamento extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaHome c = new TelaHome(null);
+				TelaHome c = new TelaHome(hospede,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -115,7 +118,7 @@ public class TelaPagamento extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaPerfil c = new TelaPerfil(null);
+				TelaPerfil c = new TelaPerfil(hospede,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -316,12 +319,12 @@ public class TelaPagamento extends JFrame {
 		        int retorno = dao.InserirPagamento(pagamentos);
 		        
 		        if (retorno > 0) {
-		            JOptionPane.showMessageDialog(null, "Avaliação inserida com sucesso!");
+		            JOptionPane.showMessageDialog(null, "Pagamento Efetuado");
 		            pagamentos.setIdPagamento(retorno);
 		            listarPagamento.add(pagamentos);
 		            atualizarJTable();
 		        } else {
-		            JOptionPane.showMessageDialog(null, "Falha ao inserir avaliação!");
+		            JOptionPane.showMessageDialog(null, "Erro ao Efetuar Pagamento");
 		        }
 				
 			}

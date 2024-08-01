@@ -2,7 +2,9 @@ package modelo;
 
 import java.time.LocalDate;
 
-public class Computadores {
+import controle.IReserva;
+
+public class Computadores implements IReserva{
 
 	private int idPC;
 	private int num;
@@ -54,6 +56,12 @@ public class Computadores {
 	}
 	public void setTemp(int temp) {
 		this.temp = temp;
+	}
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return idPC
+				;
 	}
 	
 	
