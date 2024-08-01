@@ -97,7 +97,7 @@ public class TelaLogin extends JFrame {
  
 		JPanel PainelLogin = new JPanel(); 
 		Tela.add(PainelLogin, "flowx,cell 1 0 1 6,alignx center,growy"); 
-		PainelLogin.setLayout(new MigLayout("", "[grow]", "[200px][70px][][][][][100px][500px]")); 
+		PainelLogin.setLayout(new MigLayout("", "[grow]", "[200px][70px][][][][20px][100px][500px]")); 
  
 		table = new JTable(); 
 																 
@@ -129,7 +129,7 @@ public class TelaLogin extends JFrame {
 																}); 
 																 
 																		txtLogin.setBounds(309, 339, 335, 30); 
-																		PainelLogin.add(txtLogin, "cell 0 2,aligny top"); 
+																		PainelLogin.add(txtLogin, "cell 0 2,growx,aligny top"); 
 																		txtLogin.setColumns(10); 
 												 
 														lblNewLabel_2 = new JLabel("Senha"); 
@@ -141,79 +141,14 @@ public class TelaLogin extends JFrame {
 																txtSenha.setBorder(bordaPreta); 
 																txtSenha.setFont(new Font("Arial", Font.PLAIN, 25)); 
 																txtSenha.setBounds(309, 453, 335, 30); 
-																PainelLogin.add(txtSenha, "cell 0 4,aligny top"); 
+																PainelLogin.add(txtSenha, "cell 0 4,growx,aligny top"); 
 																txtSenha.setColumns(10); 
 												 
 														JLabel lblNewLabel_3 = new JLabel("Esqueceu a senha?"); 
 														lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER); 
 														lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20)); 
 														lblNewLabel_3.setBounds(515, 494, 129, 14); 
-														PainelLogin.add(lblNewLabel_3, "cell 0 5,aligny top"); 
-												 
-														JButton JButton = new JButton("Login"); 
-														JButton.setForeground(new Color(255, 255, 255)); 
-														 
-																JButton.setFont(new Font("Arial", Font.PLAIN, 16)); 
-																JButton.addActionListener(new ActionListener() { 
- 
-																	public void actionPerformed(ActionEvent e) { 
- 
-																		if(txtLogin.getText().equals("") && txtSenha.getText().equals("")) { 
-																			JOptionPane.showMessageDialog(null, "Os campos estão vazios."); 
-																			txtLogin.setBorder(bordaVermelha); 
-																			txtSenha.setBorder(bordaVermelha); 
-																			 
-																		} 
-																																			 
-																		else if (txtLogin.getText().equals("")) { 
-																			JOptionPane.showMessageDialog(null, "Preencha o campo Login."); 
-																			txtLogin.setBorder(bordaVermelha); 
-																			txtSenha.setBorder(bordaPreta); 
-																			return; 
-																		} 
- 
-																		else if (txtSenha.getText().equals("")) { 
-																			JOptionPane.showMessageDialog(null, "Preencha o campo Senha."); 
-																			txtSenha.setBorder(bordaVermelha); 
-																			txtLogin.setBorder(bordaPreta); 
-																			return; 
- 
-																		} 
-																		 
- 
-																		String email = txtLogin.getText(); 
-										 
-																		String senha = txtSenha.getText(); 
-																		 
-																		Infologin login = new Infologin(); 
-																		 
-																		login.setLogin(email); 
-																		login.setSenha(senha); 
-																		 
-																		Hospedes hospede = new Hospedes(); 
- 
-																		InfologinDAO dao = InfologinDAO.getInstancia(); 
- 
-																		Infologin usuarioLogado = dao.buscarInfologin(login); 
- 
-																		if (usuarioLogado != null) { 
-																			JOptionPane.showMessageDialog(null, "Usuário Cadastrado"); 
-																			HospedesDAO daohosp = HospedesDAO.getInstancia(); 
-																			hospede.setLogin(login); 
-																			hospede = daohosp.buscarHospedes(usuarioLogado);
-																			Reserva reserva = new Reserva();
-																			TelaHome c = new TelaHome(hospede,reserva); 
-																			c.setVisible(true); 
-																			dispose(); 
-																		} else { 
-																			JOptionPane.showMessageDialog(null, "Usuário não cadastrado"); 
-																		} 
- 
-																	} 
-																}); 
-																JButton.setBackground(new Color(119, 165, 175)); 
-																JButton.setBounds(359, 546, 243, 40); 
-																PainelLogin.add(JButton, "cell 0 6,alignx center"); 
+														PainelLogin.add(lblNewLabel_3, "cell 0 5,aligny top");
 												 
 														JLabel lblNewLabel_4 = new JLabel("Não possui conta? Registre-se"); 
 														lblNewLabel_4.addMouseListener(new MouseAdapter() { 
@@ -224,6 +159,67 @@ public class TelaLogin extends JFrame {
 																dispose(); 
 															} 
 														}); 
+														
+														JLabel lblNewLabel_5 = new JLabel("");
+														lblNewLabel_5.addMouseListener(new MouseAdapter() {
+															@Override
+															public void mouseClicked(MouseEvent e) {
+																if(txtLogin.getText().equals("") && txtSenha.getText().equals("")) { 
+																	JOptionPane.showMessageDialog(null, "Os campos estão vazios."); 
+																	txtLogin.setBorder(bordaVermelha); 
+																	txtSenha.setBorder(bordaVermelha); 
+																	 
+																} 
+																																	 
+																else if (txtLogin.getText().equals("")) { 
+																	JOptionPane.showMessageDialog(null, "Preencha o campo E-mail."); 
+																	txtLogin.setBorder(bordaVermelha); 
+																	return; 
+																} else{
+																	txtLogin.setBorder(bordaPreta);
+																}
+
+																if (txtSenha.getText().equals("")) { 
+																	JOptionPane.showMessageDialog(null, "Preencha o campo Senha."); 
+																	txtSenha.setBorder(bordaVermelha); 
+																	return; 
+
+																} else{
+																	txtSenha.setBorder(bordaPreta);
+																}
+																 
+
+																String email = txtLogin.getText(); 
+								 
+																String senha = txtSenha.getText(); 
+																 
+																Infologin login = new Infologin(); 
+																 
+																login.setLogin(email); 
+																login.setSenha(senha); 
+																 
+																Hospedes hospede = new Hospedes(); 
+
+																InfologinDAO dao = InfologinDAO.getInstancia(); 
+
+																Infologin usuarioLogado = dao.buscarInfologin(login); 
+
+																if (usuarioLogado != null) { 
+																	JOptionPane.showMessageDialog(null, "Usuário Cadastrado"); 
+																	HospedesDAO daohosp = HospedesDAO.getInstancia(); 
+																	hospede.setLogin(login); 
+																	hospede = daohosp.buscarHospedes(usuarioLogado);
+																	Reserva reserva = new Reserva();
+																	TelaHome c = new TelaHome(hospede,reserva); 
+																	c.setVisible(true); 
+																	dispose(); 
+																} else { 
+																	JOptionPane.showMessageDialog(null, "Usuário não cadastrado"); 
+																} 
+															}
+														});
+														lblNewLabel_5.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Botões/BTN Login.png")));
+														PainelLogin.add(lblNewLabel_5, "cell 0 6,aligny center");
 														lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER); 
 														lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 20)); 
 														lblNewLabel_4.setBounds(372, 631, 210, 14); 

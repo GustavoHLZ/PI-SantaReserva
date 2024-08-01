@@ -23,6 +23,7 @@ import javax.swing.text.MaskFormatter;
 
 import controle.HospedesDAO;
 import controle.InfologinDAO;
+import controle.RoundedBorder;
 import modelo.Hospedes;
 import modelo.Infologin;
 import modelo.Reserva;
@@ -61,6 +62,8 @@ public class TelaCadastro extends JFrame {
 		Tela = new JPanel();
 		Tela.setBackground(new Color(238, 238, 238));
 		Tela.setBorder(null);
+		RoundedBorder bordaVermelha = new RoundedBorder(Color.red, 10); 
+		RoundedBorder bordaPreta = new RoundedBorder(Color.black, 10); 
 
 		setContentPane(Tela);
 		Tela.setLayout(new MigLayout("", "[960px][grow]", "[grow]"));
@@ -86,7 +89,8 @@ public class TelaCadastro extends JFrame {
 				PainelCadastro.add(lblEmail, "cell 0 1");
 		
 				txtEmail = new JTextField();
-				txtEmail.setFont(new Font("Arial", Font.PLAIN, 32));
+				txtEmail.setBorder(bordaPreta);
+				txtEmail.setFont(new Font("Arial", Font.PLAIN, 25));
 				PainelCadastro.add(txtEmail, "cell 0 2,grow");
 				txtEmail.setColumns(10);
 		
@@ -95,7 +99,8 @@ public class TelaCadastro extends JFrame {
 				PainelCadastro.add(lblNome, "cell 0 3");
 		
 				txtNome = new JTextField();
-				txtNome.setFont(new Font("Arial", Font.PLAIN, 32));
+				txtNome.setBorder(bordaPreta);
+				txtNome.setFont(new Font("Arial", Font.PLAIN, 25));
 				PainelCadastro.add(txtNome, "cell 0 4,grow");
 				txtNome.setColumns(10);
 		
@@ -104,7 +109,8 @@ public class TelaCadastro extends JFrame {
 				PainelCadastro.add(lblSobrenome, "cell 0 5");
 		
 				txtSobrenome = new JTextField();
-				txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 32));
+				txtSobrenome.setBorder(bordaPreta);
+				txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 25));
 				PainelCadastro.add(txtSobrenome, "cell 0 6,grow");
 				txtSobrenome.setColumns(10);
 
@@ -125,7 +131,8 @@ public class TelaCadastro extends JFrame {
 				PainelCadastro.add(lblNascimento, "cell 0 7");
 		
 				txtNascimento = new JFormattedTextField(mascaraDat);
-				txtNascimento.setFont(new Font("Arial", Font.PLAIN, 32));
+				txtNascimento.setBorder(bordaPreta);
+				txtNascimento.setFont(new Font("Arial", Font.PLAIN, 25));
 				PainelCadastro.add(txtNascimento, "cell 0 8,grow");
 				txtNascimento.setColumns(10);
 
@@ -146,7 +153,8 @@ public class TelaCadastro extends JFrame {
 				PainelCadastro.add(lblTelefone, "cell 0 9");
 		
 				txtTelefone = new JFormattedTextField(mascaraTel);
-				txtTelefone.setFont(new Font("Arial", Font.PLAIN, 32));
+				txtTelefone.setBorder(bordaPreta);
+				txtTelefone.setFont(new Font("Arial", Font.PLAIN, 25));
 				PainelCadastro.add(txtTelefone, "cell 0 10,grow");
 				txtTelefone.setColumns(10);
 		
@@ -155,7 +163,8 @@ public class TelaCadastro extends JFrame {
 				PainelCadastro.add(lblSenha, "cell 0 11");
 				
 						txtSenha = new JTextField();
-						txtSenha.setFont(new Font("Arial", Font.PLAIN, 32));
+						txtSenha.setBorder(bordaPreta);
+						txtSenha.setFont(new Font("Arial", Font.PLAIN, 25));
 						PainelCadastro.add(txtSenha, "cell 0 12,grow");
 						txtSenha.setColumns(10);
 				
@@ -164,55 +173,81 @@ public class TelaCadastro extends JFrame {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 
+								if(txtEmail.getText().equals("") && txtSenha.getText().equals("") && txtNome.getText().equals("") && txtSobrenome.getText().equals("")) { 
+									JOptionPane.showMessageDialog(null, "Os campos estão vazios."); 
+									txtEmail.setBorder(bordaVermelha); 
+									txtSenha.setBorder(bordaVermelha); 
+									txtNome.setBorder(bordaVermelha);
+									txtNascimento.setBorder(bordaVermelha);
+									txtSobrenome.setBorder(bordaVermelha);
+									txtTelefone.setBorder(bordaVermelha);
+								} 
+								
 								if (txtEmail.getText().equals("")) {
 
 									JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
-
+									txtEmail.setBorder(bordaVermelha);
 									return;
 
+								} else{
+									txtEmail.setBorder(bordaPreta);
 								}
 
 								if (txtNome.getText().equals("")) {
 
 									JOptionPane.showMessageDialog(null, "Preencha o campo Nome.");
-
+									txtNome.setBorder(bordaVermelha);
 									return;
 
+								}else{
+									txtNome.setBorder(bordaPreta);
 								}
 
 								if (txtSobrenome.getText().equals("")) {
 
 									JOptionPane.showMessageDialog(null, "Preencha o campo Sobrenome.");
-
+									txtSobrenome.setBorder(bordaVermelha);
 									return;
 
+								}else{
+									txtSobrenome.setBorder(bordaPreta);
 								}
 
 								if (txtNascimento.getText().equals("")) {
 
 									JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
-
+									txtNascimento.setBorder(bordaVermelha);
 									return;
 
+								}else{
+									txtNascimento.setBorder(bordaPreta);
 								}
 
 								if (txtTelefone.getText().equals("")) {
 
 									JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
-
+									txtTelefone.setBorder(bordaVermelha);
 									return;
 
+								}else{
+									txtTelefone.setBorder(bordaPreta);
 								}
 								
 								
 								if (txtSenha.getText().equals("")) {
 									JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
+									txtSenha.setBorder(bordaVermelha);
 									return;
+								}else{
+									txtEmail.setBorder(bordaPreta);
 								}
 								
 								if (txtSenha.getText().length() < 8) {
 									JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 caracteres.");
+									txtSenha.setBorder(bordaVermelha);
 									return;
+								}else{
+									txtSenha.setBorder(bordaPreta);
 								}
 								
 								
@@ -221,25 +256,31 @@ public class TelaCadastro extends JFrame {
 								if (!txtNome.getText().matches("[\\p{L}\\s~^]+")) {
 
 									JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
-
+									txtNome.setBorder(bordaVermelha);
 									return;
 
+								}else{
+									txtNome.setBorder(bordaPreta);
 								}
 
 								if (!txtSobrenome.getText().matches("[\\p{L}\\s~^]+")) {
 
 									JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
-
+									txtSobrenome.setBorder(bordaVermelha);
 									return;
 
+								}else{
+									txtSobrenome.setBorder(bordaPreta);
 								}
 
 								if (!txtNascimento.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
 
 									JOptionPane.showMessageDialog(null, "A data de nascimento deve estar no formato dd/MM/yyyy.");
-
+									txtNascimento.setBorder(bordaVermelha);
 									return;
 
+								}else{
+									txtNascimento.setBorder(bordaPreta);
 								}
 
 								SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
