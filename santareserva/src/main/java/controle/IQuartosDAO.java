@@ -1,16 +1,17 @@
 package controle;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Quartos;
 
 public interface IQuartosDAO {
 	
-public int InserirQuartos(Quartos end);
+	public int InserirQuartos(Quartos end);
 	
 	public ArrayList<Quartos> listarQuartos();
 	
-	public boolean atualizarQuartos(Quartos end);
+	public Quartos atualizarQuartos(LocalDate checkin, LocalDate checkout, boolean disp, Integer idquarto);
 	
 	public boolean removerQuartos(Quartos end);
 	

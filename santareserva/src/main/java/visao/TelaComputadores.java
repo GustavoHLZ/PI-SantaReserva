@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -281,14 +283,94 @@ public class TelaComputadores extends JFrame {
 		scrollPane.setViewportView(table); 
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preco", "Disponibilidade" })); 
 		 
-		JLabel lblNewLabel_20 = new JLabel(""); 
-		lblNewLabel_20.addMouseListener(new MouseAdapter() { 
+		JLabel lblReservar = new JLabel(""); 
+		lblReservar.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
+				
+				if (textCheckIn.getText().equals("")) { 
+					JOptionPane.showMessageDialog(null, "Preencha o campo Check-In"); 
+					return; 
+
+				} 
+            	if (textCheckOut.getText().equals("")) { 
+					JOptionPane.showMessageDialog(null, "Preencha o campo Check-Out"); 
+					return; 
+
+				} 
+            	 
+            	if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+					JOptionPane.showMessageDialog(null, "A data de Check-In deve estar no formato dd/MM/yyyy."); 
+					return; 
+				} 
+            	if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
+					return; 
+				}
+            	
+            	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+           	 
+		String checkin = textCheckIn.getText(); 
+		String checkout = textCheckOut.getText(); 
+		Integer idcomp = computadoralugado.getId();				 
+		 
+		String dataCheckInTxt = textCheckIn.getText(); 
+		String dataCheckOutTxt = textCheckOut.getText(); 
+		 
+		dataCheckInTxt = dataCheckInTxt.replace("/", ""); 
+		dataCheckInTxt = dataCheckInTxt.trim(); 
+		 
+		dataCheckOutTxt = dataCheckOutTxt.replace("/", ""); 
+		dataCheckOutTxt = dataCheckOutTxt.trim(); 
+		 
+		LocalDate checkINN = null; 
+		if (checkin.isEmpty()) { 
+			JOptionPane.showMessageDialog(null, "Nenhuma data de Check-In preenchida!"); 
+		} else { 
+
+			String diaTxt = dataCheckInTxt.substring(0, 2); 
+			String mesTxt = dataCheckInTxt.substring(2, 4); 
+			String anoTxt = dataCheckInTxt.substring(4, 8); 
+
+			Integer dia = Integer.valueOf(diaTxt); 
+			Integer mes = Integer.valueOf(mesTxt); 
+			Integer ano = Integer.valueOf(anoTxt); 
+
+			checkINN = LocalDate.of(ano, mes, dia); 
+
+		} 
+		 
+		LocalDate checkOUTT = null; 
+		if (checkout.isEmpty()) { 
+			JOptionPane.showMessageDialog(null, "Nenhuma data de Check-Out preenchida!"); 
+		} else { 
+
+			String diaTxt = dataCheckOutTxt.substring(0, 2); 
+			String mesTxt = dataCheckOutTxt.substring(2, 4); 
+			String anoTxt = dataCheckOutTxt.substring(4, 8); 
+
+			Integer dia = Integer.valueOf(diaTxt); 
+			Integer mes = Integer.valueOf(mesTxt); 
+			Integer ano = Integer.valueOf(anoTxt); 
+
+			checkOUTT = LocalDate.of(ano, mes, dia); 
+
+		}
+			
+		Computadores computadores =  new Computadores();	
+		computadores.setCheckIn(checkINN); 
+		computadores.setCheckOut(checkOUTT); 
+		computadores.setIdPC(idcomp);
+		
+		ComputadoresDAO dao = ComputadoresDAO.getInstancia();
+		
+		dao.atualizarComputadores(checkINN, checkOUTT, idcomp);
+				
 				reserva.adicionarReserva(computadoralugado);
 				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva); 
 		        telaReservas.setVisible(true); 
 				atualizarJTable(); 
+				dispose();
 			} 
 		}); 
 		 
@@ -373,8 +455,8 @@ public class TelaComputadores extends JFrame {
 		PainelPrincipal.add(panel_16, "cell 0 1"); 
 		 
 		 
-		lblNewLabel_20.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Botões/BTN Reserva.png"))); 
-		PainelPrincipal.add(lblNewLabel_20, "cell 0 1"); 
+		lblReservar.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Botões/BTN Reserva.png"))); 
+		PainelPrincipal.add(lblReservar, "cell 0 1"); 
 		 
 		//txtIdPc = new JTextField(); 
 		//PainelPrincipal.add(txtIdPc, "cell 4 3 1 3,alignx left,aligny top"); 

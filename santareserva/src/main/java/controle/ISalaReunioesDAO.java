@@ -1,5 +1,6 @@
 package controle;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.SalaReunioes;
@@ -10,7 +11,7 @@ public int InserirSalaReunioes(SalaReunioes end);
 	
 	public ArrayList<SalaReunioes> listarSalaReunioes();
 	
-	public boolean atualizarSalaReunioes(SalaReunioes end);
+	public SalaReunioes atualizarSalaReunioes(LocalDate checkin, LocalDate checkout, Integer id);
 	
 	public boolean removerSalaReunioes(SalaReunioes end);
 	
