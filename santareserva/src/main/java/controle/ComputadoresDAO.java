@@ -1,6 +1,7 @@
 package controle;
 	
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -103,27 +104,32 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	}
 		
 		
-	public boolean atualizarComputadores(Computadores comp) {
+	public Computadores atualizarComputadores(LocalDate checkin, LocalDate checkout, Integer id) {
 		
-	    String SQL = "UPDATE Computadores SET num = ?, temp = ?, preco = ?, disp = ? WHERE idPC = ?";
+	    String SQL = "UPDATE Computadores SET checkIn = ?, checkOut = ? WHERE idPC = ?";
 	    
-	    boolean atualizacaoRealizada = false;
+	    Computadores computador = null;
 
 	    Conexao con = Conexao.getInstancia();
 	    Connection conBD = con.conectar();
 
 	    try {
 	        PreparedStatement ps = conBD.prepareStatement(SQL);
-	        ps.setInt(1, comp.getNum());
-	        ps.setInt(2, comp.getTemp());
-	        ps.setFloat(3, comp.getPreco());
-	        ps.setBoolean(4, comp.getDisp());
-	        ps.setInt(5, comp.getIdPC());
+	        
+	        java.sql.Date sqlcheckIn = Date.valueOf(checkin);
+	        ps.setDate(1, sqlcheckIn);
+	        java.sql.Date sqlcheckOut = Date.valueOf(checkout);
+	        ps.setDate(2, sqlcheckOut);
+	        ps.setInt(3, id);
 
 	        int linhasAfetadas = ps.executeUpdate();
 
 	        if (linhasAfetadas > 0) {
-	            atualizacaoRealizada = true;
+	        	computador = new Computadores();
+	        	computador.setIdPC(id);
+	        	computador.setCheckIn(checkin);
+	        	computador.setCheckOut(checkout);
+
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -131,7 +137,7 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	        con.fecharConexao();
 	    }
 
-	    return atualizacaoRealizada;
+	    return computador;
 	}
 	    
 	public Computadores removerComputadores(Computadores comp) {
@@ -225,4 +231,5 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	
 	    return comp;
 	}
+
 }

@@ -119,7 +119,7 @@ public class TelaQuartos extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				if(quartoSelecionado==null) {
-					JOptionPane.showMessageDialog(null, "SelecioneQuarto");
+					JOptionPane.showMessageDialog(null, "Selecione o Quarto");
 				}
 				else {
 					TelaReservas c = new TelaReservas(hosplogado,reserva); 
@@ -278,7 +278,8 @@ public class TelaQuartos extends JFrame {
 		            	 
 				String checkin = textCheckIn.getText(); 
 				String checkout = textCheckOut.getText(); 
-				Integer idquarto = quartoSelecionado.getIdQuarto();				 
+				Integer idquarto = quartoSelecionado.getIdQuarto();		
+				boolean disp = false;
 				 
 				String dataCheckInTxt = textCheckIn.getText(); 
 				String dataCheckOutTxt = textCheckOut.getText(); 
@@ -328,11 +329,12 @@ public class TelaQuartos extends JFrame {
 				quartos.setCheckIn(checkINN); 
 				quartos.setCheckOut(checkOUTT); 
 				quartos.setIdQuarto(idquarto); 
+				quartos.setDisp(disp);
 				 
 				 
 				QuartosDAO dao = QuartosDAO.getInstancia(); 
 				 
-				dao.atualizarQuartos(checkINN, checkOUTT, idquarto); 
+				dao.atualizarQuartos(checkINN, checkOUTT, disp, idquarto); 
 				 
 				reserva.adicionarReserva(quartos);
 			
@@ -342,6 +344,7 @@ public class TelaQuartos extends JFrame {
 				 
 				  
 				 atualizarJTable(); 
+				 dispose();
 				  
 		            } else { 
 		                JOptionPane.showMessageDialog(null, "Este quarto não está disponível para reserva."); 

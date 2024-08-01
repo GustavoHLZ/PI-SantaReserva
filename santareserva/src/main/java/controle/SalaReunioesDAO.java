@@ -1,12 +1,14 @@
 package controle;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import modelo.Computadores;
 import modelo.Infologin;
 import modelo.SalaReunioes;
 
@@ -102,33 +104,43 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 		return sala_reunioes;
 	}
 	
-	public boolean atualizarSalaReunioes(SalaReunioes sala) {
+	public SalaReunioes atualizarSalaReunioes(LocalDate checkin, LocalDate checkout, Integer id) {
 		
-		String SQL = "UPDATE SalaReunioes SET disp, temp = ? WHERE idSala = ?";
+		String SQL = "UPDATE SalaReunioes SET checkIn = ?, checkOut = ? WHERE idSala = ?";
+		
+		SalaReunioes sala = null;
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
 		
-		int retorno = 0;
 		
 		try {
 			PreparedStatement ps = conBD.prepareStatement(SQL);
 			
-			ps.setBoolean(1, sala.getDisp());
-			ps.setInt(2, sala.getTemp());
+			java.sql.Date sqlcheckIn = Date.valueOf(checkin);
+	        ps.setDate(1, sqlcheckIn);
+	        java.sql.Date sqlcheckOut = Date.valueOf(checkout);
+	        ps.setDate(2, sqlcheckOut);
+	        ps.setInt(3, id);
 			
-			retorno = ps.executeUpdate();
+	        int linhasAfetadas = ps.executeUpdate();
 			
 			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} finally {
-			con.fecharConexao();
-		}
+	        if (linhasAfetadas > 0) {
+	        	sala = new SalaReunioes();
+	        	sala.setIdSala(id);
+	        	sala.setCheckIn(checkin);
+	        	sala.setCheckOut(checkout);
+
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        con.fecharConexao();
+	    }
 		
 		
-		return (retorno == 0 ? false : true);
+		return sala;
 	}
 	
 	public boolean removerSalaReunioes(SalaReunioes end) {

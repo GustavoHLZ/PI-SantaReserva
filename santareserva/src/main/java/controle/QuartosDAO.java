@@ -105,9 +105,9 @@ public class QuartosDAO implements IQuartosDAO {
 		return quartos;
 	}
 	
-	public Quartos atualizarQuartos(LocalDate checkin, LocalDate checkout, Integer idquarto) {
+	public Quartos atualizarQuartos(LocalDate checkin, LocalDate checkout, boolean disp, Integer idquarto) {
 	    // Comando SQL a ser executado
-	    String SQL = "UPDATE Quartos SET checkIn = ?, checkOut = ? WHERE idQuarto = ?";
+	    String SQL = "UPDATE Quartos SET checkIn = ?, checkOut = ?, disp = ? WHERE idQuarto = ?";
 
 	    Quartos quarto = null;
 	    
@@ -122,7 +122,8 @@ public class QuartosDAO implements IQuartosDAO {
 	        ps.setDate(1, sqlcheckIn);
 	        java.sql.Date sqlcheckOut = Date.valueOf(checkout);
 	        ps.setDate(2, sqlcheckOut);
-	        ps.setInt(3, idquarto);
+	        ps.setBoolean(3, disp);
+	        ps.setInt(4, idquarto);
 
 	        int linhasAfetadas = ps.executeUpdate();
 	        
@@ -131,6 +132,7 @@ public class QuartosDAO implements IQuartosDAO {
 	            quarto.setIdQuarto(idquarto);
 	            quarto.setCheckIn(checkin);
 	            quarto.setCheckOut(checkout);
+	            quarto.setDisp(disp);
 	        }
 
 	    } catch (SQLException e) {
@@ -174,10 +176,6 @@ public class QuartosDAO implements IQuartosDAO {
 		return null;
 	}
 
-	@Override
-	public boolean atualizarQuartos(Quartos end) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 }

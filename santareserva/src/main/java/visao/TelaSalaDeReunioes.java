@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -31,6 +32,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -257,10 +259,59 @@ public class TelaSalaDeReunioes extends JFrame {
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				LocalDate checkINN = null;
+				if (textCheckIn.getText().isEmpty()) { 
+					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-In preenchida!"); 
+					return;
+				} else { 
+ 
+					String diaTxt = textCheckIn.getText().substring(0, 2); 
+					String mesTxt = textCheckIn.getText().substring(3, 5); 
+					String anoTxt = textCheckIn.getText().substring(6, 10); 
+ 
+					Integer dia = Integer.valueOf(diaTxt); 
+					Integer mes = Integer.valueOf(mesTxt); 
+					Integer ano = Integer.valueOf(anoTxt); 
+ 
+					checkINN = LocalDate.of(ano, mes, dia); 
+					salaalugada.setCheckIn(checkINN);
+ 
+				} 
+				LocalDate checkOut = null;
+				if (textCheckOut.getText().isEmpty()) { 
+					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-out preenchida!"); 
+					return;
+				} else { 
+ 
+					String diaTxt = textCheckOut.getText().substring(0, 2); 
+					String mesTxt = textCheckOut.getText().substring(3, 5); 
+					String anoTxt = textCheckOut.getText().substring(6, 10); 
+ 
+					Integer dia = Integer.valueOf(diaTxt); 
+					Integer mes = Integer.valueOf(mesTxt); 
+					Integer ano = Integer.valueOf(anoTxt); 
+ 
+					checkOut = LocalDate.of(ano, mes, dia); 
+					salaalugada.setCheckOut(checkOut);
+
+ 
+				} 
+				
+				Integer idsala = salaalugada.getId();	
+				
+				SalaReunioes sala = new SalaReunioes();
+				
+				SalaReunioesDAO dao = SalaReunioesDAO.getInstancia();
+				
+				dao.atualizarSalaReunioes(checkINN, checkOut, idsala);
+				
 				reserva.adicionarReserva(salaalugada);
+				
 				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
+				dispose();
 			}
 		});
 		

@@ -549,14 +549,30 @@ public class TelaReservas extends JFrame {
 	protected void atualizarJTable() {
 	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"ID do Espaço" , "Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede", "ID Pagamento" });
 
-	    EspacosDAO EspacoDAO = EspacosDAO.getInstancia();
-	    listarEspaco = EspacoDAO.listarEspacos();
+	    //EspacosDAO EspacoDAO = EspacosDAO.getInstancia();
+	    //listarEspaco = EspacoDAO.listarEspacos();
+	    
+	    MaskFormatter mascaraDat = null;
 
-	    for (int i = 0; i < listarEspaco.size(); i++) {
-	        Espacos espaco = listarEspaco.get(i);
+		try {
+
+			mascaraDat = new MaskFormatter("##/##/####");
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+
+		}
+
+	    for (IReserva r : this.reserva.getLista()) {
+		        modelo.addRow(new Object[] {r.getId(),r.getPreco(),r.getCheckIn(),r.getCheckOut(),hosplogado.getNome(),hosplogado.getIdHospede()});
+			
+		}
+	   /* for (int i = 0; i < this.reserva.size(); i++) {
+	        Espacos espaco = this.reserva.get(i);
 	        modelo.addRow(new Object[] {espaco.getFkidQuartos()});
 	    }
-	    
+	    */
 	    table.setModel(modelo);
 	}
 	
