@@ -280,8 +280,8 @@ public class TelaSalaDeReunioes extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" }));
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.addMouseListener(new MouseAdapter() {
+		JLabel lblReserva = new JLabel("");
+		lblReserva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -332,7 +332,6 @@ public class TelaSalaDeReunioes extends JFrame {
 				dao.atualizarSalaReunioes(checkINN, checkOut, idsala);
 				
 				reserva.adicionarReserva(salaalugada);
-				
 				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
@@ -421,8 +420,8 @@ public class TelaSalaDeReunioes extends JFrame {
 		PainelPrincipal.add(panel_16, "cell 0 1");
 		
 		
-		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
-		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
+		lblReserva.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
+		PainelPrincipal.add(lblReserva, "cell 0 1,alignx center");
 		
 		atualizarJTable();
 	}
