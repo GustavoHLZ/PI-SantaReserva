@@ -104,9 +104,9 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	}
 		
 		
-	public Computadores atualizarComputadores(LocalDate checkin, LocalDate checkout, Integer id) {
+	public Computadores atualizarComputadores(LocalDate checkin, LocalDate checkout, boolean disp,Integer idPC) {
 		
-	    String SQL = "UPDATE Computadores SET checkIn = ?, checkOut = ? WHERE idPC = ?";
+	    String SQL = "UPDATE Computadores SET checkIn = ?, checkOut = ?, disp = ? WHERE idPC = ?";
 	    
 	    Computadores computador = null;
 
@@ -120,16 +120,17 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	        ps.setDate(1, sqlcheckIn);
 	        java.sql.Date sqlcheckOut = Date.valueOf(checkout);
 	        ps.setDate(2, sqlcheckOut);
-	        ps.setInt(3, id);
+	        ps.setBoolean(3, disp);
+	        ps.setInt(4, idPC);
 
 	        int linhasAfetadas = ps.executeUpdate();
 
 	        if (linhasAfetadas > 0) {
 	        	computador = new Computadores();
-	        	computador.setIdPC(id);
+	        	computador.setIdPC(idPC);
 	        	computador.setCheckIn(checkin);
 	        	computador.setCheckOut(checkout);
-
+	        	computador.setDisp(disp);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -230,6 +231,12 @@ public class ComputadoresDAO implements IComputadoresDAO {
 	    }
 	
 	    return comp;
+	}
+
+	@Override
+	public Computadores atualizarComputadores(LocalDate checkin, LocalDate checkout, Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
