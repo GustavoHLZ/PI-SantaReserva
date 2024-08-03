@@ -24,6 +24,7 @@ import javax.swing.text.MaskFormatter;
 import controle.EspacosDAO;
 import controle.IReserva;
 import controle.QuartosDAO;
+import controle.RoundedBorder;
 import modelo.Computadores;
 import modelo.Espacos;
 import modelo.Hospedes;
@@ -85,7 +86,10 @@ public class TelaReservas extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(228, 228, 228));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		RoundedBorder bordaVermelha = new RoundedBorder(Color.red, 10); 
+		RoundedBorder bordaPreta = new RoundedBorder(Color.black, 10); 
+		
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[300px][grow]", "[100px][grow]"));
 		
@@ -274,19 +278,12 @@ public class TelaReservas extends JFrame {
 		PainelPrincipal.add(panel_2, "cell 13 0 13 4,grow");
 		panel_2.setLayout(new MigLayout("", "[grow]", "[grow][30px][grow][30px][grow][30px][grow][30px][grow][grow][grow][grow][grow][grow][grow]"));
 		
-		MaskFormatter mascaraNome = null;
-		
-		try {
-			mascaraNome = new MaskFormatter("**** **** **** ****");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
 		JLabel lblNewLabel_21 = new JLabel("Nome Titular");
 		lblNewLabel_21.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_21, "cell 0 0");
 		
-		txtNometitular = new JFormattedTextField(mascaraNome);
+		txtNometitular = new JFormattedTextField();
 		panel_2.add(txtNometitular, "cell 0 1,grow");
 		txtNometitular.setColumns(10);
 		
@@ -380,16 +377,6 @@ public class TelaReservas extends JFrame {
 		JLabel lbltotalpagar = new JLabel("-");
 		panel_2.add(lbltotalpagar, "cell 0 15,alignx center");
 		
-		JLabel lblOpcaoPagamento = new JLabel("Escolha outra forma de pagamento");
-		lblOpcaoPagamento.addMouseListener(new MouseAdapter() {
-			@Override
-		
-			public void mousePressed(MouseEvent e) {
-				JComboBox comboBoxOpcaoPagmento = new JComboBox(comboBoxOpcaoPagamento.values());
-				PainelPrincipal.add(comboBoxOpcaoPagmento, "cell 3 11,growx");
-			}
-		});
-		
 		JScrollPane scrollPane = new JScrollPane();
 		PainelPrincipal.add(scrollPane, "cell 0 0 12 3,grow");
 		
@@ -447,17 +434,38 @@ public class TelaReservas extends JFrame {
 			    */
 		}
 		
-		JLabel lblReservasRealizadas = new JLabel("Reservas Realizadas");
-		PainelPrincipal.add(lblReservasRealizadas, "cell 2 3,alignx center,growy");
-		lblOpcaoPagamento.setHorizontalAlignment(SwingConstants.CENTER);
-		PainelPrincipal.add(lblOpcaoPagamento, "cell 3 3");
-		
 		JLabel lblNewLabel_34 = new JLabel("");
+		lblNewLabel_34.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    // Remover a reserva do ArrayList no modelo
+                    reserva.removerReserva(selectedRow);
+                    // Remover a linha da tabela
+                    atualizarJTable();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione uma linha para remover.");
+                }
+			}
+		});
 		lblNewLabel_34.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Cancelar Reserva.png")));
-		PainelPrincipal.add(lblNewLabel_34, "cell 3 4");
+		PainelPrincipal.add(lblNewLabel_34, "cell 3 4 8 1");
 		
 		JPanel panel_3 = new JPanel();
 		PainelPrincipal.add(panel_3, "cell 14 4 11 1,grow");
+		
+		txtNometitular.setBorder(bordaPreta); 
+		txtNometitular.setFont(new Font("Arial", Font.PLAIN, 25));
+		
+		txtNumeroCartao.setBorder(bordaPreta); 
+		txtNumeroCartao.setFont(new Font("Arial", Font.PLAIN, 25));
+		
+		txtDataValidade.setBorder(bordaPreta); 
+		txtDataValidade.setFont(new Font("Arial", Font.PLAIN, 25));
+		
+		txtCodigoSeguranca.setBorder(bordaPreta); 
+		txtCodigoSeguranca.setFont(new Font("Arial", Font.PLAIN, 25));
 		
 		JLabel lblEfetuarPagamento = 
 				new JLabel("");
