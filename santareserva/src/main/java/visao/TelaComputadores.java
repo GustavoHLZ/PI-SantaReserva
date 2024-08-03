@@ -169,7 +169,7 @@ public class TelaComputadores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(usuariologado,reserva);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado,reserva);
 				c.setVisible(true);
 				dispose();
 			}
