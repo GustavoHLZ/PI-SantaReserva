@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -21,11 +22,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import controle.ComputadoresDAO;
 import controle.EspacosDAO;
 import controle.IReserva;
 import controle.PagamentoDAO;
 import controle.QuartosDAO;
 import controle.RoundedBorder;
+import controle.SalaReunioesDAO;
 import modelo.Computadores;
 import modelo.Espacos;
 import modelo.Hospedes;
@@ -384,7 +387,7 @@ public class TelaReservas extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede", "ID Pagamento"}));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede"}));
 		
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		
@@ -392,18 +395,21 @@ public class TelaReservas extends JFrame {
 		int[] computadorIntervalos = {41, 60, 131, 150};
 		int[] salaReunioesIntervalos = {61, 80, 151, 170};
 		for (IReserva reser : listasespacos) {
-			
+				int tipoEspaco;
 			   int id = reser.getId();
 			    String tipo = "";
 
 			    if ((id >= computadorIntervalos[0] && id <= computadorIntervalos[1]) || 
 			        (id >= computadorIntervalos[2] && id <= computadorIntervalos[3])) {
 			        tipo = "Computador";
+			        tipoEspaco = 1;
 			    } else if ((id >= salaReunioesIntervalos[0] && id <= salaReunioesIntervalos[1]) ||
 			             (id >= salaReunioesIntervalos[2] && id <= salaReunioesIntervalos[3])) {
 			        tipo = "Sala de Reuniões";
+			        tipoEspaco = 2;
 			    } else {
 			        tipo = "Quarto";
+			        tipoEspaco = 3;
 			    }
 			
 			   model.addRow(new Object[] {
@@ -417,43 +423,6 @@ public class TelaReservas extends JFrame {
 			
 		
 		 });
-			   
-			   
-			   /*
-		if (quartoSelecionado != null) {
-		    model.addRow(new Object[] {
-		        quartoalugado.getIdQuarto(),
-		        quartoalugado.getPreco(),
-		        quartoalugado.getCheckIn(),
-		        quartoalugado.getCheckOut(),
-		        hosplogado.getNome(),
-		        hosplogado.getIdHospede(),
-		       
-		        
-		    });
-		} else if (salaalugada != null) {
-		    model.addRow(new Object[] {
-		        salaalugada.getIdSala(),
-		        salaalugada.getPreco(),
-		        salaalugada.getCheckIn(),
-		        salaalugada.getCheckOut(),
-		        hosplogado.getNome(),
-		        hosplogado.getIdHospede(),
-		        
-		    });
-		} else if (computadoralugado != null) {
-		    model.addRow(new Object[] {
-		    		computadoralugado.getIdPC(),
-		    		computadoralugado.getPreco(),
-		    		computadoralugado.getCheckIn(),
-		    		computadoralugado.getCheckOut(),
-			        hosplogado.getNome(),
-			        hosplogado.getIdHospede(),
-		    		//computadoralugado.getNum(),
-		    		//computadoralugado.getTemp(),
-			        
-			    });
-			    */
 		}
 		
 		JLabel lblNewLabel_34 = new JLabel("");
@@ -501,6 +470,42 @@ public class TelaReservas extends JFrame {
 					return;
 
 				}
+				
+		        int selectedRow = table.getSelectedRow(); 
+		        
+		        if (selectedRow == -1) {
+		            JOptionPane.showMessageDialog(null, "Nenhum espaço selecionado.");
+		            return;
+		        }
+		        
+		        boolean disp = false;
+		        int id = (Integer) table.getValueAt(selectedRow, 0); 
+		        String tipoEspaco = (String) table.getValueAt(selectedRow, 1); 
+		        LocalDate checkIn = (LocalDate) table.getValueAt(selectedRow, 3); 
+		        LocalDate checkOut = (LocalDate) table.getValueAt(selectedRow, 4); 
+		     
+		        if ("Computador".equals(tipoEspaco)) {
+		            Computadores computadores = new Computadores();
+		            computadores.setDisp(disp);
+		        	ComputadoresDAO dao = ComputadoresDAO.getInstancia();
+		            dao.atualizarComputadores(checkIn, checkOut, disp, id);
+		           
+		        } else if ("Sala de Reuniões".equals(tipoEspaco)) {
+		        	SalaReunioes sala = new SalaReunioes();
+		            sala.setDisp(disp);
+		           SalaReunioesDAO dao = SalaReunioesDAO.getInstancia();
+		           dao.atualizarSalaReunioes(checkIn, checkOut, disp, id);
+		        	
+		        } else if ("Quarto".equals(tipoEspaco)) {
+		            Quartos quarto = new Quartos();
+		            quarto.setDisp(disp);
+		        	QuartosDAO dao = QuartosDAO.getInstancia();
+		            dao.atualizarQuartos(checkIn, checkOut, disp, id);
+		            
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Tipo de espaço desconhecido.");
+		            return;
+		        }
 		        
 				
 				    String nomeTitular = txtNometitular.getText();
@@ -524,6 +529,7 @@ public class TelaReservas extends JFrame {
 			        PagamentoDAO dao = PagamentoDAO.getInstancia();
 			        
 			        int retorno = dao.InserirPagamento(reserva);
+			        
 			        
 			        if (retorno > 0) {
 			            JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso!");
@@ -552,7 +558,7 @@ public class TelaReservas extends JFrame {
 	}
 	
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede", "ID Pagamento" });
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede"});
 
 	    //EspacosDAO EspacoDAO = EspacosDAO.getInstancia();
 	    //listarEspaco = EspacoDAO.listarEspacos();
@@ -572,6 +578,7 @@ public class TelaReservas extends JFrame {
 	    for (IReserva r : this.reserva.getLista()) {
 	    	  int id = r.getId();
 			    String tipo = "";
+			    
 				int[] computadorIntervalos = {41, 60, 131, 150};
 				int[] salaReunioesIntervalos = {61, 80, 151, 170};
 			    if ((id >= computadorIntervalos[0] && id <= computadorIntervalos[1]) || 

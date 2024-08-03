@@ -104,9 +104,9 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 		return sala_reunioes;
 	}
 	
-	public SalaReunioes atualizarSalaReunioes(LocalDate checkin, LocalDate checkout, Integer id) {
+	public SalaReunioes atualizarSalaReunioes(LocalDate checkin, LocalDate checkout,boolean disp ,Integer idSala) {
 		
-		String SQL = "UPDATE SalaReunioes SET checkIn = ?, checkOut = ? WHERE idSala = ?";
+		String SQL = "UPDATE SalaReunioes SET checkIn = ?, checkOut = ?, disp = ? WHERE idSala = ?";
 		
 		SalaReunioes sala = null;
 		
@@ -121,17 +121,18 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 	        ps.setDate(1, sqlcheckIn);
 	        java.sql.Date sqlcheckOut = Date.valueOf(checkout);
 	        ps.setDate(2, sqlcheckOut);
-	        ps.setInt(3, id);
+	        ps.setBoolean(3, disp);
+	        ps.setInt(4, idSala);
 			
 	        int linhasAfetadas = ps.executeUpdate();
 			
 			
 	        if (linhasAfetadas > 0) {
 	        	sala = new SalaReunioes();
-	        	sala.setIdSala(id);
+	        	sala.setIdSala(idSala);
 	        	sala.setCheckIn(checkin);
 	        	sala.setCheckOut(checkout);
-
+	        	sala.setDisp(disp);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -170,6 +171,12 @@ public class SalaReunioesDAO implements ISalaReunioesDAO{
 	
 	public SalaReunioes buscarSalaReunioes(SalaReunioes end) {
 	
+		return null;
+	}
+
+	@Override
+	public SalaReunioes atualizarSalaReunioes(LocalDate checkin, LocalDate checkout, Integer id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
