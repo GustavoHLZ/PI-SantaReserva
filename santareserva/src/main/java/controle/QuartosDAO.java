@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import modelo.Computadores;
 import modelo.Quartos;
 
 
@@ -175,7 +176,12 @@ public class QuartosDAO implements IQuartosDAO {
 	
 		return null;
 	}
-
+	
+	@Override
+	public Quartos atualizarQuartos(LocalDate checkin, LocalDate checkout, Integer idquarto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }
