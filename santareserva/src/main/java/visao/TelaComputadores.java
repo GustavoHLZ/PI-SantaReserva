@@ -281,86 +281,63 @@ public class TelaComputadores extends JFrame {
 		}); 
 		 
 		scrollPane.setViewportView(table); 
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preco", "Disponibilidade" })); 
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preço", "Disponibilidade" })); 
 		 
-		JLabel lblReservar = new JLabel(""); 
-		lblReservar.addMouseListener(new MouseAdapter() { 
+		JLabel lblReserva = new JLabel(""); 
+		lblReserva.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				
-				if (textCheckIn.getText().equals("")) { 
+				LocalDate checkINN = null;
+				
+				if (textCheckIn.getText().isEmpty()) { 
 					JOptionPane.showMessageDialog(null, "Preencha o campo Check-In"); 
 					return; 
 
-				} 
-            	if (textCheckOut.getText().equals("")) { 
-					JOptionPane.showMessageDialog(null, "Preencha o campo Check-Out"); 
-					return; 
-
-				} 
+				}  
             	 
             	if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
 					JOptionPane.showMessageDialog(null, "A data de Check-In deve estar no formato dd/MM/yyyy."); 
 					return; 
-				} 
+				} else {
+					
+					String diaTxt = textCheckIn.getText().substring(0, 2); 
+					String mesTxt = textCheckIn.getText().substring(3, 5); 
+					String anoTxt = textCheckIn.getText().substring(6, 10); 
+
+					Integer dia = Integer.valueOf(diaTxt); 
+					Integer mes = Integer.valueOf(mesTxt); 
+					Integer ano = Integer.valueOf(anoTxt); 
+
+					checkINN = LocalDate.of(ano, mes, dia);
+					computadoralugado.setCheckIn(checkINN);
+				}
+            	
+            	LocalDate checkOUTT = null;
+            	
+            	if (textCheckOut.getText().isEmpty()) { 
+					JOptionPane.showMessageDialog(null, "Preencha o campo Check-Out"); 
+					return; 
+
+				}
+            	
             	if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
 					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
 					return; 
+				} else {
+					String diaTxt = textCheckOut.getText().substring(0, 2); 
+					String mesTxt = textCheckOut.getText().substring(3, 5); 
+					String anoTxt = textCheckOut.getText().substring(6, 10); 
+
+					Integer dia = Integer.valueOf(diaTxt); 
+					Integer mes = Integer.valueOf(mesTxt); 
+					Integer ano = Integer.valueOf(anoTxt); 
+
+					checkOUTT = LocalDate.of(ano, mes, dia);
+					computadoralugado.setCheckOut(checkOUTT);
 				}
             	
-            	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-           	 
-		String checkin = textCheckIn.getText(); 
-		String checkout = textCheckOut.getText(); 
-		Integer idcomp = computadoralugado.getId();				 
-		 
-		String dataCheckInTxt = textCheckIn.getText(); 
-		String dataCheckOutTxt = textCheckOut.getText(); 
-		 
-		dataCheckInTxt = dataCheckInTxt.replace("/", ""); 
-		dataCheckInTxt = dataCheckInTxt.trim(); 
-		 
-		dataCheckOutTxt = dataCheckOutTxt.replace("/", ""); 
-		dataCheckOutTxt = dataCheckOutTxt.trim(); 
-		 
-		LocalDate checkINN = null; 
-		if (checkin.isEmpty()) { 
-			JOptionPane.showMessageDialog(null, "Nenhuma data de Check-In preenchida!"); 
-		} else { 
-
-			String diaTxt = dataCheckInTxt.substring(0, 2); 
-			String mesTxt = dataCheckInTxt.substring(2, 4); 
-			String anoTxt = dataCheckInTxt.substring(4, 8); 
-
-			Integer dia = Integer.valueOf(diaTxt); 
-			Integer mes = Integer.valueOf(mesTxt); 
-			Integer ano = Integer.valueOf(anoTxt); 
-
-			checkINN = LocalDate.of(ano, mes, dia); 
-
-		} 
-		 
-		LocalDate checkOUTT = null; 
-		if (checkout.isEmpty()) { 
-			JOptionPane.showMessageDialog(null, "Nenhuma data de Check-Out preenchida!"); 
-		} else { 
-
-			String diaTxt = dataCheckOutTxt.substring(0, 2); 
-			String mesTxt = dataCheckOutTxt.substring(2, 4); 
-			String anoTxt = dataCheckOutTxt.substring(4, 8); 
-
-			Integer dia = Integer.valueOf(diaTxt); 
-			Integer mes = Integer.valueOf(mesTxt); 
-			Integer ano = Integer.valueOf(anoTxt); 
-
-			checkOUTT = LocalDate.of(ano, mes, dia); 
-
-		}
-			
-		Computadores computadores =  new Computadores();	
-		computadores.setCheckIn(checkINN); 
-		computadores.setCheckOut(checkOUTT); 
-		computadores.setIdPC(idcomp);
+        Integer idcomp = computadoralugado.getId();	
 		
 		ComputadoresDAO dao = ComputadoresDAO.getInstancia();
 		
@@ -455,8 +432,8 @@ public class TelaComputadores extends JFrame {
 		PainelPrincipal.add(panel_16, "cell 0 1"); 
 		 
 		 
-		lblReservar.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Botões/BTN Reserva.png"))); 
-		PainelPrincipal.add(lblReservar, "cell 0 1"); 
+		lblReserva.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Botões/BTN Reserva.png"))); 
+		PainelPrincipal.add(lblReserva, "cell 0 1"); 
 		 
 		//txtIdPc = new JTextField(); 
 		//PainelPrincipal.add(txtIdPc, "cell 4 3 1 3,alignx left,aligny top"); 
@@ -546,7 +523,7 @@ public class TelaComputadores extends JFrame {
 		atualizarJTable(); 
 	} 
 	protected void atualizarJTable() { 
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preco", "Disponibilidade" }); 
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preço", "Disponibilidade" }); 
 	     
 	    ComputadoresDAO CompDAO = ComputadoresDAO.getInstancia(); 
 	    listaComp = CompDAO.listarComputadores(); 

@@ -280,15 +280,21 @@ public class TelaSalaDeReunioes extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" }));
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.addMouseListener(new MouseAdapter() {
+		JLabel lblReserva = new JLabel("");
+		lblReserva.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				LocalDate checkINN = null;
+				
 				if (textCheckIn.getText().isEmpty()) { 
 					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-In preenchida!"); 
 					return;
+				}
+				
+				if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+					JOptionPane.showMessageDialog(null, "A data de Check-In deve estar no formato dd/MM/yyyy."); 
+					return; 
 				} else { 
  
 					String diaTxt = textCheckIn.getText().substring(0, 2); 
@@ -307,6 +313,10 @@ public class TelaSalaDeReunioes extends JFrame {
 				if (textCheckOut.getText().isEmpty()) { 
 					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-out preenchida!"); 
 					return;
+				}
+				if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
+					return; 
 				} else { 
  
 					String diaTxt = textCheckOut.getText().substring(0, 2); 
@@ -325,14 +335,11 @@ public class TelaSalaDeReunioes extends JFrame {
 				
 				Integer idsala = salaalugada.getId();	
 				
-				SalaReunioes sala = new SalaReunioes();
-				
 				SalaReunioesDAO dao = SalaReunioesDAO.getInstancia();
 				
 				dao.atualizarSalaReunioes(checkINN, checkOut, idsala);
 				
 				reserva.adicionarReserva(salaalugada);
-				
 				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva);
 		        telaReservas.setVisible(true);
 				atualizarJTable();
@@ -421,8 +428,8 @@ public class TelaSalaDeReunioes extends JFrame {
 		PainelPrincipal.add(panel_16, "cell 0 1");
 		
 		
-		lblNewLabel_20.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
-		PainelPrincipal.add(lblNewLabel_20, "cell 0 1,alignx center");
+		lblReserva.setIcon(new ImageIcon(TelaSalaDeReunioes.class.getResource("/visao/Botões/BTN Reserva.png")));
+		PainelPrincipal.add(lblReserva, "cell 0 1,alignx center");
 		
 		atualizarJTable();
 	}
