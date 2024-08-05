@@ -281,7 +281,7 @@ public class TelaComputadores extends JFrame {
 		}); 
 		 
 		scrollPane.setViewportView(table); 
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preco", "Disponibilidade" })); 
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preço", "Disponibilidade" })); 
 		 
 		JLabel lblReserva = new JLabel(""); 
 		lblReserva.addMouseListener(new MouseAdapter() { 
@@ -325,21 +325,19 @@ public class TelaComputadores extends JFrame {
 					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
 					return; 
 				} else {
-					String diaTxt = textCheckIn.getText().substring(0, 2); 
-					String mesTxt = textCheckIn.getText().substring(3, 5); 
-					String anoTxt = textCheckIn.getText().substring(6, 10); 
+					String diaTxt = textCheckOut.getText().substring(0, 2); 
+					String mesTxt = textCheckOut.getText().substring(3, 5); 
+					String anoTxt = textCheckOut.getText().substring(6, 10); 
 
 					Integer dia = Integer.valueOf(diaTxt); 
 					Integer mes = Integer.valueOf(mesTxt); 
 					Integer ano = Integer.valueOf(anoTxt); 
 
-					checkINN = LocalDate.of(ano, mes, dia);
-					computadoralugado.setCheckIn(checkOUTT);
+					checkOUTT = LocalDate.of(ano, mes, dia);
+					computadoralugado.setCheckOut(checkOUTT);
 				}
             	
-        Integer idcomp = computadoralugado.getId();		
-        
-		Computadores computadores =  new Computadores();	
+        Integer idcomp = computadoralugado.getId();	
 		
 		ComputadoresDAO dao = ComputadoresDAO.getInstancia();
 		
@@ -525,7 +523,7 @@ public class TelaComputadores extends JFrame {
 		atualizarJTable(); 
 	} 
 	protected void atualizarJTable() { 
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preco", "Disponibilidade" }); 
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "IdPC", "Numero", "Tempo", "Preço", "Disponibilidade" }); 
 	     
 	    ComputadoresDAO CompDAO = ComputadoresDAO.getInstancia(); 
 	    listaComp = CompDAO.listarComputadores(); 

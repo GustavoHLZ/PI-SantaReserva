@@ -289,15 +289,7 @@ public class TelaQuartos extends JFrame {
 							return; 
  
 						} 
-		            	 
-		            	if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-							JOptionPane.showMessageDialog(null, "A data de Check-In deve estar no formato dd/MM/yyyy."); 
-							return; 
-						} 
-		            	if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-							JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
-							return; 
-						}			 
+		            	 			 
 		            	 
 		            	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
 		            	 
@@ -329,12 +321,16 @@ public class TelaQuartos extends JFrame {
 					Integer ano = Integer.valueOf(anoTxt); 
  
 					checkINN = LocalDate.of(ano, mes, dia); 
- 
+					quartoSelecionado.setCheckIn(checkINN);
 				} 
 				 
 				LocalDate checkOUTT = null; 
 				if (checkout.isEmpty()) { 
 					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-Out preenchida!"); 
+				}
+				if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
+					return; 
 				} else { 
  
 					String diaTxt = dataCheckOutTxt.substring(0, 2); 
@@ -346,22 +342,16 @@ public class TelaQuartos extends JFrame {
 					Integer ano = Integer.valueOf(anoTxt); 
  
 					checkOUTT = LocalDate.of(ano, mes, dia); 
- 
+					quartoSelecionado.setCheckOut(checkOUTT);
 				} 
-				 
-				Quartos quartos = new Quartos(); 
-				 
-				quartos.setCheckIn(checkINN); 
-				quartos.setCheckOut(checkOUTT); 
-				quartos.setIdQuarto(idquarto); 
-				quartos.setDisp(disp);
-				 
-				 
+				
+				Integer idquartos = quartoSelecionado.getId();
+				
 				QuartosDAO dao = QuartosDAO.getInstancia(); 
+				
+				dao.atualizarQuartos(checkINN, checkOUTT, disp, idquartos);
 				 
-				dao.atualizarQuartos(checkINN, checkOUTT, disp, idquarto); 
-				 
-				reserva.adicionarReserva(quartos);
+				reserva.adicionarReserva(quartoSelecionado);
 			
 				 
 				TelaReservas telaReservas = new TelaReservas(hosplogado, reserva); 
@@ -477,7 +467,7 @@ public class TelaQuartos extends JFrame {
 	        } else { 
 	            disponibilidade = "Indisponível"; 
 	        } 
-	        modelo.addRow(new Object[] {quarto.getIdQuarto(), quarto.getTipo(), quarto.getCap(), disponibilidade ,quarto.getPreco()}); 
+	        modelo.addRow(new Object[] {quarto.getIdQuarto(), quarto.getTipo(), quarto.getCap(), disponibilidade , quarto.getPreco() }); 
 	    } 
 	     
 	    table.setModel(modelo); 
