@@ -3,6 +3,7 @@ package controle;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import modelo.Computadores;
 import modelo.Quartos;
 
 public interface IQuartosDAO {
@@ -11,7 +12,7 @@ public interface IQuartosDAO {
 	
 	public ArrayList<Quartos> listarQuartos();
 	
-	public Quartos atualizarQuartos(LocalDate checkin, LocalDate checkout, boolean disp, Integer idquarto);
+	public Quartos atualizarQuartos(LocalDate checkin, LocalDate checkout, Integer idquarto);
 	
 	public boolean removerQuartos(Quartos end);
 	

@@ -304,7 +304,7 @@ public class TelaQuartos extends JFrame {
 				String checkin = textCheckIn.getText(); 
 				String checkout = textCheckOut.getText(); 
 				Integer idquarto = quartoSelecionado.getIdQuarto();		
-				boolean disp = false;
+				
 				 
 				String dataCheckInTxt = textCheckIn.getText(); 
 				String dataCheckOutTxt = textCheckOut.getText(); 
@@ -354,12 +354,11 @@ public class TelaQuartos extends JFrame {
 				quartos.setCheckIn(checkINN); 
 				quartos.setCheckOut(checkOUTT); 
 				quartos.setIdQuarto(idquarto); 
-				quartos.setDisp(disp);
 				 
 				 
 				QuartosDAO dao = QuartosDAO.getInstancia(); 
 				 
-				dao.atualizarQuartos(checkINN, checkOUTT, disp, idquarto); 
+				dao.atualizarQuartos(checkINN, checkOUTT, idquarto); 
 				 
 				reserva.adicionarReserva(quartos);
 			
