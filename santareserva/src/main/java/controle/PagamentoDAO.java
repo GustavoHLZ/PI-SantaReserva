@@ -40,7 +40,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, pag.getNometitular());
-			ps.setInt(2, pag.getNumeroCartao());
+			ps.setLong(2, pag.getNumeroCartao());
 			ps.setString(3, pag.getDataValidade());
 			ps.setInt(4, pag.getCodigoSeguranca());
 			ps.setInt(5, pag.getNumeroBoleto());

@@ -349,7 +349,7 @@ public class TelaQuartos extends JFrame {
 				
 				QuartosDAO dao = QuartosDAO.getInstancia(); 
 				
-				dao.atualizarQuartos(checkINN, checkOUTT, disp, idquartos);
+				dao.atualizarQuartos(checkINN, checkOUTT, idquartos);
 				 
 				reserva.adicionarReserva(quartoSelecionado);
 			

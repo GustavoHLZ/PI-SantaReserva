@@ -4,7 +4,7 @@ public class Pagamento {
 
 	private int idPagamento;
 	private String nometitular;
-	private int numeroCartao;
+	private long numeroCartao;
 	private String dataValidade;
 	private int codigoSeguranca;
 	private int numeroBoleto;
@@ -23,15 +23,13 @@ public class Pagamento {
 	public void setNometitular(String nometitular) {
 		this.nometitular = nometitular;
 	}
-
 	
-	public int getNumeroCartao() {
+	public long getNumeroCartao() {
 		return numeroCartao;
 	}
-	public void setNumeroCartao(int numeroCartao) {
+	public void setNumeroCartao(long numeroCartao) {
 		this.numeroCartao = numeroCartao;
 	}
-	
 	public String getDataValidade() {
 		return dataValidade;
 	}
