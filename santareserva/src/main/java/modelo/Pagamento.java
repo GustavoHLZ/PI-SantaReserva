@@ -9,7 +9,14 @@ public class Pagamento {
 	private int codigoSeguranca;
 	private int numeroBoleto;
 	private int numeroPix;
+	private Hospedes hosp;
 	
+	public Hospedes getHosp() {
+		return hosp;
+	}
+	public void setHosp(Hospedes hosp) {
+		this.hosp = hosp;
+	}
 	public int getIdPagamento() {
 		return idPagamento;
 	}

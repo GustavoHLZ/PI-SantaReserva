@@ -111,7 +111,11 @@ CREATE TABLE IF NOT EXISTS `pagamento` (
   `codigoSeguranca` CHAR(3) NOT NULL,
   `numeroBoleto` VARCHAR(48) NOT NULL,
   `numeroPix` VARCHAR(32) NOT NULL,
-  PRIMARY KEY (`idPagamento`)
+  `fkidUser` INT(11) NOT NULL,
+  PRIMARY KEY (`idPagamento`),
+  CONSTRAINT `fkPagamentoHospedes1`
+    FOREIGN KEY (`fkidUser`)
+    REFERENCES `hospedes` (`idHospede`)
 );
 
 -- -----------------------------------------------------

@@ -29,7 +29,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 	@Override
 	public int InserirPagamento(Pagamento pag) {
 
-		String SQL = "INSERT INTO Pagamento (nometitular, numeroCartao, dataValidade, codigoSeguranca, numeroBoleto, numeroPix) VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Pagamento (nometitular, numeroCartao, dataValidade, codigoSeguranca, numeroBoleto, numeroPix, fkidUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -45,6 +45,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 			ps.setInt(4, pag.getCodigoSeguranca());
 			ps.setInt(5, pag.getNumeroBoleto());
 			ps.setInt(6, pag.getNumeroPix());
+			ps.setInt(7, pag.getHosp().getIdHospede());
 			
 			
 			ps.executeUpdate();

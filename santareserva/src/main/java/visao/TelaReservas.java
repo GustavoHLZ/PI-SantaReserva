@@ -524,6 +524,7 @@ public class TelaReservas extends JFrame {
 			        reserva.setCodigoSeguranca(codigoSeguranca);
 			        reserva.setNumeroBoleto(0);
 			        reserva.setNumeroPix(0);
+			        reserva.setHosp(hosplogado);
 			        
 			       
 			        PagamentoDAO dao = PagamentoDAO.getInstancia();
