@@ -3,7 +3,8 @@
 import java.awt.EventQueue; 
  
 import javax.swing.JFrame; 
-import javax.swing.JPanel; 
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane; 
 import javax.swing.JTable; 
 import javax.swing.border.EmptyBorder; 
@@ -137,18 +138,12 @@ public class TelaLogin extends JFrame {
 														PainelLogin.add(lblNewLabel_2, "cell 0 3"); 
 														lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 40)); 
 														 
-																txtSenha = new JTextField(); 
+																txtSenha = new JPasswordField(); 
 																txtSenha.setBorder(bordaPreta); 
 																txtSenha.setFont(new Font("Arial", Font.PLAIN, 25)); 
 																txtSenha.setBounds(309, 453, 335, 30); 
-																PainelLogin.add(txtSenha, "cell 0 4,growx,aligny top"); 
+																PainelLogin.add(txtSenha, "flowx,cell 0 4,growx,aligny top"); 
 																txtSenha.setColumns(10); 
-												 
-														JLabel lblNewLabel_3 = new JLabel("Esqueceu a senha?"); 
-														lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER); 
-														lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20)); 
-														lblNewLabel_3.setBounds(515, 494, 129, 14); 
-														PainelLogin.add(lblNewLabel_3, "cell 0 5,aligny top");
 												 
 														JLabel lblNewLabel_4 = new JLabel("Não possui conta? Registre-se"); 
 														lblNewLabel_4.addMouseListener(new MouseAdapter() { 
@@ -224,6 +219,13 @@ public class TelaLogin extends JFrame {
 														lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 20)); 
 														lblNewLabel_4.setBounds(372, 631, 210, 14); 
 														PainelLogin.add(lblNewLabel_4, "cell 0 7,alignx center,aligny top"); 
+														
+														JLabel lblMostrar = new JLabel(""); 
+														lblMostrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Icones/iconeMostrarSenha.png")));
+														lblMostrar.setHorizontalAlignment(SwingConstants.CENTER); 
+														lblMostrar.setFont(new Font("Arial", Font.PLAIN, 20)); 
+														lblMostrar.setBounds(515, 494, 129, 14); 
+														PainelLogin.add(lblMostrar, "cell 0 4,aligny top");
 	} 
  
 	protected void atualizarJTable() { 

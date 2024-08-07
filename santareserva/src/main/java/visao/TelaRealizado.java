@@ -55,7 +55,7 @@ public class TelaRealizado extends JFrame {
 				dispose();
 			}
 		});
-		lblNewLabel_1.setIcon(new ImageIcon(TelaRealizado.class.getResource("/visao/Icones/BtnFechar.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(TelaRealizado.class.getResource("/visao/Botões/BtnFechar.png")));
 		Icone.add(lblNewLabel_1, "cell 0 2,alignx center,aligny bottom");
 	}
 

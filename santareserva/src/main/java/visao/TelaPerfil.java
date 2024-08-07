@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
@@ -313,7 +314,7 @@ public class TelaPerfil extends JFrame {
 		txtTelefone.setColumns(10);
 		txtTelefone.setText(usuariologado.getTelefone());
 		
-		txtSenha = new JTextField();
+		txtSenha = new JPasswordField();
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtSenha, "cell 3 5,grow");
 		txtSenha.setColumns(10);
@@ -343,7 +344,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel7.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblNewLabel7, "cell 2 8,alignx left");
 		
-		txtVerSenha = new JTextField();
+		txtVerSenha = new JPasswordField();
 		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtVerSenha, "cell 2 9,grow");
 		txtVerSenha.setColumns(10);
@@ -479,7 +480,7 @@ public class TelaPerfil extends JFrame {
 		lblNewLabel8.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblNewLabel8, "cell 2 10,alignx left");
 		
-		txtConfSenha = new JTextField();
+		txtConfSenha = new JPasswordField();
 		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelAlteracao.add(txtConfSenha, "cell 2 11,grow");
 		txtConfSenha.setColumns(10);

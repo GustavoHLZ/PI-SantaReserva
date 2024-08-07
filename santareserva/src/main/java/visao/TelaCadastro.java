@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
@@ -162,7 +163,7 @@ public class TelaCadastro extends JFrame {
 				lblSenha.setFont(new Font("Arial", Font.PLAIN, 32));
 				PainelCadastro.add(lblSenha, "cell 0 11");
 				
-						txtSenha = new JTextField();
+						txtSenha = new JPasswordField();
 						txtSenha.setBorder(bordaPreta);
 						txtSenha.setFont(new Font("Arial", Font.PLAIN, 25));
 						PainelCadastro.add(txtSenha, "cell 0 12,grow");
