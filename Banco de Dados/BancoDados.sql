@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `pagamento` (
   `dataValidade` VARCHAR(5) NOT NULL,
   `codigoSeguranca` CHAR(3) NOT NULL,
   `numeroBoleto` VARCHAR(48) NOT NULL,
-  `numeroPix` VARCHAR(32) NOT NULL,
+  `numeroespaco` VARCHAR(32) NOT NULL,
   `fkidUser` INT(11) NOT NULL,
   PRIMARY KEY (`idPagamento`),
   CONSTRAINT `fkPagamentoHospedes1`

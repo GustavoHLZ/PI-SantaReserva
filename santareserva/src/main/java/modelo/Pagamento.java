@@ -8,7 +8,7 @@ public class Pagamento {
 	private String dataValidade;
 	private int codigoSeguranca;
 	private int numeroBoleto;
-	private int numeroPix;
+	private int numeroEspaco;
 	private Hospedes hosp;
 	
 	public Hospedes getHosp() {
@@ -55,11 +55,11 @@ public class Pagamento {
 	public void setNumeroBoleto(int numeroBoleto) {
 		this.numeroBoleto = numeroBoleto;
 	}
-	public int getNumeroPix() {
-		return numeroPix;
+	public int getNumeroEspaco() {
+		return numeroEspaco;
 	}
-	public void setNumeroPix(int numeroPix) {
-		this.numeroPix = numeroPix;
+	public void setnumeroEspaco(int numeroEspaco) {
+		this.numeroEspaco = numeroEspaco;
 	}
 	
 }

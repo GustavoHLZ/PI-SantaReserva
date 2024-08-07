@@ -523,7 +523,7 @@ public class TelaReservas extends JFrame {
 			        reserva.setDataValidade(dataValidade);
 			        reserva.setCodigoSeguranca(codigoSeguranca);
 			        reserva.setNumeroBoleto(0);
-			        reserva.setNumeroPix(0);
+			        reserva.setnumeroEspaco(id);
 			        reserva.setHosp(hosplogado);
 			        
 			       
