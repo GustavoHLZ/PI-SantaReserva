@@ -15,7 +15,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-public class TelaRealizado extends JFrame {
+public class TelaLoginRealizado extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel Tela;
@@ -23,7 +23,7 @@ public class TelaRealizado extends JFrame {
     /**
      * Create the frame.
      */
-    public TelaRealizado() {
+    public TelaLoginRealizado() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new Dimension(500, 500)); // Define o tamanho preferido do JFrame
@@ -43,10 +43,10 @@ public class TelaRealizado extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][grow][]10px"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaRealizado.class.getResource("/visao/Icones/RealizadoM.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaLoginRealizado.class.getResource("/visao/Icones/RealizadoM.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
-        JLabel lblNoRealizado = new JLabel("Transação Realizada Com Sucesso!");
+        JLabel lblNoRealizado = new JLabel("Login Realizado Com Sucesso!");
         lblNoRealizado.setFont(new Font("Arial", Font.PLAIN, 20));
         Icone.add(lblNoRealizado, "cell 0 1,alignx center,aligny center");
 
@@ -68,16 +68,5 @@ public class TelaRealizado extends JFrame {
         timer.start();
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    TelaRealizado frame = new TelaRealizado();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+ 
 }

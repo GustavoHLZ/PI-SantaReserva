@@ -205,12 +205,13 @@ public class TelaLogin extends JFrame {
 																Infologin usuarioLogado = dao.buscarInfologin(login); 
 
 																if (usuarioLogado != null) { 
-																	JOptionPane.showMessageDialog(null, "Usuário Cadastrado"); 
+																	TelaLoginRealizado abrir = new TelaLoginRealizado();
 																	HospedesDAO daohosp = HospedesDAO.getInstancia(); 
 																	hospede.setLogin(login); 
 																	hospede = daohosp.buscarHospedes(usuarioLogado);
 																	Reserva reserva = new Reserva();
 																	TelaHome c = new TelaHome(hospede,reserva); 
+																	abrir.setVisible(true);
 																	c.setVisible(true); 
 																	dispose(); 
 																} else { 
