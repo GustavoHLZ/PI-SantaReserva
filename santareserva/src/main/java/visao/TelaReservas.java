@@ -533,12 +533,13 @@ public class TelaReservas extends JFrame {
 			        
 			        
 			        if (retorno > 0) {
-			            JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso!");
+			            TelaRealizado abrir = new TelaRealizado();
 			            reserva.setIdPagamento(retorno);
 			            //listarEspaco.add(reserva);
 			            atualizarJTable();
 			        } else {
-			            JOptionPane.showMessageDialog(null, "Falha ao realizar a reserva!");
+			        	TelaNaoRealizado abrir = new TelaNaoRealizado();
+			        	abrir.setVisible(true);
 			        }
 
 
