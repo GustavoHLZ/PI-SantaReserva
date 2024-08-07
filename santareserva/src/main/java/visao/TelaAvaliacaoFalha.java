@@ -18,7 +18,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class TelaNaoRealizado extends JFrame {
+public class TelaAvaliacaoFalha extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel Tela;
@@ -26,7 +26,7 @@ public class TelaNaoRealizado extends JFrame {
     /**
      * Create the frame.
      */
-    public TelaNaoRealizado() {
+    public TelaAvaliacaoFalha() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new Dimension(500, 500)); 
@@ -46,10 +46,10 @@ public class TelaNaoRealizado extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][][grow][]"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaNaoRealizado.class.getResource("/visao/Icones/NaorealizadoM.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaAvaliacaoFalha.class.getResource("/visao/Icones/NaorealizadoM.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
-        JLabel lblNoRealizado = new JLabel("Ocorreu um erro durante a transação!");
+        JLabel lblNoRealizado = new JLabel("Ocorreu um erro ao atualizar a avaliação!");
         lblNoRealizado.setFont(new Font("Arial", Font.PLAIN, 20));
         Icone.add(lblNoRealizado, "cell 0 1,alignx center,aligny center");
 
@@ -64,7 +64,7 @@ public class TelaNaoRealizado extends JFrame {
                 dispose();
             }
         });
-        lblNewLabel_1.setIcon(new ImageIcon(TelaNaoRealizado.class.getResource("/visao/Icones/BtnFechar.png")));
+        lblNewLabel_1.setIcon(new ImageIcon(TelaAvaliacaoFalha.class.getResource("/visao/Icones/BtnFechar.png")));
         Icone.add(lblNewLabel_1, "cell 0 3,alignx center,aligny bottom");
 
      

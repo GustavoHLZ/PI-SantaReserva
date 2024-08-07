@@ -352,13 +352,15 @@ public class TelaCadastro extends JFrame {
 
 									if (id != 0) {
 										hospede.setIdHospede(id);
-										JOptionPane.showMessageDialog(null, "inserido");
+										TelaCadastroRealizado abrir = new TelaCadastroRealizado();
 										Reserva reserva = new Reserva();
 										TelaHome c = new TelaHome(hospede,reserva);
 										c.setVisible(true);
+										abrir.setVisible(true);
 										dispose();
 									} else {
-										JOptionPane.showMessageDialog(null, "Erro");
+										TelaLoginNaoRealizado abrir = new TelaLoginNaoRealizado();
+										abrir.setVisible(true);
 									}
 
 								} catch (Exception e2) {

@@ -26,7 +26,7 @@ public class TelaLoginRealizado extends JFrame {
     public TelaLoginRealizado() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new Dimension(500, 500)); // Define o tamanho preferido do JFrame
+        setPreferredSize(new Dimension(500, 500)); 
         pack(); // Ajusta o tamanho automaticamente
         setLocationRelativeTo(null); // Centraliza o JFrame na tela
 
@@ -50,18 +50,18 @@ public class TelaLoginRealizado extends JFrame {
         lblNoRealizado.setFont(new Font("Arial", Font.PLAIN, 20));
         Icone.add(lblNoRealizado, "cell 0 1,alignx center,aligny center");
 
-        // Chama o método para exibir o popup e fechar após 2 segundos
+        // Chama o método para exibir o popup e fechar após 3 segundos
         exibirPopupAnimado();
     }
 
     private void exibirPopupAnimado() {
         setVisible(true); // Torna o JFrame visível
 
-        // Timer para fechar o popup após 2 segundos
+        // Timer para fechar o popup após 3 segundos
         Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Fecha o popup
+                dispose();
             }
         });
         timer.setRepeats(false); // Executa apenas uma vez

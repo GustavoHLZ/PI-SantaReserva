@@ -378,11 +378,13 @@ public class TelaAvaliacoes extends JFrame {
 							    boolean atualizado = dao.atualizarAvaliacoes(idAvaliacao, novoNome, novaAvaliacao, comentario, idUsuario); 
 							     
 							    if (atualizado) { 
-							        JOptionPane.showMessageDialog(null, "Avaliação atualizada com sucesso!"); 
+							    	TelaAvaliacaoAtualizada abrir = new TelaAvaliacaoAtualizada();
 							        atualizarJTable();  
+							        abrir.setVisible(true);
 							    } else { 
 	 
-							        JOptionPane.showMessageDialog(null, "Falha ao atualizar avaliação!"); 
+							       TelaAvaliacaoFalha abrir = new TelaAvaliacaoFalha();
+							       abrir.setVisible(true);
 							    } 
 							} 
 						} 
@@ -412,12 +414,14 @@ public class TelaAvaliacoes extends JFrame {
 					        int retorno = dao.InserirAvaliacao(avaliacao); 
 					         
 					        if (retorno > 0) { 
-					            JOptionPane.showMessageDialog(null, "Avaliação inserida com sucesso!"); 
+					        	TelaAvaliacaoRealizada abrir = new TelaAvaliacaoRealizada();
 					            avaliacao.setIdAvaliacao(retorno); 
 					        	listarAvaliacoes.add(avaliacao); 
 					            atualizarJTable(); 
+					            abrir.setVisible(true);
 					        } else { 
-					            JOptionPane.showMessageDialog(null, "Falha ao inserir avaliação!"); 
+					            TelaLoginNaoRealizado abrir = new TelaLoginNaoRealizado();
+					            abrir.setVisible(true);
 					        } 
  
 							 
