@@ -29,7 +29,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 	@Override
 	public int InserirPagamento(Pagamento pag) {
 
-		String SQL = "INSERT INTO Pagamento (nometitular, numeroCartao, dataValidade, codigoSeguranca, numeroBoleto, numeroPix) VALUES (?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO Pagamento (nometitular, numeroCartao, dataValidade, codigoSeguranca, numeroBoleto, numeroEspaco, fkidUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -40,11 +40,12 @@ public class PagamentoDAO implements IPagamentoDAO{
 			PreparedStatement ps = conBD.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, pag.getNometitular());
-			ps.setInt(2, pag.getNumeroCartao());
+			ps.setLong(2, pag.getNumeroCartao());
 			ps.setString(3, pag.getDataValidade());
 			ps.setInt(4, pag.getCodigoSeguranca());
 			ps.setInt(5, pag.getNumeroBoleto());
-			ps.setInt(6, pag.getNumeroPix());
+			ps.setInt(6, pag.getNumeroEspaco());
+			ps.setInt(7, pag.getHosp().getIdHospede());
 			
 			
 			ps.executeUpdate();
@@ -88,7 +89,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 				String dataValidade = rs.getString("dataValidade");
 				Integer codigoSeguranca = rs.getInt("codigoSeguranca");
 				Integer numeroBoleto = rs.getInt("numeroBoleto");
-				Integer numeroPix = rs.getInt("numeroPix");
+				Integer numeroEspaco = rs.getInt("numeroEspaco");
 
 				
 				pags.setIdPagamento(ID_pagamento);
@@ -97,8 +98,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 				pags.setDataValidade(dataValidade);
 				pags.setCodigoSeguranca(codigoSeguranca);
 				pags.setNumeroBoleto(numeroBoleto);
-				pags.setNumeroPix(numeroPix);
-
+				pags.setnumeroEspaco(numeroEspaco);
 				pagamentos.add(pags);
 
 			}
@@ -113,9 +113,9 @@ public class PagamentoDAO implements IPagamentoDAO{
 	}
 
 	@Override
-	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, String validade, int seg, int numboleto, int numpix) {
+	public boolean atualizarPagamento(int idpagamento, String nome, int numcartao, String validade, int seg, int numboleto, int numEspaco) {
 		
-		String SQL = "UPDATE Pagamento SET nometitular = ?, numeroCartao = ?,  dataValidade = ?,  codigoSeguranca = ?, numeroBoleto = ?, numeroPix = ? WHERE idPagamento = ?";
+		String SQL = "UPDATE Pagamento SET nometitular = ?, numeroCartao = ?,  dataValidade = ?,  codigoSeguranca = ?, numeroBoleto = ?, numeroEspaco = ? WHERE idPagamento = ?";
 		
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -131,7 +131,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 			ps.setString(3,validade);
 			ps.setInt(4,seg);
 			ps.setInt(5,numboleto);
-			ps.setInt(6,numpix);
+			ps.setInt(6,numEspaco);
 			ps.setInt(7, idpagamento);
 			retorno = ps.executeUpdate();
 			

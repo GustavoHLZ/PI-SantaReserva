@@ -312,7 +312,7 @@ public class TelaPagamento extends JFrame {
 		        pagamentos.setDataValidade(validade);
 		        pagamentos.setCodigoSeguranca(seg);
 		        pagamentos.setNumeroBoleto(numboleto);
-		        pagamentos.setNumeroPix(numpix);
+		        pagamentos.setnumeroEspaco(numpix);
 		        
 		        PagamentoDAO dao = PagamentoDAO.getInstancia();
 		        
@@ -421,7 +421,7 @@ public class TelaPagamento extends JFrame {
 	    for (int i = 0; i < listarPagamento.size(); i++) {
 	        Pagamento pagamento = listarPagamento.get(i);
 
-	        modelo.addRow(new Object[] {pagamento.getIdPagamento(), pagamento.getNometitular(), pagamento.getNumeroCartao(), pagamento.getDataValidade(), pagamento.getCodigoSeguranca(), pagamento.getNumeroBoleto(), pagamento.getNumeroPix()});
+	        modelo.addRow(new Object[] {pagamento.getIdPagamento(), pagamento.getNometitular(), pagamento.getNumeroCartao(), pagamento.getDataValidade(), pagamento.getCodigoSeguranca(), pagamento.getNumeroBoleto(), pagamento.getNumeroEspaco()});
 	    }
 	    table.setModel(modelo);
 	}

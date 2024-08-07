@@ -4,12 +4,19 @@ public class Pagamento {
 
 	private int idPagamento;
 	private String nometitular;
-	private int numeroCartao;
+	private long numeroCartao;
 	private String dataValidade;
 	private int codigoSeguranca;
 	private int numeroBoleto;
-	private int numeroPix;
+	private int numeroEspaco;
+	private Hospedes hosp;
 	
+	public Hospedes getHosp() {
+		return hosp;
+	}
+	public void setHosp(Hospedes hosp) {
+		this.hosp = hosp;
+	}
 	public int getIdPagamento() {
 		return idPagamento;
 	}
@@ -23,15 +30,13 @@ public class Pagamento {
 	public void setNometitular(String nometitular) {
 		this.nometitular = nometitular;
 	}
-
 	
-	public int getNumeroCartao() {
+	public long getNumeroCartao() {
 		return numeroCartao;
 	}
-	public void setNumeroCartao(int numeroCartao) {
+	public void setNumeroCartao(long numeroCartao) {
 		this.numeroCartao = numeroCartao;
 	}
-	
 	public String getDataValidade() {
 		return dataValidade;
 	}
@@ -50,11 +55,11 @@ public class Pagamento {
 	public void setNumeroBoleto(int numeroBoleto) {
 		this.numeroBoleto = numeroBoleto;
 	}
-	public int getNumeroPix() {
-		return numeroPix;
+	public int getNumeroEspaco() {
+		return numeroEspaco;
 	}
-	public void setNumeroPix(int numeroPix) {
-		this.numeroPix = numeroPix;
+	public void setnumeroEspaco(int numeroEspaco) {
+		this.numeroEspaco = numeroEspaco;
 	}
 	
 }

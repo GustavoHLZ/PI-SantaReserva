@@ -106,12 +106,16 @@ CREATE TABLE IF NOT EXISTS `salareunioes` (
 CREATE TABLE IF NOT EXISTS `pagamento` (
   `idPagamento` INT(11) NOT NULL AUTO_INCREMENT,
   `nometitular` VARCHAR(255) NOT NULL,
-  `numeroCartao` CHAR(16) NOT NULL,
+  `numeroCartao` BIGINT(16) NOT NULL,
   `dataValidade` VARCHAR(5) NOT NULL,
   `codigoSeguranca` CHAR(3) NOT NULL,
   `numeroBoleto` VARCHAR(48) NOT NULL,
-  `numeroPix` VARCHAR(32) NOT NULL,
-  PRIMARY KEY (`idPagamento`)
+  `numeroespaco` VARCHAR(32) NOT NULL,
+  `fkidUser` INT(11) NOT NULL,
+  PRIMARY KEY (`idPagamento`),
+  CONSTRAINT `fkPagamentoHospedes1`
+    FOREIGN KEY (`fkidUser`)
+    REFERENCES `hospedes` (`idHospede`)
 );
 
 -- -----------------------------------------------------

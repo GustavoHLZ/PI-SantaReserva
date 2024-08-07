@@ -295,7 +295,7 @@ public class TelaReservas extends JFrame {
 		MaskFormatter mascaraCart = null;
 
 		try {
-			mascaraCart = new MaskFormatter("####  #####  ####  ####");
+			mascaraCart = new MaskFormatter("####  #### #### ####");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -304,7 +304,7 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_22.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_22, "cell 0 2");
 		
-		txtNumeroCartao = new JFormattedTextField();
+		txtNumeroCartao = new JFormattedTextField(mascaraCart);
 		panel_2.add(txtNumeroCartao, "cell 0 3,grow");
 		txtNumeroCartao.setColumns(10);
 		
@@ -509,21 +509,22 @@ public class TelaReservas extends JFrame {
 		        
 				
 				    String nomeTitular = txtNometitular.getText();
-				    //Integer numeroCartao = Integer.valueOf(txtNumeroCartao.getText()); 
+				    String numeroCartaoStr = txtNumeroCartao.getText().replaceAll("\\s", ""); 
 			        String dataValidade = txtDataValidade.getText();
 			        String codigoSegurancaStr = txtCodigoSeguranca.getText().replaceAll("\\s", "");
 					
 			        Pagamento reserva = new Pagamento();
 			        
-		           // int numeroCartao = Integer.parseInt(numeroCartaoStr);
+			        long numeroCartao = Long.parseLong(numeroCartaoStr);
 		            int codigoSeguranca = Integer.parseInt(codigoSegurancaStr);
 		            
 			        reserva.setNometitular(nomeTitular);
-			        //reserva.setNumeroCartao(numeroCartao);
+			        reserva.setNumeroCartao(numeroCartao);
 			        reserva.setDataValidade(dataValidade);
 			        reserva.setCodigoSeguranca(codigoSeguranca);
 			        reserva.setNumeroBoleto(0);
-			        reserva.setNumeroPix(0);
+			        reserva.setnumeroEspaco(id);
+			        reserva.setHosp(hosplogado);
 			        
 			       
 			        PagamentoDAO dao = PagamentoDAO.getInstancia();
