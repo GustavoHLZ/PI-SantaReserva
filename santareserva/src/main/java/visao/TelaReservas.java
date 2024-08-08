@@ -412,7 +412,38 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_34.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				int selectedRow = table.getSelectedRow();
+				
+
+				  boolean disp = true;
+			        int id = (Integer) table.getValueAt(selectedRow, 0); 
+			        String tipoEspaco = (String) table.getValueAt(selectedRow, 1); 
+			        LocalDate checkIn = (LocalDate) table.getValueAt(selectedRow, 3); 
+			        LocalDate checkOut = (LocalDate) table.getValueAt(selectedRow, 4); 
+
+			        if ("Computador".equals(tipoEspaco)) {
+			            Computadores computadores = new Computadores();
+			            computadores.setDisp(disp);
+			            ComputadoresDAO dao = ComputadoresDAO.getInstancia();
+			            dao.atualizarComputadores(checkIn, checkOut, disp, id);
+			        } else if ("Sala de Reuniões".equals(tipoEspaco)) {
+			            SalaReunioes sala = new SalaReunioes();
+			            sala.setDisp(disp);
+			            SalaReunioesDAO dao = SalaReunioesDAO.getInstancia();
+			            dao.atualizarSalaReunioes(checkIn, checkOut, disp, id);
+			        } else if ("Quarto".equals(tipoEspaco)) {
+			            Quartos quarto = new Quartos();
+			            quarto.setDisp(disp);
+			            QuartosDAO dao = QuartosDAO.getInstancia();
+			            dao.atualizarQuartos(checkIn, checkOut, disp, id);
+			        } else {
+			            JOptionPane.showMessageDialog(null, "Tipo de espaço desconhecido.");
+			            return;
+			        }
+				
+				
+				
                 if (selectedRow != -1) {
                     // Remover a reserva do ArrayList no modelo
                     reserva.removerReserva(selectedRow);
