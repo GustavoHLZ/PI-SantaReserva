@@ -43,7 +43,7 @@ public class TelaRealizado extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][grow][]10px"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaRealizado.class.getResource("/visao/Icones/RealizadoM.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaRealizado.class.getResource("/visao/Icones/IconeRealizado.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
         JLabel lblNoRealizado = new JLabel("Transação Realizada Com Sucesso!");

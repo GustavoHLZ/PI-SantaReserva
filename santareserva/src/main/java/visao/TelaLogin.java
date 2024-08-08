@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -97,7 +98,7 @@ public class TelaLogin extends JFrame {
 		JPanel PainelLogin = new JPanel();
 		PainelLogin.setBackground(new Color(229, 236, 238));
 		Tela.add(PainelLogin, "flowx,cell 1 0 1 6,alignx center,growy");
-		PainelLogin.setLayout(new MigLayout("", "[grow]", "[200px][70px][][][][20px][100px][500px]"));
+		PainelLogin.setLayout(new MigLayout("", "[grow][]", "[200px][70px][][][][20px][100px][500px]"));
 
 		table = new JTable();
 
@@ -137,12 +138,53 @@ public class TelaLogin extends JFrame {
 		PainelLogin.add(lblNewLabel_2, "cell 0 3");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 40));
 
-		txtSenha = new JTextField();
+		txtSenha = new JPasswordField();
 		txtSenha.setBorder(bordaPreta);
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 25));
 		txtSenha.setBounds(309, 453, 335, 30);
 		PainelLogin.add(txtSenha, "cell 0 4,growx,aligny top");
 		txtSenha.setColumns(10);
+		
+		JLabel lblMostrar = new JLabel("");
+		lblMostrar.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Icones/iconeVerSenha.png")));
+		lblMostrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                if (txtSenha instanceof JPasswordField) {
+                    JTextField txtSenhaVisivel = new JTextField(txtSenha.getText());
+                    txtSenhaVisivel.setBorder(txtSenha.getBorder());
+                    txtSenhaVisivel.setFont(txtSenha.getFont());
+                    txtSenhaVisivel.setForeground(txtSenha.getForeground());
+                    txtSenhaVisivel.setBackground(txtSenha.getBackground());
+                    txtSenhaVisivel.setEditable(true);
+
+                    PainelLogin.remove(txtSenha);
+                    txtSenha = txtSenhaVisivel;
+                    PainelLogin.add(txtSenha, "cell 0 4,growx,aligny top");
+                    lblMostrar.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeEsconderSenha.png")));
+
+                    revalidate();
+                    repaint();
+                } else if (txtSenha instanceof JTextField) {
+                    JPasswordField txtSenhaEscondida = new JPasswordField();
+                    txtSenhaEscondida.setBorder(txtSenha.getBorder());
+                    txtSenhaEscondida.setFont(txtSenha.getFont());
+                    txtSenhaEscondida.setForeground(txtSenha.getForeground());
+                    txtSenhaEscondida.setBackground(txtSenha.getBackground());
+                    txtSenhaEscondida.setText(txtSenha.getText());
+                    txtSenhaEscondida.setEditable(true);
+
+                    PainelLogin.remove(txtSenha);
+                    txtSenha = txtSenhaEscondida;
+                    PainelLogin.add(txtSenha, "cell 0 4,growx,aligny top");
+                    lblMostrar.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+
+                    revalidate();
+                    repaint();
+                }
+            }
+        });
+		PainelLogin.add(lblMostrar, "cell 1 4");
 
 		JLabel lblNewLabel_3 = new JLabel("Esqueceu a senha?");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);

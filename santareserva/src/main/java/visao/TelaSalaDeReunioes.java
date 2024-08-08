@@ -353,6 +353,10 @@ public class TelaSalaDeReunioes extends JFrame {
 				
 				dao.atualizarSalaReunioes(checkINN, checkOut, idsala);
 				
+				Float precoSalas = salaalugada.getPreco();
+				
+				reserva.setPrecoSalas(precoSalas);
+				
 				reserva.adicionarReserva(salaalugada);
 				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva);
 		        telaReservas.setVisible(true);
