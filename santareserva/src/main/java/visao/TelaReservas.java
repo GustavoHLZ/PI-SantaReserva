@@ -73,6 +73,7 @@ public class TelaReservas extends JFrame {
 	private JTable table;
 	private ArrayList<Espacos> listarEspaco = new ArrayList<Espacos>();
 	private Reserva reserva;
+	private JTextField textSenhaLogin;
 	/**
 	 * Launch the application.
 	 */
@@ -290,11 +291,11 @@ public class TelaReservas extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		PainelPrincipal.add(panel_2, "cell 13 1 13 4,grow");
-		panel_2.setLayout(new MigLayout("", "[grow]", "[grow][30px][grow][30px][grow][30px][grow][30px][grow][grow][grow][grow][grow][grow][grow]"));
+		panel_2.setLayout(new MigLayout("", "[grow]", "[grow][30px][grow][30px][grow][30px][grow][30px][][][grow][grow][grow][grow][grow][grow][grow][]"));
 		
 		
 		JLabel lblNewLabel_21 = new JLabel("Nome Titular");
-		lblNewLabel_21.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_21.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_21, "cell 0 0");
 		
 		txtNometitular = new JFormattedTextField();
@@ -310,7 +311,7 @@ public class TelaReservas extends JFrame {
 		}
 		
 		JLabel lblNewLabel_22 = new JLabel("Número do Cartão");
-		lblNewLabel_22.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_22.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_22, "cell 0 2");
 		
 		txtNumeroCartao = new JFormattedTextField(mascaraCart);
@@ -326,7 +327,7 @@ public class TelaReservas extends JFrame {
 		}
 		
 		JLabel lblNewLabel_23 = new JLabel("Data de Validade");
-		lblNewLabel_23.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_23.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_23, "cell 0 4");
 		
 		MaskFormatter mascaraCod = null;
@@ -342,20 +343,31 @@ public class TelaReservas extends JFrame {
 		txtDataValidade.setColumns(10);
 		
 		JLabel lblNewLabel_24 = new JLabel("Código de Segurança");
-		lblNewLabel_24.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_24.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_24, "cell 0 6");
 		
 		txtCodigoSeguranca = new JFormattedTextField(mascaraCod);
 		panel_2.add(txtCodigoSeguranca, "cell 0 7,grow");
 		txtCodigoSeguranca.setColumns(10);
 		
+		JLabel lblNewLabel_28 = new JLabel("Senha de Login");
+		lblNewLabel_28.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lblNewLabel_28, "cell 0 8");
+		
+		textSenhaLogin = new JTextField();
+		textSenhaLogin.setBorder(bordaPreta); 
+		textSenhaLogin.setFont(new Font("Arial", Font.PLAIN, 25));
+		panel_2.add(textSenhaLogin, "cell 0 9,growx");
+		textSenhaLogin.setColumns(10);
+		
 		JLabel lblNewLabel_25 = new JLabel("Total Sala de Reuniões");
-		lblNewLabel_25.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_2.add(lblNewLabel_25, "cell 0 8");
+		lblNewLabel_25.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lblNewLabel_25, "cell 0 10");
 		
 		JLabel lblsalareunioes = new JLabel("-");
+		lblsalareunioes.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 11));
 		lblsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblsalareunioes, "cell 0 9,grow");
+		panel_2.add(lblsalareunioes, "cell 0 11,grow");
 		//if( != null) {
 		//	lblsalareunioes.setText(salareunioes.getPreco().toString());
 	//	}
@@ -363,33 +375,36 @@ public class TelaReservas extends JFrame {
 		
 		
 		JLabel lblNewLabel_27 = new JLabel("Total Computadores");
-		lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_2.add(lblNewLabel_27, "cell 0 10");
+		lblNewLabel_27.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lblNewLabel_27, "cell 0 12");
 		
 		JLabel lblcomputadores = new JLabel("-");
-		panel_2.add(lblcomputadores, "cell 0 11,alignx center");
+		lblcomputadores.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 11));
+		panel_2.add(lblcomputadores, "cell 0 13,alignx center");
 		//if(computador != null) {
 		//	lblcomputadores.setText(computador.getPreco().toString());
 	//	}
 
 		
 		JLabel lblNewLabel_29 = new JLabel("Total Quartos");
-		lblNewLabel_29.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_2.add(lblNewLabel_29, "cell 0 12");
+		lblNewLabel_29.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lblNewLabel_29, "cell 0 14");
 		
 		JLabel lblquartos = new JLabel("-");
-		panel_2.add(lblquartos, "cell 0 13,alignx center");
+		lblquartos.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 11));
+		panel_2.add(lblquartos, "cell 0 15,alignx center");
 		//if(quarto != null) {
 		//	lblquartos.setText(quarto.getPreco().toString());
 		//}
 
 		
 		JLabel lblNewLabel_31 = new JLabel("Total à pagar:");
-		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_2.add(lblNewLabel_31, "cell 0 14");
+		lblNewLabel_31.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lblNewLabel_31, "cell 0 16");
 		
 		JLabel lbltotalpagar = new JLabel("-");
-		panel_2.add(lbltotalpagar, "cell 0 15,alignx center");
+		lbltotalpagar.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lbltotalpagar, "cell 0 17,alignx center");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		PainelPrincipal.add(scrollPane, "cell 0 1 12 3,grow");
@@ -432,6 +447,7 @@ public class TelaReservas extends JFrame {
 		
 		txtDataValidade.setBorder(bordaPreta); 
 		txtDataValidade.setFont(new Font("Arial", Font.PLAIN, 25));
+		
 		
 		txtCodigoSeguranca.setBorder(bordaPreta); 
 		txtCodigoSeguranca.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -485,7 +501,14 @@ public class TelaReservas extends JFrame {
 		        String numeroCartaoStr = txtNumeroCartao.getText().replaceAll("\\s", ""); 
 		        String dataValidade = txtDataValidade.getText();
 		        String codigoSegurancaStr = txtCodigoSeguranca.getText().replaceAll("\\s", "");
+		        
+		        String senhaLogin = textSenhaLogin.getText();
 
+		        if(!senhaLogin.equals(hosplogado.getLogin().getSenha())) {
+		        	JOptionPane.showMessageDialog(null, "Senha não coincide!");
+		            return;
+		        } 
+		        
 		        Pagamento reservaPgto = new Pagamento();
 
 		        long numeroCartao = Long.parseLong(numeroCartaoStr);
@@ -502,7 +525,7 @@ public class TelaReservas extends JFrame {
 		        PagamentoDAO dao = PagamentoDAO.getInstancia();
 
 		        int retorno = dao.InserirPagamento(reservaPgto);
-
+		        //hosplogado.getLogin().getSenha();
 
 		        if (retorno > 0) {
 		            TelaRealizado abrir = new TelaRealizado();
