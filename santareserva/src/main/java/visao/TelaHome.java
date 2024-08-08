@@ -101,7 +101,7 @@ public class TelaHome extends JFrame {
 		 
 		JLabel lblNewLabel_11 = new JLabel(""); 
 		lblNewLabel_11.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeReserva.png"))); 
-		PainelIcones.add(lblNewLabel_11, "cell 0 2"); 
+		PainelIcones.add(lblNewLabel_11, "cell 0 2,alignx center"); 
 		 
 		if(hospede.getLogin().getIdUsuario()== (1)) {
 			JLabel lblNewLabel_5 = new JLabel("Pagamento"); 
@@ -393,7 +393,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/LogoCerta2.png"))); 
 		PainelTopo.add(lblNewLabel, "cell 0 0 1 2"); 
 		
-		JLabel lblNewLabel_53 = new JLabel("Olá ");
+		JLabel lblNewLabel_53 = new JLabel("Olá,");
 		lblNewLabel_53.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelTopo.add(lblNewLabel_53, "flowx,cell 1 0,alignx right,aligny bottom");
 		

@@ -5,14 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame; 
 import javax.swing.JPanel; 
 import javax.swing.border.EmptyBorder; 
-import javax.swing.table.DefaultTableModel; 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.text.MaskFormatter; 
  
 import controle.AvaliacoesDAO; 
 import controle.HospedesDAO; 
 import controle.InfologinDAO; 
 import controle.Quarto; 
-import controle.QuartosDAO; 
+import controle.QuartosDAO;
+import controle.RoundedBorder;
 import modelo.Avaliacoes; 
 import modelo.Hospedes; 
 import modelo.Infologin; 
@@ -21,8 +24,10 @@ import modelo.Reserva;
 import modelo.TipoHoras; 
 import modelo.comboBoxDisponivel; 
 import modelo.comboBoxPreco; 
-import net.miginfocom.swing.MigLayout; 
-import java.awt.Color; 
+import net.miginfocom.swing.MigLayout;
+
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension; 
  
 import javax.swing.JLabel; 
@@ -82,6 +87,8 @@ public class TelaAvaliacoes extends JFrame {
 		contentPane = new JPanel(); 
 		contentPane.setBackground(new Color(228, 228, 228)); 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); 
+		RoundedBorder bordaVermelha = new RoundedBorder(Color.red, 10);
+		RoundedBorder bordaPreta = new RoundedBorder(Color.black, 10);
  
 		setContentPane(contentPane); 
 		contentPane.setLayout(new MigLayout("", "[350px][grow]", "[100px][grow][grow][grow]")); 
@@ -94,7 +101,7 @@ public class TelaAvaliacoes extends JFrame {
 		JPanel PainelIcones = new JPanel(); 
 		PainelIcones.setBackground(new Color(240, 240, 240)); 
 		contentPane.add(PainelIcones, "cell 0 1 1 3,grow"); 
-		PainelIcones.setLayout(new MigLayout("", "[][]", "[grow][grow][grow][grow][grow][grow][grow][grow][grow]")); 
+		PainelIcones.setLayout(new MigLayout("", "[][]", "[70px][70px][70px][70px][70px][70px][70px][70px][grow]")); 
 		 
 		JLabel lblNewLabel_1 = new JLabel(""); 
 		lblNewLabel_1.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeHome.png"))); 
@@ -225,11 +232,11 @@ public class TelaAvaliacoes extends JFrame {
 		 
 		JLabel lblNewLabel_18 = new JLabel(""); 
 		lblNewLabel_18.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeConfiguracoes.png"))); 
-		PainelIcones.add(lblNewLabel_18, "cell 0 8"); 
+		PainelIcones.add(lblNewLabel_18, "cell 0 8,aligny bottom"); 
 		 
 		JLabel lblNewLabel_17 = new JLabel("Configurações"); 
 		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
-		PainelIcones.add(lblNewLabel_17, "cell 1 8");
+		PainelIcones.add(lblNewLabel_17, "cell 1 8,aligny bottom");
 		 
 		MaskFormatter mascaraAva = null; 
  
@@ -247,7 +254,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/LogoCerta2.png"))); 
 		PainelTopo.add(lblNewLabel, "cell 0 0 1 2"); 
 		
-		JLabel lblNewLabel_53 = new JLabel("Olá ");
+		JLabel lblNewLabel_53 = new JLabel("Olá,");
 		lblNewLabel_53.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelTopo.add(lblNewLabel_53, "flowx,cell 1 0,alignx right,aligny bottom");
 		
@@ -285,6 +292,7 @@ public class TelaAvaliacoes extends JFrame {
 		panel.add(lblNewLabel21, "cell 0 0");
 		 
 		txtNome = new JTextField();
+		txtNome.setBorder(bordaPreta);
 		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(txtNome, "cell 1 0,growx,aligny center");
 		txtNome.setColumns(10); 
@@ -298,6 +306,7 @@ public class TelaAvaliacoes extends JFrame {
 		lblNewLabel22.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		txtAvaliacao = new JFormattedTextField(mascaraAva);
+		txtAvaliacao.setBorder(bordaPreta);
 		txtAvaliacao.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(txtAvaliacao, "cell 1 1,growx,aligny center");
 		txtAvaliacao.setColumns(10); 
@@ -307,6 +316,7 @@ public class TelaAvaliacoes extends JFrame {
 		panel.add(lblNewLabel_20, "cell 0 2");
 		
 		txtComentario = new JTextField();
+		txtComentario.setBorder(bordaPreta);
 		txtComentario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(txtComentario, "cell 1 2,growx,aligny center");
 		txtComentario.setColumns(10);
@@ -332,6 +342,10 @@ public class TelaAvaliacoes extends JFrame {
 												} 
 											}); 
 											atualizarJTable();
+											
+											 JTableHeader header = table.getTableHeader();
+										        header.setDefaultRenderer(new HeaderRenderer(table.getTableHeader().getDefaultRenderer()));
+										        table.setRowHeight(30);
 											
 					JLabel lbApagar = new JLabel(""); 
 					PainelPrincipal1.add(lbApagar, "cell 0 1,alignx center,aligny center");
@@ -448,4 +462,22 @@ public class TelaAvaliacoes extends JFrame {
 	    } 
 	    table.setModel(modelo); 
 	} 
+	 private static class HeaderRenderer implements TableCellRenderer {
+	        private final TableCellRenderer delegate;
+
+	        public HeaderRenderer(TableCellRenderer delegate) {
+	            this.delegate = delegate;
+	        }
+	        
+	        @Override
+	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+	            Component c = delegate.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+	            Color topo = new Color(119, 165, 175);
+	            c.setBackground(topo = new Color(119, 165, 175)); 
+	            c.setForeground(Color.WHITE); 
+	            c.setFont(new Font("Arial", Font.TRUETYPE_FONT, 18)); 
+	            return c;
+	        }
+	        
+	    }
 } 
