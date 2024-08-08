@@ -14,6 +14,25 @@ public class Quartos implements IReserva{
 	private int temp;
 	private LocalDate CheckIn;
 	private LocalDate CheckOut;
+	private Boolean Status;
+	
+	public Boolean getStatus() {
+		return Status;
+	}
+
+
+	public void setStatus(Boolean status) {
+		Status = status;
+	}
+	
+	public void efetuarPagamento() {
+		setStatus(true);
+	}
+
+
+	public Quartos() {
+		Status=false;
+	}
 	
 	
 	public LocalDate getCheckIn() {

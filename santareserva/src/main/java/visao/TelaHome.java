@@ -24,8 +24,6 @@ public class TelaHome extends JFrame {
 	 *  
 	 */ 
 	private static final long serialVersionUID = 1L; 
-	private static Hospedes hosplogado; 
-	private Hospedes usuariologado; 
 	private JPanel contentPane; 
 	private Quartos quartoSelecionado; 
 	private Reserva reserva;
@@ -39,8 +37,7 @@ public class TelaHome extends JFrame {
 		
 		this.reserva = reserva;
 		/* TEM Q TER EM TODAS AS TELAS */ 
-		hosplogado = hospede; 
-		usuariologado = hosplogado; 
+		
 		/* TEM Q TER EM TODAS AS TELAS */ 
 		 
 		setTitle("Home"); 
@@ -75,7 +72,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaHome c = new TelaHome(hosplogado,reserva); 
+				TelaHome c = new TelaHome(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -91,7 +88,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaPerfil c = new TelaPerfil(usuariologado,reserva); 
+				TelaPerfil c = new TelaPerfil(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -139,7 +136,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado,reserva); 
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -155,7 +152,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_7.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaComputadores c = new TelaComputadores(hosplogado,reserva); 
+				TelaComputadores c = new TelaComputadores(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -171,7 +168,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_8.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaQuartos c = new TelaQuartos(hosplogado,reserva); 
+				TelaQuartos c = new TelaQuartos(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -187,7 +184,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				TelaAvaliacoes c = new TelaAvaliacoes(hosplogado,reserva); 
+				TelaAvaliacoes c = new TelaAvaliacoes(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 			} 
@@ -203,7 +200,7 @@ public class TelaHome extends JFrame {
 		lblNewLabel_10.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-					TelaInformacoes c = new TelaInformacoes(usuariologado,reserva); 
+					TelaInformacoes c = new TelaInformacoes(hospede,reserva); 
 					c.setVisible(true); 
 					dispose(); 
 			} 
@@ -400,7 +397,7 @@ public class TelaHome extends JFrame {
 		JLabel lblNameuser = new JLabel("");
 		lblNameuser.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelTopo.add(lblNameuser, "cell 1 0 1 2,alignx right,aligny bottom");
-		lblNameuser.setText(hosplogado.getNome());
+		lblNameuser.setText(hospede.getNome());
 		
 		JLabel lblNewLabel_19 = new JLabel("");
 		lblNewLabel_19.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/iconeUser.png")));
