@@ -73,7 +73,7 @@ public class TelaPagamento extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/LogoCerta2.png"))); 
 		PainelTopo.add(lblNewLabel, "cell 0 0 1 2"); 
 		
-		JLabel lblNewLabel_53 = new JLabel("Olá ");
+		JLabel lblNewLabel_53 = new JLabel("Olá,");
 		lblNewLabel_53.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelTopo.add(lblNewLabel_53, "flowx,cell 1 0,alignx right,aligny bottom");
 		
@@ -100,7 +100,7 @@ public class TelaPagamento extends JFrame {
 		
 		JPanel PainelIcones = new JPanel();
 		contentPane.add(PainelIcones, "cell 0 1,grow");
-		PainelIcones.setLayout(new MigLayout("", "[][]", "[50px][50px][50px][50px][50px][50px][50px][50px][grow]"));
+		PainelIcones.setLayout(new MigLayout("", "[][]", "[70px][70px][70px][70px][70px][70px][70px][70px][grow]"));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeHome.png")));
@@ -233,10 +233,14 @@ public class TelaPagamento extends JFrame {
 		
 		JPanel PainelPrincipal = new JPanel();
 		contentPane.add(PainelPrincipal, "cell 1 1,grow");
-		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[grow][103px]"));
+		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[][grow][103px]"));
+				
+				JLabel lblNewLabel_20 = new JLabel("Pagamentos");
+				lblNewLabel_20.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 40));
+				PainelPrincipal.add(lblNewLabel_20, "cell 0 0");
 				
 				JScrollPane scrollPane = new JScrollPane();
-				PainelPrincipal.add(scrollPane, "cell 0 0,grow");
+				PainelPrincipal.add(scrollPane, "cell 0 1,grow");
 				
 						table = new JTable();
 						table.addMouseListener(new MouseAdapter() {
@@ -257,7 +261,7 @@ public class TelaPagamento extends JFrame {
 						table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDPagamento", "Nome", "Número", "Validade","COD Segurança", "Num espaço" }));
 						
 				JPanel panel_19 = new JPanel();
-				PainelPrincipal.add(panel_19, "cell 0 1 5 1,grow");
+				PainelPrincipal.add(panel_19, "cell 0 2 5 1,grow");
 				panel_19.setLayout(new MigLayout("", "[grow]", "[]"));
 				
 				JLabel lbApagar = new JLabel("");

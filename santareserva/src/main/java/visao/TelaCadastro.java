@@ -61,7 +61,7 @@ public class TelaCadastro extends JFrame {
 		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);
 		Tela = new JPanel();
-		Tela.setBackground(new Color(238, 238, 238));
+		Tela.setBackground(new Color(229, 236, 238));
 		Tela.setBorder(null);
 		RoundedBorder bordaVermelha = new RoundedBorder(Color.red, 10); 
 		RoundedBorder bordaPreta = new RoundedBorder(Color.black, 10); 
@@ -78,6 +78,7 @@ public class TelaCadastro extends JFrame {
 		PainelHotel.add(ImgHotel, "cell 0 0,alignx left,aligny top");
 
 		JPanel PainelCadastro = new JPanel();
+		PainelCadastro.setBackground(new Color(229, 236, 238));
 		Tela.add(PainelCadastro, "flowx,cell 1 0 1 6,alignx center,growy");
 		PainelCadastro.setLayout(new MigLayout("", "[grow]", "[250px][][][][][][][][][][][][][][grow]"));
 
