@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -354,38 +355,44 @@ public class TelaReservas extends JFrame {
 		lblNewLabel_28.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_28, "cell 0 8");
 		
-		textSenhaLogin = new JTextField();
+		JPasswordField textSenhaLogin = new JPasswordField();
 		textSenhaLogin.setBorder(bordaPreta); 
 		textSenhaLogin.setFont(new Font("Arial", Font.PLAIN, 25));
 		panel_2.add(textSenhaLogin, "cell 0 9,growx");
 		textSenhaLogin.setColumns(10);
 		
+		JLabel lblsalareunioes = new JLabel("-");
+		lblsalareunioes.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		lblsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblsalareunioes, "cell 0 11,grow");
+		
 		JLabel lblNewLabel_25 = new JLabel("Total Sala de Reuniões");
 		lblNewLabel_25.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_25, "cell 0 10");
-		
-		JLabel lblsalareunioes = new JLabel("-");
-		lblsalareunioes.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 11));
-		lblsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblsalareunioes, "cell 0 9,grow");
 		if(reserva.getPrecoSalas() != null) {
 			lblsalareunioes.setText(String.valueOf(reserva.getTotalSalas()));
 		}
+		
+		JLabel lblcomputadores = new JLabel("-");
+		lblcomputadores.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lblcomputadores, "cell 0 13,alignx center");
 		
 		
 		JLabel lblNewLabel_27 = new JLabel("Total Computadores");
 		lblNewLabel_27.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_27, "cell 0 12");
-		
-		JLabel lblcomputadores = new JLabel("-");
-		panel_2.add(lblcomputadores, "cell 0 11,alignx center");
 		if(reserva.getPrecoComputadores() != null) {
 			lblcomputadores.setText(String.valueOf(reserva.getTotalComputadores()));
 		}
 		
+		
 		JLabel lblNewLabel_29 = new JLabel("Total Quartos");
 		lblNewLabel_29.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lblNewLabel_29, "cell 0 14");
+		
+		JLabel lblquartos = new JLabel("-");
+		lblquartos.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
+		panel_2.add(lblquartos, "cell 0 15,alignx center");
 		
 		JLabel lblNewLabel_31 = new JLabel("Total à pagar:");
 		lblNewLabel_31.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
@@ -394,9 +401,6 @@ public class TelaReservas extends JFrame {
 		JLabel lbltotalpagar = new JLabel("-");
 		lbltotalpagar.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 16));
 		panel_2.add(lbltotalpagar, "cell 0 17,alignx center");
-		
-		JLabel lblquartos = new JLabel("-");
-		panel_2.add(lblquartos, "cell 0 13,alignx center");
 		if(reserva.getPrecoQuartos() != null) {
 			lblquartos.setText(String.valueOf(reserva.getTotalQuartos()));
 		}
