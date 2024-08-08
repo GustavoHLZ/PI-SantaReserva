@@ -46,7 +46,7 @@ public class TelaNaoRealizado extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][][grow][]"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaNaoRealizado.class.getResource("/visao/Icones/NaorealizadoM.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaNaoRealizado.class.getResource("/visao/Icones/IconeNaorealizado.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
         JLabel lblNoRealizado = new JLabel("Ocorreu um erro durante a transação!");

@@ -356,10 +356,9 @@ public class TelaReservas extends JFrame {
 		JLabel lblsalareunioes = new JLabel("-");
 		lblsalareunioes.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblsalareunioes, "cell 0 9,grow");
-		//if( != null) {
-		//	lblsalareunioes.setText(salareunioes.getPreco().toString());
-	//	}
-		
+		if(reserva.getPrecoSalas() != null) {
+			lblsalareunioes.setText(String.valueOf(reserva.getTotalSalas()));
+		}
 		
 		
 		JLabel lblNewLabel_27 = new JLabel("Total Computadores");
@@ -368,21 +367,13 @@ public class TelaReservas extends JFrame {
 		
 		JLabel lblcomputadores = new JLabel("-");
 		panel_2.add(lblcomputadores, "cell 0 11,alignx center");
-		//if(computador != null) {
-		//	lblcomputadores.setText(computador.getPreco().toString());
-	//	}
-
+		if(reserva.getPrecoComputadores() != null) {
+			lblcomputadores.setText(String.valueOf(reserva.getTotalComputadores()));
+		}
 		
 		JLabel lblNewLabel_29 = new JLabel("Total Quartos");
 		lblNewLabel_29.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(lblNewLabel_29, "cell 0 12");
-		
-		JLabel lblquartos = new JLabel("-");
-		panel_2.add(lblquartos, "cell 0 13,alignx center");
-		//if(quarto != null) {
-		//	lblquartos.setText(quarto.getPreco().toString());
-		//}
-
 		
 		JLabel lblNewLabel_31 = new JLabel("Total à pagar:");
 		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -390,6 +381,20 @@ public class TelaReservas extends JFrame {
 		
 		JLabel lbltotalpagar = new JLabel("-");
 		panel_2.add(lbltotalpagar, "cell 0 15,alignx center");
+		
+		JLabel lblquartos = new JLabel("-");
+		panel_2.add(lblquartos, "cell 0 13,alignx center");
+		if(reserva.getPrecoQuartos() != null) {
+			lblquartos.setText(String.valueOf(reserva.getTotalQuartos()));
+		}
+		
+		 Float tQuartos = reserva.getPrecoQuartos();
+		 Float total = reserva.getTotal();
+		 
+		 if(total != null) {
+			 lbltotalpagar.setText(String.valueOf(total));
+		 }
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		PainelPrincipal.add(scrollPane, "cell 0 1 12 3,grow");

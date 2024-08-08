@@ -366,6 +366,10 @@ public class TelaQuartos extends JFrame {
 				QuartosDAO dao = QuartosDAO.getInstancia(); 
 				
 				dao.atualizarQuartos(checkINN, checkOUTT, idquartos);
+				
+				Float precoQuarto = quartoSelecionado.getPreco();
+				
+				reserva.setPrecoQuartos(precoQuarto);
 				 
 				reserva.adicionarReserva(quartoSelecionado);
 			

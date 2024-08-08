@@ -80,7 +80,7 @@ public class TelaCadastro extends JFrame {
 		JPanel PainelCadastro = new JPanel();
 		PainelCadastro.setBackground(new Color(229, 236, 238));
 		Tela.add(PainelCadastro, "flowx,cell 1 0 1 6,alignx center,growy");
-		PainelCadastro.setLayout(new MigLayout("", "[grow]", "[250px][][][][][][][][][][][][][][grow]"));
+		PainelCadastro.setLayout(new MigLayout("", "[grow][]", "[250px][][][][][][][][][][][][][][grow]"));
 
 		JLabel lblRegistro = new JLabel("Registrar-se");
 		lblRegistro.setFont(new Font("Arial", Font.PLAIN, 36));
@@ -371,6 +371,47 @@ public class TelaCadastro extends JFrame {
 
 							}
 						});
+						
+						JLabel lblMostrar = new JLabel("");
+						lblMostrar.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+				                if (txtSenha instanceof JPasswordField) {
+				                    JTextField txtSenhaVisivel = new JTextField(txtSenha.getText());
+				                    txtSenhaVisivel.setBorder(txtSenha.getBorder());
+				                    txtSenhaVisivel.setFont(txtSenha.getFont());
+				                    txtSenhaVisivel.setForeground(txtSenha.getForeground());
+				                    txtSenhaVisivel.setBackground(txtSenha.getBackground());
+				                    txtSenhaVisivel.setEditable(true);
+
+				                    PainelCadastro.remove(txtSenha);
+				                    txtSenha = txtSenhaVisivel;
+				                    PainelCadastro.add(txtSenha, "cell 0 12,grow");
+				                    lblMostrar.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeEsconderSenha.png")));
+
+				                    revalidate();
+				                    repaint();
+				                } else if (txtSenha instanceof JTextField) {
+				                    JPasswordField txtSenhaEscondida = new JPasswordField();
+				                    txtSenhaEscondida.setBorder(txtSenha.getBorder());
+				                    txtSenhaEscondida.setFont(txtSenha.getFont());
+				                    txtSenhaEscondida.setForeground(txtSenha.getForeground());
+				                    txtSenhaEscondida.setBackground(txtSenha.getBackground());
+				                    txtSenhaEscondida.setText(txtSenha.getText());
+				                    txtSenhaEscondida.setEditable(true);
+
+				                    PainelCadastro.remove(txtSenha);
+				                    txtSenha = txtSenhaEscondida;
+				                    PainelCadastro.add(txtSenha, "cell 0 12,grow");
+				                    lblMostrar.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+
+				                    revalidate();
+				                    repaint();
+				                }
+				            }
+				        });
+						lblMostrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Icones/iconeVerSenha.png")));
+						PainelCadastro.add(lblMostrar, "cell 1 12");
 						BTNRegistrar.setIcon(new ImageIcon(TelaCadastro.class.getResource("/visao/Botões/BTN Registrar.png")));
 						PainelCadastro.add(BTNRegistrar, "cell 0 13");
 				

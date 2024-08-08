@@ -271,7 +271,7 @@ public class TelaPerfil extends JFrame {
 		JPanel PainelAlteracao = new JPanel();
 		PainelAlteracao.setBackground(new Color(238, 238, 238));
 		PainelGeral.add(PainelAlteracao, "cell 1 1,grow");
-		PainelAlteracao.setLayout(new MigLayout("", "[grow][400px][500px][400px][grow]", "[][200px][100px][][][][][][][][][][][grow][grow]"));
+		PainelAlteracao.setLayout(new MigLayout("", "[grow][400px][500px][][400px][][grow]", "[][200px][100px][][][][][][][][][][][grow][grow]"));
 		
 		JLabel lblPerfil = new JLabel("");
 		PainelAlteracao.add(lblPerfil, "cell 2 1,alignx center,aligny bottom");
@@ -289,7 +289,7 @@ public class TelaPerfil extends JFrame {
 		
 		JLabel lblAltSobrenome = new JLabel("Alterar Sobrenome");
 		lblAltSobrenome.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltSobrenome, "cell 3 3,alignx left,aligny center");
+		PainelAlteracao.add(lblAltSobrenome, "cell 4 3,alignx left,aligny center");
 		
 		txtNome = new JTextField();
 		txtNome.setBorder(bordaPreta);
@@ -301,7 +301,7 @@ public class TelaPerfil extends JFrame {
 		txtSobrenome = new JTextField();
 		txtSobrenome.setBorder(bordaPreta);
 		txtSobrenome.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtSobrenome, "cell 3 4,grow");
+		PainelAlteracao.add(txtSobrenome, "cell 4 4,grow");
 		txtSobrenome.setColumns(10);
 		txtSobrenome.setText(usuariologado.getSobrenome());
 		
@@ -311,7 +311,7 @@ public class TelaPerfil extends JFrame {
 		
 		JLabel lblAltSenha = new JLabel("Alterar Senha");
 		lblAltSenha.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltSenha, "cell 3 5");
+		PainelAlteracao.add(lblAltSenha, "cell 4 5");
 		
 		txtTelefone = new JFormattedTextField(mascaraTel);
 		txtTelefone.setBorder(bordaPreta);
@@ -323,9 +323,52 @@ public class TelaPerfil extends JFrame {
 		txtSenha = new JPasswordField();
 		txtSenha.setBorder(bordaPreta);
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtSenha, "cell 3 6,grow");
+		PainelAlteracao.add(txtSenha, "flowx,cell 4 6,grow");
 		txtSenha.setColumns(10);
 		txtSenha.setText(usuariologado.getLogin().getSenha());
+		
+		JLabel lblMostrar = new JLabel("");
+		lblMostrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                if (txtSenha instanceof JPasswordField) {
+                    JTextField txtSenhaVisivel = new JTextField(txtSenha.getText());
+                    txtSenhaVisivel.setBorder(txtSenha.getBorder());
+                    txtSenhaVisivel.setFont(txtSenha.getFont());
+                    txtSenhaVisivel.setForeground(txtSenha.getForeground());
+                    txtSenhaVisivel.setBackground(txtSenha.getBackground());
+                    txtSenhaVisivel.setEditable(true);
+
+                    PainelAlteracao.remove(txtSenha);
+                    txtSenha = txtSenhaVisivel;
+                    PainelAlteracao.add(txtSenha, "flowx,cell 4 6,grow");
+                    lblMostrar.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeEsconderSenha.png")));
+
+                    revalidate();
+                    repaint();
+                } else if (txtSenha instanceof JTextField) {
+                    JPasswordField txtSenhaEscondida = new JPasswordField();
+                    txtSenhaEscondida.setBorder(txtSenha.getBorder());
+                    txtSenhaEscondida.setFont(txtSenha.getFont());
+                    txtSenhaEscondida.setForeground(txtSenha.getForeground());
+                    txtSenhaEscondida.setBackground(txtSenha.getBackground());
+                    txtSenhaEscondida.setText(txtSenha.getText());
+                    txtSenhaEscondida.setEditable(true);
+
+                    PainelAlteracao.remove(txtSenha);
+                    txtSenha = txtSenhaEscondida;
+                    PainelAlteracao.add(txtSenha, "flowx,cell 4 6,grow");
+                    lblMostrar.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+
+                    revalidate();
+                    repaint();
+                }
+            }
+        });
+		
+		
+		lblMostrar.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+		PainelAlteracao.add(lblMostrar, "cell 5 6,alignx center");
 		
 		JLabel lblAltNascimento = new JLabel("Alterar Data de nascimento");
 		lblAltNascimento.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -333,7 +376,7 @@ public class TelaPerfil extends JFrame {
 		
 		JLabel lblAltEmail = new JLabel("Alterar Email");
 		lblAltEmail.setFont(new Font("Arial", Font.PLAIN, 18));
-		PainelAlteracao.add(lblAltEmail, "cell 3 7");
+		PainelAlteracao.add(lblAltEmail, "cell 4 7");
 		
 		txtNascimento = new JFormattedTextField(mascaraDat);
 		txtNascimento.setBorder(bordaPreta);
@@ -345,7 +388,7 @@ public class TelaPerfil extends JFrame {
 		txtEmail = new JTextField();
 		txtEmail.setBorder(bordaPreta);
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtEmail, "cell 3 8,grow");
+		PainelAlteracao.add(txtEmail, "cell 4 8,grow");
 		txtEmail.setColumns(10);
 		txtEmail.setText(usuariologado.getLogin().getLogin());
 		
@@ -356,7 +399,7 @@ public class TelaPerfil extends JFrame {
 		txtVerSenha = new JPasswordField();
 		txtVerSenha.setBorder(bordaPreta);
 		txtVerSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtVerSenha, "cell 2 10,grow");
+		PainelAlteracao.add(txtVerSenha, "flowx,cell 2 10,grow");
 		txtVerSenha.setColumns(10);
 		txtVerSenha.setText(usuariologado.getLogin().getSenha());
 		
@@ -385,27 +428,33 @@ public class TelaPerfil extends JFrame {
 
 				if (txtNome.getText().trim().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "O campo Nome não pode estar vazio.");
+					txtNome.setBorder(bordaVermelha);
 					return;
 				}
 				
 				if (txtSobrenome.getText().trim().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "O campo Sobrenome não pode estar vazio.");
+					txtSobrenome.setBorder(bordaVermelha);
 					return;
 				}
 				if (txtTelefone.getText().trim().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "O campo Telefone não pode estar vazio.");
+					txtTelefone.setBorder(bordaVermelha);
 					return;
 				}
 				if (txtNascimento.getText().trim().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "O campo Data de Nascimento não pode estar vazio.");
+					txtNascimento.setBorder(bordaVermelha);
 					return;
 				}
 				if (txtEmail.getText().trim().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "O campo Email não pode estar vazio.");
+					txtEmail.setBorder(bordaVermelha);
 					return;
 				}
 				if (!txtSenha.getText().equals(txtConfSenha.getText())) {
 					JOptionPane.showMessageDialog(null, "As senhas não coincidem.");
+					txtSenha.setBorder(bordaVermelha);
 					return;
 				}
 				
@@ -413,6 +462,7 @@ public class TelaPerfil extends JFrame {
 
 					JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
 
+					txtNome.setBorder(bordaVermelha);
 					return;
 
 				}
@@ -421,6 +471,7 @@ public class TelaPerfil extends JFrame {
 
 					JOptionPane.showMessageDialog(null, "O sobrenome deve conter apenas letras.");
 
+					txtSobrenome.setBorder(bordaVermelha);
 					return;
 
 				}
@@ -488,6 +539,47 @@ public class TelaPerfil extends JFrame {
 				
 		});
 		
+		JLabel lblMostrar2 = new JLabel("");
+		lblMostrar2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                if (txtVerSenha instanceof JPasswordField) {
+                    JTextField txtSenhaVisivel = new JTextField(txtVerSenha.getText());
+                    txtSenhaVisivel.setBorder(txtVerSenha.getBorder());
+                    txtSenhaVisivel.setFont(txtVerSenha.getFont());
+                    txtSenhaVisivel.setForeground(txtVerSenha.getForeground());
+                    txtSenhaVisivel.setBackground(txtVerSenha.getBackground());
+                    txtSenhaVisivel.setEditable(true);
+
+                    PainelAlteracao.remove(txtVerSenha);
+                    txtVerSenha = txtSenhaVisivel;
+                    PainelAlteracao.add(txtVerSenha, "flowx,cell 2 10,grow");
+                    lblMostrar2.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeEsconderSenha.png")));
+
+                    revalidate();
+                    repaint();
+                } else if (txtVerSenha instanceof JTextField) {
+                    JPasswordField txtSenhaEscondida = new JPasswordField();
+                    txtSenhaEscondida.setBorder(txtVerSenha.getBorder());
+                    txtSenhaEscondida.setFont(txtVerSenha.getFont());
+                    txtSenhaEscondida.setForeground(txtVerSenha.getForeground());
+                    txtSenhaEscondida.setBackground(txtVerSenha.getBackground());
+                    txtSenhaEscondida.setText(txtVerSenha.getText());
+                    txtSenhaEscondida.setEditable(true);
+
+                    PainelAlteracao.remove(txtVerSenha);
+                    txtVerSenha = txtSenhaEscondida;
+                    PainelAlteracao.add(txtVerSenha, "flowx,cell 2 10,grow");
+                    lblMostrar2.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+
+                    revalidate();
+                    repaint();
+                }
+            }
+        });
+		lblMostrar2.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+		PainelAlteracao.add(lblMostrar2, "cell 3 10");
+		
 		JLabel lblNewLabel8 = new JLabel("Confirmar Senha");
 		lblNewLabel8.setFont(new Font("Arial", Font.PLAIN, 18));
 		PainelAlteracao.add(lblNewLabel8, "cell 2 11,alignx left");
@@ -495,13 +587,57 @@ public class TelaPerfil extends JFrame {
 		txtConfSenha = new JPasswordField();
 		txtConfSenha.setBorder(bordaPreta);
 		txtConfSenha.setFont(new Font("Arial", Font.PLAIN, 20));
-		PainelAlteracao.add(txtConfSenha, "cell 2 12,grow");
+		PainelAlteracao.add(txtConfSenha, "flowx,cell 2 12,grow");
 		txtConfSenha.setColumns(10);
 		txtConfSenha.setText(usuariologado.getLogin().getSenha());
+		
+		JLabel lblMostrar3 = new JLabel("");
+		lblMostrar3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                if (txtConfSenha instanceof JPasswordField) {
+                    JTextField txtSenhaVisivel = new JTextField(txtConfSenha.getText());
+                    txtSenhaVisivel.setBorder(txtConfSenha.getBorder());
+                    txtSenhaVisivel.setFont(txtConfSenha.getFont());
+                    txtSenhaVisivel.setForeground(txtConfSenha.getForeground());
+                    txtSenhaVisivel.setBackground(txtConfSenha.getBackground());
+                    txtSenhaVisivel.setEditable(true);
+
+                    PainelAlteracao.remove(txtConfSenha);
+                    txtConfSenha = txtSenhaVisivel;
+                    PainelAlteracao.add(txtConfSenha, "flowx,cell 2 12,grow");
+                    lblMostrar3.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeEsconderSenha.png")));
+
+                    revalidate();
+                    repaint();
+                } else if (txtConfSenha instanceof JTextField) {
+                    JPasswordField txtSenhaEscondida = new JPasswordField();
+                    txtSenhaEscondida.setBorder(txtConfSenha.getBorder());
+                    txtSenhaEscondida.setFont(txtConfSenha.getFont());
+                    txtSenhaEscondida.setForeground(txtConfSenha.getForeground());
+                    txtSenhaEscondida.setBackground(txtConfSenha.getBackground());
+                    txtSenhaEscondida.setText(txtConfSenha.getText());
+                    txtSenhaEscondida.setEditable(true);
+
+                    PainelAlteracao.remove(txtConfSenha);
+                    txtConfSenha = txtSenhaEscondida;
+                    PainelAlteracao.add(txtConfSenha, "flowx,cell 2 12,grow");
+                    lblMostrar3.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+
+                    revalidate();
+                    repaint();
+                }
+            }
+        });
+		lblMostrar3.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Icones/iconeVerSenha.png")));
+		PainelAlteracao.add(lblMostrar3, "cell 3 12");
 		BtnAtualizarInfo.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BTN Aplicar Atualizações.png")));
 		PainelAlteracao.add(BtnAtualizarInfo, "cell 2 13,alignx center,aligny center");
 		lblNewLabel1.setIcon(new ImageIcon(TelaPerfil.class.getResource("/visao/Botões/BtnExcluirPerfil.png")));
 		PainelAlteracao.add(lblNewLabel1, "cell 2 14,alignx center,aligny top");
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		PainelAlteracao.add(lblNewLabel_20, "cell 2 10");
 	}
 
 }

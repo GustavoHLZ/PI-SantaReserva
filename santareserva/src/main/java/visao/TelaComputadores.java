@@ -353,7 +353,10 @@ public class TelaComputadores extends JFrame {
 		ComputadoresDAO dao = ComputadoresDAO.getInstancia();
 		
 		dao.atualizarComputadores(checkINN, checkOUTT, idcomp);
+		
+		Float precoComputadores = computadoralugado.getPreco();
 				
+				reserva.setPrecoComputadores(precoComputadores);
 				reserva.adicionarReserva(computadoralugado);
 				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva); 
 		        telaReservas.setVisible(true); 
