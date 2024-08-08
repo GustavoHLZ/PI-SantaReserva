@@ -41,8 +41,6 @@ public class TelaComputadores extends JFrame {
 	private String valor; 
 	private ArrayList<Computadores> listaComp = new ArrayList<Computadores>(); 
 	private Computadores compSelecionado; 
-	private Hospedes hosplogado; 
-	private Hospedes usuariologado; 
 	private Computadores computadoralugado; 
 	private JTable table; 
 	private JTextField textCheckIn; 
@@ -57,7 +55,7 @@ public class TelaComputadores extends JFrame {
 	public TelaComputadores(Hospedes hospede,Reserva reserva) { 
 		this.reserva=reserva;
 		/* TEM Q TER EM TODAS AS TELAS */
-		hosplogado = hospede;
+		
 	
 		/* TEM Q TER EM TODAS AS TELAS */
 		 
@@ -91,7 +89,7 @@ public class TelaComputadores extends JFrame {
 		JLabel lblNameuser = new JLabel("");
 		lblNameuser.setFont(new Font("Arial", Font.PLAIN, 20));
 		PainelTopo.add(lblNameuser, "cell 1 0 1 2,alignx right,aligny bottom");
-		lblNameuser.setText(hosplogado.getNome());
+		lblNameuser.setText(hospede.getNome());
 		
 		JLabel lblNewLabel_19 = new JLabel("");
 		lblNewLabel_19.setIcon(new ImageIcon(TelaHome.class.getResource("/visao/Icones/iconeUser.png")));
@@ -122,7 +120,7 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				TelaHome c = new TelaHome(usuariologado,reserva); 
+				TelaHome c = new TelaHome(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
 		 
@@ -140,7 +138,7 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				TelaPerfil c = new TelaPerfil(usuariologado,reserva);
+				TelaPerfil c = new TelaPerfil(hospede,reserva);
 				c.setVisible(true);
 				dispose();
 			} 
@@ -174,7 +172,7 @@ public class TelaComputadores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado,reserva);
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hospede,reserva);
 				c.setVisible(true);
 				dispose();
 			}
@@ -223,7 +221,7 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				TelaAvaliacoes c = new TelaAvaliacoes(usuariologado,reserva);
+				TelaAvaliacoes c = new TelaAvaliacoes(hospede,reserva);
 				c.setVisible(true);
 				dispose();
 			} 
@@ -240,7 +238,7 @@ public class TelaComputadores extends JFrame {
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				 
-				TelaInformacoes c = new TelaInformacoes(usuariologado,reserva);
+				TelaInformacoes c = new TelaInformacoes(hospede,reserva);
 				c.setVisible(true);
 				dispose();
 			} 
@@ -357,7 +355,7 @@ public class TelaComputadores extends JFrame {
 		dao.atualizarComputadores(checkINN, checkOUTT, idcomp);
 				
 				reserva.adicionarReserva(computadoralugado);
-				TelaReservas telaReservas = new TelaReservas(hosplogado,reserva); 
+				TelaReservas telaReservas = new TelaReservas(hospede,reserva); 
 		        telaReservas.setVisible(true); 
 				atualizarJTable(); 
 				dispose();

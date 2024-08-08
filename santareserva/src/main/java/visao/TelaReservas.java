@@ -396,47 +396,12 @@ public class TelaReservas extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede"}));
+		atualizarJTable();
 		
 		JTableHeader header = table.getTableHeader();
 	    header.setDefaultRenderer(new HeaderRenderer(table.getTableHeader().getDefaultRenderer()));
 	    table.setRowHeight(30);
 		
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		
-		ArrayList<IReserva> listasespacos = reserva.getLista();
-		int[] computadorIntervalos = {41, 60, 131, 150};
-		int[] salaReunioesIntervalos = {61, 80, 151, 170};
-		for (IReserva reser : listasespacos) {
-				int tipoEspaco;
-			   int id = reser.getId();
-			    String tipo = "";
-
-			    if ((id >= computadorIntervalos[0] && id <= computadorIntervalos[1]) || 
-			        (id >= computadorIntervalos[2] && id <= computadorIntervalos[3])) {
-			        tipo = "Computador";
-			        tipoEspaco = 1;
-			    } else if ((id >= salaReunioesIntervalos[0] && id <= salaReunioesIntervalos[1]) ||
-			             (id >= salaReunioesIntervalos[2] && id <= salaReunioesIntervalos[3])) {
-			        tipo = "Sala de Reuniões";
-			        tipoEspaco = 2;
-			    } else {
-			        tipo = "Quarto";
-			        tipoEspaco = 3;
-			    }
-			
-			   model.addRow(new Object[] {
-					   reser.getId(),
-					   tipo,
-					   reser.getPreco(),
-					   reser.getCheckIn(),
-					   reser.getCheckOut(),
-				        hosplogado.getNome(),
-				        hosplogado.getIdHospede(),
-			
-		
-		 });
-		}
 		
 		JLabel lblNewLabel_34 = new JLabel("");
 		lblNewLabel_34.addMouseListener(new MouseAdapter() {
@@ -474,90 +439,82 @@ public class TelaReservas extends JFrame {
 		JLabel lblEfetuarPagamento = 
 				new JLabel("");
 		lblEfetuarPagamento.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (!txtNometitular.getText().matches("[\\p{L}\\s~^]+")) {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        if (!txtNometitular.getText().matches("[\\p{L}\\s~^]+")) {
+		            JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+		            return;
+		        }
 
-					JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
-
-					return;
-
-				}
-				
 		        int selectedRow = table.getSelectedRow(); 
 		        
+		       
+
 		        if (selectedRow == -1) {
 		            JOptionPane.showMessageDialog(null, "Nenhum espaço selecionado.");
 		            return;
 		        }
-		        
+
 		        boolean disp = false;
 		        int id = (Integer) table.getValueAt(selectedRow, 0); 
 		        String tipoEspaco = (String) table.getValueAt(selectedRow, 1); 
 		        LocalDate checkIn = (LocalDate) table.getValueAt(selectedRow, 3); 
 		        LocalDate checkOut = (LocalDate) table.getValueAt(selectedRow, 4); 
-		     
+
 		        if ("Computador".equals(tipoEspaco)) {
 		            Computadores computadores = new Computadores();
 		            computadores.setDisp(disp);
-		        	ComputadoresDAO dao = ComputadoresDAO.getInstancia();
+		            ComputadoresDAO dao = ComputadoresDAO.getInstancia();
 		            dao.atualizarComputadores(checkIn, checkOut, disp, id);
-		           
 		        } else if ("Sala de Reuniões".equals(tipoEspaco)) {
-		        	SalaReunioes sala = new SalaReunioes();
+		            SalaReunioes sala = new SalaReunioes();
 		            sala.setDisp(disp);
-		           SalaReunioesDAO dao = SalaReunioesDAO.getInstancia();
-		           dao.atualizarSalaReunioes(checkIn, checkOut, disp, id);
-		        	
+		            SalaReunioesDAO dao = SalaReunioesDAO.getInstancia();
+		            dao.atualizarSalaReunioes(checkIn, checkOut, disp, id);
 		        } else if ("Quarto".equals(tipoEspaco)) {
 		            Quartos quarto = new Quartos();
 		            quarto.setDisp(disp);
-		        	QuartosDAO dao = QuartosDAO.getInstancia();
+		            QuartosDAO dao = QuartosDAO.getInstancia();
 		            dao.atualizarQuartos(checkIn, checkOut, disp, id);
-		            
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Tipo de espaço desconhecido.");
 		            return;
 		        }
-		        
-				
-				    String nomeTitular = txtNometitular.getText();
-				    String numeroCartaoStr = txtNumeroCartao.getText().replaceAll("\\s", ""); 
-			        String dataValidade = txtDataValidade.getText();
-			        String codigoSegurancaStr = txtCodigoSeguranca.getText().replaceAll("\\s", "");
-					
-			        Pagamento reserva = new Pagamento();
-			        
-			        long numeroCartao = Long.parseLong(numeroCartaoStr);
-		            int codigoSeguranca = Integer.parseInt(codigoSegurancaStr);
-		            
-			        reserva.setNometitular(nomeTitular);
-			        reserva.setNumeroCartao(numeroCartao);
-			        reserva.setDataValidade(dataValidade);
-			        reserva.setCodigoSeguranca(codigoSeguranca);
-			        reserva.setNumeroBoleto(0);
-			        reserva.setnumeroEspaco(id);
-			        reserva.setHosp(hosplogado);
-			        
-			       
-			        PagamentoDAO dao = PagamentoDAO.getInstancia();
-			        
-			        int retorno = dao.InserirPagamento(reserva);
-			        
-			        
-			        if (retorno > 0) {
-			            TelaRealizado abrir = new TelaRealizado();
-			            reserva.setIdPagamento(retorno);
-			            //listarEspaco.add(reserva);
-			            atualizarJTable();
-			        } else {
-			        	TelaNaoRealizado abrir = new TelaNaoRealizado();
-			        	abrir.setVisible(true);
-			        }
+
+		        String nomeTitular = txtNometitular.getText();
+		        String numeroCartaoStr = txtNumeroCartao.getText().replaceAll("\\s", ""); 
+		        String dataValidade = txtDataValidade.getText();
+		        String codigoSegurancaStr = txtCodigoSeguranca.getText().replaceAll("\\s", "");
+
+		        Pagamento reservaPgto = new Pagamento();
+
+		        long numeroCartao = Long.parseLong(numeroCartaoStr);
+		        int codigoSeguranca = Integer.parseInt(codigoSegurancaStr);
+
+		        reservaPgto.setNometitular(nomeTitular);
+		        reservaPgto.setNumeroCartao(numeroCartao);
+		        reservaPgto.setDataValidade(dataValidade);
+		        reservaPgto.setCodigoSeguranca(codigoSeguranca);
+		        reservaPgto.setNumeroBoleto(0);
+		        reservaPgto.setnumeroEspaco(id);
+		        reservaPgto.setHosp(hosplogado);
+
+		        PagamentoDAO dao = PagamentoDAO.getInstancia();
+
+		        int retorno = dao.InserirPagamento(reservaPgto);
 
 
-			    }				
-			
+		        if (retorno > 0) {
+		            TelaRealizado abrir = new TelaRealizado();
+		            //table.setValueAt("Pago", selectedRow, 6);
+		            reservaPgto.setIdPagamento(retorno);
+		            reserva.getLista().get(selectedRow).efetuarPagamento();
+		            atualizarJTable(); 
+		        } else {
+		            TelaNaoRealizado abrir = new TelaNaoRealizado();
+		            abrir.setVisible(true);
+		        }
+		    }
 		});
 		lblEfetuarPagamento.setIcon(new ImageIcon(TelaReservas.class.getResource("/visao/Botões/BTN Efetuar Pagamento.png")));
 		panel_3.add(lblEfetuarPagamento);
@@ -573,7 +530,8 @@ public class TelaReservas extends JFrame {
 	}
 	
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante" , "ID Hospede"});
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante","Status" , "ID Hospede"}));
+
 
 	    //EspacosDAO EspacoDAO = EspacosDAO.getInstancia();
 	    //listarEspaco = EspacoDAO.listarEspacos();
@@ -590,38 +548,53 @@ public class TelaReservas extends JFrame {
 
 		}
 
-	    for (IReserva r : this.reserva.getLista()) {
-	    	  int id = r.getId();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		ArrayList<IReserva> listasespacos = reserva.getLista();
+		int[] computadorIntervalos = {41, 60, 131, 150};
+		int[] salaReunioesIntervalos = {61, 80, 151, 170};
+		for (IReserva reser : listasespacos) {
+				int tipoEspaco;
+			   int id = reser.getId();
 			    String tipo = "";
-			    
-				int[] computadorIntervalos = {41, 60, 131, 150};
-				int[] salaReunioesIntervalos = {61, 80, 151, 170};
+
 			    if ((id >= computadorIntervalos[0] && id <= computadorIntervalos[1]) || 
 			        (id >= computadorIntervalos[2] && id <= computadorIntervalos[3])) {
 			        tipo = "Computador";
+			        tipoEspaco = 1;
 			    } else if ((id >= salaReunioesIntervalos[0] && id <= salaReunioesIntervalos[1]) ||
 			             (id >= salaReunioesIntervalos[2] && id <= salaReunioesIntervalos[3])) {
 			        tipo = "Sala de Reuniões";
+			        tipoEspaco = 2;
 			    } else {
 			        tipo = "Quarto";
+			        tipoEspaco = 3;
 			    }
-			    modelo.addRow(new Object[] {
-			            r.getId(),
-			            tipo,
-			            r.getPreco(),
-			            r.getCheckIn(),
-			            r.getCheckOut(),
-			            hosplogado.getNome(),
-			            hosplogado.getIdHospede()
-			        });
 			
+			    String status = "Pendente";
+			    if(reser.getStatus()== true) {
+			    	status="Pago";
+			    }
+			   model.addRow(new Object[] {
+					   reser.getId(),
+					   tipo,
+					   reser.getPreco(),
+					   reser.getCheckIn(),
+					   reser.getCheckOut(),
+				        hosplogado.getNome(),
+				        status,
+				        hosplogado.getIdHospede(),
+			
+		
+		 });
 		}
+
 	   /* for (int i = 0; i < this.reserva.size(); i++) {
 	        Espacos espaco = this.reserva.get(i);
 	        modelo.addRow(new Object[] {espaco.getFkidQuartos()});
 	    }
 	    */
-	    table.setModel(modelo);
+	    table.setModel(model);
 	}
 	 private static class HeaderRenderer implements TableCellRenderer {
 	        private final TableCellRenderer delegate;

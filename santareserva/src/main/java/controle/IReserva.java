@@ -8,6 +8,8 @@ public interface IReserva {
 	public LocalDate getCheckOut();
 	public int getId() ;
 	public Float getPreco();
+	public Boolean getStatus();
+	public void efetuarPagamento();	
 	
 
 }

@@ -213,6 +213,7 @@ public class TelaLogin extends JFrame {
 					abrir.setVisible(true);
 					c.setVisible(true);
 					dispose();
+					abrir.setVisible(true);
 				} else {
 					TelaLoginNaoRealizado abrir = new TelaLoginNaoRealizado();
 					abrir.setVisible(true);				}

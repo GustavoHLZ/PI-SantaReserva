@@ -12,7 +12,24 @@ public class Computadores implements IReserva{
 	private Float preco;
 	private LocalDate checkIn;
 	private LocalDate checkOut;
+	private Boolean Status;
+	public Computadores() {
+		Status=false;
+	}
 	
+	public Boolean getStatus() {
+		return Status;
+	}
+
+
+	public void setStatus(Boolean status) {
+		Status = status;
+	}
+	
+	public void efetuarPagamento() {
+		setStatus(true);
+	}
+
 	public LocalDate getCheckIn() {
 		return checkIn;
 	}
