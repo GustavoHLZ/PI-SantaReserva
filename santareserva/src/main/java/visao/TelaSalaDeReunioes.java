@@ -11,6 +11,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.text.MaskFormatter;
 
 import modelo.comboBoxPreco;
+import controle.RoundedBorder;
 import controle.SalaReunioesDAO;
 import modelo.Hospedes;
 import modelo.Reserva;
@@ -70,7 +71,8 @@ public class TelaSalaDeReunioes extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(228, 228, 228));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		RoundedBorder bordaVermelha = new RoundedBorder(Color.red, 10);
+		RoundedBorder bordaPreta = new RoundedBorder(Color.black, 10);
 	
 		
 		setContentPane(contentPane);
@@ -375,9 +377,11 @@ public class TelaSalaDeReunioes extends JFrame {
 		}
 		
 		JLabel lblNewLabel_21 = new JLabel("Check-in");
-		PainelPrincipal.add(lblNewLabel_21, "cell 0 2");
+		lblNewLabel_21.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 22));
+		PainelPrincipal.add(lblNewLabel_21, "cell 0 2,aligny center");
 		
 		textCheckIn = new JFormattedTextField(mascaraDat);
+		textCheckIn.setBorder(bordaPreta);
 		PainelPrincipal.add(textCheckIn, "cell 0 2");
 		textCheckIn.setColumns(10);
 		
@@ -385,9 +389,11 @@ public class TelaSalaDeReunioes extends JFrame {
 		PainelPrincipal.add(panel_20, "cell 0 2");
 		
 		JLabel lblNewLabel_22 = new JLabel("Check-Out");
-		PainelPrincipal.add(lblNewLabel_22, "cell 0 2");
+		lblNewLabel_22.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 22));
+		PainelPrincipal.add(lblNewLabel_22, "cell 0 2,aligny center");
 		
 		textCheckOut = new JFormattedTextField(mascaraDat);
+		textCheckOut.setBorder(bordaPreta);
 		PainelPrincipal.add(textCheckOut, "cell 0 2");
 		textCheckOut.setColumns(10);
 		
