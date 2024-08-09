@@ -206,24 +206,24 @@ public class TelaLogin extends JFrame {
 		lblNewLabel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (txtLogin.getText().equals("") && txtSenha.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Os campos estão vazios.");
+				if (txtLogin.getText().isEmpty() && txtSenha.getText().isEmpty()) {
 					txtLogin.setBorder(bordaVermelha);
 					txtSenha.setBorder(bordaVermelha);
-
+					TelaLoginNaoRealizado abrir = new TelaLoginNaoRealizado();
+					return;
 				}
 
-				else if (txtLogin.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
+				else if (txtLogin.getText().isEmpty()) {
 					txtLogin.setBorder(bordaVermelha);
+					TelaLoginNaoRealizado abrir = new TelaLoginNaoRealizado();
 					return;
 				} else {
 					txtLogin.setBorder(bordaPreta);
 				}
 
-				if (txtSenha.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Preencha o campo Senha.");
+				if (txtSenha.getText().isEmpty()) {
 					txtSenha.setBorder(bordaVermelha);
+					TelaLoginNaoRealizado abrir = new TelaLoginNaoRealizado();
 					return;
 
 				} else {
@@ -258,7 +258,8 @@ public class TelaLogin extends JFrame {
 					abrir.setVisible(true);
 				} else {
 					TelaLoginNaoRealizado abrir = new TelaLoginNaoRealizado();
-					abrir.setVisible(true);				}
+					abrir.setVisible(true);				
+					}
 			}
 		});
 		lblNewLabel_5.setIcon(new ImageIcon(TelaLogin.class.getResource("/visao/Botões/BTN Login.png")));

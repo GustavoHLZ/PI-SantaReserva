@@ -148,23 +148,33 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_11.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeReserva.png"))); 
 		PainelIcones.add(lblNewLabel_11, "cell 0 2,alignx center"); 
 		 
+		if(hospede.getLogin().getIdUsuario()== (1)) {
+			JLabel lblNewLabel_5 = new JLabel("Pagamento"); 
+			lblNewLabel_5.addMouseListener(new MouseAdapter() { 
+				@Override 
+				public void mouseClicked(MouseEvent e) { 
+					TelaPagamento c = new TelaPagamento(hospede,reserva); 
+					c.setVisible(true); 
+					dispose(); 
+				} 
+			});
+			
+			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
+			PainelIcones.add(lblNewLabel_5, "cell 1 2"); 
+		}else {
 		JLabel lblNewLabel_5 = new JLabel("Reserva"); 
 		lblNewLabel_5.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				if(quartoSelecionado==null) {
-					JOptionPane.showMessageDialog(null, "Selecione o Quarto");
-				}
-				else {
-					TelaReservas c = new TelaReservas(hosplogado,reserva); 
+				TelaReservas c = new TelaReservas(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
-				}
-				
 			} 
 		}); 
+		
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
 		PainelIcones.add(lblNewLabel_5, "cell 1 2"); 
+		}
 		 
 		JLabel lblNewLabel_12 = new JLabel(""); 
 		lblNewLabel_12.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeSalaReunioes.png"))); 

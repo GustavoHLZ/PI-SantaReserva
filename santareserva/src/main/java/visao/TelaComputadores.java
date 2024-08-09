@@ -150,6 +150,20 @@ public class TelaComputadores extends JFrame {
 		lblNewLabel_11.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Icones/IconeReserva.png"))); 
 		PainelIcones.add(lblNewLabel_11, "cell 0 2,alignx center"); 
 		 
+		if(hospede.getLogin().getIdUsuario()== (1)) {
+			JLabel lblNewLabel_5 = new JLabel("Pagamento"); 
+			lblNewLabel_5.addMouseListener(new MouseAdapter() { 
+				@Override 
+				public void mouseClicked(MouseEvent e) { 
+					TelaPagamento c = new TelaPagamento(hospede,reserva); 
+					c.setVisible(true); 
+					dispose(); 
+				} 
+			});
+			
+			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
+			PainelIcones.add(lblNewLabel_5, "cell 1 2"); 
+		}else {
 		JLabel lblNewLabel_5 = new JLabel("Reserva"); 
 		lblNewLabel_5.addMouseListener(new MouseAdapter() { 
 			@Override 
@@ -157,11 +171,12 @@ public class TelaComputadores extends JFrame {
 				TelaReservas c = new TelaReservas(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
-				 
 			} 
 		}); 
+		
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
 		PainelIcones.add(lblNewLabel_5, "cell 1 2"); 
+		} 
 		 
 		JLabel lblNewLabel_12 = new JLabel(""); 
 		lblNewLabel_12.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Icones/IconeSalaReunioes.png"))); 
@@ -301,15 +316,22 @@ public class TelaComputadores extends JFrame {
 				
 				LocalDate checkINN = null;
 				
-				if (textCheckIn.getText().isEmpty()) { 
-					JOptionPane.showMessageDialog(null, "Preencha o campo Check-In"); 
+				if(textCheckIn.getText().isEmpty() && textCheckOut.getText().isEmpty()) {
+					textCheckIn.setBorder(bordaVermelha);
+					textCheckOut.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
+					return;
+					
+				}else if (textCheckIn.getText().isEmpty()) { 
+					textCheckIn.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
 					return; 
 
-				}  
-            	 
-            	if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-					JOptionPane.showMessageDialog(null, "A data de Check-In deve estar no formato dd/MM/yyyy."); 
+				}else if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+					textCheckIn.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
 					return; 
+					
 				} else {
 					
 					String diaTxt = textCheckIn.getText().substring(0, 2); 
@@ -322,18 +344,19 @@ public class TelaComputadores extends JFrame {
 
 					checkINN = LocalDate.of(ano, mes, dia);
 					computadoralugado.setCheckIn(checkINN);
+					textCheckIn.setBorder(bordaPreta);
 				}
             	
             	LocalDate checkOUTT = null;
             	
             	if (textCheckOut.getText().isEmpty()) { 
-					JOptionPane.showMessageDialog(null, "Preencha o campo Check-Out"); 
+					textCheckOut.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
 					return; 
 
-				}
-            	
-            	if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
+				}else if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+					textCheckOut.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
 					return; 
 				} else {
 					String diaTxt = textCheckOut.getText().substring(0, 2); 
@@ -346,6 +369,7 @@ public class TelaComputadores extends JFrame {
 
 					checkOUTT = LocalDate.of(ano, mes, dia);
 					computadoralugado.setCheckOut(checkOUTT);
+					textCheckOut.setBorder(bordaPreta);
 				}
             	
         Integer idcomp = computadoralugado.getId();	

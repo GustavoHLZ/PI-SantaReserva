@@ -1,33 +1,37 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.Timer;
-import net.miginfocom.swing.MigLayout;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-public class TelaLoginNaoRealizado extends JFrame {
+import net.miginfocom.swing.MigLayout;
 
-    private static final long serialVersionUID = 1L;
-    private JPanel Tela;
+public class TelanInserido extends JFrame {
 
-    /**
-     * Create the frame.
-     */
-    public TelaLoginNaoRealizado() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private JPanel Tela;
+
+	/**
+	 * Launch the application.
+	 */
+
+	/**
+	 * Create the frame.
+	 */
+	public TelanInserido() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new Dimension(500, 500)); 
         pack(); // Ajusta o tamanho automaticamente
@@ -46,10 +50,10 @@ public class TelaLoginNaoRealizado extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][][grow][]"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaLoginNaoRealizado.class.getResource("/visao/Icones/IconeNaorealizado.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaNaoRealizado.class.getResource("/visao/Icones/IconeNaorealizado.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
-        JLabel lblNoRealizado = new JLabel("Ocorreu um erro ao inserir os dados!");
+        JLabel lblNoRealizado = new JLabel("Informações não inseridas");
         lblNoRealizado.setFont(new Font("Arial", Font.PLAIN, 20));
         Icone.add(lblNoRealizado, "cell 0 1,alignx center,aligny center");
 
