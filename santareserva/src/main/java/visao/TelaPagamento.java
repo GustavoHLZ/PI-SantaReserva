@@ -1,6 +1,7 @@
 package visao;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -20,6 +21,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.text.MaskFormatter;
 
 import controle.PagamentoDAO;
@@ -138,17 +141,9 @@ public class TelaPagamento extends JFrame {
 		lblNewLabel_11.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeReserva.png")));
 		PainelIcones.add(lblNewLabel_11, "cell 0 2,alignx center");
 		
-		JLabel lblNewLabel_5 = new JLabel("Reserva");
-		lblNewLabel_5.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//TelaReservas c = new TelaReservas(hosplogado);
-				//c.setVisible(true);
-				//();
-			}
-		});
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		PainelIcones.add(lblNewLabel_5, "cell 1 2");
+			JLabel lblNewLabel_5 = new JLabel("Pagamento"); 
+			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
+			PainelIcones.add(lblNewLabel_5, "cell 1 2"); 
 		
 		JLabel lblNewLabel_12 = new JLabel("");
 		lblNewLabel_12.setIcon(new ImageIcon(TelaAvaliacoes.class.getResource("/visao/Icones/IconeSalaReunioes.png")));
@@ -158,9 +153,9 @@ public class TelaPagamento extends JFrame {
 		lblNewLabel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//TelaSalaDeReunioes c = new TelaSalaDeReunioes(hosplogado);
-				//c.setVisible(true);
-				//dispose();
+				TelaSalaDeReunioes c = new TelaSalaDeReunioes(hospede,reserva);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -171,6 +166,14 @@ public class TelaPagamento extends JFrame {
 		PainelIcones.add(lblNewLabel_13, "cell 0 4,alignx center");
 		
 		JLabel lblNewLabel_7 = new JLabel("Computadores");
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaComputadores tela  = new TelaComputadores(hospede, reserva);
+				tela.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_7, "cell 1 4");
 		
@@ -179,6 +182,14 @@ public class TelaPagamento extends JFrame {
 		PainelIcones.add(lblNewLabel_14, "cell 0 5,alignx center");
 		
 		JLabel lblNewLabel_8 = new JLabel("Quartos");
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaQuartos tela = new TelaQuartos(hospede, reserva);
+				tela.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_8, "cell 1 5");
 		
@@ -187,6 +198,14 @@ public class TelaPagamento extends JFrame {
 		PainelIcones.add(lblNewLabel_15, "cell 0 6,alignx center");
 		
 		JLabel lblNewLabel_9 = new JLabel("Avalie-nos");
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaAvaliacoes tela = new TelaAvaliacoes(hospede, reserva);
+				tela.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_9, "cell 1 6");
 		
@@ -195,6 +214,14 @@ public class TelaPagamento extends JFrame {
 		PainelIcones.add(lblNewLabel_16, "cell 0 7,alignx center");
 		
 		JLabel lblNewLabel_10 = new JLabel("Nossas Informações");
+		lblNewLabel_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaInformacoes tela = new TelaInformacoes(hospede, reserva);
+				tela.setVisible(true);
+				dispose();
+			}
+		});
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		PainelIcones.add(lblNewLabel_10, "cell 1 7");
 		
@@ -243,6 +270,13 @@ public class TelaPagamento extends JFrame {
 				PainelPrincipal.add(scrollPane, "cell 0 1,grow");
 				
 						table = new JTable();
+						scrollPane.setViewportView(table);
+						atualizarJTable();
+						
+						JTableHeader header = table.getTableHeader();
+					    header.setDefaultRenderer(new HeaderRenderer(table.getTableHeader().getDefaultRenderer()));
+					    table.setRowHeight(30);
+					    
 						table.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent e) {
@@ -257,7 +291,6 @@ public class TelaPagamento extends JFrame {
 							}
 						});
 						
-						scrollPane.setViewportView(table);
 						table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "IDPagamento", "Nome", "Número", "Validade","COD Segurança", "Num espaço" }));
 						
 				JPanel panel_19 = new JPanel();
@@ -286,7 +319,7 @@ public class TelaPagamento extends JFrame {
 		
 	}
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "IDPagamento", "Nome", "Número", "Validade" ,"COD Segurança", "Num Boleto", "Num Pix" });
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "IDPagamento", "Nome", "Número", "Validade" ,"COD Segurança", "Num Espaço" });
 
 	    PagamentoDAO pagamentodao = PagamentoDAO.getInstancia();
 	    listarPagamento = pagamentodao.listarPagamento();
@@ -294,8 +327,26 @@ public class TelaPagamento extends JFrame {
 	    for (int i = 0; i < listarPagamento.size(); i++) {
 	        Pagamento pagamento = listarPagamento.get(i);
 
-	        modelo.addRow(new Object[] {pagamento.getIdPagamento(), pagamento.getNometitular(), pagamento.getNumeroCartao(), pagamento.getDataValidade(), pagamento.getCodigoSeguranca(), pagamento.getNumeroBoleto(), pagamento.getNumeroEspaco()});
+	        modelo.addRow(new Object[] {pagamento.getIdPagamento(), pagamento.getNometitular(), pagamento.getNumeroCartao(), pagamento.getDataValidade(), pagamento.getCodigoSeguranca(), pagamento.getNumeroEspaco()});
 	    }
 	    table.setModel(modelo);
+	}
+	
+	private static class HeaderRenderer implements TableCellRenderer {
+        private final TableCellRenderer delegate;
+
+        public HeaderRenderer(TableCellRenderer delegate) {
+            this.delegate = delegate;
+        }
+        
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component c = delegate.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Color topo = new Color(119, 165, 175);
+            c.setBackground(topo = new Color(119, 165, 175)); 
+            c.setForeground(Color.WHITE); 
+            c.setFont(new Font("Arial", Font.TRUETYPE_FONT, 18)); 
+            return c;
+        }
 	}
 }

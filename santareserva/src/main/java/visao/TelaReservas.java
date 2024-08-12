@@ -496,7 +496,8 @@ public class TelaReservas extends JFrame {
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
 		        if (!txtNometitular.getText().matches("[\\p{L}\\s~^]+")) {
-		            JOptionPane.showMessageDialog(null, "O nome deve conter apenas letras.");
+					TelanInserido tela  = new TelanInserido();
+					tela.setVisible(true);
 		            return;
 		        }
 
@@ -505,7 +506,8 @@ public class TelaReservas extends JFrame {
 		       
 
 		        if (selectedRow == -1) {
-		            JOptionPane.showMessageDialog(null, "Nenhum espaço selecionado.");
+		            TelasEspaco tela = new TelasEspaco();
+		            tela.setVisible(true);
 		            return;
 		        }
 
@@ -543,7 +545,7 @@ public class TelaReservas extends JFrame {
 		        String senhaLogin = textSenhaLogin.getText();
 
 		        if(!senhaLogin.equals(hosplogado.getLogin().getSenha())) {
-		        	JOptionPane.showMessageDialog(null, "Senha não coincide!");
+		        	JOptionPane.showMessageDialog(null, "A senha não coincide!");
 		            return;
 		        } 
 		        

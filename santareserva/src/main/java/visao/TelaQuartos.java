@@ -7,7 +7,8 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter; 
 import java.awt.event.MouseEvent; 
 import java.text.ParseException; 
-import java.text.SimpleDateFormat; 
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalDate; 
 import java.util.ArrayList; 
  
@@ -148,23 +149,33 @@ public class TelaQuartos extends JFrame {
 		lblNewLabel_11.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeReserva.png"))); 
 		PainelIcones.add(lblNewLabel_11, "cell 0 2,alignx center"); 
 		 
+		if(hospede.getLogin().getIdUsuario()== (1)) {
+			JLabel lblNewLabel_5 = new JLabel("Pagamento"); 
+			lblNewLabel_5.addMouseListener(new MouseAdapter() { 
+				@Override 
+				public void mouseClicked(MouseEvent e) { 
+					TelaPagamento c = new TelaPagamento(hospede,reserva); 
+					c.setVisible(true); 
+					dispose(); 
+				} 
+			});
+			
+			lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
+			PainelIcones.add(lblNewLabel_5, "cell 1 2"); 
+		}else {
 		JLabel lblNewLabel_5 = new JLabel("Reserva"); 
 		lblNewLabel_5.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				if(quartoSelecionado==null) {
-					JOptionPane.showMessageDialog(null, "Selecione o Quarto");
-				}
-				else {
-					TelaReservas c = new TelaReservas(hosplogado,reserva); 
+				TelaReservas c = new TelaReservas(hospede,reserva); 
 				c.setVisible(true); 
 				dispose(); 
-				}
-				
 			} 
 		}); 
+		
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20)); 
 		PainelIcones.add(lblNewLabel_5, "cell 1 2"); 
+		}
 		 
 		JLabel lblNewLabel_12 = new JLabel(""); 
 		lblNewLabel_12.setIcon(new ImageIcon(TelaQuartos.class.getResource("/visao/Icones/IconeSalaReunioes.png"))); 
@@ -270,8 +281,6 @@ public class TelaQuartos extends JFrame {
 		table.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
-				System.out.println("");
-				//
 				if (e.getClickCount() == 1) { 
 		            JTable source = (JTable) e.getSource(); 
 		            int posicaoQuarto = source.getSelectedRow(); 
@@ -297,18 +306,7 @@ public class TelaQuartos extends JFrame {
 			public void mouseClicked(MouseEvent e) { 
 				//validação pra ver se o usuário não selecionou nada e também se o quarto selecionado está vazio ou não 
 				if (quartoSelecionado != null) {  
-		            if (quartoSelecionado.getDisp()) { 
-		            	 
-		            	if (textCheckIn.getText().equals("")) { 
-							JOptionPane.showMessageDialog(null, "Preencha o campo Check-In"); 
-							return; 
- 
-						} 
-		            	if (textCheckOut.getText().equals("")) { 
-							JOptionPane.showMessageDialog(null, "Preencha o campo Check-Out"); 
-							return; 
- 
-						} 
+		            if (quartoSelecionado.getDisp()) {  
 		            	 			 
 		            	 
 		            	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
@@ -327,42 +325,93 @@ public class TelaQuartos extends JFrame {
 				dataCheckOutTxt = dataCheckOutTxt.replace("/", ""); 
 				dataCheckOutTxt = dataCheckOutTxt.trim(); 
 				 
-				LocalDate checkINN = null; 
-				if (checkin.isEmpty()) { 
-					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-In preenchida!"); 
-				} else { 
- 
-					String diaTxt = dataCheckInTxt.substring(0, 2); 
-					String mesTxt = dataCheckInTxt.substring(2, 4); 
-					String anoTxt = dataCheckInTxt.substring(4, 8); 
- 
-					Integer dia = Integer.valueOf(diaTxt); 
-					Integer mes = Integer.valueOf(mesTxt); 
-					Integer ano = Integer.valueOf(anoTxt); 
- 
-					checkINN = LocalDate.of(ano, mes, dia); 
-					quartoSelecionado.setCheckIn(checkINN);
-				} 
-				 
-				LocalDate checkOUTT = null; 
-				if (checkout.isEmpty()) { 
-					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-Out preenchida!"); 
+				if (quartoSelecionado == null) {
+				    TelasEspaco tela = new TelasEspaco();
+				    tela.setVisible(true);
+				    return;
 				}
-				if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
-					return; 
-				} else { 
- 
-					String diaTxt = dataCheckOutTxt.substring(0, 2); 
-					String mesTxt = dataCheckOutTxt.substring(2, 4); 
-					String anoTxt = dataCheckOutTxt.substring(4, 8); 
- 
-					Integer dia = Integer.valueOf(diaTxt); 
-					Integer mes = Integer.valueOf(mesTxt); 
-					Integer ano = Integer.valueOf(anoTxt); 
- 
-					checkOUTT = LocalDate.of(ano, mes, dia); 
-					quartoSelecionado.setCheckOut(checkOUTT);
+				
+				if (textCheckIn.getText().equals("  /  /    ") && textCheckOut.getText().equals("  /  /    ")) {
+				    textCheckIn.setBorder(bordaVermelha);
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    System.out.println("1");
+				    return;
+				}
+				
+				LocalDate checkINN = null;
+				
+				if (textCheckIn.getText().equals("  /  /    ")) { 
+				    textCheckIn.setBorder(bordaVermelha);
+				    textCheckOut.setBorder(bordaPreta);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    System.out.println("11");
+				    return;
+
+				} else if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+				    textCheckIn.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    System.out.println(textCheckIn.getText());
+				    return;
+
+				} else {
+				    try {
+				        String diaTxt = textCheckIn.getText().substring(0, 2); 
+				        String mesTxt = textCheckIn.getText().substring(3, 5); 
+				        String anoTxt = textCheckIn.getText().substring(6, 10); 
+
+				        Integer dia = Integer.valueOf(diaTxt); 
+				        Integer mes = Integer.valueOf(mesTxt); 
+				        Integer ano = Integer.valueOf(anoTxt); 
+
+				        checkINN = LocalDate.of(ano, mes, dia);
+				        quartoSelecionado.setCheckIn(checkINN);
+				        textCheckIn.setBorder(bordaPreta);
+
+				    } catch (DateTimeException ex) {
+				        textCheckIn.setBorder(bordaVermelha);
+				        TelanInserido tela = new TelanInserido();
+				        tela.setVisible(true);
+				        return;
+				    }
+				}            	
+				LocalDate checkOUTT = null;
+
+				if (textCheckOut.getText().equals("  /  /    ")) { 
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
+
+				} else if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
+
+				} else {
+				    try {
+				        String diaTxt = textCheckOut.getText().substring(0, 2); 
+				        String mesTxt = textCheckOut.getText().substring(3, 5); 
+				        String anoTxt = textCheckOut.getText().substring(6, 10); 
+
+				        Integer dia = Integer.valueOf(diaTxt); 
+				        Integer mes = Integer.valueOf(mesTxt); 
+				        Integer ano = Integer.valueOf(anoTxt); 
+
+				        checkOUTT = LocalDate.of(ano, mes, dia);
+				        quartoSelecionado.setCheckOut(checkOUTT);
+				        textCheckOut.setBorder(bordaPreta);
+
+				    } catch (DateTimeException ex) {
+				        textCheckOut.setBorder(bordaVermelha);
+				        TelanInserido tela = new TelanInserido();
+				        tela.setVisible(true);
+				        return;
+				    }
 				} 
 				
 				Integer idquartos = quartoSelecionado.getId();
@@ -386,11 +435,12 @@ public class TelaQuartos extends JFrame {
 				 dispose();
 				  
 		            } else { 
-		                JOptionPane.showMessageDialog(null, "Este quarto não está disponível para reserva."); 
+		                TelaIndisponivel tela = new TelaIndisponivel();
+		                return;
 		            } 
 		        } else { 
-		            JOptionPane.showMessageDialog(null, "Por favor, selecione um quarto antes de fazer uma reserva."); 
-		        } 
+		        	TelasEspaco tela = new TelasEspaco();
+		        }
 				 
 			} 
 		}); 

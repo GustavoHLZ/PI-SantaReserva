@@ -43,7 +43,7 @@ public class TelaCadastroRealizado extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][grow][]10px"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaCadastroRealizado.class.getResource("/visao/Icones/RealizadoM.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaCadastroRealizado.class.getResource("/visao/Icones/IconeRealizado.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
         JLabel lblNoRealizado = new JLabel("Cadastro Realizado Com Sucesso!");

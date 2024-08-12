@@ -175,19 +175,22 @@ public class TelaCadastro extends JFrame {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 
-								if(txtEmail.getText().equals("") && txtSenha.getText().equals("") && txtNome.getText().equals("") && txtSobrenome.getText().equals("")) { 
-									JOptionPane.showMessageDialog(null, "Os campos estão vazios."); 
-									txtEmail.setBorder(bordaVermelha); 
-									txtSenha.setBorder(bordaVermelha); 
+								if(txtEmail.getText().equals("") && txtSenha.getText().equals("") && txtNome.getText().equals("") && txtSobrenome.getText().equals("") && txtNascimento.getText().equals("  /  /    ")) { 
+									TelanInserido tela  = new TelanInserido();
+									tela.setVisible(true);
+									txtEmail.setBorder(bordaVermelha);
 									txtNome.setBorder(bordaVermelha);
-									txtNascimento.setBorder(bordaVermelha);
 									txtSobrenome.setBorder(bordaVermelha);
+									txtNascimento.setBorder(bordaVermelha);
 									txtTelefone.setBorder(bordaVermelha);
+									txtSenha.setBorder(bordaVermelha);
+									
 								} 
 								
 								if (txtEmail.getText().equals("")) {
 
-									JOptionPane.showMessageDialog(null, "Preencha o campo E-mail.");
+									TelanInserido tela  = new TelanInserido();
+									tela.setVisible(true);
 									txtEmail.setBorder(bordaVermelha);
 									return;
 
@@ -215,7 +218,7 @@ public class TelaCadastro extends JFrame {
 									txtSobrenome.setBorder(bordaPreta);
 								}
 
-								if (txtNascimento.getText().equals("")) {
+								if (txtNascimento.getText().equals("  /  /    ")) {
 
 									JOptionPane.showMessageDialog(null, "Preencha o campo Nascimento.");
 									txtNascimento.setBorder(bordaVermelha);
@@ -225,7 +228,7 @@ public class TelaCadastro extends JFrame {
 									txtNascimento.setBorder(bordaPreta);
 								}
 
-								if (txtTelefone.getText().equals("")) {
+								if (txtTelefone.getText().equals("(  )      -    ")) {
 
 									JOptionPane.showMessageDialog(null, "Preencha o campo Telefone.");
 									txtTelefone.setBorder(bordaVermelha);

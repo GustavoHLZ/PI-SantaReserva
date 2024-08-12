@@ -43,10 +43,10 @@ public class TelaPerfilExcluido extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][grow][]10px"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaPerfilExcluido.class.getResource("/visao/Icones/RealizadoM.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaPerfilExcluido.class.getResource("/visao/Icones/IconeRealizado.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
-        JLabel lblNoRealizado = new JLabel("Seu Perfil Foi Excluído!");
+        JLabel lblNoRealizado = new JLabel("Perfil excluído com sucesso!");
         lblNoRealizado.setFont(new Font("Arial", Font.PLAIN, 20));
         Icone.add(lblNoRealizado, "cell 0 1,alignx center,aligny center");
 

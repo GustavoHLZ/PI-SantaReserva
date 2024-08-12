@@ -57,16 +57,6 @@ public class TelaLoginNaoRealizado extends JFrame {
         lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
         Icone.add(lblNewLabel_2, "cell 0 2,alignx center");
 
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                dispose();
-            }
-        });
-        lblNewLabel_1.setIcon(new ImageIcon(TelaLoginNaoRealizado.class.getResource("/visao/Icones/BtnFechar.png")));
-        Icone.add(lblNewLabel_1, "cell 0 3,alignx center,aligny bottom");
-
      
         exibirPopupAnimado();
     }
