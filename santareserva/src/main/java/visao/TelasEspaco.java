@@ -1,30 +1,31 @@
 package visao;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.Timer;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
 
-public class TelaAvaliacaoExcluida extends JFrame {
+import net.miginfocom.swing.MigLayout;
 
-    private static final long serialVersionUID = 1L;
-    private JPanel Tela;
+public class TelasEspaco extends JFrame {
+	
+	private JPanel Tela;
 
-    /**
-     * Create the frame.
-     */
-    public TelaAvaliacaoExcluida() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Create the panel.
+	 */
+	public TelasEspaco() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new Dimension(500, 500)); 
         pack(); // Ajusta o tamanho automaticamente
@@ -40,33 +41,35 @@ public class TelaAvaliacaoExcluida extends JFrame {
         JPanel Icone = new JPanel();
         Icone.setBackground(new Color(255, 255, 255));
         Tela.add(Icone, "flowx,cell 0 0,alignx center,growy");
-        Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][grow][]10px"));
+        Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][][grow][]"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaAvaliacaoExcluida.class.getResource("/visao/Icones/IconeRealizado.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaNaoRealizado.class.getResource("/visao/Icones/IconeNaorealizado.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
-        JLabel lblNoRealizado = new JLabel("Avaliação Excluída com Sucesso!");
+        JLabel lblNoRealizado = new JLabel("Nenhum espaço selecionado");
         lblNoRealizado.setFont(new Font("Arial", Font.PLAIN, 20));
         Icone.add(lblNoRealizado, "cell 0 1,alignx center,aligny center");
 
-        // Chama o método para exibir o popup e fechar após 3 segundos
+        JLabel lblNewLabel_2 = new JLabel("(Certifique-se de selecionar um espaço)");
+        lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
+        Icone.add(lblNewLabel_2, "cell 0 2,alignx center");
+
+     
         exibirPopupAnimado();
     }
 
     private void exibirPopupAnimado() {
         setVisible(true); // Torna o JFrame visível
 
-        // Timer para fechar o popup após 3 segundos
-        Timer timer = new Timer(3000, new ActionListener() {
+        // Timer para fechar o popup após 2 segundos
+        Timer timer = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                dispose(); 
             }
         });
         timer.setRepeats(false); // Executa apenas uma vez
         timer.start();
     }
-
- 
 }

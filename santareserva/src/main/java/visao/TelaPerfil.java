@@ -443,34 +443,40 @@ public class TelaPerfil extends JFrame {
 				
 
 				if (txtNome.getText().trim().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "O campo Nome não pode estar vazio.");
+					TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
 					txtNome.setBorder(bordaVermelha);
 					return;
 				}
 				
 				if (txtSobrenome.getText().trim().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "O campo Sobrenome não pode estar vazio.");
-					txtSobrenome.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    txtSobrenome.setBorder(bordaVermelha);
 					return;
 				}
 				if (txtTelefone.getText().trim().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "O campo Telefone não pode estar vazio.");
-					txtTelefone.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    txtTelefone.setBorder(bordaVermelha);
 					return;
 				}
 				if (txtNascimento.getText().trim().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "O campo Data de Nascimento não pode estar vazio.");
-					txtNascimento.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    txtNascimento.setBorder(bordaVermelha);
 					return;
 				}
 				if (txtEmail.getText().trim().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "O campo Email não pode estar vazio.");
-					txtEmail.setBorder(bordaVermelha);
+					TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    txtEmail.setBorder(bordaVermelha);
 					return;
 				}
-				if (!txtSenha.getText().equals(txtConfSenha.getText())) {
-					JOptionPane.showMessageDialog(null, "As senhas não coincidem.");
-					txtSenha.setBorder(bordaVermelha);
+				if (!txtVerSenha.getText().equals(txtConfSenha.getText())) {
+					TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    txtVerSenha.setBorder(bordaVermelha);
 					return;
 				}
 				
@@ -504,7 +510,9 @@ public class TelaPerfil extends JFrame {
 
 				LocalDate nascimento = null;
 				if (dataNascTxt.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Nenhuma data preenchida!");
+					TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    txtNascimento.setBorder(bordaVermelha);
 				} else {
 
 					String diaTxt = dataNascTxt.substring(0, 2);
@@ -536,10 +544,17 @@ public class TelaPerfil extends JFrame {
 				hospedes.setNascimento(nascimento);
 				hospedes.setTelefone(telefone);
 				
+				usuariologado.setNome(txtNome.getText());
+		        usuariologado.setSobrenome(txtSobrenome.getText());
+		        usuariologado.setTelefone(txtTelefone.getText());
+		        usuariologado.setNascimento(LocalDate.parse(txtNascimento.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		        usuariologado.getLogin().setLogin(txtEmail.getText());
+		        usuariologado.getLogin().setSenha(txtSenha.getText());
+				
 				InfologinDAO idao = InfologinDAO.getInstancia();
 				HospedesDAO dao = HospedesDAO.getInstancia();
 				
-				dao.atualizarHospedes(nome, sobrenome, nascimento, telefone, id);
+				dao.atualizarHospedes(usuariologado.getNome(), sobrenome, nascimento, telefone, id);
 				
 					// pega a chave primaria gerada no inserir do InfologinDAO e insere as info-
 					// mações no Login do usuário
@@ -548,6 +563,13 @@ public class TelaPerfil extends JFrame {
 					// insere as informações de login a partir da chave estrangeira em Hospedes
 					TelaPerfilAtualizado abrir = new TelaPerfilAtualizado();
 					abrir.setVisible(true);
+					lblNameuser.setText(usuariologado.getNome());
+					lblUser.setText("Olá, " + usuariologado.getNome() + " " + usuariologado.getSobrenome());
+					lblNameuser.setText(hosplogado.getNome());
+			        PainelAlteracao.revalidate();
+			        PainelAlteracao.repaint();
+			        
+			        
 
 					
 					

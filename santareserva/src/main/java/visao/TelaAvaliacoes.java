@@ -378,10 +378,12 @@ public class TelaAvaliacoes extends JFrame {
 						           boolean removido = dao.removerAvaliacoes(idAvaliacao, idHospede);
 
 						           if (removido) {
-						               JOptionPane.showMessageDialog(null, "Avaliação removida com sucesso!");
+						               TelaAvaliacaoExcluida tela = new TelaAvaliacaoExcluida();
+						               tela.setVisible(true);
 						               atualizarJTable();
 						           } else {
-						               JOptionPane.showMessageDialog(null, "Falha ao remover avaliação!");
+						               TelaAvaliacaoFalha tela = new TelaAvaliacaoFalha();
+						               tela.setVisible(true);
 						           }
 						       }
 						   }

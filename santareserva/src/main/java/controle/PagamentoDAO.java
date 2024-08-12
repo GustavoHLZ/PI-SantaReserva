@@ -70,7 +70,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 		
 		ArrayList<Pagamento> pagamentos = new ArrayList<Pagamento>();
 
-		String SQL = "SELECT * FROM Pagamento";
+		String SQL = "SELECT * FROM pagamento";
 
 		Conexao con = Conexao.getInstancia();
 		Connection conBD = con.conectar();
@@ -85,7 +85,7 @@ public class PagamentoDAO implements IPagamentoDAO{
 
 				Integer ID_pagamento = rs.getInt("idPagamento");
 				String nometitular = rs.getString("nometitular");
-				Integer numeroCartao = rs.getInt("numeroCartao");
+				long numeroCartao = rs.getLong("numeroCartao");
 				String dataValidade = rs.getString("dataValidade");
 				Integer codigoSeguranca = rs.getInt("codigoSeguranca");
 				Integer numeroBoleto = rs.getInt("numeroBoleto");

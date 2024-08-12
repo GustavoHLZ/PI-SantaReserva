@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -278,14 +279,14 @@ public class TelaComputadores extends JFrame {
 		 
 		JPanel PainelPrincipal = new JPanel(); 
 		contentPane.add(PainelPrincipal, "cell 1 1,grow"); 
-		PainelPrincipal.setLayout(new MigLayout("", "[grow]", "[][grow][]")); 
+		PainelPrincipal.setLayout(new MigLayout("", "[][][][][grow]", "[][grow][]")); 
 		
 		JLabel lblNewLabel_20 = new JLabel("Computadores");
 		lblNewLabel_20.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 40));
-		PainelPrincipal.add(lblNewLabel_20, "cell 0 0");
+		PainelPrincipal.add(lblNewLabel_20, "cell 0 0 5 1");
 		 
 		JScrollPane scrollPane = new JScrollPane(); 
-		PainelPrincipal.add(scrollPane, "cell 0 1,grow"); 
+		PainelPrincipal.add(scrollPane, "cell 0 1 5 1,grow"); 
 		 
 		table = new JTable(); 
 		table.addMouseListener(new MouseAdapter() { 
@@ -307,69 +308,99 @@ public class TelaComputadores extends JFrame {
 	    table.setRowHeight(30);
 		
 		scrollPane.setViewportView(table); 
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Numero", "Tempo", "Preço", "Disponibilidade" })); 
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Numero", "Preço", "Disponibilidade" })); 
+		
+		
 		 
+
+		
 		JLabel lblReserva = new JLabel(""); 
 		lblReserva.addMouseListener(new MouseAdapter() { 
 			@Override 
 			public void mouseClicked(MouseEvent e) { 
 				
+				if (computadoralugado != null) {  
+		            if (computadoralugado.getDisp()) {
+				
+				if (textCheckIn.getText().equals("  /  /    ") && textCheckOut.getText().equals("  /  /    ")) {
+				    textCheckIn.setBorder(bordaVermelha);
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
+				}
+				
 				LocalDate checkINN = null;
 				
-				if(textCheckIn.getText().isEmpty() && textCheckOut.getText().isEmpty()) {
-					textCheckIn.setBorder(bordaVermelha);
-					textCheckOut.setBorder(bordaVermelha);
-					TelanInserido tela = new TelanInserido();
-					return;
-					
-				}else if (textCheckIn.getText().isEmpty()) { 
-					textCheckIn.setBorder(bordaVermelha);
-					TelanInserido tela = new TelanInserido();
-					return; 
+				if (textCheckIn.getText().equals("  /  /    ")) { 
+				    textCheckIn.setBorder(bordaVermelha);
+				    textCheckOut.setBorder(bordaPreta);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
 
-				}else if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-					textCheckIn.setBorder(bordaVermelha);
-					TelanInserido tela = new TelanInserido();
-					return; 
-					
+				} else if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+				    textCheckIn.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    System.out.println(textCheckIn.getText());
+				    return;
+
 				} else {
-					
-					String diaTxt = textCheckIn.getText().substring(0, 2); 
-					String mesTxt = textCheckIn.getText().substring(3, 5); 
-					String anoTxt = textCheckIn.getText().substring(6, 10); 
+				    try {
+				        String diaTxt = textCheckIn.getText().substring(0, 2); 
+				        String mesTxt = textCheckIn.getText().substring(3, 5); 
+				        String anoTxt = textCheckIn.getText().substring(6, 10); 
 
-					Integer dia = Integer.valueOf(diaTxt); 
-					Integer mes = Integer.valueOf(mesTxt); 
-					Integer ano = Integer.valueOf(anoTxt); 
+				        Integer dia = Integer.valueOf(diaTxt); 
+				        Integer mes = Integer.valueOf(mesTxt); 
+				        Integer ano = Integer.valueOf(anoTxt); 
 
-					checkINN = LocalDate.of(ano, mes, dia);
-					computadoralugado.setCheckIn(checkINN);
-					textCheckIn.setBorder(bordaPreta);
-				}
-            	
-            	LocalDate checkOUTT = null;
-            	
-            	if (textCheckOut.getText().isEmpty()) { 
-					textCheckOut.setBorder(bordaVermelha);
-					TelanInserido tela = new TelanInserido();
-					return; 
+				        checkINN = LocalDate.of(ano, mes, dia);
+				        computadoralugado.setCheckIn(checkINN);
+				        textCheckIn.setBorder(bordaPreta);
 
-				}else if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-					textCheckOut.setBorder(bordaVermelha);
-					TelanInserido tela = new TelanInserido();
-					return; 
+				    } catch (DateTimeException ex) {
+				        textCheckIn.setBorder(bordaVermelha);
+				        TelanInserido tela = new TelanInserido();
+				        tela.setVisible(true);
+				        return;
+				    }
+				}            	
+				LocalDate checkOUTT = null;
+
+				if (textCheckOut.getText().equals("  /  /    ")) { 
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
+
+				} else if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
+
 				} else {
-					String diaTxt = textCheckOut.getText().substring(0, 2); 
-					String mesTxt = textCheckOut.getText().substring(3, 5); 
-					String anoTxt = textCheckOut.getText().substring(6, 10); 
+				    try {
+				        String diaTxt = textCheckOut.getText().substring(0, 2); 
+				        String mesTxt = textCheckOut.getText().substring(3, 5); 
+				        String anoTxt = textCheckOut.getText().substring(6, 10); 
 
-					Integer dia = Integer.valueOf(diaTxt); 
-					Integer mes = Integer.valueOf(mesTxt); 
-					Integer ano = Integer.valueOf(anoTxt); 
+				        Integer dia = Integer.valueOf(diaTxt); 
+				        Integer mes = Integer.valueOf(mesTxt); 
+				        Integer ano = Integer.valueOf(anoTxt); 
 
-					checkOUTT = LocalDate.of(ano, mes, dia);
-					computadoralugado.setCheckOut(checkOUTT);
-					textCheckOut.setBorder(bordaPreta);
+				        checkOUTT = LocalDate.of(ano, mes, dia);
+				        computadoralugado.setCheckOut(checkOUTT);
+				        textCheckOut.setBorder(bordaPreta);
+
+				    } catch (DateTimeException ex) {
+				        textCheckOut.setBorder(bordaVermelha);
+				        TelanInserido tela = new TelanInserido();
+				        tela.setVisible(true);
+				        return;
+				    }
 				}
             	
         Integer idcomp = computadoralugado.getId();	
@@ -379,18 +410,25 @@ public class TelaComputadores extends JFrame {
 		dao.atualizarComputadores(checkINN, checkOUTT, idcomp);
 		
 		Float precoComputadores = computadoralugado.getPreco();
+		
 				
+				TelaRealizado tela = new TelaRealizado();
+				tela.setVisible(true);
 				reserva.setPrecoComputadores(precoComputadores);
 				reserva.adicionarReserva(computadoralugado);
 				TelaReservas telaReservas = new TelaReservas(hospede,reserva); 
 		        telaReservas.setVisible(true); 
 				atualizarJTable(); 
 				dispose();
+            } else { 
+                TelaIndisponivel tela = new TelaIndisponivel();
+                return;
+            } 
+        } else { 
+        	TelasEspaco tela = new TelasEspaco();
+        }
 			} 
-		}); 
-		 
-		JPanel panel_19 = new JPanel(); 
-		PainelPrincipal.add(panel_19, "flowx,cell 0 2"); 
+		});
 		
 		MaskFormatter mascaraDat = null;
 
@@ -403,85 +441,34 @@ public class TelaComputadores extends JFrame {
 			e.printStackTrace();
 
 		}
-		 
+		
 		JLabel lblNewLabel_21 = new JLabel("Check-in"); 
-		lblNewLabel_21.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 22));
-		PainelPrincipal.add(lblNewLabel_21, "cell 0 2,aligny center"); 
-		 
+		lblNewLabel_21.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 20));
+		PainelPrincipal.add(lblNewLabel_21, "flowx,cell 0 2,aligny center"); 
+		
 		textCheckIn = new JFormattedTextField(mascaraDat); 
 		textCheckIn.setBorder(bordaPreta);
-		PainelPrincipal.add(textCheckIn, "cell 0 2"); 
-		textCheckIn.setColumns(10); 
-		 
-		JPanel panel_20 = new JPanel(); 
-		PainelPrincipal.add(panel_20, "cell 0 2"); 
-		 
+		PainelPrincipal.add(textCheckIn, "cell 1 2"); 
+		textCheckIn.setColumns(10);
+		
 		JLabel lblNewLabel_22 = new JLabel("Check-Out"); 
 		lblNewLabel_22.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 20));
-		PainelPrincipal.add(lblNewLabel_22, "cell 0 2,aligny center"); 
-		 
+		PainelPrincipal.add(lblNewLabel_22, "flowx,cell 2 2,aligny center");
+		
 		textCheckOut = new JFormattedTextField(mascaraDat); 
 		textCheckOut.setBorder(bordaPreta);
-		PainelPrincipal.add(textCheckOut, "cell 0 2"); 
+		PainelPrincipal.add(textCheckOut, "cell 3 2"); 
 		textCheckOut.setColumns(10); 
-		 
-		JPanel panel = new JPanel(); 
-		PainelPrincipal.add(panel, "cell 0 2"); 
-		 
-		JPanel panel_1 = new JPanel(); 
-		PainelPrincipal.add(panel_1, "cell 0 2"); 
-		 
-		JPanel panel_2 = new JPanel(); 
-		PainelPrincipal.add(panel_2, "cell 0 2"); 
-		 
-		JPanel panel_3 = new JPanel(); 
-		PainelPrincipal.add(panel_3, "cell 0 2"); 
-		 
-		JPanel panel_5 = new JPanel(); 
-		PainelPrincipal.add(panel_5, "cell 0 2"); 
-		 
-		JPanel panel_6 = new JPanel(); 
-		PainelPrincipal.add(panel_6, "cell 0 2"); 
-		 
-		JPanel panel_7 = new JPanel(); 
-		PainelPrincipal.add(panel_7, "cell 0 2"); 
-		 
-		JPanel panel_8 = new JPanel(); 
-		PainelPrincipal.add(panel_8, "cell 0 2"); 
-		 
-		JPanel panel_9 = new JPanel(); 
-		PainelPrincipal.add(panel_9, "cell 0 2"); 
-		 
-		JPanel panel_10 = new JPanel(); 
-		PainelPrincipal.add(panel_10, "cell 0 2"); 
-		 
-		JPanel panel_11 = new JPanel(); 
-		PainelPrincipal.add(panel_11, "cell 0 2"); 
-		 
-		JPanel panel_12 = new JPanel(); 
-		PainelPrincipal.add(panel_12, "cell 0 2"); 
-		 
-		JPanel panel_13 = new JPanel(); 
-		PainelPrincipal.add(panel_13, "cell 0 2"); 
-		 
-		JPanel panel_14 = new JPanel(); 
-		PainelPrincipal.add(panel_14, "cell 0 2"); 
-		 
-		JPanel panel_15 = new JPanel(); 
-		PainelPrincipal.add(panel_15, "cell 0 2"); 
-		 
-		JPanel panel_16 = new JPanel(); 
-		PainelPrincipal.add(panel_16, "cell 0 2"); 
-		 
-		 
+		
+		
 		lblReserva.setIcon(new ImageIcon(TelaComputadores.class.getResource("/visao/Botões/BTN Reserva.png"))); 
-		PainelPrincipal.add(lblReserva, "cell 0 2"); 
+		PainelPrincipal.add(lblReserva, "cell 4 2,alignx center"); 
 		 
 		 
 		atualizarJTable(); 
 	} 
 	protected void atualizarJTable() { 
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Numero", "Tempo", "Preço", "Disponibilidade" }); 
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Numero", "Preço", "Disponibilidade" }); 
 	     
 	    ComputadoresDAO CompDAO = ComputadoresDAO.getInstancia(); 
 	    listaComp = CompDAO.listarComputadores(); 
@@ -494,7 +481,7 @@ public class TelaComputadores extends JFrame {
 	        } else { 
 	            disponibilidade = "Indisponível"; 
 	        } 
-	        modelo.addRow(new Object[] {comp.getIdPC(), comp.getNum(), comp.getTemp(), comp.getPreco(), disponibilidade}); 
+	        modelo.addRow(new Object[] {comp.getIdPC(), comp.getNum(), comp.getPreco(), disponibilidade}); 
 	    } 
 	     
 	    table.setModel(modelo); 

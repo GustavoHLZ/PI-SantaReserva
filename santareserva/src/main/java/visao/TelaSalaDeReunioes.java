@@ -37,6 +37,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
@@ -314,59 +315,98 @@ public class TelaSalaDeReunioes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				
+				if (salaalugada != null) {  
+		            if (salaalugada.getDisp()) {
+				
+				if (textCheckIn.getText().equals("  /  /    ") && textCheckOut.getText().equals("  /  /    ")) {
+				    textCheckIn.setBorder(bordaVermelha);
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    System.out.println("1");
+				    return;
+				}
+				
 				LocalDate checkINN = null;
 				
-				if (textCheckIn.getText().isEmpty()) { 
-					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-In preenchida!"); 
-					return;
-				}
-				
-				if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-					JOptionPane.showMessageDialog(null, "A data de Check-In deve estar no formato dd/MM/yyyy."); 
-					return; 
-				} else { 
- 
-					String diaTxt = textCheckIn.getText().substring(0, 2); 
-					String mesTxt = textCheckIn.getText().substring(3, 5); 
-					String anoTxt = textCheckIn.getText().substring(6, 10); 
- 
-					Integer dia = Integer.valueOf(diaTxt); 
-					Integer mes = Integer.valueOf(mesTxt); 
-					Integer ano = Integer.valueOf(anoTxt); 
- 
-					checkINN = LocalDate.of(ano, mes, dia); 
-					salaalugada.setCheckIn(checkINN);
- 
-				} 
-				LocalDate checkOut = null;
-				if (textCheckOut.getText().isEmpty()) { 
-					JOptionPane.showMessageDialog(null, "Nenhuma data de Check-out preenchida!"); 
-					return;
-				}
-				if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
-					JOptionPane.showMessageDialog(null, "A data de Check-Out deve estar no formato dd/MM/yyyy."); 
-					return; 
-				} else { 
- 
-					String diaTxt = textCheckOut.getText().substring(0, 2); 
-					String mesTxt = textCheckOut.getText().substring(3, 5); 
-					String anoTxt = textCheckOut.getText().substring(6, 10); 
- 
-					Integer dia = Integer.valueOf(diaTxt); 
-					Integer mes = Integer.valueOf(mesTxt); 
-					Integer ano = Integer.valueOf(anoTxt); 
- 
-					checkOut = LocalDate.of(ano, mes, dia); 
-					salaalugada.setCheckOut(checkOut);
+				if (textCheckIn.getText().equals("  /  /    ")) { 
+				    textCheckIn.setBorder(bordaVermelha);
+				    textCheckOut.setBorder(bordaPreta);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    System.out.println("11");
+				    return;
 
- 
+				} else if (!textCheckIn.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+				    textCheckIn.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    System.out.println(textCheckIn.getText());
+				    return;
+
+				} else {
+				    try {
+				        String diaTxt = textCheckIn.getText().substring(0, 2); 
+				        String mesTxt = textCheckIn.getText().substring(3, 5); 
+				        String anoTxt = textCheckIn.getText().substring(6, 10); 
+
+				        Integer dia = Integer.valueOf(diaTxt); 
+				        Integer mes = Integer.valueOf(mesTxt); 
+				        Integer ano = Integer.valueOf(anoTxt); 
+
+				        checkINN = LocalDate.of(ano, mes, dia);
+				        salaalugada.setCheckIn(checkINN);
+				        textCheckIn.setBorder(bordaPreta);
+
+				    } catch (DateTimeException ex) {
+				        textCheckIn.setBorder(bordaVermelha);
+				        TelanInserido tela = new TelanInserido();
+				        tela.setVisible(true);
+				        return;
+				    }
+				}            	
+				LocalDate checkOUTT = null;
+
+				if (textCheckOut.getText().equals("  /  /    ")) { 
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
+
+				} else if (!textCheckOut.getText().matches("\\d{2}/\\d{2}/\\d{4}")) { 
+				    textCheckOut.setBorder(bordaVermelha);
+				    TelanInserido tela = new TelanInserido();
+				    tela.setVisible(true);
+				    return;
+
+				} else {
+				    try {
+				        String diaTxt = textCheckOut.getText().substring(0, 2); 
+				        String mesTxt = textCheckOut.getText().substring(3, 5); 
+				        String anoTxt = textCheckOut.getText().substring(6, 10); 
+
+				        Integer dia = Integer.valueOf(diaTxt); 
+				        Integer mes = Integer.valueOf(mesTxt); 
+				        Integer ano = Integer.valueOf(anoTxt); 
+
+				        checkOUTT = LocalDate.of(ano, mes, dia);
+				        salaalugada.setCheckOut(checkOUTT);
+				        textCheckOut.setBorder(bordaPreta);
+
+				    } catch (DateTimeException ex) {
+				        textCheckOut.setBorder(bordaVermelha);
+				        TelanInserido tela = new TelanInserido();
+				        tela.setVisible(true);
+				        return;
+				    }
 				} 
 				
 				Integer idsala = salaalugada.getId();	
 				
 				SalaReunioesDAO dao = SalaReunioesDAO.getInstancia();
 				
-				dao.atualizarSalaReunioes(checkINN, checkOut, idsala);
+				dao.atualizarSalaReunioes(checkINN, checkOUTT, idsala);
 				
 				Float precoSalas = salaalugada.getPreco();
 				
@@ -377,6 +417,14 @@ public class TelaSalaDeReunioes extends JFrame {
 		        telaReservas.setVisible(true);
 				atualizarJTable();
 				dispose();
+				
+		            } else { 
+		                TelaIndisponivel tela = new TelaIndisponivel();
+		                return;
+		            } 
+		        } else { 
+		        	TelasEspaco tela = new TelasEspaco();
+		        }
 			}
 		});
 		

@@ -46,7 +46,7 @@ public class TelaAvaliacaoFalha extends JFrame {
         Icone.setLayout(new MigLayout("", "[grow][grow]", "[grow][][][grow][]"));
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(TelaAvaliacaoFalha.class.getResource("/visao/Icones/NaorealizadoM.png")));
+        lblNewLabel.setIcon(new ImageIcon(TelaAvaliacaoFalha.class.getResource("/visao/Icones/IconeRealizado.png")));
         Icone.add(lblNewLabel, "cell 0 0,alignx center,aligny bottom");
 
         JLabel lblNoRealizado = new JLabel("Ocorreu um erro ao atualizar a avaliação!");
