@@ -297,7 +297,7 @@ public class TelaQuartos extends JFrame {
         table.setRowHeight(30);
         
         scrollPane.setViewportView(table); 
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Disponibilidade", "Preço" })); 
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"Tipo", "Quantidade", "Disponibilidade", "Preço" })); 
 		
 
 		JLabel lblReservar = new JLabel(""); 
@@ -532,7 +532,7 @@ public class TelaQuartos extends JFrame {
 		atualizarJTable(); 
 	} 
 	protected void atualizarJTable() { 
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Tipo", "Quantidade", "Disponibilidade", "Preço" }); 
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Tipo", "Quantidade", "Disponibilidade", "Preço" }); 
  
 	    QuartosDAO QuartoDAO = QuartosDAO.getInstancia(); 
 	    listaQuartos = QuartoDAO.listarQuartos(); 
@@ -545,7 +545,7 @@ public class TelaQuartos extends JFrame {
 	        } else { 
 	            disponibilidade = "Indisponível"; 
 	        } 
-	        modelo.addRow(new Object[] {quarto.getIdQuarto(), quarto.getTipo(), quarto.getCap(), disponibilidade , quarto.getPreco() }); 
+	        modelo.addRow(new Object[] {quarto.getTipo(), quarto.getCap(), disponibilidade , quarto.getPreco() }); 
 	    } 
 	     
 	    table.setModel(modelo); 

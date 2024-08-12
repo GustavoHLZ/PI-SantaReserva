@@ -593,7 +593,7 @@ public class TelaReservas extends JFrame {
 	}
 	
 	protected void atualizarJTable() {
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante","Status" , "ID Hospede"}));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID do Espaço" ,"Tipo" ,"Preço", "CheckIn", "CheckOut", "Ocupante","Status" }));
 
 
 	    //EspacosDAO EspacoDAO = EspacosDAO.getInstancia();
@@ -646,7 +646,6 @@ public class TelaReservas extends JFrame {
 					   reser.getCheckOut(),
 				        hosplogado.getNome(),
 				        status,
-				        hosplogado.getIdHospede(),
 			
 		
 		 });

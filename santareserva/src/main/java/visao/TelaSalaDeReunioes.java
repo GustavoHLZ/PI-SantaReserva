@@ -308,7 +308,7 @@ public class TelaSalaDeReunioes extends JFrame {
 	    table.setRowHeight(30);
 		
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" }));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Preço", "Tempo", "Capacidade", "Disponibilidade" }));
 		
 		JLabel lblReserva = new JLabel("");
 		lblReserva.addMouseListener(new MouseAdapter() {
@@ -519,7 +519,7 @@ public class TelaSalaDeReunioes extends JFrame {
 		atualizarJTable();
 	}
 	protected void atualizarJTable() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Preço", "Tempo", "Capacidade", "Disponibilidade" });
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] {"Preço", "Tempo", "Capacidade", "Disponibilidade" });
 	    
 	    SalaReunioesDAO SalaDAO = SalaReunioesDAO.getInstancia();
 	    listaSala = SalaDAO.listarSalaReunioes();
@@ -532,7 +532,7 @@ public class TelaSalaDeReunioes extends JFrame {
 	        } else {
 	            disponibilidade = "Indisponível";
 	        }
-	        modelo.addRow(new Object[] {sala.getIdSala(), sala.getPreco(), sala.getTemp(), sala.getCap(), disponibilidade});
+	        modelo.addRow(new Object[] {sala.getPreco(), sala.getTemp(), sala.getCap(), disponibilidade});
 	    }
 	    
 	    table.setModel(modelo);
