@@ -308,7 +308,7 @@ public class TelaComputadores extends JFrame {
 	    table.setRowHeight(30);
 		
 		scrollPane.setViewportView(table); 
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Numero", "Preço", "Disponibilidade" })); 
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Numero", "Preço", "Disponibilidade" })); 
 		
 		
 		 
@@ -468,7 +468,7 @@ public class TelaComputadores extends JFrame {
 		atualizarJTable(); 
 	} 
 	protected void atualizarJTable() { 
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Numero", "Preço", "Disponibilidade" }); 
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "Numero", "Preço", "Disponibilidade" }); 
 	     
 	    ComputadoresDAO CompDAO = ComputadoresDAO.getInstancia(); 
 	    listaComp = CompDAO.listarComputadores(); 
@@ -481,7 +481,7 @@ public class TelaComputadores extends JFrame {
 	        } else { 
 	            disponibilidade = "Indisponível"; 
 	        } 
-	        modelo.addRow(new Object[] {comp.getIdPC(), comp.getNum(), comp.getPreco(), disponibilidade}); 
+	        modelo.addRow(new Object[] {comp.getNum(), comp.getPreco(), disponibilidade}); 
 	    } 
 	     
 	    table.setModel(modelo); 
